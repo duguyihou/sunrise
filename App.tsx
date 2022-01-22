@@ -12,7 +12,7 @@ const Drawer = createDrawerNavigator()
 
 function Root() {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator screenOptions={{ headerShown: false, title: '' }}>
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="NewItem" component={NewItemScreen} />
     </Stack.Navigator>
@@ -29,7 +29,7 @@ const App = () => {
             title: 'Home',
             headerStyle: { backgroundColor: '#0C2A38' },
             headerTintColor: '#fff',
-            headerShown: true,
+            headerTitle: '',
           }}
         />
         <Drawer.Screen name="Inbox" component={InboxScreen} />

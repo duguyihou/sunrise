@@ -12,11 +12,8 @@ const HomeScreen = ({ navigation }: Props) => {
     <View style={styles.container}>
       <Text>Home</Text>
       <Button
-        title="NewItem"
-        onPress={() => {
-          navigation.setOptions({ headerShown: true })
-          navigation.push('NewItem')
-        }}
+        title="go to NewItem"
+        onPress={() => navigation.push('NewItem')}
       />
     </View>
   )
@@ -27,5 +24,8 @@ export default HomeScreen
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 })
