@@ -1,6 +1,6 @@
 # sunrise
 
-# 3rd party libs
+## 3rd party libs
 
 - redux toolkit
 - react-navigation
