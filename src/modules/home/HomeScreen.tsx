@@ -1,10 +1,17 @@
-import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import { Button, StyleSheet, Text, View } from 'react-native'
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
 
-const HomeScreen = () => {
+type RootStackParamList = {
+  Home: undefined
+  NewItem: undefined
+}
+type Props = NativeStackScreenProps<RootStackParamList, 'NewItem'>
+const HomeScreen = ({ navigation }: Props) => {
   return (
     <View style={styles.container}>
       <Text>Home</Text>
+      <Button title="NewItem" onPress={() => navigation.push('NewItem')} />
     </View>
   )
 }
