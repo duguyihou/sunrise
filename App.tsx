@@ -1,15 +1,19 @@
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import HomeScreen from 'modules/home/HomeScreen'
+import 'react-native-gesture-handler'
+import { createDrawerNavigator } from '@react-navigation/drawer'
 
-const Stack = createNativeStackNavigator()
+import HomeScreen from 'modules/home/HomeScreen'
+import InboxScreen from 'modules/inbox/InboxScreen'
+
+const Drawer = createDrawerNavigator()
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
-      </Stack.Navigator>
+      <Drawer.Navigator>
+        <Drawer.Screen name="Home" component={HomeScreen} />
+        <Drawer.Screen name="Inbox" component={InboxScreen} />
+      </Drawer.Navigator>
     </NavigationContainer>
   )
 }
