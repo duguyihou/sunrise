@@ -11,7 +11,13 @@ const HomeScreen = ({ navigation }: Props) => {
   return (
     <View style={styles.container}>
       <Text>Home</Text>
-      <Button title="NewItem" onPress={() => navigation.push('NewItem')} />
+      <Button
+        title="NewItem"
+        onPress={() => {
+          navigation.setOptions({ headerShown: true })
+          navigation.push('NewItem')
+        }}
+      />
     </View>
   )
 }
