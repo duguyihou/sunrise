@@ -11,6 +11,7 @@ specifiers:
   '@commitlint/config-conventional': ^16.0.0
   '@react-native-community/eslint-config': ^2.0.0
   '@react-navigation/native': ^6.0.6
+  '@react-navigation/native-stack': ^6.2.5
   '@types/jest': ^26.0.23
   '@types/react-native': ^0.66.4
   '@types/react-test-renderer': ^17.0.1
@@ -31,6 +32,7 @@ specifiers:
 dependencies:
   '@babel/preset-env': 7.16.10_@babel+core@7.16.10
   '@react-navigation/native': 6.0.6_react-native@0.66.4+react@17.0.2
+  '@react-navigation/native-stack': 6.2.5_3f734be3b74b4561c53a46996b0dbc75
   react: 17.0.2
   react-native: 0.66.4_3ea5b0cc8d329643dbdf4991280571c8
   react-native-safe-area-context: 3.3.2_react-native@0.66.4+react@17.0.2
@@ -1978,6 +1980,38 @@ packages:
       query-string: 7.1.0
       react: 17.0.2
       react-is: 16.13.1
+    dev: false
+
+  /@react-navigation/elements/1.2.1_43fa20f2b331ed2244585c7ced80887f:
+    resolution: {integrity: sha512-EnmAbKMsptrliRKf95rdgS6BhMjML+mIns06+G1Vdih6BrEo7/0iytThUv3WBf99AI76dyEq/cqLUwHPiFzXWg==}
+    peerDependencies:
+      '@react-navigation/native': ^6.0.0
+      react: '*'
+      react-native: '*'
+      react-native-safe-area-context: '>= 3.0.0'
+    dependencies:
+      '@react-navigation/native': 6.0.6_react-native@0.66.4+react@17.0.2
+      react: 17.0.2
+      react-native: 0.66.4_3ea5b0cc8d329643dbdf4991280571c8
+      react-native-safe-area-context: 3.3.2_react-native@0.66.4+react@17.0.2
+    dev: false
+
+  /@react-navigation/native-stack/6.2.5_3f734be3b74b4561c53a46996b0dbc75:
+    resolution: {integrity: sha512-XCtwl4LEr06nzxMG4aXbYfbO/pAjyhGOR3QtBVBq/uGfVGkeK8utKUe925reqd1x099CiEfSJLpgeR2KzzYp+Q==}
+    peerDependencies:
+      '@react-navigation/native': ^6.0.0
+      react: '*'
+      react-native: '*'
+      react-native-safe-area-context: '>= 3.0.0'
+      react-native-screens: '>= 3.0.0'
+    dependencies:
+      '@react-navigation/elements': 1.2.1_43fa20f2b331ed2244585c7ced80887f
+      '@react-navigation/native': 6.0.6_react-native@0.66.4+react@17.0.2
+      react: 17.0.2
+      react-native: 0.66.4_3ea5b0cc8d329643dbdf4991280571c8
+      react-native-safe-area-context: 3.3.2_react-native@0.66.4+react@17.0.2
+      react-native-screens: 3.10.2_react-native@0.66.4+react@17.0.2
+      warn-once: 0.1.0
     dev: false
 
   /@react-navigation/native/6.0.6_react-native@0.66.4+react@17.0.2:
