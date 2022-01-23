@@ -9,23 +9,31 @@ import InboxScreen from 'modules/inbox/InboxScreen'
 import NewItemScreen from 'modules/newItem/NewItemScreen'
 import { store } from 'app/store'
 
-const Stack = createNativeStackNavigator()
-const Drawer = createDrawerNavigator()
+const RootStack = createNativeStackNavigator()
+const RootDrawer = createDrawerNavigator()
 
 function Root() {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false, title: '' }}>
-      <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="NewItem" component={NewItemScreen} />
-    </Stack.Navigator>
+    <RootStack.Navigator>
+      <RootStack.Group screenOptions={{ headerShown: false, title: '' }}>
+        <RootStack.Screen name="Home" component={HomeScreen} />
+      </RootStack.Group>
+      <RootStack.Group screenOptions={{ presentation: 'modal' }}>
+        <RootStack.Screen
+          name="NewItem"
+          component={NewItemScreen}
+          options={{ title: 'New Event' }}
+        />
+      </RootStack.Group>
+    </RootStack.Navigator>
   )
 }
 const App = () => {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Drawer.Navigator>
-          <Drawer.Screen
+        <RootDrawer.Navigator>
+          <RootDrawer.Screen
             name="Root"
             component={Root}
             options={{
@@ -35,8 +43,8 @@ const App = () => {
               headerTitle: '',
             }}
           />
-          <Drawer.Screen name="Inbox" component={InboxScreen} />
-        </Drawer.Navigator>
+          <RootDrawer.Screen name="Inbox" component={InboxScreen} />
+        </RootDrawer.Navigator>
       </NavigationContainer>
     </Provider>
   )
