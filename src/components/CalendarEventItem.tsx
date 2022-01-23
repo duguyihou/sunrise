@@ -2,6 +2,7 @@ import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { CalendarEvent } from 'typings'
 import { windowWidth } from 'utils/dimensions'
+import { dateFormat } from 'utils/dateFormate'
 
 const CalendarEventItem = (calendarEvents: CalendarEvent) => {
   const {
@@ -11,7 +12,7 @@ const CalendarEventItem = (calendarEvents: CalendarEvent) => {
   return (
     <TouchableOpacity style={styles.item} onPress={() => alert('item')}>
       <Text style={styles.summary}>{summary}</Text>
-      <Text style={styles.dateTime}>{dateTime}</Text>
+      <Text style={styles.dateTime}>{dateFormat(dateTime)}</Text>
     </TouchableOpacity>
   )
 }
@@ -20,8 +21,8 @@ export default CalendarEventItem
 
 const styles = StyleSheet.create({
   item: {
-    width: windowWidth - 10,
-    padding: 5,
+    width: windowWidth - 20,
+    padding: 10,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',

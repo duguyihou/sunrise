@@ -15,13 +15,9 @@ const HomeScreen = ({ navigation }: Props) => {
     <View style={styles.container}>
       {calendarEvents &&
         calendarEvents.map(calendarEvent => (
-          // <Text key={id}>{summary}</Text>
           <CalendarEventItem key={calendarEvent.id} {...calendarEvent} />
         ))}
-      <Button
-        title="go to NewItem"
-        onPress={() => navigation.push('NewItem')}
-      />
+      <Button title="Add" onPress={() => navigation.push('NewItem')} />
     </View>
   )
 }
@@ -32,7 +28,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     display: 'flex',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
     backgroundColor: '#0C2A38',
   },
