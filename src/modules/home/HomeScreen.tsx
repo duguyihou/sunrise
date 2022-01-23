@@ -1,7 +1,8 @@
 import React from 'react'
-import { Button, StyleSheet, Text, View } from 'react-native'
+import { Button, StyleSheet, View } from 'react-native'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { useAppSelector } from 'app/hooks'
+import CalendarEventItem from 'components/CalendarEventItem'
 
 type RootStackParamList = {
   Home: undefined
@@ -13,8 +14,9 @@ const HomeScreen = ({ navigation }: Props) => {
   return (
     <View style={styles.container}>
       {calendarEvents &&
-        calendarEvents.map(({ summary, id }) => (
-          <Text key={id}>{summary}</Text>
+        calendarEvents.map(calendarEvent => (
+          // <Text key={id}>{summary}</Text>
+          <CalendarEventItem key={calendarEvent.id} {...calendarEvent} />
         ))}
       <Button
         title="go to NewItem"
