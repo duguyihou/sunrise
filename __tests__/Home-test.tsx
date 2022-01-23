@@ -13,7 +13,7 @@ test('should return the initial state', () => {
       location: '800 Howard St., San Francisco, CA 94103',
       description: "A chance to hear more about Google's developer products.",
       start: {
-        dateTime: '2015-05-28T09:00:00-07:00',
+        dateTime: '2015-05-28T09:30:00-07:00',
         timeZone: 'America/Los_Angeles',
       },
       end: {
@@ -39,11 +39,11 @@ test('should return the initial state', () => {
       location: '800 Howard St., San Francisco, CA 94103',
       description: "A chance to hear more about Google's developer products.",
       start: {
-        dateTime: '2015-05-28T09:00:00-07:00',
+        dateTime: '2015-05-28T13:00:00-15:45',
         timeZone: 'America/Los_Angeles',
       },
       end: {
-        dateTime: '2015-05-28T17:00:00-07:00',
+        dateTime: '2015-05-28T17:00:00-19:00',
         timeZone: 'America/Los_Angeles',
       },
       recurrence: ['RRULE:FREQ=DAILY;COUNT=2'],

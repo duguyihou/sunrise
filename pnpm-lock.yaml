@@ -21,6 +21,7 @@ specifiers:
   '@typescript-eslint/eslint-plugin': ^5.7.0
   '@typescript-eslint/parser': ^5.7.0
   babel-jest: ^26.6.3
+  dayjs: ^1.10.7
   eslint: ^7.14.0
   husky: ^7.0.0
   jest: ^26.6.3
@@ -41,6 +42,7 @@ dependencies:
   '@react-navigation/native': 6.0.6_react-native@0.66.4+react@17.0.2
   '@react-navigation/native-stack': 6.2.5_3f734be3b74b4561c53a46996b0dbc75
   '@reduxjs/toolkit': 1.7.1_react-redux@7.2.6+react@17.0.2
+  dayjs: 1.10.7
   react: 17.0.2
   react-native: 0.66.4_3ea5b0cc8d329643dbdf4991280571c8
   react-native-gesture-handler: 2.2.0
