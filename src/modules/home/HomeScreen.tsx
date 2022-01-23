@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, StyleSheet, View } from 'react-native'
+import { TouchableOpacity, StyleSheet, View, Text } from 'react-native'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { useAppSelector } from 'app/hooks'
 import CalendarEventItem from 'components/CalendarEventItem'
@@ -17,7 +17,11 @@ const HomeScreen = ({ navigation }: Props) => {
         calendarEvents.map(calendarEvent => (
           <CalendarEventItem key={calendarEvent.id} {...calendarEvent} />
         ))}
-      <Button title="Add" onPress={() => navigation.push('NewItem')} />
+      <TouchableOpacity
+        style={styles.plus}
+        onPress={() => navigation.push('NewItem')}>
+        <Text>Add</Text>
+      </TouchableOpacity>
     </View>
   )
 }
@@ -31,5 +35,10 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     backgroundColor: '#0C2A38',
+  },
+  plus: {
+    position: 'absolute',
+    right: 50,
+    bottom: 50,
   },
 })
