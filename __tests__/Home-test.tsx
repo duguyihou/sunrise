@@ -3,12 +3,11 @@
  */
 
 import 'react-native'
-import React from 'react'
-
 // Note: test renderer must be required after react-native.
-import renderer from 'react-test-renderer'
-import HomeScreen from '../src/modules/home/HomeScreen'
-
-it('renders correctly', () => {
-  renderer.create(<HomeScreen />)
+import eventReducer from 'app/eventsSlice'
+test('should return the initial state', () => {
+  expect(eventReducer(undefined, { type: String, payload: String })).toEqual([
+    'a',
+    'b',
+  ])
 })
