@@ -9,10 +9,13 @@ type RootStackParamList = {
 }
 type Props = NativeStackScreenProps<RootStackParamList, 'NewItem'>
 const HomeScreen = ({ navigation }: Props) => {
-  const events = useAppSelector(state => state.events)
+  const calendarEvents = useAppSelector(state => state.calendarEvents)
   return (
     <View style={styles.container}>
-      {events && events.map(e => <Text key={e}>{e}</Text>)}
+      {calendarEvents &&
+        calendarEvents.map(({ summary, id }) => (
+          <Text key={id}>{summary}</Text>
+        ))}
       <Button
         title="go to NewItem"
         onPress={() => navigation.push('NewItem')}
