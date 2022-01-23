@@ -6,20 +6,17 @@ type RootStackParamList = {
   Home: undefined
   NewItem: undefined
 }
-type Props = NativeStackScreenProps<RootStackParamList, 'NewItem'>
-const HomeScreen = ({ navigation }: Props) => {
+type Props = NativeStackScreenProps<RootStackParamList, 'Home'>
+const NewItemScreen = ({ navigation }: Props) => {
   return (
     <View style={styles.container}>
-      <Text>Home</Text>
-      <Button
-        title="go to NewItem"
-        onPress={() => navigation.push('NewItem')}
-      />
+      <Text>New Item</Text>
+      <Button title=" go to Home" onPress={() => navigation.goBack()} />
     </View>
   )
 }
 
-export default HomeScreen
+export default NewItemScreen
 
 const styles = StyleSheet.create({
   container: {
