@@ -19,11 +19,7 @@ function Root() {
         <RootStack.Screen name="Home" component={HomeScreen} />
       </RootStack.Group>
       <RootStack.Group screenOptions={{ presentation: 'modal' }}>
-        <RootStack.Screen
-          name="NewItem"
-          component={NewItemScreen}
-          options={{ title: 'New Event' }}
-        />
+        <RootStack.Screen name="NewItem" component={NewItemScreen} />
       </RootStack.Group>
     </RootStack.Navigator>
   )
