@@ -8,7 +8,6 @@ import HomeScreen from 'modules/home/HomeScreen'
 import InboxScreen from 'modules/inbox/InboxScreen'
 import NewItemScreen from 'modules/newItem/NewItemScreen'
 import { store } from 'app/store'
-import { Button } from 'react-native'
 
 const RootStack = createNativeStackNavigator()
 const RootDrawer = createDrawerNavigator()
@@ -20,20 +19,7 @@ function Root() {
         <RootStack.Screen name="Home" component={HomeScreen} />
       </RootStack.Group>
       <RootStack.Group screenOptions={{ presentation: 'modal' }}>
-        <RootStack.Screen
-          name="NewItem"
-          component={NewItemScreen}
-          options={{
-            title: 'New Event',
-            headerLeft: () => (
-              <Button
-                onPress={() => alert('This is a back button!')}
-                title="Back"
-                color="#000"
-              />
-            ),
-          }}
-        />
+        <RootStack.Screen name="NewItem" component={NewItemScreen} />
       </RootStack.Group>
     </RootStack.Navigator>
   )
