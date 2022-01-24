@@ -1,6 +1,8 @@
 import React from 'react'
-import { TouchableOpacity, StyleSheet, View, Text } from 'react-native'
+import { TouchableOpacity, StyleSheet, View } from 'react-native'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { useAppSelector } from 'app/hooks'
 import CalendarEventItem from 'components/CalendarEventItem'
 
@@ -20,7 +22,7 @@ const HomeScreen = ({ navigation }: Props) => {
       <TouchableOpacity
         style={styles.plus}
         onPress={() => navigation.push('NewItem')}>
-        <Text>Add</Text>
+        <FontAwesomeIcon icon={faPlus} color="#fff" />
       </TouchableOpacity>
     </View>
   )

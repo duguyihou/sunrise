@@ -1,7 +1,15 @@
 import React, { useLayoutEffect } from 'react'
 import { useForm, Controller } from 'react-hook-form'
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native'
+import {
+  TouchableOpacity,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from 'react-native'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { windowWidth } from 'utils/dimensions'
 
 type RootStackParamList = {
@@ -39,11 +47,17 @@ const NewItemScreen = ({ navigation }: Props) => {
   useLayoutEffect(() => {
     navigation.setOptions({
       title: 'New Event',
+      headerStyle: { backgroundColor: '#0C2A38' },
+      headerTintColor: '#fff',
       headerLeft: () => (
-        <Button onPress={handleCancel} title="Cancel" color="#000" />
+        <TouchableOpacity onPress={handleCancel}>
+          <FontAwesomeIcon icon={faTimes} color="#fff" />
+        </TouchableOpacity>
       ),
       headerRight: () => (
-        <Button onPress={handleSubmit(onSubmit)} title="Save" color="#000" />
+        <TouchableOpacity onPress={handleSubmit(onSubmit)}>
+          <FontAwesomeIcon icon={faCheck} color="#fff" />
+        </TouchableOpacity>
       ),
     })
   })
