@@ -11,6 +11,8 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { windowWidth } from 'utils/dimensions'
+import { useAppDispatch } from 'app/hooks'
+import { addCalendarEvent } from 'app/calendarEventsSlice'
 
 type RootStackParamList = {
   Home: undefined
@@ -41,7 +43,9 @@ const NewItemScreen = ({ navigation }: Props) => {
     handleSubmit,
     formState: { errors },
   } = useForm({ defaultValues })
-  const onSubmit = data => alert(data.summary)
+  const dispatch = useAppDispatch()
+  const onSubmit = data => dispatch(addCalendarEvent(data))
+
   const handleCancel = () => navigation.goBack()
 
   useLayoutEffect(() => {

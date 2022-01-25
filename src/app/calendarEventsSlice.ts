@@ -1,10 +1,5 @@
-import { CaseReducer, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 import { CalendarEvent } from 'typings'
-type State = CalendarEvent[]
-const addCalendarEvent: CaseReducer<State, PayloadAction<CalendarEvent>> = (
-  state,
-  action,
-) => [...state, action.payload]
 
 const initialState: CalendarEvent[] = [
   {
@@ -58,10 +53,14 @@ const eventsSlice = createSlice({
   name: 'events',
   initialState,
   reducers: {
-    addCalendarEvent,
+    addCalendarEvent(state, action) {
+      state = [...state, action.payload]
+    },
   },
 })
 
 const eventsReducer = eventsSlice.reducer
+
+export const { addCalendarEvent } = eventsSlice.actions
 
 export default eventsReducer
