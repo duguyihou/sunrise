@@ -10,9 +10,11 @@ const CalendarEventItem = (calendarEvents: CalendarEvent) => {
     start: { dateTime },
   } = calendarEvents
   return (
-    <TouchableOpacity style={styles.item} onPress={() => alert('item')}>
+    <TouchableOpacity style={styles.item} onPress={() => console.log(summary)}>
       <Text style={styles.summary}>{summary}</Text>
-      <Text style={styles.dateTime}>{dateFormat(dateTime)}</Text>
+      <Text style={styles.dateTime}>
+        {dateTime ? dateFormat(dateTime) : ''}
+      </Text>
     </TouchableOpacity>
   )
 }
