@@ -53,12 +53,12 @@ const eventsSlice = createSlice({
   name: 'events',
   initialState,
   reducers: {
-    addCalendarEvent(state, action) {
-      state = [...state, action.payload]
-    },
+    addCalendarEvent: (
+      state,
+      action: { type: string; payload: CalendarEvent },
+    ) => (state = [...state, action.payload]),
   },
 })
-
 const eventsReducer = eventsSlice.reducer
 
 export const { addCalendarEvent } = eventsSlice.actions

@@ -17,7 +17,7 @@ const HomeScreen = ({ navigation }: Props) => {
     <View style={styles.container}>
       {calendarEvents &&
         calendarEvents.map(calendarEvent => (
-          <CalendarEventItem key={calendarEvent.id} {...calendarEvent} />
+          <CalendarEventItem key={calendarEvent.summary} {...calendarEvent} />
         ))}
       <TouchableOpacity
         style={styles.plus}

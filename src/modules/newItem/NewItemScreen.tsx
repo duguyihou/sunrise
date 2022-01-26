@@ -13,6 +13,7 @@ import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { windowWidth } from 'utils/dimensions'
 import { useAppDispatch } from 'app/hooks'
 import { addCalendarEvent } from 'app/calendarEventsSlice'
+import { CalendarEvent } from 'typings'
 
 type RootStackParamList = {
   Home: undefined
@@ -21,18 +22,18 @@ type RootStackParamList = {
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>
 const defaultValues = {
   summary: '',
-  location: '800 Howard St., San Francisco, CA 94103',
+  location: '',
   description: '',
   start: {
-    dateTime: '2015-05-28T09:30:00-07:00',
-    timeZone: 'America/Los_Angeles',
+    dateTime: '',
+    timeZone: '',
   },
   end: {
-    dateTime: '2015-05-28T17:00:00-07:00',
-    timeZone: 'America/Los_Angeles',
+    dateTime: '',
+    timeZone: '',
   },
   recurrence: ['RRULE:FREQ=DAILY;COUNT=2'],
-  attendees: [{ email: 'lpage@example.com' }],
+  attendees: [{ email: '' }],
   reminders: {
     useDefault: true,
   },
@@ -44,7 +45,10 @@ const NewItemScreen = ({ navigation }: Props) => {
     formState: { errors },
   } = useForm({ defaultValues })
   const dispatch = useAppDispatch()
-  const onSubmit = data => dispatch(addCalendarEvent(data))
+  const onSubmit = (data: CalendarEvent) => {
+    dispatch(addCalendarEvent(data))
+    navigation.goBack()
+  }
 
   const handleCancel = () => navigation.goBack()
 
