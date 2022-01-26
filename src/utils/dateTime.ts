@@ -1,18 +1,6 @@
 import dayjs from 'dayjs'
-import updateLocale from 'dayjs/plugin/updateLocale'
+import { Day } from 'typings/day'
 
-dayjs.extend(updateLocale)
-dayjs.updateLocale('en', {
-  weekdays: [
-    'Sunday',
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-  ],
-})
 export const dateFormat = (dateTime: string, format = 'h:mm:a') =>
   dayjs(dateTime).format(format)
 
@@ -24,10 +12,6 @@ export const getCurrentDayName = (number = 0) =>
 export const getCurrentDay = (number = 0) =>
   dayjs().add(number, 'day').format('DD')
 
-interface Day {
-  day: number
-  dayName: string
-}
 export const getNextDays = (number = 0) => {
   if (number === 0)
     return [{ day: getCurrentDay(), dayName: getCurrentDayName() }]
