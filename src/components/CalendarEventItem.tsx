@@ -2,7 +2,7 @@ import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { CalendarEvent } from 'typings'
 import { windowWidth } from 'utils/dimensions'
-import { dateFormat } from 'utils/dateFormate'
+import { dateFormat } from 'utils/dateTime'
 
 const CalendarEventItem = (calendarEvents: CalendarEvent) => {
   const {

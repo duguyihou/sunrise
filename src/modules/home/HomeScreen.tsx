@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { useAppSelector } from 'app/hooks'
 import CalendarEventItem from 'components/CalendarEventItem'
+import CalendatBanner from 'components/CalendatBanner'
 
 type RootStackParamList = {
   Home: undefined
@@ -15,6 +16,7 @@ const HomeScreen = ({ navigation }: Props) => {
   const calendarEvents = useAppSelector(state => state.calendarEvents)
   return (
     <View style={styles.container}>
+      <CalendatBanner />
       {calendarEvents &&
         calendarEvents.map(calendarEvent => (
           <CalendarEventItem key={calendarEvent.summary} {...calendarEvent} />

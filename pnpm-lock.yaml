@@ -20,6 +20,7 @@ specifiers:
   '@types/jest': ^26.0.23
   '@types/node': '*'
   '@types/react-native': ^0.66.4
+  '@types/react-native-snap-carousel': ^3.8.5
   '@types/react-test-renderer': ^17.0.1
   '@typescript-eslint/eslint-plugin': ^5.7.0
   '@typescript-eslint/parser': ^5.7.0
@@ -70,6 +71,7 @@ devDependencies:
   '@types/jest': 26.0.24
   '@types/node': 17.0.10
   '@types/react-native': 0.66.13
+  '@types/react-native-snap-carousel': 3.8.5
   '@types/react-test-renderer': 17.0.1
   '@typescript-eslint/eslint-plugin': 5.10.0_a21c83c428c27db268953928902857c9
   '@typescript-eslint/parser': 5.10.0_eslint@7.32.0+typescript@4.5.4
@@ -2289,6 +2291,13 @@ packages:
 
   /@types/prop-types/15.7.4:
     resolution: {integrity: sha512-rZ5drC/jWjrArrS8BR6SIr4cWpW09RNTYt9AMZo3Jwwif+iacXAqgVjm0B0Bv/S1jhDXKHqRVNCbACkJ89RAnQ==}
+
+  /@types/react-native-snap-carousel/3.8.5:
+    resolution: {integrity: sha512-EMBwQo/om2HZM/J6u8Bvz7i0BEO/v6frrpmlvUQ579CMsgYQPlYzQ1ne4KDdRq08+yDSG8/8AwIi1R+185ROsg==}
+    dependencies:
+      '@types/react': 17.0.38
+      '@types/react-native': 0.66.13
+    dev: true
 
   /@types/react-native/0.66.13:
     resolution: {integrity: sha512-Yp8hiCvez9HdaSNx1xKMog8uzXEugk47nmfWvXLnyERchjcnaF4VZwi9NmZMU5ETrx7apN+aynBdC+64JM9o2g==}
