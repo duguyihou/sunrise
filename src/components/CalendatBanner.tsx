@@ -6,12 +6,12 @@ import { faAngleRight } from '@fortawesome/free-solid-svg-icons'
 import Carousel from 'react-native-snap-carousel'
 import { windowWidth } from 'utils/dimensions'
 
-const CalendatBanner = ({ item }) => {
+const CalendatBanner = () => {
   const renderItem = () => {
     return (
-      <View>
-        <Text style={styles.carouselText}>{item}</Text>
-      </View>
+      <TouchableOpacity onPress={() => console.log('carousel')}>
+        <Text style={styles.carouselText}>1</Text>
+      </TouchableOpacity>
     )
   }
   return (
@@ -59,9 +59,9 @@ const styles = StyleSheet.create({
 
   carouselText: {
     width: windowWidth / 4 - 10,
-    padding: 5,
+    // padding: 5,
     height: 100,
-    fontSize: 30,
+    fontSize: 80,
     fontWeight: 'bold',
     color: '#fff',
     backgroundColor: 'red',
