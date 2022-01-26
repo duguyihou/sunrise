@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons'
 import { windowWidth } from 'utils/dimensions'
 
+const Next_DAYS = 8
 const CalendatBanner = () => {
   return (
     <View style={styles.container}>
@@ -24,7 +25,7 @@ const CalendatBanner = () => {
         style={styles.daysContainer}
         horizontal={true}
         showsHorizontalScrollIndicator={false}>
-        {getNextDays(8).map(({ day, dayName }) => (
+        {getNextDays(Next_DAYS).map(({ day, dayName }) => (
           <TouchableOpacity
             style={styles.dayContainer}
             onPress={() => console.log({ getCurrentDay: day })}>
