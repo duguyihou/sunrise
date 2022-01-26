@@ -1,10 +1,12 @@
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
-import React from 'react'
 import {
-  getCurrentDayName,
-  getCurrentDay,
-  getCurrentMonth,
-} from 'utils/dateTime'
+  StyleSheet,
+  Text,
+  ScrollView,
+  View,
+  TouchableOpacity,
+} from 'react-native'
+import React from 'react'
+import { getCurrentMonth, getNextDays } from 'utils/dateTime'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons'
 import { windowWidth } from 'utils/dimensions'
@@ -18,14 +20,19 @@ const CalendatBanner = () => {
         <Text style={styles.label}>{getCurrentMonth()}</Text>
         <FontAwesomeIcon icon={faAngleRight} color="#fff" size={20} />
       </TouchableOpacity>
-      <View style={styles.daysContainer}>
-        <TouchableOpacity
-          style={styles.dayContainer}
-          onPress={() => console.log({ getCurrentDay: getCurrentDay() })}>
-          <Text style={styles.day}>{getCurrentDay()}</Text>
-          <Text style={styles.dayName}>{getCurrentDayName()}</Text>
-        </TouchableOpacity>
-      </View>
+      <ScrollView
+        style={styles.daysContainer}
+        horizontal={true}
+        showsHorizontalScrollIndicator={false}>
+        {getNextDays(8).map(({ day, dayName }) => (
+          <TouchableOpacity
+            style={styles.dayContainer}
+            onPress={() => console.log({ getCurrentDay: day })}>
+            <Text style={styles.day}>{day}</Text>
+            <Text style={styles.dayName}>{dayName}</Text>
+          </TouchableOpacity>
+        ))}
+      </ScrollView>
     </View>
   )
 }
@@ -55,16 +62,17 @@ const styles = StyleSheet.create({
   },
   daysContainer: {
     width: windowWidth - 20,
-    height: 100,
+    height: 120,
     padding: 10,
+    flexDirection: 'row',
   },
   dayContainer: {
-    width: (windowWidth - 20) / 4,
+    width: (windowWidth - 40) / 4,
     height: 100,
-    padding: 10,
-    borderRadius: 20,
-    backgroundColor: 'red',
-    display: 'flex',
+    borderRadius: 5,
+    borderWidth: 2,
+    borderColor: '#0C2A38',
+    backgroundColor: '#254C67',
     justifyContent: 'center',
     alignItems: 'center',
   },
