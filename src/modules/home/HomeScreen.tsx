@@ -16,7 +16,7 @@ const HomeScreen = ({ navigation }: Props) => {
   const calendarEvents = useAppSelector(state => state.calendarEvents)
   return (
     <View style={styles.container}>
-      <CalendatBanner />
+      <CalendatBanner item={[1]} />
       {calendarEvents &&
         calendarEvents.map(calendarEvent => (
           <CalendarEventItem key={calendarEvent.summary} {...calendarEvent} />
