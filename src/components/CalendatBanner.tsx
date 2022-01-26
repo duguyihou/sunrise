@@ -1,36 +1,31 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import React from 'react'
-import { currentMonth } from 'utils/dateTime'
+import {
+  getCurrentDayName,
+  getCurrentDay,
+  getCurrentMonth,
+} from 'utils/dateTime'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons'
-import Carousel from 'react-native-snap-carousel'
 import { windowWidth } from 'utils/dimensions'
 
 const CalendatBanner = () => {
-  const renderItem = () => {
-    return (
-      <TouchableOpacity onPress={() => console.log('carousel')}>
-        <Text style={styles.carouselText}>1</Text>
-      </TouchableOpacity>
-    )
-  }
   return (
     <View style={styles.container}>
       <TouchableOpacity
         style={styles.labelContainer}
-        onPress={() => console.log({ currentMonth: currentMonth() })}>
-        <Text style={styles.label}>{currentMonth()}</Text>
+        onPress={() => console.log({ currentMonth: getCurrentMonth() })}>
+        <Text style={styles.label}>{getCurrentMonth()}</Text>
         <FontAwesomeIcon icon={faAngleRight} color="#fff" size={20} />
       </TouchableOpacity>
-      <Carousel
-        data={['1', '2', '3', '4', '5']}
-        renderItem={renderItem}
-        sliderWidth={windowWidth}
-        itemWidth={windowWidth / 4}
-        activeSlideAlignment="start"
-        inactiveSlideScale={1}
-        inactiveSlideOpacity={1}
-      />
+      <View style={styles.daysContainer}>
+        <TouchableOpacity
+          style={styles.dayContainer}
+          onPress={() => console.log({ getCurrentDay: getCurrentDay() })}>
+          <Text style={styles.day}>{getCurrentDay()}</Text>
+          <Text style={styles.dayName}>{getCurrentDayName()}</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   )
 }
@@ -43,6 +38,8 @@ const styles = StyleSheet.create({
     height: 200,
     display: 'flex',
     flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
   },
   labelContainer: {
     width: windowWidth - 20,
@@ -56,16 +53,29 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#fff',
   },
-
-  carouselText: {
-    width: windowWidth / 4 - 10,
-    // padding: 5,
+  daysContainer: {
+    width: windowWidth - 20,
     height: 100,
-    fontSize: 80,
+    padding: 10,
+  },
+  dayContainer: {
+    width: (windowWidth - 20) / 4,
+    height: 100,
+    padding: 10,
+    borderRadius: 20,
+    backgroundColor: 'red',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  day: {
+    fontSize: 30,
     fontWeight: 'bold',
     color: '#fff',
-    backgroundColor: 'red',
-    textAlign: 'center',
-    textAlignVertical: 'center',
+  },
+  dayName: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#fff',
   },
 })
