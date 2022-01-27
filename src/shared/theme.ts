@@ -6,6 +6,8 @@ export const theme = {
   font: {
     primary: '#fff',
     secondary: '#DDECF5',
+    placeholder: '#807F80',
   },
   border: '#1B3744',
+  hidden: 'transpancy',
 }

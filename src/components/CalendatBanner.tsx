@@ -20,7 +20,11 @@ const CalendatBanner = () => {
         style={styles.labelContainer}
         onPress={() => console.log({ currentMonth: getCurrentMonth() })}>
         <Text style={styles.label}>{getCurrentMonth()}</Text>
-        <FontAwesomeIcon icon={faAngleRight} color="#fff" size={20} />
+        <FontAwesomeIcon
+          icon={faAngleRight}
+          color={theme.font.primary}
+          size={20}
+        />
       </TouchableOpacity>
       <ScrollView
         style={styles.daysContainer}

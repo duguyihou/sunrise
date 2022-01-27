@@ -25,7 +25,7 @@ const HomeScreen = ({ navigation }: Props) => {
       <TouchableOpacity
         style={styles.plus}
         onPress={() => navigation.push('NewItem')}>
-        <FontAwesomeIcon icon={faPlus} color="#fff" />
+        <FontAwesomeIcon icon={faPlus} color={theme.font.primary} size={30} />
       </TouchableOpacity>
     </View>
   )
