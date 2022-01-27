@@ -9,11 +9,18 @@ import {
 } from 'react-native'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
+import {
+  faCheck,
+  faTimes,
+  faStickyNote,
+  faClock,
+  faBell,
+} from '@fortawesome/free-solid-svg-icons'
 import { windowWidth } from 'utils/dimensions'
 import { useAppDispatch } from 'app/hooks'
 import { addCalendarEvent } from 'app/calendarEventsSlice'
 import { CalendarEvent } from 'typings'
+import { theme } from 'shared/theme'
 
 type RootStackParamList = {
   Home: undefined
@@ -22,7 +29,6 @@ type RootStackParamList = {
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>
 const defaultValues = {
   summary: '',
-  location: '',
   description: '',
   start: {
     dateTime: '',
@@ -32,11 +38,7 @@ const defaultValues = {
     dateTime: '',
     timeZone: '',
   },
-  recurrence: ['RRULE:FREQ=DAILY;COUNT=2'],
-  attendees: [{ email: '' }],
-  reminders: {
-    useDefault: true,
-  },
+  notification: '',
 }
 const NewItemScreen = ({ navigation }: Props) => {
   const {
@@ -64,7 +66,7 @@ const NewItemScreen = ({ navigation }: Props) => {
       ),
       headerRight: () => (
         <TouchableOpacity onPress={handleSubmit(onSubmit)}>
-          <FontAwesomeIcon icon={faCheck} color="#fff" />
+          <FontAwesomeIcon icon={faCheck} color={theme.font.primary} />
         </TouchableOpacity>
       ),
     })
@@ -78,7 +80,8 @@ const NewItemScreen = ({ navigation }: Props) => {
         }}
         render={({ field: { onChange, onBlur, value } }) => (
           <TextInput
-            placeholder="summary"
+            placeholder="Type what you want"
+            placeholderTextColor={theme.font.placeholder}
             style={styles.summary}
             onBlur={onBlur}
             onChangeText={onChange}
@@ -87,23 +90,89 @@ const NewItemScreen = ({ navigation }: Props) => {
         )}
         name="summary"
       />
-      {errors.summary && <Text>This is required.</Text>}
-      <Controller
-        control={control}
-        rules={{
-          maxLength: 100,
-        }}
-        render={({ field: { onChange, onBlur, value } }) => (
-          <TextInput
-            placeholder="description"
-            style={styles.description}
-            onBlur={onBlur}
-            onChangeText={onChange}
-            value={value}
-          />
-        )}
-        name="description"
-      />
+      {errors.summary && <Text style={styles.error}>This is required.</Text>}
+      <View style={styles.section}>
+        <FontAwesomeIcon icon={faClock} color={theme.font.secondary} />
+        <Controller
+          control={control}
+          rules={{
+            maxLength: 100,
+          }}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <TextInput
+              placeholder="Start Time"
+              placeholderTextColor={theme.font.placeholder}
+              style={styles.detail}
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value.dateTime}
+            />
+          )}
+          name="start"
+        />
+      </View>
+      <View style={styles.section}>
+        <FontAwesomeIcon icon={faClock} color={theme.hidden} />
+        <Controller
+          control={control}
+          rules={{
+            maxLength: 100,
+          }}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <TextInput
+              placeholder="End Time"
+              placeholderTextColor={theme.font.placeholder}
+              style={styles.detail}
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value.dateTime}
+            />
+          )}
+          name="end"
+        />
+      </View>
+      <View style={styles.section}>
+        <FontAwesomeIcon icon={faBell} color={theme.font.secondary} />
+        <Controller
+          control={control}
+          rules={{
+            maxLength: 100,
+          }}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <TextInput
+              placeholder="No Notification"
+              placeholderTextColor={theme.font.placeholder}
+              style={styles.detail}
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value.toString()}
+            />
+          )}
+          name="notification"
+        />
+      </View>
+      <View style={styles.section}>
+        <FontAwesomeIcon icon={faStickyNote} color={theme.font.secondary} />
+        <Controller
+          control={control}
+          rules={{
+            maxLength: 100,
+          }}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <TextInput
+              style={styles.detail}
+              placeholder="description"
+              placeholderTextColor={theme.font.placeholder}
+              multiline={true}
+              numberOfLines={6}
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
+            />
+          )}
+          name="description"
+        />
+      </View>
     </View>
   )
 }
@@ -116,15 +185,33 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'flex-start',
     alignItems: 'center',
+    backgroundColor: theme.bg.primary,
   },
   summary: {
     width: windowWidth - 20,
     padding: 10,
     fontSize: 20,
+    fontWeight: 'bold',
+    color: theme.font.primary,
+    borderBottomColor: theme.border,
+    borderBottomWidth: 2,
   },
-  description: {
+  error: {
+    color: 'red',
+    paddingLeft: 20,
+    alignSelf: 'flex-start',
+  },
+  section: {
     width: windowWidth - 20,
     padding: 10,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+
+  detail: {
+    padding: 10,
     fontSize: 16,
+    color: theme.font.primary,
   },
 })
