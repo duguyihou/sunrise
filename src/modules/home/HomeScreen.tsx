@@ -6,6 +6,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { useAppSelector } from 'app/hooks'
 import CalendarEventItem from 'components/CalendarEventItem'
 import CalendatBanner from 'components/CalendatBanner'
+import { theme } from 'shared/theme'
 
 type RootStackParamList = {
   Home: undefined
@@ -38,7 +39,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    backgroundColor: '#0C2A38',
+    backgroundColor: theme.bg.primary,
   },
   plus: {
     position: 'absolute',

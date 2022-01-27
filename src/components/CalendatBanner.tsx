@@ -10,6 +10,7 @@ import { getCurrentMonth, getNextDays } from 'utils/dateTime'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons'
 import { windowWidth } from 'utils/dimensions'
+import { theme } from 'shared/theme'
 
 const Next_DAYS = 8
 const CalendatBanner = () => {
@@ -59,7 +60,7 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 30,
     fontWeight: 'bold',
-    color: '#fff',
+    color: theme.font.primary,
   },
   daysContainer: {
     width: windowWidth - 20,
@@ -72,19 +73,19 @@ const styles = StyleSheet.create({
     height: 100,
     borderRadius: 5,
     borderWidth: 2,
-    borderColor: '#0C2A38',
-    backgroundColor: '#254C67',
+    borderColor: theme.bg.primary,
+    backgroundColor: theme.bg.secondary,
     justifyContent: 'center',
     alignItems: 'center',
   },
   day: {
     fontSize: 30,
     fontWeight: 'bold',
-    color: '#fff',
+    color: theme.font.primary,
   },
   dayName: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#fff',
+    color: theme.font.primary,
   },
 })

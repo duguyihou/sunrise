@@ -3,6 +3,7 @@ import React from 'react'
 import { CalendarEvent } from 'typings'
 import { windowWidth } from 'utils/dimensions'
 import { dateFormat } from 'utils/dateTime'
+import { theme } from 'shared/theme'
 
 const CalendarEventItem = (calendarEvents: CalendarEvent) => {
   const {
@@ -32,10 +33,10 @@ const styles = StyleSheet.create({
   },
   summary: {
     fontSize: 20,
-    color: '#DDECF5',
+    color: theme.font.secondary,
   },
   dateTime: {
-    fontSize: 20,
-    color: '#758295',
+    fontSize: 18,
+    color: theme.font.secondary,
   },
 })

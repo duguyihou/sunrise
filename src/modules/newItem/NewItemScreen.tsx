@@ -14,6 +14,7 @@ import { windowWidth } from 'utils/dimensions'
 import { useAppDispatch } from 'app/hooks'
 import { addCalendarEvent } from 'app/calendarEventsSlice'
 import { CalendarEvent } from 'typings'
+import { theme } from 'shared/theme'
 
 type RootStackParamList = {
   Home: undefined
@@ -87,7 +88,7 @@ const NewItemScreen = ({ navigation }: Props) => {
         )}
         name="summary"
       />
-      {errors.summary && <Text>This is required.</Text>}
+      {errors.summary && <Text style={styles.error}>This is required.</Text>}
       <Controller
         control={control}
         rules={{
@@ -116,11 +117,18 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'flex-start',
     alignItems: 'center',
+    backgroundColor: theme.bg.primary,
   },
   summary: {
     width: windowWidth - 20,
     padding: 10,
     fontSize: 20,
+    borderBottomColor: theme.border,
+  },
+  error: {
+    color: 'red',
+    paddingLeft: 20,
+    alignSelf: 'flex-start',
   },
   description: {
     width: windowWidth - 20,
