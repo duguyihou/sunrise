@@ -6,15 +6,12 @@ import { dateFormat } from 'utils/dateTime'
 import { theme } from 'shared/theme'
 
 const CalendarEventItem = (calendarEvents: CalendarEvent) => {
-  const {
-    summary,
-    start: { dateTime },
-  } = calendarEvents
+  const { summary, notification } = calendarEvents
   return (
     <TouchableOpacity style={styles.item} onPress={() => console.log(summary)}>
       <Text style={styles.summary}>{summary}</Text>
-      <Text style={styles.dateTime}>
-        {dateTime ? dateFormat(dateTime) : ''}
+      <Text style={styles.notification}>
+        {notification ? dateFormat(notification) : ''}
       </Text>
     </TouchableOpacity>
   )
@@ -35,7 +32,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: theme.font.secondary,
   },
-  dateTime: {
+  notification: {
     fontSize: 18,
     color: theme.font.secondary,
   },

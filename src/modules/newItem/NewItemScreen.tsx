@@ -29,16 +29,8 @@ type RootStackParamList = {
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>
 const defaultValues = {
   summary: '',
-  description: '',
-  start: {
-    dateTime: '',
-    timeZone: '',
-  },
-  end: {
-    dateTime: '',
-    timeZone: '',
-  },
   notification: '',
+  description: '',
 }
 const NewItemScreen = ({ navigation }: Props) => {
   const {
@@ -91,46 +83,6 @@ const NewItemScreen = ({ navigation }: Props) => {
         name="summary"
       />
       {errors.summary && <Text style={styles.error}>This is required.</Text>}
-      <View style={styles.section}>
-        <FontAwesomeIcon icon={faClock} color={theme.font.secondary} />
-        <Controller
-          control={control}
-          rules={{
-            maxLength: 100,
-          }}
-          render={({ field: { onChange, onBlur, value } }) => (
-            <TextInput
-              placeholder="Start Time"
-              placeholderTextColor={theme.font.placeholder}
-              style={styles.detail}
-              onBlur={onBlur}
-              onChangeText={onChange}
-              value={value.dateTime}
-            />
-          )}
-          name="start"
-        />
-      </View>
-      <View style={styles.section}>
-        <FontAwesomeIcon icon={faClock} color={theme.hidden} />
-        <Controller
-          control={control}
-          rules={{
-            maxLength: 100,
-          }}
-          render={({ field: { onChange, onBlur, value } }) => (
-            <TextInput
-              placeholder="End Time"
-              placeholderTextColor={theme.font.placeholder}
-              style={styles.detail}
-              onBlur={onBlur}
-              onChangeText={onChange}
-              value={value.dateTime}
-            />
-          )}
-          name="end"
-        />
-      </View>
       <View style={styles.section}>
         <FontAwesomeIcon icon={faBell} color={theme.font.secondary} />
         <Controller
