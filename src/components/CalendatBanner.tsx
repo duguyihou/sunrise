@@ -32,6 +32,7 @@ const CalendatBanner = () => {
         showsHorizontalScrollIndicator={false}>
         {getNextDays(Next_DAYS).map(({ day, dayName }) => (
           <TouchableOpacity
+            key={day}
             style={styles.dayContainer}
             onPress={() => console.log({ getCurrentDay: day })}>
             <Text style={styles.day}>{day}</Text>
