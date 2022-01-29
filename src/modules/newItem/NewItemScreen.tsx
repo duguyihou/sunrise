@@ -13,7 +13,6 @@ import {
   faCheck,
   faTimes,
   faStickyNote,
-  faClock,
   faBell,
 } from '@fortawesome/free-solid-svg-icons'
 import { windowWidth } from 'utils/dimensions'

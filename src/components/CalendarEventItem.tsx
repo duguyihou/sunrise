@@ -1,15 +1,25 @@
 import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import { faThumbtack } from '@fortawesome/free-solid-svg-icons'
 import { CalendarEvent } from 'typings'
 import { windowWidth } from 'utils/dimensions'
 import { dateFormat } from 'utils/dateTime'
 import { theme } from 'shared/theme'
 
 const CalendarEventItem = (calendarEvents: CalendarEvent) => {
-  const { summary, notification } = calendarEvents
+  const { summary, notification, description } = calendarEvents
   return (
     <TouchableOpacity style={styles.item} onPress={() => console.log(summary)}>
       <Text style={styles.summary}>{summary}</Text>
+      {!!description && (
+        <FontAwesomeIcon
+          style={styles.description}
+          icon={faThumbtack}
+          color={theme.font.secondary}
+          size={12}
+        />
+      )}
       <Text style={styles.notification}>
         {notification ? dateFormat(notification) : ''}
       </Text>
@@ -30,9 +40,13 @@ const styles = StyleSheet.create({
   },
   summary: {
     fontSize: 20,
-    color: theme.font.secondary,
+    color: theme.font.primary,
+  },
+  description: {
+    marginLeft: 5,
   },
   notification: {
+    marginLeft: 'auto',
     fontSize: 18,
     color: theme.font.secondary,
   },
