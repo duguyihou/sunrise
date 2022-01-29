@@ -20,7 +20,7 @@ const HomeScreen = ({ navigation }: Props) => {
       <CalendatBanner />
       {calendarEvents &&
         calendarEvents.map(calendarEvent => (
-          <CalendarEventItem key={calendarEvent.summary} {...calendarEvent} />
+          <CalendarEventItem key={calendarEvent.id} {...calendarEvent} />
         ))}
       <TouchableOpacity
         style={styles.plus}

@@ -6,11 +6,18 @@ import { CalendarEvent } from 'typings'
 import { windowWidth } from 'utils/dimensions'
 import { dateFormat } from 'utils/dateTime'
 import { theme } from 'shared/theme'
+import { useNavigation } from '@react-navigation/native'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { RootStackParamList } from 'typings/route'
 
-const CalendarEventItem = (calendarEvents: CalendarEvent) => {
-  const { summary, notification, description } = calendarEvents
+const CalendarEventItem = (calendarEvent: CalendarEvent) => {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>()
+  const { summary, notification, description } = calendarEvent
   return (
-    <TouchableOpacity style={styles.item} onPress={() => console.log(summary)}>
+    <TouchableOpacity
+      style={styles.item}
+      onPress={() => navigation.navigate('ItemDetail', { calendarEvent })}>
       <Text style={styles.summary}>{summary}</Text>
       {!!description && (
         <FontAwesomeIcon

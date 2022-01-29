@@ -7,51 +7,38 @@ import {
   TextInput,
   View,
 } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import {
   faCheck,
-  faTimes,
   faStickyNote,
   faBell,
 } from '@fortawesome/free-solid-svg-icons'
 import { windowWidth } from 'utils/dimensions'
 import { useAppDispatch } from 'app/hooks'
-import { addCalendarEvent } from 'app/calendarEventsSlice'
+import { updateCalendatEvent } from 'app/calendarEventsSlice'
 import { CalendarEvent } from 'typings'
 import { theme } from 'shared/theme'
-
-const defaultValues = {
-  id: (Math.random() * 100000).toString(),
-  summary: '',
-  notification: '',
-  description: '',
-}
+import { RootStackParamList } from 'typings/route'
 const NewItemScreen = () => {
+  const navigation = useNavigation()
+  const {
+    params: { calendarEvent },
+  } = useRoute<RouteProp<RootStackParamList, 'ItemDetail'>>()
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm({ defaultValues })
+  } = useForm({ defaultValues: calendarEvent })
   const dispatch = useAppDispatch()
-  const navigation = useNavigation()
   const onSubmit = (data: CalendarEvent) => {
-    dispatch(addCalendarEvent(data))
+    dispatch(updateCalendatEvent(data))
     navigation.goBack()
   }
 
-  const handleCancel = () => navigation.goBack()
-
   useLayoutEffect(() => {
     navigation.setOptions({
-      title: 'New Event',
-      headerStyle: { backgroundColor: '#0C2A38' },
-      headerTintColor: '#fff',
-      headerLeft: () => (
-        <TouchableOpacity onPress={handleCancel}>
-          <FontAwesomeIcon icon={faTimes} color="#fff" />
-        </TouchableOpacity>
-      ),
+      title: '',
       headerRight: () => (
         <TouchableOpacity onPress={handleSubmit(onSubmit)}>
           <FontAwesomeIcon icon={faCheck} color={theme.font.primary} />
