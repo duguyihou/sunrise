@@ -7,7 +7,7 @@ import {
   TextInput,
   View,
 } from 'react-native'
-import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import { useNavigation } from '@react-navigation/native'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import {
   faCheck,
@@ -21,23 +21,20 @@ import { addCalendarEvent } from 'app/calendarEventsSlice'
 import { CalendarEvent } from 'typings'
 import { theme } from 'shared/theme'
 
-type RootStackParamList = {
-  Home: undefined
-  NewItem: undefined
-}
-type Props = NativeStackScreenProps<RootStackParamList, 'Home'>
 const defaultValues = {
+  id: (Math.random() * 100000).toString(),
   summary: '',
   notification: '',
   description: '',
 }
-const NewItemScreen = ({ navigation }: Props) => {
+const NewItemScreen = () => {
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm({ defaultValues })
   const dispatch = useAppDispatch()
+  const navigation = useNavigation()
   const onSubmit = (data: CalendarEvent) => {
     dispatch(addCalendarEvent(data))
     navigation.goBack()

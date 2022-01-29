@@ -7,7 +7,7 @@ import {
   TextInput,
   View,
 } from 'react-native'
-import { useNavigation, useRoute } from '@react-navigation/native'
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import {
   faCheck,
@@ -16,15 +16,15 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { windowWidth } from 'utils/dimensions'
 import { useAppDispatch } from 'app/hooks'
-import { addCalendarEvent } from 'app/calendarEventsSlice'
+import { updateCalendatEvent } from 'app/calendarEventsSlice'
 import { CalendarEvent } from 'typings'
 import { theme } from 'shared/theme'
-
+import { RootStackParamList } from 'typings/route'
 const NewItemScreen = () => {
   const navigation = useNavigation()
   const {
     params: { calendarEvent },
-  } = useRoute()
+  } = useRoute<RouteProp<RootStackParamList, 'ItemDetail'>>()
   const {
     control,
     handleSubmit,
@@ -32,7 +32,7 @@ const NewItemScreen = () => {
   } = useForm({ defaultValues: calendarEvent })
   const dispatch = useAppDispatch()
   const onSubmit = (data: CalendarEvent) => {
-    dispatch(addCalendarEvent(data))
+    dispatch(updateCalendatEvent(data))
     navigation.goBack()
   }
 
