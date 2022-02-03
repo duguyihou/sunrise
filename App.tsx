@@ -9,6 +9,7 @@ import ItemDetailScreen from 'modules/itemDetail/ItemDetailScreen'
 
 import { store } from 'app/store'
 import { RootStackParamList } from 'typings/route'
+import SigninScreen from 'modules/signin/SigninScreen'
 
 const RootStack = createNativeStackNavigator<RootStackParamList>()
 
@@ -20,6 +21,11 @@ function Root() {
         headerTintColor: '#fff',
       }}>
       <RootStack.Group>
+        <RootStack.Screen
+          name="SignIn"
+          component={SigninScreen}
+          options={{ headerShown: false }}
+        />
         <RootStack.Screen name="Home" component={HomeScreen} />
         <RootStack.Screen name="ItemDetail" component={ItemDetailScreen} />
       </RootStack.Group>
@@ -29,6 +35,7 @@ function Root() {
     </RootStack.Navigator>
   )
 }
+
 const App = () => {
   return (
     <Provider store={store}>
