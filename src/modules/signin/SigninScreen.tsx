@@ -4,14 +4,16 @@ import { authorize } from 'react-native-app-auth'
 import { config } from 'shared/config'
 import { windowHeight, windowWidth } from 'utils/dimensions'
 import { theme } from 'shared/theme'
+import { saveAuth } from 'app/authSlice'
+import { useAppDispatch } from 'app/hooks'
 
 const SigninScreen = () => {
+  const dispatch = useAppDispatch()
   const handleSignin = async () => {
-    console.log('🐵', config)
     const response = await authorize(config)
-
-    console.log('🐵', response)
+    dispatch(saveAuth(response))
   }
+
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.button} onPress={handleSignin}>
