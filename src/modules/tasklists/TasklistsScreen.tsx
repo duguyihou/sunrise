@@ -1,14 +1,10 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
-import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import { RootStackParamList } from 'typings'
+import { StackProps } from 'typings'
 import { windowWidth } from 'utils/dimensions'
 import TasklistItem from 'components/TasklistItem'
 
-const TasklistsScreen = ({
-  navigation,
-  route,
-}: NativeStackScreenProps<RootStackParamList>) => {
+const TasklistsScreen = ({ navigation, route }: StackProps) => {
   return (
     <View style={styles.container}>
       <TasklistItem navigation={navigation} route={route} />

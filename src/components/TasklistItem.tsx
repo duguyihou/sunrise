@@ -1,11 +1,8 @@
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity } from 'react-native'
-import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import { RootStackParamList } from 'typings'
+import { StackProps } from 'typings/route'
 
-const TasklistItem = ({
-  navigation,
-}: NativeStackScreenProps<RootStackParamList>) => {
+const TasklistItem = ({ navigation }: StackProps) => {
   return (
     <TouchableOpacity onPress={() => navigation.push('Home')}>
       <Text style={styles.text}>My Task</Text>
