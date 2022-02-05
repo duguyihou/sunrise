@@ -1,5 +1,4 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import calendarEventsReducer from './calendarEventsSlice'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import {
   persistStore,
@@ -11,14 +10,21 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist'
+import calendarEventsReducer from './calendarEventsSlice'
+import authReducer from './authSlice'
 
 const persistConfig = {
   key: 'root',
+  version: 1,
   storage: AsyncStorage,
 }
-const reducer = combineReducers({
-  calendarEvents: persistReducer(persistConfig, calendarEventsReducer),
-})
+const reducer = persistReducer(
+  persistConfig,
+  combineReducers({
+    calendarEvents: calendarEventsReducer,
+    auth: authReducer,
+  }),
+)
 
 export const store = configureStore({
   reducer,

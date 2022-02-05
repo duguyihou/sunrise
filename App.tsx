@@ -7,10 +7,9 @@ import { PersistGate } from 'redux-persist/integration/react'
 import HomeScreen from 'modules/home/HomeScreen'
 import NewItemScreen from 'modules/newItem/NewItemScreen'
 import ItemDetailScreen from 'modules/itemDetail/ItemDetailScreen'
-
+import SigninScreen from 'modules/signin/SigninScreen'
 import { store, persistor } from 'app/store'
 import { RootStackParamList } from 'typings/route'
-import SigninScreen from 'modules/signin/SigninScreen'
 
 const RootStack = createNativeStackNavigator<RootStackParamList>()
 
