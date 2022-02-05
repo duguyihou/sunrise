@@ -5,10 +5,10 @@ import { faThumbtack } from '@fortawesome/free-solid-svg-icons'
 import { CalendarEvent } from 'typings'
 import { windowWidth } from 'utils/dimensions'
 import { dateFormat } from 'utils/dateTime'
-import { theme } from 'shared/theme'
+import { theme } from 'shared'
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { RootStackParamList } from 'typings/route'
+import { RootStackParamList } from 'typings'
 
 const CalendarEventItem = (calendarEvent: CalendarEvent) => {
   const navigation =

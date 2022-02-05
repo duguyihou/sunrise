@@ -10,7 +10,7 @@ import { getCurrentMonth, getNextDays } from 'utils/dateTime'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons'
 import { windowWidth } from 'utils/dimensions'
-import { theme } from 'shared/theme'
+import { theme } from 'shared'
 
 const Next_DAYS = 8
 const CalendatBanner = () => {
