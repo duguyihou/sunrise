@@ -12,6 +12,7 @@ specifiers:
   '@fortawesome/fontawesome-svg-core': ^1.2.36
   '@fortawesome/free-solid-svg-icons': ^5.15.4
   '@fortawesome/react-native-fontawesome': ^0.2.7
+  '@react-native-async-storage/async-storage': ^1.15.17
   '@react-native-community/eslint-config': ^2.0.0
   '@react-navigation/drawer': ^6.1.8
   '@react-navigation/native': ^6.0.6
@@ -42,6 +43,7 @@ specifiers:
   react-native-svg: ^12.1.1
   react-redux: ^7.2.6
   react-test-renderer: 17.0.2
+  redux-persist: ^6.0.0
   typescript: ^4.4.4
 
 dependencies:
@@ -49,6 +51,7 @@ dependencies:
   '@fortawesome/fontawesome-svg-core': 1.2.36
   '@fortawesome/free-solid-svg-icons': 5.15.4
   '@fortawesome/react-native-fontawesome': 0.2.7_4b63e2f03dc2a9f693574aba8e48f35c
+  '@react-native-async-storage/async-storage': 1.15.17_react-native@0.66.4
   '@react-navigation/drawer': 6.1.8_d2d1dfc97d104a50bcdd483361fce3cd
   '@react-navigation/native': 6.0.6_react-native@0.66.4+react@17.0.2
   '@react-navigation/native-stack': 6.2.5_3f734be3b74b4561c53a46996b0dbc75
@@ -65,6 +68,7 @@ dependencies:
   react-native-screens: 3.10.2_react-native@0.66.4+react@17.0.2
   react-native-svg: 12.1.1_react-native@0.66.4+react@17.0.2
   react-redux: 7.2.6_react-native@0.66.4+react@17.0.2
+  redux-persist: 6.0.0
 
 devDependencies:
   '@babel/core': 7.16.10
@@ -1854,6 +1858,15 @@ packages:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.13.0
     dev: true
+
+  /@react-native-async-storage/async-storage/1.15.17_react-native@0.66.4:
+    resolution: {integrity: sha512-NQCFs47aFEch9kya/bqwdpvSdZaVRtzU7YB02L8VrmLSLpKgQH/1VwzFUBPcc1/JI1s3GU4yOLVrEbwxq+Fqcw==}
+    peerDependencies:
+      react-native: ^0.0.0-0 || 0.60 - 0.67 || 1000.0.0
+    dependencies:
+      merge-options: 3.0.4
+      react-native: 0.66.4_3ea5b0cc8d329643dbdf4991280571c8
+    dev: false
 
   /@react-native-community/cli-debugger-ui/6.0.0-rc.0:
     resolution: {integrity: sha512-achYcPPoWa9D02C5tn6TBzjeY443wQTyx37urptc75JpZ7gR5YHsDyIEEWa3DDYp1va9zx/iGg+uZ/hWw07GAw==}
@@ -4929,6 +4942,11 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
+  /is-plain-obj/2.1.0:
+    resolution: {integrity: sha512-YWnfyRwxL/+SsrWYfOpUtz5b3YD+nyfkHvjbcanzk8zgyO4ASD67uVMRt8k5bM4lLMDnXfriRhOpemw+NfT1eA==}
+    engines: {node: '>=8'}
+    dev: false
+
   /is-plain-object/2.0.4:
     resolution: {integrity: sha512-h5PpgXkWitc38BBMYawTYMWJHFZJVnBquFE57xFpjB8pJFiF6gZ+bU+WyI/yqXiFR5mdLsgYNaPe8uao6Uv9Og==}
     engines: {node: '>=0.10.0'}
@@ -5867,6 +5885,13 @@ packages:
       type-fest: 0.18.1
       yargs-parser: 20.2.9
     dev: true
+
+  /merge-options/3.0.4:
+    resolution: {integrity: sha512-2Sug1+knBjkaMsMgf1ctR1Ujx+Ayku4EdJN4Z+C2+JzoeF7A3OZ9KM2GY0CpQS51NR61LTurMJrRKPhSs3ZRTQ==}
+    engines: {node: '>=10'}
+    dependencies:
+      is-plain-obj: 2.1.0
+    dev: false
 
   /merge-stream/2.0.0:
     resolution: {integrity: sha512-abv/qOcuPfk3URPfDzmZU1LKmuw8kT+0nIHvKrKgFrwifol/doWcdA4ZqsWQ8ENrFKkd67Mfpo/LovbIUsbt3w==}
@@ -7120,6 +7145,12 @@ packages:
       indent-string: 4.0.0
       strip-indent: 3.0.0
     dev: true
+
+  /redux-persist/6.0.0:
+    resolution: {integrity: sha512-71LLMbUq2r02ng2We9S215LtPu3fY0KgaGE0k8WRgl6RkqxtGfl7HUozz1Dftwsb0D/5mZ8dwAaPbtnzfvbEwQ==}
+    peerDependencies:
+      redux: '>4.0.0'
+    dev: false
 
   /redux-thunk/2.4.1_redux@4.1.2:
     resolution: {integrity: sha512-OOYGNY5Jy2TWvTL1KgAlVy6dcx3siPJ1wTq741EPyUKfn6W6nChdICjZwCd0p8AZBs5kWpZlbkXW2nE/zjUa+Q==}
