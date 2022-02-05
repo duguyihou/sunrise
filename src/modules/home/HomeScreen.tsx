@@ -11,8 +11,9 @@ import { theme } from 'shared'
 import { RootStackParamList, Tasklist } from 'typings'
 import tasklistService from 'api/tasklists'
 
-type Props = NativeStackScreenProps<RootStackParamList>
-const HomeScreen = ({ navigation }: Props) => {
+const HomeScreen = ({
+  navigation,
+}: NativeStackScreenProps<RootStackParamList>) => {
   const calendarEvents = useAppSelector(state => state.calendarEvents)
   const { isLoading, error, data } = useQuery<Tasklist, Error>(
     'tasklists',

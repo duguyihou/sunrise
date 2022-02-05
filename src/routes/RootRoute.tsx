@@ -8,38 +8,35 @@ import HomeScreen from 'modules/home/HomeScreen'
 import NewItemScreen from 'modules/newItem/NewItemScreen'
 import ItemDetailScreen from 'modules/itemDetail/ItemDetailScreen'
 import SigninScreen from 'modules/signin/SigninScreen'
+import TasklistsScreen from 'modules/tasklists/TasklistsScreen'
 
 const RootStack = createNativeStackNavigator<RootStackParamList>()
 
 function RootRoute() {
   const { accessToken } = useAppSelector(state => state.auth) as Auth
+
+  if (!accessToken) {
+    return (
+      <RootStack.Navigator screenOptions={{ headerShown: false }}>
+        <RootStack.Screen name="SignIn" component={SigninScreen} />
+      </RootStack.Navigator>
+    )
+  }
+
   return (
     <RootStack.Navigator
       screenOptions={{
         headerStyle: { backgroundColor: '#0C2A38' },
         headerTintColor: '#fff',
       }}>
-      {accessToken ? (
-        <>
-          <RootStack.Group>
-            <RootStack.Screen
-              name="Home"
-              component={HomeScreen}
-              options={{ title: '' }}
-            />
-            <RootStack.Screen name="ItemDetail" component={ItemDetailScreen} />
-          </RootStack.Group>
-          <RootStack.Group screenOptions={{ presentation: 'modal' }}>
-            <RootStack.Screen name="NewItem" component={NewItemScreen} />
-          </RootStack.Group>
-        </>
-      ) : (
-        <RootStack.Screen
-          name="SignIn"
-          component={SigninScreen}
-          options={{ headerShown: false }}
-        />
-      )}
+      <RootStack.Group>
+        <RootStack.Screen name="Tasklists" component={TasklistsScreen} />
+        <RootStack.Screen name="Home" component={HomeScreen} />
+        <RootStack.Screen name="ItemDetail" component={ItemDetailScreen} />
+      </RootStack.Group>
+      <RootStack.Group screenOptions={{ presentation: 'modal' }}>
+        <RootStack.Screen name="NewItem" component={NewItemScreen} />
+      </RootStack.Group>
     </RootStack.Navigator>
   )
 }
