@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { Auth } from 'typings/auth'
+import { Auth } from 'typings'
 
-const initialState = {
+const initialState: Auth = {
   accessToken: '',
   accessTokenExpirationDate: '',
   refreshToken: '',
-} as Auth
+}
 const authSlice = createSlice({
   name: 'auth',
   initialState,

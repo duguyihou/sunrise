@@ -6,13 +6,10 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { useAppSelector } from 'app/hooks'
 import CalendarEventItem from 'components/CalendarEventItem'
 import CalendatBanner from 'components/CalendatBanner'
-import { theme } from 'shared/theme'
+import { theme } from 'shared'
+import { RootStackParamList } from 'typings'
 
-type RootStackParamList = {
-  Home: undefined
-  NewItem: undefined
-}
-type Props = NativeStackScreenProps<RootStackParamList, 'NewItem'>
+type Props = NativeStackScreenProps<RootStackParamList>
 const HomeScreen = ({ navigation }: Props) => {
   const calendarEvents = useAppSelector(state => state.calendarEvents)
   return (

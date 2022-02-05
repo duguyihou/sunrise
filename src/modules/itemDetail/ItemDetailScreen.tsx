@@ -17,9 +17,8 @@ import {
 import { windowWidth } from 'utils/dimensions'
 import { useAppDispatch } from 'app/hooks'
 import { updateCalendatEvent } from 'app/calendarEventsSlice'
-import { CalendarEvent } from 'typings'
-import { theme } from 'shared/theme'
-import { RootStackParamList } from 'typings/route'
+import { CalendarEvent, RootStackParamList } from 'typings'
+import { theme } from 'shared'
 const NewItemScreen = () => {
   const navigation = useNavigation()
   const {

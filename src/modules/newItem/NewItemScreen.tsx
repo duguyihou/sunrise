@@ -19,7 +19,7 @@ import { windowWidth } from 'utils/dimensions'
 import { useAppDispatch } from 'app/hooks'
 import { addCalendarEvent } from 'app/calendarEventsSlice'
 import { CalendarEvent } from 'typings'
-import { theme } from 'shared/theme'
+import { theme } from 'shared'
 
 const defaultValues = {
   id: (Math.random() * 100000).toString(),
