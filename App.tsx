@@ -8,11 +8,13 @@ import HomeScreen from 'modules/home/HomeScreen'
 import NewItemScreen from 'modules/newItem/NewItemScreen'
 import ItemDetailScreen from 'modules/itemDetail/ItemDetailScreen'
 import SigninScreen from 'modules/signin/SigninScreen'
+import { QueryClient, QueryClientProvider } from 'react-query'
 import { store, persistor } from 'app/store'
 import { RootStackParamList } from 'typings'
 import { useAppSelector } from 'app/hooks'
 import { Auth } from 'typings/auth'
 
+const queryClient = new QueryClient()
 const RootStack = createNativeStackNavigator<RootStackParamList>()
 
 function Root() {
@@ -48,15 +50,17 @@ const App = () => {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <NavigationContainer>
-          <RootStack.Navigator>
-            <RootStack.Screen
-              name="Root"
-              component={Root}
-              options={{ headerShown: false }}
-            />
-          </RootStack.Navigator>
-        </NavigationContainer>
+        <QueryClientProvider client={queryClient}>
+          <NavigationContainer>
+            <RootStack.Navigator>
+              <RootStack.Screen
+                name="Root"
+                component={Root}
+                options={{ headerShown: false }}
+              />
+            </RootStack.Navigator>
+          </NavigationContainer>
+        </QueryClientProvider>
       </PersistGate>
     </Provider>
   )
