@@ -25,15 +25,15 @@ export default TasklistItem
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: theme.bg.primary,
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
     marginLeft: 20,
+    borderBottomColor: theme.border,
+    borderBottomWidth: 1,
   },
   text: {
-    fontSize: 20,
-    fontWeight: 'bold',
+    fontSize: 16,
     color: theme.font.primary,
     padding: 10,
   },

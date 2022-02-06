@@ -12,6 +12,7 @@ import SigninScreen from 'modules/signin/SigninScreen'
 import TasklistsScreen from 'modules/tasklists/TasklistsScreen'
 import AllTasksScreen from 'modules/all/AllTasksScreen'
 import CompletedTasksScreen from 'modules/completed/CompletedTasksScreen'
+import { theme } from 'shared'
 
 const RootStack = createNativeStackNavigator<RootStackParamList>()
 
@@ -29,11 +30,15 @@ function RootRoute() {
   return (
     <RootStack.Navigator
       screenOptions={{
-        headerStyle: { backgroundColor: '#0C2A38' },
-        headerTintColor: '#fff',
+        headerStyle: { backgroundColor: theme.bg.primary },
+        headerTintColor: theme.font.secondary,
       }}>
       <RootStack.Group>
-        <RootStack.Screen name="Tasklists" component={TasklistsScreen} />
+        <RootStack.Screen
+          name="Tasklists"
+          component={TasklistsScreen}
+          options={{ title: '' }}
+        />
         <RootStack.Screen name="Inbox" component={InboxScreen} />
         <RootStack.Screen name="Home" component={HomeScreen} />
         <RootStack.Screen name="All" component={AllTasksScreen} />

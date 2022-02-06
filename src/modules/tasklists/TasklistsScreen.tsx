@@ -56,6 +56,6 @@ const styles = StyleSheet.create({
   container: {
     width: windowWidth,
     height: windowHeight,
-    backgroundColor: theme.bg.primary,
+    backgroundColor: theme.bg.secondary,
   },
 })
