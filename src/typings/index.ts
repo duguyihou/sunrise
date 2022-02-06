@@ -1,5 +1,9 @@
 export type { CalendarEvent } from './calendarEvent'
-export type { RootStackParamList } from './route'
+export type {
+  RootStackParamList,
+  StackProps,
+  StackNavigationProps,
+} from './route'
 export type { Day } from './day'
 export type { Auth } from './auth'
 export type { Task, Tasklist } from './task'

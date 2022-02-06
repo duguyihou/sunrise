@@ -7,12 +7,10 @@ import { windowWidth } from 'utils/dimensions'
 import { dateFormat } from 'utils/dateTime'
 import { theme } from 'shared'
 import { useNavigation } from '@react-navigation/native'
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { RootStackParamList } from 'typings'
+import { StackNavigationProps } from 'typings'
 
 const CalendarEventItem = (calendarEvent: CalendarEvent) => {
-  const navigation =
-    useNavigation<NativeStackNavigationProp<RootStackParamList>>()
+  const navigation = useNavigation<StackNavigationProps>()
   const { summary, notification, description } = calendarEvent
   return (
     <TouchableOpacity
