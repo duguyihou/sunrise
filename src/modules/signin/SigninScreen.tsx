@@ -11,6 +11,8 @@ const SigninScreen = () => {
   const dispatch = useAppDispatch()
   const handleSignin = async () => {
     const response = await authorize(config)
+    console.log('🐵', response)
+
     dispatch(saveAuth(response))
   }
 

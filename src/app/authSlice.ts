@@ -5,18 +5,28 @@ const initialState: Auth = {
   accessToken: '',
   accessTokenExpirationDate: '',
   refreshToken: '',
+  idToken: '',
+  scopes: [],
 }
 const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
     saveAuth: (state, { payload }) => {
-      const { accessToken, accessTokenExpirationDate, refreshToken } = payload
+      const {
+        accessToken,
+        accessTokenExpirationDate,
+        refreshToken,
+        idToken,
+        scopes,
+      } = payload
       return (state = {
         ...state,
         accessToken,
         accessTokenExpirationDate,
         refreshToken,
+        idToken,
+        scopes,
       })
     },
   },
