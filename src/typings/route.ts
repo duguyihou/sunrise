@@ -8,7 +8,10 @@ export type RootStackParamList = {
   Root: undefined
   SignIn: undefined
   Tasklists: undefined
+  Inbox: undefined
   Home: undefined
+  All: undefined
+  Completed: undefined
   NewItem: undefined
   ItemDetail: { calendarEvent: CalendarEvent }
 }

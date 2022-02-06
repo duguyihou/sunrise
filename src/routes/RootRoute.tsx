@@ -4,11 +4,14 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { RootStackParamList } from 'typings'
 import { useAppSelector } from 'app/hooks'
 import { Auth } from 'typings/auth'
+import InboxScreen from 'modules/inbox/InboxScreen'
 import HomeScreen from 'modules/home/HomeScreen'
 import NewItemScreen from 'modules/newItem/NewItemScreen'
 import ItemDetailScreen from 'modules/itemDetail/ItemDetailScreen'
 import SigninScreen from 'modules/signin/SigninScreen'
 import TasklistsScreen from 'modules/tasklists/TasklistsScreen'
+import AllTasksScreen from 'modules/all/AllTasksScreen'
+import CompletedTasksScreen from 'modules/completed/CompletedTasksScreen'
 
 const RootStack = createNativeStackNavigator<RootStackParamList>()
 
@@ -31,7 +34,10 @@ function RootRoute() {
       }}>
       <RootStack.Group>
         <RootStack.Screen name="Tasklists" component={TasklistsScreen} />
+        <RootStack.Screen name="Inbox" component={InboxScreen} />
         <RootStack.Screen name="Home" component={HomeScreen} />
+        <RootStack.Screen name="All" component={AllTasksScreen} />
+        <RootStack.Screen name="Completed" component={CompletedTasksScreen} />
         <RootStack.Screen name="ItemDetail" component={ItemDetailScreen} />
       </RootStack.Group>
       <RootStack.Group screenOptions={{ presentation: 'modal' }}>
