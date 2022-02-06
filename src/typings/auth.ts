@@ -6,10 +6,17 @@ export interface Auth {
   refreshToken: string
 }
 
-export interface AccessToken {
-  accessToken: string
+export interface Access {
+  access_token: string
   expires_in: string
   scope: string
   token_type: string
   id_token: string
+}
+
+export interface RefreshAccessTokenPayload {
+  client_id: string
+  client_secret: string
+  grant_type: string
+  refresh_token: string
 }

@@ -1,9 +1,8 @@
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
-import { RootStackParamList } from 'typings'
+import { RootStackParamList, Access } from 'typings'
 import { useAppSelector } from 'app/hooks'
-import { Auth } from 'typings/auth'
 import InboxScreen from 'modules/inbox/InboxScreen'
 import HomeScreen from 'modules/home/HomeScreen'
 import NewItemScreen from 'modules/newItem/NewItemScreen'
@@ -17,9 +16,9 @@ import { theme } from 'shared'
 const RootStack = createNativeStackNavigator<RootStackParamList>()
 
 function RootRoute() {
-  const { accessToken } = useAppSelector(state => state.auth) as Auth
+  const { access_token } = useAppSelector(state => state.auth.access) as Access
 
-  if (!accessToken) {
+  if (!access_token) {
     return (
       <RootStack.Navigator screenOptions={{ headerShown: false }}>
         <RootStack.Screen name="SignIn" component={SigninScreen} />

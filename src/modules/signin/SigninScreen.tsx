@@ -4,16 +4,22 @@ import { authorize } from 'react-native-app-auth'
 import { config } from 'shared/config'
 import { windowHeight, windowWidth } from 'utils/dimensions'
 import { theme } from 'shared'
-import { saveAuth } from 'app/authSlice'
+import { fetchRefreshAccessToken, saveAuth } from 'app/authSlice'
 import { useAppDispatch } from 'app/hooks'
+import Config from 'react-native-config'
 
 const SigninScreen = () => {
   const dispatch = useAppDispatch()
   const handleSignin = async () => {
     const response = await authorize(config)
-    console.log('🐵', response)
-
     dispatch(saveAuth(response))
+    const payload = {
+      client_id: Config.CLIENT_ID,
+      client_secret: Config.CLIENT_SECRET,
+      grant_type: 'refresh_token',
+      refresh_token: response.refreshToken,
+    }
+    dispatch(fetchRefreshAccessToken(payload))
   }
 
   return (
