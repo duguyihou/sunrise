@@ -1,63 +1,38 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import authService from 'api/auth'
-import { Auth, Access, RefreshAccessTokenPayload } from 'typings'
 
 export const fetchRefreshAccessToken = createAsyncThunk(
   'auth/fetchRefreshAccessToken',
-  async (payload: RefreshAccessTokenPayload, { rejectWithValue }) => {
+  async (refresh_token: string, { rejectWithValue }) => {
     try {
-      const response = await authService.refreshAccessToken(payload)
-      return response.data
+      const response = await authService.refreshAccessToken(refresh_token)
+      return response
     } catch (error: unknown) {
       return rejectWithValue(error)
     }
   },
 )
 const initialState = {
-  access: {
-    access_token: '',
-    expires_in: '',
-    scope: '',
-    token_type: '',
-    id_token: '',
-  } as Access,
-  auth: {
-    accessToken: '',
-    accessTokenExpirationDate: '',
-    idToken: '',
-    scopes: [],
-    refreshToken: '',
-  } as Auth,
+  access_token: '',
+  refresh_token: '',
 }
 const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
     saveAuth: (state, { payload }) => {
-      const {
-        accessToken,
-        accessTokenExpirationDate,
-        refreshToken,
-        idToken,
-        scopes,
-      } = payload
+      const { accessToken, refreshToken } = payload
       return (state = {
         ...state,
-        auth: {
-          ...state.auth,
-          accessToken,
-          accessTokenExpirationDate,
-          refreshToken,
-          idToken,
-          scopes,
-        },
+        access_token: accessToken,
+        refresh_token: refreshToken,
       })
     },
   },
   extraReducers: builder => {
     builder.addCase(fetchRefreshAccessToken.fulfilled, (state, { payload }) => {
       console.log('🐵 fetchRefreshAccessToken', payload)
-      return (state = { ...state, access: payload })
+      return (state = { ...state, access_token: payload.access_token })
     })
   },
 })

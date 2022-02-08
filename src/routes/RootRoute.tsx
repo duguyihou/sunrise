@@ -1,7 +1,7 @@
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
-import { RootStackParamList, Access } from 'typings'
+import { RootStackParamList } from 'typings'
 import { useAppSelector } from 'app/hooks'
 import InboxScreen from 'modules/inbox/InboxScreen'
 import HomeScreen from 'modules/home/HomeScreen'
@@ -16,7 +16,7 @@ import { theme } from 'shared'
 const RootStack = createNativeStackNavigator<RootStackParamList>()
 
 function RootRoute() {
-  const { access_token } = useAppSelector(state => state.auth.access) as Access
+  const { access_token } = useAppSelector(state => state.auth)
 
   if (!access_token) {
     return (
