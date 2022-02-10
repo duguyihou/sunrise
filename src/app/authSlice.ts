@@ -28,15 +28,20 @@ const authSlice = createSlice({
         refresh_token: refreshToken,
       })
     },
+    saveToken: (state, { payload }) => {
+      return (state = {
+        ...state,
+        access_token: payload,
+      })
+    },
   },
   extraReducers: builder => {
     builder.addCase(fetchRefreshAccessToken.fulfilled, (state, { payload }) => {
-      console.log('🐵 fetchRefreshAccessToken', payload)
       return (state = { ...state, access_token: payload.access_token })
     })
   },
 })
 
 const authReducer = authSlice.reducer
-export const { saveAuth } = authSlice.actions
+export const { saveAuth, saveToken } = authSlice.actions
 export default authReducer

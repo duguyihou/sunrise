@@ -1,10 +1,14 @@
 import authService from 'api/auth'
+import { saveToken } from 'app/authSlice'
 import { store } from 'app/store'
 import axios from 'axios'
 import Config from 'react-native-config'
 
 const apiClient = axios.create({
   baseURL: Config.BASE_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
 })
 
 apiClient.interceptors.request.use(
@@ -12,7 +16,6 @@ apiClient.interceptors.request.use(
     const { access_token } = store.getState().auth
     config.headers = {
       Authorization: `Bearer ${access_token}`,
-      'Content-type': 'application/json',
     }
     return config
   },
@@ -29,8 +32,7 @@ apiClient.interceptors.response.use(
       const { access_token } = await authService.refreshAccessToken(
         refresh_token,
       )
-      console.log('🐵 access_token', access_token)
-      axios.defaults.headers.common.Authorization = `Bearer ${access_token}`
+      store.dispatch(saveToken(access_token))
       return apiClient(originalRequest)
     }
     return Promise.reject(error)
