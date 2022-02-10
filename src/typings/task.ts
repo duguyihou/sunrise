@@ -30,3 +30,9 @@ export interface Tasklist {
   updated: string
   selfLink: string
 }
+
+export interface TasklistQuery {
+  etag: string
+  items: Tasklist[]
+  kind: string
+}
