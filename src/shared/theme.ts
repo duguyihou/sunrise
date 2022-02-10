@@ -1,13 +1,13 @@
 export const theme = {
   bg: {
-    primary: '#0C2A38',
-    secondary: '#254C67',
+    primary: '#ef928f',
+    secondary: '#fafafa',
   },
   font: {
-    primary: '#fff',
-    secondary: '#DDECF5',
+    primary: '#282c34',
+    secondary: '#fff',
     placeholder: '#807F80',
   },
-  border: '#1B3744',
+  border: '#f8f8f8',
   hidden: 'transpancy',
 }

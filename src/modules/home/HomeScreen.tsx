@@ -16,7 +16,6 @@ const HomeScreen = ({ navigation }: StackProps) => {
     'tasklists',
     async () => await tasklistService.findAll(),
   )
-  console.log('🐵 data', data)
 
   if (isLoading) return <Text>loading...</Text>
   if (error) return <Text>`An error has occurred: ${error.message}`</Text>

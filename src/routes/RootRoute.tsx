@@ -3,7 +3,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 import { RootStackParamList } from 'typings'
 import { useAppSelector } from 'app/hooks'
-import { Auth } from 'typings/auth'
 import InboxScreen from 'modules/inbox/InboxScreen'
 import HomeScreen from 'modules/home/HomeScreen'
 import NewItemScreen from 'modules/newItem/NewItemScreen'
@@ -12,13 +11,14 @@ import SigninScreen from 'modules/signin/SigninScreen'
 import TasklistsScreen from 'modules/tasklists/TasklistsScreen'
 import AllTasksScreen from 'modules/all/AllTasksScreen'
 import CompletedTasksScreen from 'modules/completed/CompletedTasksScreen'
+import { theme } from 'shared'
 
 const RootStack = createNativeStackNavigator<RootStackParamList>()
 
 function RootRoute() {
-  const { accessToken } = useAppSelector(state => state.auth) as Auth
+  const { access_token } = useAppSelector(state => state.auth)
 
-  if (!accessToken) {
+  if (!access_token) {
     return (
       <RootStack.Navigator screenOptions={{ headerShown: false }}>
         <RootStack.Screen name="SignIn" component={SigninScreen} />
@@ -29,11 +29,15 @@ function RootRoute() {
   return (
     <RootStack.Navigator
       screenOptions={{
-        headerStyle: { backgroundColor: '#0C2A38' },
-        headerTintColor: '#fff',
+        headerStyle: { backgroundColor: theme.bg.primary },
+        headerTintColor: theme.font.secondary,
       }}>
       <RootStack.Group>
-        <RootStack.Screen name="Tasklists" component={TasklistsScreen} />
+        <RootStack.Screen
+          name="Tasklists"
+          component={TasklistsScreen}
+          options={{ title: '' }}
+        />
         <RootStack.Screen name="Inbox" component={InboxScreen} />
         <RootStack.Screen name="Home" component={HomeScreen} />
         <RootStack.Screen name="All" component={AllTasksScreen} />

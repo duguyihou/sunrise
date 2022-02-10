@@ -1,5 +1,4 @@
 export interface Auth {
-  accessToken: string
-  accessTokenExpirationDate: string
-  refreshToken: string
+  access_token: string
+  refresh_token: string
 }
