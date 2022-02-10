@@ -5,7 +5,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { useAppSelector } from 'app/hooks'
 import CalendarEventItem from 'components/CalendarEventItem'
 import CalendatBanner from 'components/CalendatBanner'
-import { theme } from 'shared'
+import { routeNames, theme } from 'shared'
 import { StackProps } from 'typings'
 
 const HomeScreen = ({ navigation }: StackProps) => {
@@ -20,7 +20,7 @@ const HomeScreen = ({ navigation }: StackProps) => {
         ))}
       <TouchableOpacity
         style={styles.plus}
-        onPress={() => navigation.push('NewItem')}>
+        onPress={() => navigation.push(routeNames.NewItem)}>
         <FontAwesomeIcon icon={faPlus} color={theme.font.primary} size={30} />
       </TouchableOpacity>
     </View>

@@ -3,7 +3,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faListUl, IconDefinition } from '@fortawesome/free-solid-svg-icons'
 import { theme } from 'shared'
-import { RootStackParamList, StackProps } from 'typings/route'
+import { RootStackParamList, StackProps } from 'typings'
 
 type ItemProps = StackProps & {
   title: string

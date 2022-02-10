@@ -1,15 +1,15 @@
-import React from 'react'
+import React, { useLayoutEffect } from 'react'
 import { useQuery } from 'react-query'
 import { ScrollView, StyleSheet, Text } from 'react-native'
+import { faListUl } from '@fortawesome/free-solid-svg-icons'
 import { RootStackParamList, StackProps, TasklistQuery } from 'typings'
 import { windowHeight, windowWidth } from 'utils/dimensions'
 import TasklistItem from 'components/TasklistItem'
-import { theme } from 'shared'
-import { fixedListsRoutes } from 'shared/constants'
+import { theme, fixedListsRoutes, routeNames } from 'shared'
 import tasklistService from 'api/tasklists'
-import { faListUl } from '@fortawesome/free-solid-svg-icons'
 
 const TasklistsScreen = ({ navigation, route }: StackProps) => {
+  useLayoutEffect(() => navigation.navigate(routeNames.Home))
   const { isLoading, error, data } = useQuery<TasklistQuery, Error>(
     'tasklists',
     async () => await tasklistService.findAll(),
