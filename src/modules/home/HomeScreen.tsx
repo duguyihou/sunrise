@@ -1,24 +1,16 @@
 import React from 'react'
-import { TouchableOpacity, StyleSheet, View, Text } from 'react-native'
+import { TouchableOpacity, StyleSheet, View } from 'react-native'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
-import { useQuery } from 'react-query'
 import { useAppSelector } from 'app/hooks'
 import CalendarEventItem from 'components/CalendarEventItem'
 import CalendatBanner from 'components/CalendatBanner'
 import { theme } from 'shared'
-import { StackProps, Tasklist } from 'typings'
-import tasklistService from 'api/tasklists'
+import { StackProps } from 'typings'
 
 const HomeScreen = ({ navigation }: StackProps) => {
   const calendarEvents = useAppSelector(state => state.calendarEvents)
-  const { isLoading, error, data } = useQuery<Tasklist, Error>(
-    'tasklists',
-    async () => await tasklistService.findAll(),
-  )
 
-  if (isLoading) return <Text>loading...</Text>
-  if (error) return <Text>`An error has occurred: ${error.message}`</Text>
   return (
     <View style={styles.container}>
       <CalendatBanner />

@@ -1,8 +1,8 @@
-import { Tasklist } from 'typings'
+import { TasklistQuery } from 'typings'
 import apiClient from 'utils/apiClient'
 
 const findAll = async () => {
-  const response = await apiClient.get<Tasklist>('/v1/users/@me/lists')
+  const response = await apiClient.get<TasklistQuery>('/v1/users/@me/lists')
   return response.data
 }
 
