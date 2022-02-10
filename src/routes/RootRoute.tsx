@@ -11,7 +11,7 @@ import SigninScreen from 'modules/signin/SigninScreen'
 import TasklistsScreen from 'modules/tasklists/TasklistsScreen'
 import AllTasksScreen from 'modules/all/AllTasksScreen'
 import CompletedTasksScreen from 'modules/completed/CompletedTasksScreen'
-import { theme } from 'shared'
+import { routeNames, theme } from 'shared'
 
 const RootStack = createNativeStackNavigator<RootStackParamList>()
 
@@ -21,7 +21,7 @@ function RootRoute() {
   if (!access_token) {
     return (
       <RootStack.Navigator screenOptions={{ headerShown: false }}>
-        <RootStack.Screen name="SignIn" component={SigninScreen} />
+        <RootStack.Screen name={routeNames.SignIn} component={SigninScreen} />
       </RootStack.Navigator>
     )
   }
@@ -34,18 +34,24 @@ function RootRoute() {
       }}>
       <RootStack.Group>
         <RootStack.Screen
-          name="Tasklists"
+          name={routeNames.Tasklists}
           component={TasklistsScreen}
           options={{ title: '' }}
         />
-        <RootStack.Screen name="Inbox" component={InboxScreen} />
-        <RootStack.Screen name="Home" component={HomeScreen} />
-        <RootStack.Screen name="All" component={AllTasksScreen} />
-        <RootStack.Screen name="Completed" component={CompletedTasksScreen} />
-        <RootStack.Screen name="ItemDetail" component={ItemDetailScreen} />
+        <RootStack.Screen name={routeNames.Inbox} component={InboxScreen} />
+        <RootStack.Screen name={routeNames.Home} component={HomeScreen} />
+        <RootStack.Screen name={routeNames.All} component={AllTasksScreen} />
+        <RootStack.Screen
+          name={routeNames.Completed}
+          component={CompletedTasksScreen}
+        />
+        <RootStack.Screen
+          name={routeNames.ItemDetail}
+          component={ItemDetailScreen}
+        />
       </RootStack.Group>
       <RootStack.Group screenOptions={{ presentation: 'modal' }}>
-        <RootStack.Screen name="NewItem" component={NewItemScreen} />
+        <RootStack.Screen name={routeNames.NewItem} component={NewItemScreen} />
       </RootStack.Group>
     </RootStack.Navigator>
   )

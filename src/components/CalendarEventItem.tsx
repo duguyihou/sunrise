@@ -2,12 +2,11 @@ import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faThumbtack } from '@fortawesome/free-solid-svg-icons'
-import { CalendarEvent } from 'typings'
+import { CalendarEvent, StackNavigationProps } from 'typings'
 import { windowWidth } from 'utils/dimensions'
 import { dateFormat } from 'utils/dateTime'
-import { theme } from 'shared'
+import { routeNames, theme } from 'shared'
 import { useNavigation } from '@react-navigation/native'
-import { StackNavigationProps } from 'typings'
 
 const CalendarEventItem = (calendarEvent: CalendarEvent) => {
   const navigation = useNavigation<StackNavigationProps>()
@@ -15,7 +14,9 @@ const CalendarEventItem = (calendarEvent: CalendarEvent) => {
   return (
     <TouchableOpacity
       style={styles.item}
-      onPress={() => navigation.navigate('ItemDetail', { calendarEvent })}>
+      onPress={() =>
+        navigation.navigate(routeNames.ItemDetail, { calendarEvent })
+      }>
       <Text style={styles.summary}>{summary}</Text>
       {!!description && (
         <FontAwesomeIcon

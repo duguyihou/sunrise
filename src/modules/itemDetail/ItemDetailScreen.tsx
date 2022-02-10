@@ -18,12 +18,12 @@ import { windowWidth } from 'utils/dimensions'
 import { useAppDispatch } from 'app/hooks'
 import { updateCalendatEvent } from 'app/calendarEventsSlice'
 import { CalendarEvent, RootStackParamList } from 'typings'
-import { theme } from 'shared'
+import { routeNames, theme } from 'shared'
 const NewItemScreen = () => {
   const navigation = useNavigation()
   const {
     params: { calendarEvent },
-  } = useRoute<RouteProp<RootStackParamList, 'ItemDetail'>>()
+  } = useRoute<RouteProp<RootStackParamList, routeNames.ItemDetail>>()
   const {
     control,
     handleSubmit,

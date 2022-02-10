@@ -5,6 +5,18 @@ import {
   faInfinity,
 } from '@fortawesome/free-solid-svg-icons'
 
+export enum routeNames {
+  Root = 'Root',
+  SignIn = 'SignIn',
+  Tasklists = 'Tasklists',
+  Inbox = 'Inbox',
+  Home = 'Home',
+  All = 'All',
+  Completed = 'Completed',
+  NewItem = 'NewItem',
+  ItemDetail = 'ItemDetail',
+}
+
 export const fixedListsRoutes = [
   {
     title: 'Inbox',

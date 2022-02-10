@@ -1,9 +1,8 @@
 import { StyleSheet, TouchableOpacity, View, Text } from 'react-native'
 import React from 'react'
 import { authorize } from 'react-native-app-auth'
-import { config } from 'shared/config'
 import { windowHeight, windowWidth } from 'utils/dimensions'
-import { theme } from 'shared'
+import { theme, config } from 'shared'
 import { saveAuth } from 'app/authSlice'
 import { useAppDispatch } from 'app/hooks'
 
