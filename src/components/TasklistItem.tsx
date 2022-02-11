@@ -17,7 +17,7 @@ const TasklistItem = ({
   icon = faListUl,
 }: ItemProps) => {
   return (
-    <TouchableOpacity onPress={() => navigation.push(path)}>
+    <TouchableOpacity onPress={() => navigation.push(path, { key: title })}>
       <View style={styles.container}>
         <FontAwesomeIcon icon={icon} size={20} color={theme.font.primary} />
         <Text style={styles.text}>{title}</Text>

@@ -9,10 +9,8 @@ export enum routeNames {
   Root = 'Root',
   SignIn = 'SignIn',
   Tasklists = 'Tasklists',
-  Inbox = 'Inbox',
+  Tasklist = 'Tasklist',
   Home = 'Home',
-  All = 'All',
-  Completed = 'Completed',
   NewItem = 'NewItem',
   ItemDetail = 'ItemDetail',
 }
@@ -20,22 +18,22 @@ export enum routeNames {
 export const fixedListsRoutes = [
   {
     title: 'Inbox',
-    path: 'Inbox',
+    path: routeNames.Tasklist,
     icon: faInbox,
   },
   {
     title: 'Planned',
-    path: 'Home',
+    path: routeNames.Home,
     icon: faCalendar,
   },
   {
     title: 'All',
-    path: 'All',
+    path: routeNames.Tasklist,
     icon: faInfinity,
   },
   {
     title: 'Completed',
-    path: 'Completed',
+    path: routeNames.Tasklist,
     icon: faCheckSquare,
   },
 ]
