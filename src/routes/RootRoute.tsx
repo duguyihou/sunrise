@@ -9,8 +9,6 @@ import NewItemScreen from 'modules/newItem/NewItemScreen'
 import ItemDetailScreen from 'modules/itemDetail/ItemDetailScreen'
 import SigninScreen from 'modules/signin/SigninScreen'
 import TasklistsScreen from 'modules/tasklists/TasklistsScreen'
-import AllTasksScreen from 'modules/all/AllTasksScreen'
-import CompletedTasksScreen from 'modules/completed/CompletedTasksScreen'
 import { routeNames, theme } from 'shared'
 
 const RootStack = createNativeStackNavigator<RootStackParamList>()
