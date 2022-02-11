@@ -2,10 +2,11 @@ import React, { useLayoutEffect } from 'react'
 import { useQuery } from 'react-query'
 import { ScrollView, StyleSheet, Text } from 'react-native'
 import { faListUl } from '@fortawesome/free-solid-svg-icons'
+
 import { RootStackParamList, StackProps, TasklistQuery } from 'typings'
 import { windowHeight, windowWidth } from 'utils/dimensions'
 import TasklistItem from 'components/TasklistItem'
-import { theme, fixedListsRoutes, routeNames } from 'shared'
+import { theme, fixedListsRoutes, routeNames, tasklist } from 'shared'
 import tasklistService from 'api/tasklists'
 
 const TasklistsScreen = ({ navigation, route }: StackProps) => {
@@ -16,7 +17,10 @@ const TasklistsScreen = ({ navigation, route }: StackProps) => {
   )
   if (isLoading) return <Text>loading...</Text>
   if (error) return <Text>`An error has occurred: ${error.message}`</Text>
-  const tasklistsRoutes = data?.items.map(({ title }) => ({
+  const allLists = data?.items
+  const inboxLists = data?.items.filter(({ title }) => title === tasklist.inbox)
+  const tasklists = data?.items.filter(({ title }) => title !== tasklist.inbox)
+  const tasklistsRoutes = tasklists?.map(({ title }) => ({
     title,
     path: title,
     icon: faListUl,
