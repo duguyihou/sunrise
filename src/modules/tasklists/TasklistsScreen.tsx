@@ -17,12 +17,10 @@ const TasklistsScreen = ({ navigation, route }: StackProps) => {
   )
   if (isLoading) return <Text>loading...</Text>
   if (error) return <Text>`An error has occurred: ${error.message}`</Text>
-  const allLists = data?.items
-  const inboxLists = data?.items.filter(({ title }) => title === tasklist.inbox)
   const tasklists = data?.items.filter(({ title }) => title !== tasklist.inbox)
   const tasklistsRoutes = tasklists?.map(({ title }) => ({
     title,
-    path: title,
+    path: routeNames.Tasklist,
     icon: faListUl,
   }))
   return (

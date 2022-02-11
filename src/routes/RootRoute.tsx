@@ -34,15 +34,12 @@ function RootRoute() {
         <RootStack.Screen
           name={routeNames.Tasklists}
           component={TasklistsScreen}
-          options={{ title: '' }}
         />
-        <RootStack.Screen name={routeNames.Inbox} component={TasklistScreen} />
-        <RootStack.Screen name={routeNames.Home} component={HomeScreen} />
-        <RootStack.Screen name={routeNames.All} component={TasklistScreen} />
         <RootStack.Screen
-          name={routeNames.Completed}
+          name={routeNames.Tasklist}
           component={TasklistScreen}
         />
+        <RootStack.Screen name={routeNames.Home} component={HomeScreen} />
         <RootStack.Screen
           name={routeNames.ItemDetail}
           component={ItemDetailScreen}
