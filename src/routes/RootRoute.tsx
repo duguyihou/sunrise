@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 import { RootStackParamList } from 'typings'
 import { useAppSelector } from 'app/hooks'
-import InboxScreen from 'modules/inbox/InboxScreen'
+import TasklistScreen from 'modules/tasklist/TasklistScreen'
 import HomeScreen from 'modules/home/HomeScreen'
 import NewItemScreen from 'modules/newItem/NewItemScreen'
 import ItemDetailScreen from 'modules/itemDetail/ItemDetailScreen'
@@ -38,12 +38,12 @@ function RootRoute() {
           component={TasklistsScreen}
           options={{ title: '' }}
         />
-        <RootStack.Screen name={routeNames.Inbox} component={InboxScreen} />
+        <RootStack.Screen name={routeNames.Inbox} component={TasklistScreen} />
         <RootStack.Screen name={routeNames.Home} component={HomeScreen} />
-        <RootStack.Screen name={routeNames.All} component={AllTasksScreen} />
+        <RootStack.Screen name={routeNames.All} component={TasklistScreen} />
         <RootStack.Screen
           name={routeNames.Completed}
-          component={CompletedTasksScreen}
+          component={TasklistScreen}
         />
         <RootStack.Screen
           name={routeNames.ItemDetail}

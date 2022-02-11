@@ -7,7 +7,7 @@ import {
 export type RootStackParamList = {
   Root: undefined
   SignIn: undefined
-  Tasklists: undefined
+  Tasklists: { path: string }
   Inbox: undefined
   Home: undefined
   All: undefined
