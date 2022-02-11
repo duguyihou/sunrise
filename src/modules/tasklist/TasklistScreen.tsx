@@ -11,12 +11,12 @@ const TasklistScreen = () => {
   const navigation = useNavigation()
   useLayoutEffect(() =>
     navigation.setOptions({
-      title: key,
+      title: key.title,
     }),
   )
   return (
     <View>
-      <Text>{key}</Text>
+      <Text>{key.title}</Text>
     </View>
   )
 }
