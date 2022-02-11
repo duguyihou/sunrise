@@ -3,11 +3,12 @@ import {
   NativeStackScreenProps,
   NativeStackNavigationProp,
 } from '@react-navigation/native-stack'
+import { Tasklist } from './task'
 
 export type RootStackParamList = {
   Root: undefined
   SignIn: undefined
-  Tasklists: { key: string }
+  Tasklists: { key: Tasklist }
   Tasklist: undefined
   Home: undefined
   NewItem: undefined

@@ -6,7 +6,7 @@ import { faListUl } from '@fortawesome/free-solid-svg-icons'
 import { RootStackParamList, StackProps, TasklistQuery } from 'typings'
 import { windowHeight, windowWidth } from 'utils/dimensions'
 import TasklistItem from 'components/TasklistItem'
-import { theme, fixedListsRoutes, routeNames, tasklist } from 'shared'
+import { theme, routeNames } from 'shared'
 import tasklistService from 'api/tasklists'
 
 const TasklistsScreen = ({ navigation, route }: StackProps) => {
@@ -17,31 +17,18 @@ const TasklistsScreen = ({ navigation, route }: StackProps) => {
   )
   if (isLoading) return <Text>loading...</Text>
   if (error) return <Text>`An error has occurred: ${error.message}`</Text>
-  const tasklists = data?.items.filter(({ title }) => title !== tasklist.inbox)
-  const tasklistsRoutes = tasklists?.map(({ title }) => ({
-    title,
-    path: routeNames.Tasklist,
-    icon: faListUl,
-  }))
+
+  const allTasklists = data?.items
+
   return (
     <ScrollView style={styles.container}>
-      {fixedListsRoutes.map(({ title, path, icon }) => (
-        <TasklistItem
-          key={title}
-          title={title}
-          path={path as keyof RootStackParamList}
-          icon={icon}
-          navigation={navigation}
-          route={route}
-        />
-      ))}
-      {tasklistsRoutes &&
-        tasklistsRoutes.map(({ title, path, icon }) => (
+      {allTasklists &&
+        allTasklists.map(tasklist => (
           <TasklistItem
-            key={title}
-            title={title}
-            path={path as keyof RootStackParamList}
-            icon={icon}
+            key={tasklist.id}
+            tasklist={tasklist}
+            path={routeNames.Tasklist as keyof RootStackParamList}
+            icon={faListUl}
             navigation={navigation}
             route={route}
           />

@@ -3,24 +3,24 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faListUl, IconDefinition } from '@fortawesome/free-solid-svg-icons'
 import { theme } from 'shared'
-import { RootStackParamList, StackProps } from 'typings'
+import { RootStackParamList, StackProps, Tasklist } from 'typings'
 
 type ItemProps = StackProps & {
-  title: string
+  tasklist: Tasklist
   path: keyof RootStackParamList
   icon: IconDefinition
 }
 const TasklistItem = ({
   navigation,
-  title,
+  tasklist,
   path,
   icon = faListUl,
 }: ItemProps) => {
   return (
-    <TouchableOpacity onPress={() => navigation.push(path, { key: title })}>
+    <TouchableOpacity onPress={() => navigation.push(path, { key: tasklist })}>
       <View style={styles.container}>
         <FontAwesomeIcon icon={icon} size={20} color={theme.font.primary} />
-        <Text style={styles.text}>{title}</Text>
+        <Text style={styles.text}>{tasklist.title}</Text>
       </View>
     </TouchableOpacity>
   )
