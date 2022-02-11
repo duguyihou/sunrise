@@ -39,3 +39,7 @@ export const fixedListsRoutes = [
     icon: faCheckSquare,
   },
 ]
+
+export enum tasklist {
+  inbox = 'My Tasks',
+}
