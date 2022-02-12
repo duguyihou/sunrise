@@ -1,25 +1,12 @@
 export interface Task {
-  kind: string
-  id: string
   etag: string
+  id: string
+  kind: string
+  position: string
+  selfLink: string
+  status: string
   title: string
   updated: string
-  selfLink: string
-  parent: string
-  position: string
-  notes: string
-  status: string
-  due: string
-  completed: string
-  deleted: boolean
-  hidden: boolean
-  links: [
-    {
-      type: string
-      description: string
-      link: string
-    },
-  ]
 }
 
 export interface Tasklist {
@@ -34,5 +21,11 @@ export interface Tasklist {
 export interface TasklistQuery {
   etag: string
   items: Tasklist[]
+  kind: string
+}
+
+export interface TaskQuery {
+  etag: string
+  items: Task[]
   kind: string
 }

@@ -3,9 +3,10 @@ export enum routeNames {
   SignIn = 'SignIn',
   Tasklists = 'Tasklists',
   Tasklist = 'Tasklist',
-  Home = 'Home',
+  MyTasks = 'My Tasks',
   NewItem = 'NewItem',
   ItemDetail = 'ItemDetail',
+  Home = 'Home',
 }
 
 export enum tasklistName {
