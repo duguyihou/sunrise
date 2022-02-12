@@ -6,8 +6,14 @@ const findAll = async () => {
   return response.data
 }
 
+const deleteById = async (tasklist: string) => {
+  const response = await apiClient.delete(`v1/users/@me/lists/${tasklist}`)
+  return response.data
+}
+
 const tasklistService = {
   findAll,
+  deleteById,
 }
 
 export default tasklistService
