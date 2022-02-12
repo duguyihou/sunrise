@@ -4,12 +4,12 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { RootStackParamList } from 'typings'
 import { useAppSelector } from 'app/hooks'
 import TasklistScreen from 'modules/tasklist/TasklistScreen'
-import HomeScreen from 'modules/home/HomeScreen'
+import MyTasksScreen from 'modules/myTasks/MyTasksScreen'
 import NewItemScreen from 'modules/newItem/NewItemScreen'
 import ItemDetailScreen from 'modules/itemDetail/ItemDetailScreen'
 import SigninScreen from 'modules/signin/SigninScreen'
 import TasklistsScreen from 'modules/tasklists/TasklistsScreen'
-import { routeNames, theme } from 'shared'
+import { routeNames, tasklistName, theme } from 'shared'
 
 const RootStack = createNativeStackNavigator<RootStackParamList>()
 
@@ -34,12 +34,17 @@ function RootRoute() {
         <RootStack.Screen
           name={routeNames.Tasklists}
           component={TasklistsScreen}
+          options={{ title: '' }}
         />
         <RootStack.Screen
           name={routeNames.Tasklist}
           component={TasklistScreen}
         />
-        <RootStack.Screen name={routeNames.Home} component={HomeScreen} />
+        <RootStack.Screen
+          name={routeNames.MyTasks}
+          component={MyTasksScreen}
+          options={{ title: tasklistName.MyTasks }}
+        />
         <RootStack.Screen
           name={routeNames.ItemDetail}
           component={ItemDetailScreen}

@@ -3,12 +3,12 @@ export enum routeNames {
   SignIn = 'SignIn',
   Tasklists = 'Tasklists',
   Tasklist = 'Tasklist',
-  MyTasks = 'My Tasks',
+  MyTasks = 'MyTasks',
   NewItem = 'NewItem',
   ItemDetail = 'ItemDetail',
   Home = 'Home',
 }
 
 export enum tasklistName {
-  inbox = 'My Tasks',
+  MyTasks = 'My Tasks',
 }
