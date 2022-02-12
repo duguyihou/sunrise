@@ -8,9 +8,10 @@ import { Tasklist } from './task'
 export type RootStackParamList = {
   Root: undefined
   SignIn: undefined
-  Tasklists: { key: Tasklist }
-  Tasklist: undefined
+  Tasklists: undefined
+  Tasklist: { key?: Tasklist }
   Home: undefined
+  MyTasks: undefined
   NewItem: undefined
   ItemDetail: { calendarEvent: CalendarEvent }
 }

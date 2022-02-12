@@ -8,7 +8,7 @@ import CalendatBanner from 'components/CalendatBanner'
 import { routeNames, theme } from 'shared'
 import { StackProps } from 'typings'
 
-const HomeScreen = ({ navigation }: StackProps) => {
+const MyTasksScreen = ({ navigation }: StackProps) => {
   const calendarEvents = useAppSelector(state => state.calendarEvents)
 
   return (
@@ -27,7 +27,7 @@ const HomeScreen = ({ navigation }: StackProps) => {
   )
 }
 
-export default HomeScreen
+export default MyTasksScreen
 
 const styles = StyleSheet.create({
   container: {
