@@ -5,13 +5,13 @@ import { ScrollView, StyleSheet, Text } from 'react-native'
 import { StackProps, TasklistQuery } from 'typings'
 import { windowHeight, windowWidth } from 'utils/dimensions'
 import TasklistItem from 'components/TasklistItem'
-import { theme, routeNames } from 'shared'
+import { theme, routeNames, queryKey } from 'shared'
 import tasklistService from 'api/tasklists'
 
 const TasklistsScreen = ({ navigation, route }: StackProps) => {
   useLayoutEffect(() => navigation.push(routeNames.MyTasks), [navigation])
   const { isLoading, error, data } = useQuery<TasklistQuery, Error>(
-    'tasklists',
+    queryKey.tasklists,
     async () => await tasklistService.findAll(),
   )
   const allTasklists = data?.items

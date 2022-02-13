@@ -4,7 +4,7 @@ import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faEllipsisH } from '@fortawesome/free-solid-svg-icons'
 import { RootStackParamList, Tasklist } from 'typings'
-import { routeNames, theme } from 'shared'
+import { routeNames, theme, queryKey } from 'shared'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
 import tasksService from 'api/tasks'
 import { TaskQuery } from 'typings/task'
@@ -42,7 +42,7 @@ const TasklistScreen = () => {
     (tasklistId: string) => tasklistService.deleteById(tasklistId),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries('tasklists')
+        queryClient.invalidateQueries(queryKey.tasklists)
         navigation.goBack()
       },
     },
