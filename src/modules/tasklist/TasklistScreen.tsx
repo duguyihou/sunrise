@@ -5,13 +5,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faEllipsisH } from '@fortawesome/free-solid-svg-icons'
 import { RootStackParamList, Tasklist } from 'typings'
 import { routeNames, theme } from 'shared'
-import { useQuery } from 'react-query'
-import tasksService from 'api/tasks'
-import { TaskQuery } from 'typings/task'
 import TaskItem from 'components/TaskItem'
 import PopupView from 'components/PopupView'
 import PopupItem from 'components/PopupItem'
 import { useDeleteTasklistMutation } from 'hooks/tasklists'
+import { useFetchTasksQuery } from 'hooks/tasks'
 
 const TasklistScreen = () => {
   const {
@@ -31,10 +29,7 @@ const TasklistScreen = () => {
     }),
   )
 
-  const { isLoading, error, data } = useQuery<TaskQuery, Error>(
-    'tasks',
-    async () => await tasksService.findAll(id),
-  )
+  const { isLoading, error, data } = useFetchTasksQuery(id)
 
   const mutation = useDeleteTasklistMutation(id)
   const tasks = data?.items

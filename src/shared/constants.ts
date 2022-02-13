@@ -15,4 +15,5 @@ export enum tasklistName {
 
 export enum queryKey {
   tasklists = 'tasklists',
+  tasks = 'tasks',
 }
