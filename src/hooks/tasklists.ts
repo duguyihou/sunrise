@@ -1,5 +1,7 @@
 import tasklistService from 'api/tasklists'
-import { useQuery } from 'react-query'
+import { useMutation, useQuery, useQueryClient } from 'react-query'
+import { useNavigation } from '@react-navigation/native'
+
 import { queryKey } from 'shared'
 import { TasklistQuery } from 'typings'
 
@@ -9,4 +11,16 @@ export const useFetchTasklistQuery = () => {
     async () => await tasklistService.findAll(),
   )
   return { isLoading, error, data }
+}
+
+export const useDeleteTasklistMutation = (tasklistId: string) => {
+  const queryClient = useQueryClient()
+  const navigation = useNavigation()
+  const mutation = useMutation(() => tasklistService.deleteById(tasklistId), {
+    onSuccess: () => {
+      queryClient.invalidateQueries(queryKey.tasklists)
+      navigation.goBack()
+    },
+  })
+  return mutation
 }

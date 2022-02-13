@@ -11,9 +11,9 @@ const TasklistsScreen = ({ navigation, route }: StackProps) => {
   useLayoutEffect(() => navigation.push(routeNames.MyTasks), [navigation])
   const { isLoading, error, data } = useFetchTasklistQuery()
   const allTasklists = data?.items
+
   if (isLoading) return <Text>loading...</Text>
   if (error) return <Text>`An error has occurred: ${error.message}`</Text>
-
   return (
     <ScrollView style={styles.container}>
       {allTasklists &&
