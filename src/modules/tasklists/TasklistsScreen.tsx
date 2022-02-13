@@ -1,19 +1,15 @@
 import React, { useLayoutEffect } from 'react'
-import { useQuery } from 'react-query'
 import { ScrollView, StyleSheet, Text } from 'react-native'
 
-import { StackProps, TasklistQuery } from 'typings'
+import { StackProps } from 'typings'
 import { windowHeight, windowWidth } from 'utils/dimensions'
 import TasklistItem from 'components/TasklistItem'
-import { theme, routeNames, queryKey } from 'shared'
-import tasklistService from 'api/tasklists'
+import { theme, routeNames } from 'shared'
+import { useFetchTasklistQuery } from 'hooks/tasklists'
 
 const TasklistsScreen = ({ navigation, route }: StackProps) => {
   useLayoutEffect(() => navigation.push(routeNames.MyTasks), [navigation])
-  const { isLoading, error, data } = useQuery<TasklistQuery, Error>(
-    queryKey.tasklists,
-    async () => await tasklistService.findAll(),
-  )
+  const { isLoading, error, data } = useFetchTasklistQuery()
   const allTasklists = data?.items
   if (isLoading) return <Text>loading...</Text>
   if (error) return <Text>`An error has occurred: ${error.message}`</Text>
