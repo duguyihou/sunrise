@@ -10,7 +10,6 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist'
-import calendarEventsReducer from './calendarEventsSlice'
 import authReducer from './authSlice'
 
 const persistConfig = {
@@ -21,7 +20,6 @@ const persistConfig = {
 const reducer = persistReducer(
   persistConfig,
   combineReducers({
-    calendarEvents: calendarEventsReducer,
     auth: authReducer,
   }),
 )
