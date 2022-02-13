@@ -12,3 +12,7 @@ export enum routeNames {
 export enum tasklistName {
   MyTasks = 'My Tasks',
 }
+
+export enum queryKey {
+  tasklists = 'tasklists',
+}
