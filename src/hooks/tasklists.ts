@@ -24,3 +24,13 @@ export const useDeleteTasklistMutation = (tasklistId: string) => {
   })
   return mutation
 }
+
+export const useAddTasklistMutation = (title: string) => {
+  const queryClient = useQueryClient()
+  const mutation = useMutation(() => tasklistService.create(title), {
+    onSuccess: () => {
+      queryClient.invalidateQueries(queryKey.tasklists)
+    },
+  })
+  return mutation
+}

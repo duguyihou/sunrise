@@ -11,9 +11,15 @@ const deleteById = async (tasklist: string) => {
   return response.data
 }
 
+const create = async (title: string) => {
+  const response = await apiClient.post('v1/users/@me/lists', { title })
+  return response.data
+}
+
 const tasklistService = {
   findAll,
   deleteById,
+  create,
 }
 
 export default tasklistService
