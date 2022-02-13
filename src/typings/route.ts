@@ -12,7 +12,7 @@ export type RootStackParamList = {
   Tasklist: { key?: Tasklist }
   Home: undefined
   MyTasks: undefined
-  NewTasklist: { title: string }
+  NewTasklist: { title: string; tasklistId: string }
   ItemDetail: { calendarEvent: CalendarEvent }
 }
 

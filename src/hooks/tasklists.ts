@@ -13,6 +13,16 @@ export const useFetchTasklistQuery = () => {
   return { isLoading, error, data }
 }
 
+export const useAddTasklistMutation = (title: string) => {
+  const queryClient = useQueryClient()
+  const mutation = useMutation(() => tasklistService.create(title), {
+    onSuccess: () => {
+      queryClient.invalidateQueries(queryKey.tasklists)
+    },
+  })
+  return mutation
+}
+
 export const useDeleteTasklistMutation = (tasklistId: string) => {
   const queryClient = useQueryClient()
   const navigation = useNavigation()
@@ -25,12 +35,18 @@ export const useDeleteTasklistMutation = (tasklistId: string) => {
   return mutation
 }
 
-export const useAddTasklistMutation = (title: string) => {
+export const useUpdateTasklistMutation = (
+  tasklistId: string,
+  title: string,
+) => {
   const queryClient = useQueryClient()
-  const mutation = useMutation(() => tasklistService.create(title), {
-    onSuccess: () => {
-      queryClient.invalidateQueries(queryKey.tasklists)
+  const mutation = useMutation(
+    () => tasklistService.updateById(tasklistId, title),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(queryKey.tasklists)
+      },
     },
-  })
+  )
   return mutation
 }

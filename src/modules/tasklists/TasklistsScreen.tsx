@@ -11,9 +11,13 @@ import PlusButton from 'components/PlusButton'
 const TasklistsScreen = ({ navigation, route }: StackProps) => {
   const handlePlus = () => {
     addTasklistMutation.mutate()
-    navigation.push(routeName.NewTasklist, {
-      title: tasklistName.UntitledList,
-    })
+    if (addTasklistMutation.isSuccess) {
+      const { id } = addTasklistMutation.data
+      navigation.push(routeName.NewTasklist, {
+        title: tasklistName.UntitledList,
+        tasklistId: id,
+      })
+    }
   }
   useLayoutEffect(() => navigation.push(routeName.MyTasks), [navigation])
   const addTasklistMutation = useAddTasklistMutation(tasklistName.UntitledList)

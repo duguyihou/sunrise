@@ -9,6 +9,7 @@ import PopupItem from 'components/PopupItem'
 import { useDeleteTasklistMutation } from 'hooks/tasklists'
 import { useFetchTasksQuery } from 'hooks/tasks'
 import EllipsishButton from 'components/EllipsishButton'
+import HeaderTitle from 'components/HeaderTitle'
 
 const TasklistScreen = () => {
   const {
@@ -19,7 +20,7 @@ const TasklistScreen = () => {
   const [modalVisible, setModalVisible] = useState(false)
   useLayoutEffect(() =>
     navigation.setOptions({
-      title,
+      headerTitle: () => <HeaderTitle title={title} tasklistId={id} />,
       headerRight: () => (
         <EllipsishButton fn={() => setModalVisible(!modalVisible)} />
       ),
