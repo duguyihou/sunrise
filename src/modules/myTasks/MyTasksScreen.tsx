@@ -2,22 +2,15 @@ import React from 'react'
 import { TouchableOpacity, StyleSheet, View } from 'react-native'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
-import { useAppSelector } from 'app/hooks'
-import CalendarEventItem from 'components/CalendarEventItem'
 import CalendatBanner from 'components/CalendatBanner'
 import { routeNames, theme } from 'shared'
 import { StackProps } from 'typings'
 
 const MyTasksScreen = ({ navigation }: StackProps) => {
-  const calendarEvents = useAppSelector(state => state.calendarEvents)
-
   return (
     <View style={styles.container}>
       <CalendatBanner />
-      {calendarEvents &&
-        calendarEvents.map(calendarEvent => (
-          <CalendarEventItem key={calendarEvent.id} {...calendarEvent} />
-        ))}
+
       <TouchableOpacity
         style={styles.plus}
         onPress={() => navigation.push(routeNames.NewItem)}>

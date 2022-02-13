@@ -5,8 +5,6 @@ import { RootStackParamList } from 'typings'
 import { useAppSelector } from 'app/hooks'
 import TasklistScreen from 'modules/tasklist/TasklistScreen'
 import MyTasksScreen from 'modules/myTasks/MyTasksScreen'
-import NewItemScreen from 'modules/newItem/NewItemScreen'
-import ItemDetailScreen from 'modules/itemDetail/ItemDetailScreen'
 import SigninScreen from 'modules/signin/SigninScreen'
 import TasklistsScreen from 'modules/tasklists/TasklistsScreen'
 import { routeNames, tasklistName, theme } from 'shared'
@@ -45,14 +43,10 @@ function RootRoute() {
           component={MyTasksScreen}
           options={{ title: tasklistName.MyTasks }}
         />
-        <RootStack.Screen
-          name={routeNames.ItemDetail}
-          component={ItemDetailScreen}
-        />
       </RootStack.Group>
-      <RootStack.Group screenOptions={{ presentation: 'modal' }}>
+      {/* <RootStack.Group screenOptions={{ presentation: 'modal' }}>
         <RootStack.Screen name={routeNames.NewItem} component={NewItemScreen} />
-      </RootStack.Group>
+      </RootStack.Group> */}
     </RootStack.Navigator>
   )
 }
