@@ -21,6 +21,7 @@ const updateById = async (tasklistId: string, title: string) => {
     title,
     id: tasklistId,
   })
+  console.log('🐵 updateById', response.data)
   return response.data
 }
 const tasklistService = {
