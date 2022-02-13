@@ -7,8 +7,6 @@ import TasklistItem from 'components/TasklistItem'
 import { theme, routeNames } from 'shared'
 import { useFetchTasklistQuery } from 'hooks/tasklists'
 import PlusButton from 'components/PlusButton'
-import Dialog from 'components/Dialog'
-import DialogView from 'components/DialogView'
 
 const TasklistsScreen = ({ navigation, route }: StackProps) => {
   const [modalVisible, setModalVisible] = useState(false)
@@ -26,22 +24,17 @@ const TasklistsScreen = ({ navigation, route }: StackProps) => {
   if (isLoading) return <Text>loading...</Text>
   if (error) return <Text>`An error has occurred: ${error.message}`</Text>
   return (
-    <>
-      <ScrollView style={styles.container}>
-        {allTasklists &&
-          allTasklists.map(tasklist => (
-            <TasklistItem
-              key={tasklist.id}
-              tasklist={tasklist}
-              navigation={navigation}
-              route={route}
-            />
-          ))}
-      </ScrollView>
-      <DialogView visible={modalVisible} setVisible={setModalVisible}>
-        <Dialog />
-      </DialogView>
-    </>
+    <ScrollView style={styles.container}>
+      {allTasklists &&
+        allTasklists.map(tasklist => (
+          <TasklistItem
+            key={tasklist.id}
+            tasklist={tasklist}
+            navigation={navigation}
+            route={route}
+          />
+        ))}
+    </ScrollView>
   )
 }
 
