@@ -26,7 +26,7 @@ const TasklistScreen = () => {
     }),
   )
 
-  const mutation = useDeleteTasklistMutation(id)
+  const deleteTasklistMutation = useDeleteTasklistMutation(id)
   const { isLoading, error, data } = useFetchTasksQuery(id)
   const tasks = data?.items
 
@@ -36,7 +36,7 @@ const TasklistScreen = () => {
     <View>
       {tasks && tasks.map(task => <TaskItem key={task.id} task={task} />)}
       <PopupView visible={modalVisible} setVisible={setModalVisible}>
-        <PopupItem title="delete" fn={() => mutation.mutate()} />
+        <PopupItem title="delete" fn={() => deleteTasklistMutation.mutate()} />
       </PopupView>
     </View>
   )
