@@ -6,9 +6,15 @@ import { windowHeight, windowWidth } from 'utils/dimensions'
 import TasklistItem from 'components/TasklistItem'
 import { theme, routeNames } from 'shared'
 import { useFetchTasklistQuery } from 'hooks/tasklists'
+import PlusButton from 'components/PlusButton'
 
 const TasklistsScreen = ({ navigation, route }: StackProps) => {
   useLayoutEffect(() => navigation.push(routeNames.MyTasks), [navigation])
+  useLayoutEffect(() =>
+    navigation.setOptions({
+      headerRight: () => <PlusButton fn={() => console.log('🐵plus')} />,
+    }),
+  )
   const { isLoading, error, data } = useFetchTasklistQuery()
   const allTasklists = data?.items
 
