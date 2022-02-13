@@ -13,7 +13,6 @@ const HeaderTitle = ({ tasklistId, title }: Props) => {
   const [value, setValue] = useState(title)
   const updateTasklistMutation = useUpdateTasklistMutation(tasklistId, value)
   const handleOnBlur = () => {
-    console.log('🐵 value', value)
     updateTasklistMutation.mutate()
     setEditable(false)
   }

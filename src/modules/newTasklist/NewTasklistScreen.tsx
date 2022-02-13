@@ -7,12 +7,14 @@ import { routeName } from 'shared'
 
 const NewTasklistScreen = () => {
   const {
-    params: { title },
+    params: { title, tasklistId },
   } = useRoute<RouteProp<RootStackParamList, routeName.NewTasklist>>()
   const navigation = useNavigation()
-  // useLayoutEffect(() =>
-  //   navigation.setOptions({ headerTitle: () => <HeaderTitle title={title}  /> }),
-  // )
+  useLayoutEffect(() =>
+    navigation.setOptions({
+      headerTitle: () => <HeaderTitle title={title} tasklistId={tasklistId} />,
+    }),
+  )
   return (
     <View>
       <Text>NewTasklistScreen</Text>
