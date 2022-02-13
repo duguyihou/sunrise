@@ -2,7 +2,7 @@ import { View, Text } from 'react-native'
 import React, { useLayoutEffect, useState } from 'react'
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { RootStackParamList, Tasklist } from 'typings'
-import { routeNames } from 'shared'
+import { routeName } from 'shared'
 import TaskItem from 'components/TaskItem'
 import PopupView from 'components/PopupView'
 import PopupItem from 'components/PopupItem'
@@ -13,7 +13,7 @@ import EllipsishButton from 'components/EllipsishButton'
 const TasklistScreen = () => {
   const {
     params: { key },
-  } = useRoute<RouteProp<RootStackParamList, routeNames.Tasklist>>()
+  } = useRoute<RouteProp<RootStackParamList, routeName.Tasklist>>()
   const navigation = useNavigation()
   const { id, title } = key as Tasklist
   const [modalVisible, setModalVisible] = useState(false)

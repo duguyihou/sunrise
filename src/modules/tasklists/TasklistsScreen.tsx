@@ -1,21 +1,25 @@
-import React, { useLayoutEffect, useState } from 'react'
+import React, { useLayoutEffect } from 'react'
 import { ScrollView, StyleSheet, Text } from 'react-native'
 
 import { StackProps } from 'typings'
 import { windowHeight, windowWidth } from 'utils/dimensions'
 import TasklistItem from 'components/TasklistItem'
-import { theme, routeNames } from 'shared'
-import { useFetchTasklistQuery } from 'hooks/tasklists'
+import { theme, routeName, tasklistName } from 'shared'
+import { useAddTasklistMutation, useFetchTasklistQuery } from 'hooks/tasklists'
 import PlusButton from 'components/PlusButton'
 
 const TasklistsScreen = ({ navigation, route }: StackProps) => {
-  const [modalVisible, setModalVisible] = useState(false)
-  useLayoutEffect(() => navigation.push(routeNames.MyTasks), [navigation])
+  const handlePlus = () => {
+    addTasklistMutation.mutate()
+    navigation.push(routeName.NewTasklist, {
+      title: tasklistName.UntitledList,
+    })
+  }
+  useLayoutEffect(() => navigation.push(routeName.MyTasks), [navigation])
+  const addTasklistMutation = useAddTasklistMutation(tasklistName.UntitledList)
   useLayoutEffect(() =>
     navigation.setOptions({
-      headerRight: () => (
-        <PlusButton fn={() => setModalVisible(!modalVisible)} />
-      ),
+      headerRight: () => <PlusButton fn={handlePlus} />,
     }),
   )
   const { isLoading, error, data } = useFetchTasklistQuery()

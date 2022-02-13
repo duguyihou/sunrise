@@ -3,7 +3,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faListUl, faCalendar } from '@fortawesome/free-solid-svg-icons'
 
-import { routeNames, tasklistName, theme } from 'shared'
+import { routeName, tasklistName, theme } from 'shared'
 import { StackProps, Tasklist } from 'typings'
 
 type ItemProps = StackProps & {
@@ -14,7 +14,7 @@ const TasklistItem = ({ navigation, tasklist }: ItemProps) => {
   return (
     <TouchableOpacity
       onPress={() =>
-        navigation.push(isMyTasks ? routeNames.MyTasks : routeNames.Tasklist, {
+        navigation.push(isMyTasks ? routeName.MyTasks : routeName.Tasklist, {
           key: tasklist,
         })
       }>
