@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faEllipsisH } from '@fortawesome/free-solid-svg-icons'
 import { RootStackParamList, Tasklist } from 'typings'
 import { routeNames, theme } from 'shared'
-import { useMutation, useQuery } from 'react-query'
+import { useMutation, useQuery, useQueryClient } from 'react-query'
 import tasksService from 'api/tasks'
 import { TaskQuery } from 'typings/task'
 import TaskItem from 'components/TaskItem'
@@ -31,12 +31,22 @@ const TasklistScreen = () => {
     }),
   )
 
+  const queryClient = useQueryClient()
+
   const { isLoading, error, data } = useQuery<TaskQuery, Error>(
     'tasks',
     async () => await tasksService.findAll(id),
   )
 
-  const mutation = useMutation(() => tasklistService.deleteById(id))
+  const mutation = useMutation(
+    (tasklistId: string) => tasklistService.deleteById(tasklistId),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries('tasklists')
+        navigation.goBack()
+      },
+    },
+  )
   const tasks = data?.items
   if (isLoading) return <Text>loading...</Text>
   if (error) return <Text>`An error has occurred: ${error.message}`</Text>
@@ -45,7 +55,7 @@ const TasklistScreen = () => {
     <View>
       {tasks && tasks.map(task => <TaskItem key={task.id} task={task} />)}
       <PopupView visible={modalVisible} setVisible={setModalVisible}>
-        <PopupItem title="delete" fn={() => mutation.mutate()} />
+        <PopupItem title="delete" fn={() => mutation.mutate(id)} />
       </PopupView>
     </View>
   )
