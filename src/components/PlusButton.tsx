@@ -6,11 +6,12 @@ import { theme } from 'shared'
 
 type Props = {
   fn: () => void
+  size?: number
 }
-const PlusButton = ({ fn }: Props) => {
+const PlusButton = ({ fn, size = 16 }: Props) => {
   return (
     <TouchableOpacity onPress={fn}>
-      <FontAwesomeIcon icon={faPlus} color={theme.font.primary} />
+      <FontAwesomeIcon icon={faPlus} color={theme.font.primary} size={size} />
     </TouchableOpacity>
   )
 }
