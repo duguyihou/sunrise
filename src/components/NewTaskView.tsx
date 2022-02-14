@@ -1,5 +1,5 @@
 import { StyleSheet, TextInput, View } from 'react-native'
-import React, { SyntheticEvent, useState } from 'react'
+import React, { useState } from 'react'
 import { windowWidth, windowHeight } from 'utils/dimensions'
 import Checkbox from './Checkbox'
 import { useAddTaskMutation } from 'hooks/tasks'
@@ -17,6 +17,7 @@ const NewTaskView = ({ tasklistId }: Props) => {
     addTaskMutation.mutate()
     setText('')
   }
+
   return (
     <View style={styles.container}>
       <Checkbox isChecked={isChecked} onPress={handleCheck} />
