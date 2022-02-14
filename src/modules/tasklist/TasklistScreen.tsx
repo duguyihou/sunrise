@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet } from 'react-native'
 import React, { useLayoutEffect, useState } from 'react'
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
-import { RootStackParamList, Tasklist } from 'typings'
+import { RootStackParamList, StackNavigationProps, Tasklist } from 'typings'
 import { RouteName, theme } from 'shared'
 import TaskItem from 'components/TaskItem'
 import PopupView from 'components/PopupView'
@@ -16,7 +16,7 @@ const TasklistScreen = () => {
   const {
     params: { key },
   } = useRoute<RouteProp<RootStackParamList, RouteName.Tasklist>>()
-  const navigation = useNavigation()
+  const navigation = useNavigation<StackNavigationProps>()
   const { id, title } = key as Tasklist
   const [modalVisible, setModalVisible] = useState(false)
   useLayoutEffect(() =>
@@ -41,7 +41,10 @@ const TasklistScreen = () => {
         <PopupItem title="delete" fn={() => deleteTasklistMutation.mutate()} />
       </PopupView>
       <View style={styles.plusWrapper}>
-        <PlusButton fn={() => console.log('🐵 plus')} size={25} />
+        <PlusButton
+          fn={() => navigation.navigate(RouteName.NewTask)}
+          size={25}
+        />
       </View>
     </View>
   )
