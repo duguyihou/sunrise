@@ -42,7 +42,7 @@ const TasklistScreen = () => {
       </PopupView>
       <View style={styles.plusWrapper}>
         <PlusButton
-          fn={() => navigation.navigate(RouteName.NewTask)}
+          fn={() => navigation.navigate(RouteName.NewTask, { tasklistId: id })}
           size={25}
         />
       </View>
