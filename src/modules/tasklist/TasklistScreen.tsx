@@ -2,7 +2,7 @@ import { View, Text, StyleSheet } from 'react-native'
 import React, { useLayoutEffect, useState } from 'react'
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { RootStackParamList, Tasklist } from 'typings'
-import { routeName, theme } from 'shared'
+import { RouteName, theme } from 'shared'
 import TaskItem from 'components/TaskItem'
 import PopupView from 'components/PopupView'
 import PopupItem from 'components/PopupItem'
@@ -15,7 +15,7 @@ import PlusButton from 'components/PlusButton'
 const TasklistScreen = () => {
   const {
     params: { key },
-  } = useRoute<RouteProp<RootStackParamList, routeName.Tasklist>>()
+  } = useRoute<RouteProp<RootStackParamList, RouteName.Tasklist>>()
   const navigation = useNavigation()
   const { id, title } = key as Tasklist
   const [modalVisible, setModalVisible] = useState(false)

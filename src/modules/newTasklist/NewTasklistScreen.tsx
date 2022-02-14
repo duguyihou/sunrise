@@ -3,12 +3,12 @@ import React, { useLayoutEffect } from 'react'
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import HeaderTitle from 'components/HeaderTitle'
 import { RootStackParamList } from 'typings'
-import { routeName } from 'shared'
+import { RouteName } from 'shared'
 
 const NewTasklistScreen = () => {
   const {
     params: { title, tasklistId },
-  } = useRoute<RouteProp<RootStackParamList, routeName.NewTasklist>>()
+  } = useRoute<RouteProp<RootStackParamList, RouteName.NewTasklist>>()
   const navigation = useNavigation()
   useLayoutEffect(() =>
     navigation.setOptions({

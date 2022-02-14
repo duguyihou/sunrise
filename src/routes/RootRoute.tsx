@@ -7,7 +7,7 @@ import TasklistScreen from 'modules/tasklist/TasklistScreen'
 import MyTasksScreen from 'modules/myTasks/MyTasksScreen'
 import SigninScreen from 'modules/signin/SigninScreen'
 import TasklistsScreen from 'modules/tasklists/TasklistsScreen'
-import { routeName, tasklistName, theme } from 'shared'
+import { RouteName, TasklistName, theme } from 'shared'
 import NewTasklistScreen from 'modules/newTasklist/NewTasklistScreen'
 
 const RootStack = createNativeStackNavigator<RootStackParamList>()
@@ -18,7 +18,7 @@ function RootRoute() {
   if (!access_token) {
     return (
       <RootStack.Navigator screenOptions={{ headerShown: false }}>
-        <RootStack.Screen name={routeName.SignIn} component={SigninScreen} />
+        <RootStack.Screen name={RouteName.SignIn} component={SigninScreen} />
       </RootStack.Navigator>
     )
   }
@@ -31,26 +31,26 @@ function RootRoute() {
       }}>
       <RootStack.Group>
         <RootStack.Screen
-          name={routeName.Tasklists}
+          name={RouteName.Tasklists}
           component={TasklistsScreen}
           options={{ title: '' }}
         />
         <RootStack.Screen
-          name={routeName.Tasklist}
+          name={RouteName.Tasklist}
           component={TasklistScreen}
         />
         <RootStack.Screen
-          name={routeName.MyTasks}
+          name={RouteName.MyTasks}
           component={MyTasksScreen}
-          options={{ title: tasklistName.MyTasks }}
+          options={{ title: TasklistName.MyTasks }}
         />
         <RootStack.Screen
-          name={routeName.NewTasklist}
+          name={RouteName.NewTasklist}
           component={NewTasklistScreen}
         />
       </RootStack.Group>
       {/* <RootStack.Group screenOptions={{ presentation: 'modal' }}>
-        <RootStack.Screen name={routeName.NewItem} component={NewItemScreen} />
+        <RootStack.Screen name={RouteName.NewItem} component={NewItemScreen} />
       </RootStack.Group> */}
     </RootStack.Navigator>
   )

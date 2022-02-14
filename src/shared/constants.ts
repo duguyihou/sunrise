@@ -1,4 +1,4 @@
-export enum routeName {
+export enum RouteName {
   Root = 'Root',
   SignIn = 'SignIn',
   Tasklists = 'Tasklists',
@@ -9,12 +9,16 @@ export enum routeName {
   Home = 'Home',
 }
 
-export enum tasklistName {
+export enum TasklistName {
   MyTasks = 'My Tasks',
   UntitledList = 'Untitled list',
 }
 
-export enum queryKey {
-  tasklists = 'tasklists',
-  tasks = 'tasks',
+export enum QueryKey {
+  Tasklists = 'tasklists',
+  Tasks = 'tasks',
+}
+
+export enum AccessoryID {
+  Input = 'input',
 }

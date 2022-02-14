@@ -4,7 +4,7 @@ import { ScrollView, StyleSheet, Text } from 'react-native'
 import { StackProps } from 'typings'
 import { windowHeight, windowWidth } from 'utils/dimensions'
 import TasklistItem from 'components/TasklistItem'
-import { theme, routeName, tasklistName } from 'shared'
+import { theme, RouteName, TasklistName } from 'shared'
 import { useAddTasklistMutation, useFetchTasklistQuery } from 'hooks/tasklists'
 import PlusButton from 'components/PlusButton'
 
@@ -13,14 +13,14 @@ const TasklistsScreen = ({ navigation, route }: StackProps) => {
     addTasklistMutation.mutate()
     if (addTasklistMutation.isSuccess) {
       const { id } = addTasklistMutation.data
-      navigation.push(routeName.NewTasklist, {
-        title: tasklistName.UntitledList,
+      navigation.push(RouteName.NewTasklist, {
+        title: TasklistName.UntitledList,
         tasklistId: id,
       })
     }
   }
-  useLayoutEffect(() => navigation.push(routeName.MyTasks), [navigation])
-  const addTasklistMutation = useAddTasklistMutation(tasklistName.UntitledList)
+  useLayoutEffect(() => navigation.push(RouteName.MyTasks), [navigation])
+  const addTasklistMutation = useAddTasklistMutation(TasklistName.UntitledList)
   useLayoutEffect(() =>
     navigation.setOptions({
       headerRight: () => <PlusButton fn={handlePlus} />,
