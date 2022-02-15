@@ -26,6 +26,7 @@ const NewTaskView = ({ tasklistId }: Props) => {
         value={text}
         onChangeText={setText}
         placeholder="Add a Task"
+        blurOnSubmit={false}
         onSubmitEditing={handleOnSubmitEditing}
         autoFocus
       />
