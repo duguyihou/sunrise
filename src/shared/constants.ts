@@ -23,3 +23,8 @@ export enum QueryKey {
 export enum AccessoryID {
   Input = 'input',
 }
+
+export enum TaskStatus {
+  NeedsAction = 'needsAction',
+  Completed = 'completed',
+}

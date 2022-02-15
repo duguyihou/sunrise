@@ -1,3 +1,4 @@
+import { Task } from 'typings'
 import apiClient from 'utils/apiClient'
 
 const findAll = async (tasklist: string) => {
@@ -12,9 +13,22 @@ const create = async (tasklist: string, title: string) => {
   return response.data
 }
 
+const updateStatusById = async (
+  tasklistId: string,
+  taskId: string,
+  task: Task,
+) => {
+  const response = await apiClient.put(
+    `v1/lists/${tasklistId}/tasks/${taskId}`,
+    { ...task },
+  )
+  return response.data
+}
+
 const tasksService = {
   findAll,
   create,
+  updateStatusById,
 }
 
 export default tasksService

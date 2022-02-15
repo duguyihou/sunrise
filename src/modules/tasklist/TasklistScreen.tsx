@@ -36,7 +36,10 @@ const TasklistScreen = () => {
   if (error) return <Text>`An error has occurred: ${error.message}`</Text>
   return (
     <View style={styles.container}>
-      {tasks && tasks.map(task => <TaskItem key={task.id} task={task} />)}
+      {tasks &&
+        tasks.map(task => (
+          <TaskItem key={task.id} task={task} tasklistId={id} />
+        ))}
       <PopupView visible={modalVisible} setVisible={setModalVisible}>
         <PopupItem title="delete" fn={() => deleteTasklistMutation.mutate()} />
       </PopupView>
