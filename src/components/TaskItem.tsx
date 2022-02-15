@@ -4,7 +4,7 @@ import { Task } from 'typings'
 import { windowWidth } from 'utils/dimensions'
 import Checkbox from './Checkbox'
 import { useUpdateTaskStatusMutation } from 'hooks/tasks'
-import { TaskStatus } from 'shared'
+import { TaskStatus, theme } from 'shared'
 
 type Props = {
   task: Task
@@ -12,7 +12,9 @@ type Props = {
 }
 const TaskItem = ({ task, tasklistId }: Props) => {
   const { title, id, status } = task
-  const [isChecked, setIsChecked] = useState(status === TaskStatus.NeedsAction)
+  console.log('🐵 task', task)
+  const [isChecked, setIsChecked] = useState(status === TaskStatus.Completed)
+  console.log('🐵 ', isChecked)
   const updateTaskStatusMutation = useUpdateTaskStatusMutation(tasklistId, id, {
     ...task,
     status: isChecked ? TaskStatus.Completed : TaskStatus.NeedsAction,
@@ -25,8 +27,10 @@ const TaskItem = ({ task, tasklistId }: Props) => {
     <TouchableOpacity
       style={styles.container}
       onPress={() => console.log('🐵 touch')}>
-      <Checkbox onPress={handleCheck} isChecked={false} />
-      <Text style={styles.title}>{title}</Text>
+      <Checkbox onPress={handleCheck} isChecked={isChecked} />
+      <Text style={isChecked ? styles.completedTitle : styles.needsActionTitle}>
+        {title}
+      </Text>
     </TouchableOpacity>
   )
 }
@@ -39,7 +43,12 @@ const styles = StyleSheet.create({
     width: windowWidth,
     padding: 10,
   },
-  title: {
+  needsActionTitle: {
     fontSize: 20,
+  },
+  completedTitle: {
+    fontSize: 20,
+    color: theme.font.placeholder,
+    textDecorationLine: 'line-through',
   },
 })
