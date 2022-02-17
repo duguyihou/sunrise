@@ -16,7 +16,7 @@ export const useAddTaskMutation = (tasklistId: string, title: string) => {
 
   const mutation = useMutation(() => tasksService.create(tasklistId, title), {
     onSuccess: () => {
-      queryClient.invalidateQueries([QueryKey.Tasks, tasklistId])
+      queryClient.invalidateQueries(QueryKey.Tasks)
     },
   })
   return mutation

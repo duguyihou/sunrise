@@ -12,9 +12,7 @@ type Props = {
 }
 const TaskItem = ({ task, tasklistId }: Props) => {
   const { title, id, status } = task
-  console.log('🐵 task', task)
   const [isChecked, setIsChecked] = useState(status === TaskStatus.Completed)
-  console.log('🐵 ', isChecked)
   const updateTaskStatusMutation = useUpdateTaskStatusMutation(tasklistId, id, {
     ...task,
     status: isChecked ? TaskStatus.Completed : TaskStatus.NeedsAction,

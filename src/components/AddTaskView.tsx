@@ -1,5 +1,6 @@
 import { KeyboardAvoidingView, StyleSheet, TextInput, View } from 'react-native'
 import React, { useState } from 'react'
+import { useHeaderHeight } from '@react-navigation/elements'
 import { windowWidth } from 'utils/dimensions'
 import { useAddTaskMutation } from 'hooks/tasks'
 import { theme } from 'shared'
@@ -12,11 +13,14 @@ const AddTaskView = ({ tasklistId }: Props) => {
   const addTaskMutation = useAddTaskMutation(tasklistId, text)
 
   const handleOnSubmitEditing = () => {
+    if (text.trim() === '') return
     addTaskMutation.mutate()
     setText('')
   }
   return (
-    <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={100}>
+    <KeyboardAvoidingView
+      behavior="padding"
+      keyboardVerticalOffset={useHeaderHeight()}>
       <View style={styles.container}>
         <TextInput
           style={styles.textInput}
