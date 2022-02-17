@@ -15,7 +15,7 @@ const TaskItem = ({ task, tasklistId }: Props) => {
   const [isChecked, setIsChecked] = useState(status === TaskStatus.Completed)
   const updateTaskStatusMutation = useUpdateTaskStatusMutation(tasklistId, id, {
     ...task,
-    status: isChecked ? TaskStatus.Completed : TaskStatus.NeedsAction,
+    status: !isChecked ? TaskStatus.Completed : TaskStatus.NeedsAction,
   })
   const handleCheck = () => {
     setIsChecked(!isChecked)
@@ -25,7 +25,7 @@ const TaskItem = ({ task, tasklistId }: Props) => {
     <TouchableOpacity
       style={styles.container}
       onPress={() => console.log('🐵 touch')}>
-      <Checkbox onPress={handleCheck} isChecked={isChecked} />
+      <Checkbox onPress={handleCheck} />
       <Text style={isChecked ? styles.completedTitle : styles.needsActionTitle}>
         {title}
       </Text>
