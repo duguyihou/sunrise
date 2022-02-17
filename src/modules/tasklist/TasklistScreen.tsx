@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from 'react-native'
+import { ScrollView, Text, StyleSheet, View } from 'react-native'
 import React, { useLayoutEffect, useState } from 'react'
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { RootStackParamList, StackNavigationProps, Tasklist } from 'typings'
@@ -10,7 +10,8 @@ import { useDeleteTasklistMutation } from 'hooks/tasklists'
 import { useFetchTasksQuery } from 'hooks/tasks'
 import EllipsishButton from 'components/EllipsishButton'
 import HeaderTitle from 'components/HeaderTitle'
-import PlusButton from 'components/PlusButton'
+import AddTaskView from 'components/AddTaskView'
+import NewTaskAccessoryView from 'components/NewTaskAccessoryView'
 
 const TasklistScreen = () => {
   const {
@@ -36,19 +37,17 @@ const TasklistScreen = () => {
   if (error) return <Text>`An error has occurred: ${error.message}`</Text>
   return (
     <View style={styles.container}>
-      {tasks &&
-        tasks.map(task => (
-          <TaskItem key={task.id} task={task} tasklistId={id} />
-        ))}
+      <ScrollView keyboardDismissMode="on-drag">
+        {tasks &&
+          tasks.map(task => (
+            <TaskItem key={task.id} task={task} tasklistId={id} />
+          ))}
+      </ScrollView>
       <PopupView visible={modalVisible} setVisible={setModalVisible}>
         <PopupItem title="delete" fn={() => deleteTasklistMutation.mutate()} />
       </PopupView>
-      <View style={styles.plusWrapper}>
-        <PlusButton
-          fn={() => navigation.navigate(RouteName.NewTask, { tasklistId: id })}
-          size={25}
-        />
-      </View>
+      <AddTaskView />
+      <NewTaskAccessoryView tasklistId={id} />
     </View>
   )
 }
@@ -62,10 +61,5 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     backgroundColor: theme.bg.secondary,
-  },
-  plusWrapper: {
-    position: 'absolute',
-    right: 50,
-    bottom: 50,
   },
 })

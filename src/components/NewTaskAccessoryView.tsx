@@ -1,26 +1,22 @@
-import { StyleSheet, TextInput, View } from 'react-native'
+import { InputAccessoryView, StyleSheet, TextInput } from 'react-native'
 import React, { useState } from 'react'
-import { windowWidth, windowHeight } from 'utils/dimensions'
-import Checkbox from './Checkbox'
+import { windowWidth } from 'utils/dimensions'
 import { useAddTaskMutation } from 'hooks/tasks'
+import { AccessoryID } from 'shared'
 type Props = {
   tasklistId: string
 }
-const NewTaskView = ({ tasklistId }: Props) => {
-  const [isChecked, setIsChecked] = useState(false)
+const NewTaskAccessoryView = ({ tasklistId }: Props) => {
   const [text, setText] = useState('')
   const addTaskMutation = useAddTaskMutation(tasklistId, text)
-  const handleCheck = () => {
-    setIsChecked(!isChecked)
-  }
+
   const handleOnSubmitEditing = () => {
     addTaskMutation.mutate()
     setText('')
   }
 
   return (
-    <View style={styles.container}>
-      <Checkbox isChecked={isChecked} onPress={handleCheck} />
+    <InputAccessoryView style={styles.container} nativeID={AccessoryID.Input}>
       <TextInput
         style={styles.textInput}
         value={text}
@@ -30,22 +26,21 @@ const NewTaskView = ({ tasklistId }: Props) => {
         onSubmitEditing={handleOnSubmitEditing}
         autoFocus
       />
-    </View>
+    </InputAccessoryView>
   )
 }
 
-export default NewTaskView
+export default NewTaskAccessoryView
 
 const styles = StyleSheet.create({
   container: {
-    width: windowWidth,
-    height: windowHeight / 2,
-    paddingLeft: 10,
-    flexDirection: 'row',
     justifyContent: 'flex-start',
-    alignItems: 'flex-start',
+    alignItems: 'center',
   },
   textInput: {
+    width: windowWidth,
+    paddingHorizontal: 10,
+    paddingVertical: 20,
     fontSize: 20,
   },
 })
