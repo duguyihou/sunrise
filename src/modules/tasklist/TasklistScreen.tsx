@@ -11,7 +11,6 @@ import { useFetchTasksQuery } from 'hooks/tasks'
 import EllipsishButton from 'components/EllipsishButton'
 import HeaderTitle from 'components/HeaderTitle'
 import AddTaskView from 'components/AddTaskView'
-import NewTaskAccessoryView from 'components/NewTaskAccessoryView'
 
 const TasklistScreen = () => {
   const {
@@ -46,8 +45,7 @@ const TasklistScreen = () => {
       <PopupView visible={modalVisible} setVisible={setModalVisible}>
         <PopupItem title="delete" fn={() => deleteTasklistMutation.mutate()} />
       </PopupView>
-      <AddTaskView />
-      <NewTaskAccessoryView tasklistId={id} />
+      <AddTaskView tasklistId={id} />
     </View>
   )
 }

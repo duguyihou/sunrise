@@ -1,17 +1,33 @@
-import { StyleSheet, TextInput, View } from 'react-native'
-import React from 'react'
+import { KeyboardAvoidingView, StyleSheet, TextInput, View } from 'react-native'
+import React, { useState } from 'react'
 import { windowWidth } from 'utils/dimensions'
-import { AccessoryID, theme } from 'shared'
+import { useAddTaskMutation } from 'hooks/tasks'
+import { theme } from 'shared'
 
-const AddTaskView = () => {
+type Props = {
+  tasklistId: string
+}
+const AddTaskView = ({ tasklistId }: Props) => {
+  const [text, setText] = useState('')
+  const addTaskMutation = useAddTaskMutation(tasklistId, text)
+
+  const handleOnSubmitEditing = () => {
+    addTaskMutation.mutate()
+    setText('')
+  }
   return (
-    <View style={styles.container}>
-      <TextInput
-        style={styles.input}
-        inputAccessoryViewID={AccessoryID.Input}
-        placeholder="Add a Task"
-      />
-    </View>
+    <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={100}>
+      <View style={styles.container}>
+        <TextInput
+          style={styles.textInput}
+          value={text}
+          onChangeText={setText}
+          placeholder="Add a Task"
+          blurOnSubmit={false}
+          onSubmitEditing={handleOnSubmitEditing}
+        />
+      </View>
+    </KeyboardAvoidingView>
   )
 }
 
@@ -19,18 +35,11 @@ export default AddTaskView
 
 const styles = StyleSheet.create({
   container: {
-    width: windowWidth - 20,
-    paddingVertical: 10,
-    marginHorizontal: 10,
+    width: windowWidth,
     backgroundColor: theme.bg.primary,
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    position: 'absolute',
-    bottom: 50,
   },
-  input: {
+  textInput: {
+    padding: 20,
     fontSize: 20,
-    paddingLeft: 10,
   },
 })
