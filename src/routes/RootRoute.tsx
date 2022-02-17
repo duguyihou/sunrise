@@ -7,8 +7,11 @@ import TasklistScreen from 'modules/tasklist/TasklistScreen'
 import MyTasksScreen from 'modules/myTasks/MyTasksScreen'
 import SigninScreen from 'modules/signin/SigninScreen'
 import TasklistsScreen from 'modules/tasklists/TasklistsScreen'
-import { RouteName, TasklistName, theme } from 'shared'
+import { RouteName, TasklistName, TaskName, theme } from 'shared'
 import NewTasklistScreen from 'modules/newTasklist/NewTasklistScreen'
+import NewTaskScreen from 'modules/newTask/NewTaskScreen'
+import IconButton from 'components/IconButton'
+import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
 
 const RootStack = createNativeStackNavigator<RootStackParamList>()
 
@@ -47,6 +50,20 @@ function RootRoute() {
         <RootStack.Screen
           name={RouteName.NewTasklist}
           component={NewTasklistScreen}
+        />
+      </RootStack.Group>
+      <RootStack.Group screenOptions={{ presentation: 'modal' }}>
+        <RootStack.Screen
+          name={RouteName.NewTask}
+          component={NewTaskScreen}
+          options={{
+            headerTitle: () => (
+              <IconButton
+                icon={faAngleDown}
+                fn={() => console.log('🐵 angle down')}
+              />
+            ),
+          }}
         />
       </RootStack.Group>
     </RootStack.Navigator>

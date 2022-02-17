@@ -6,4 +6,5 @@ export {
   QueryKey,
   AccessoryID,
   TaskStatus,
+  TaskName,
 } from './constants'
