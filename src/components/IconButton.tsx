@@ -9,7 +9,7 @@ type Props = {
   size?: number
   icon: IconDefinition
 }
-const IconButton = ({ fn, size = 16, icon }: Props) => {
+const IconButton = ({ fn, size = 20, icon }: Props) => {
   return (
     <TouchableOpacity onPress={fn}>
       <FontAwesomeIcon icon={icon} color={theme.font.primary} size={size} />
