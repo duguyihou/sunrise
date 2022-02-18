@@ -6,7 +6,8 @@ import { windowHeight, windowWidth } from 'utils/dimensions'
 import TasklistItem from 'components/TasklistItem'
 import { theme, RouteName, TasklistName } from 'shared'
 import { useAddTasklistMutation, useFetchTasklistQuery } from 'hooks/tasklists'
-import PlusButton from 'components/PlusButton'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import IconButton from 'components/IconButton'
 
 const TasklistsScreen = ({ navigation, route }: StackProps) => {
   const handlePlus = () => {
@@ -23,7 +24,7 @@ const TasklistsScreen = ({ navigation, route }: StackProps) => {
   const addTasklistMutation = useAddTasklistMutation(TasklistName.UntitledList)
   useLayoutEffect(() =>
     navigation.setOptions({
-      headerRight: () => <PlusButton fn={handlePlus} />,
+      headerRight: () => <IconButton icon={faPlus} fn={handlePlus} />,
     }),
   )
   const { isLoading, error, data } = useFetchTasklistQuery()
