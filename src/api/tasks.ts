@@ -1,4 +1,5 @@
 import { Task } from 'typings'
+import { TaskPayload } from 'typings/task'
 import apiClient from 'utils/apiClient'
 
 const findAll = async (tasklist: string) => {
@@ -6,10 +7,11 @@ const findAll = async (tasklist: string) => {
   return response.data
 }
 
-const create = async (tasklist: string, title: string) => {
+const create = async (tasklist: string, taskPayload: TaskPayload) => {
   const response = await apiClient.post(`/v1/lists/${tasklist}/tasks`, {
-    title,
+    ...taskPayload,
   })
+  console.log('🐵 ', response.data)
   return response.data
 }
 

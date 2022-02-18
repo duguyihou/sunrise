@@ -15,6 +15,10 @@ export enum TasklistName {
   UntitledList = 'Untitled list',
 }
 
+export enum TaskName {
+  NewTask = 'New Task',
+}
+
 export enum QueryKey {
   Tasklists = 'tasklists',
   Tasks = 'tasks',

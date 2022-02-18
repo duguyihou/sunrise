@@ -1,7 +1,7 @@
 import tasksService from 'api/tasks'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { QueryKey } from 'shared'
-import { TaskQuery, Task } from 'typings/task'
+import { TaskQuery, Task, TaskPayload } from 'typings/task'
 
 export const useFetchTasksQuery = (tasklistId: string) => {
   const { isLoading, error, data } = useQuery<TaskQuery, Error>(
@@ -11,14 +11,20 @@ export const useFetchTasksQuery = (tasklistId: string) => {
   return { isLoading, error, data }
 }
 
-export const useAddTaskMutation = (tasklistId: string, title: string) => {
+export const useAddTaskMutation = (
+  tasklistId: string,
+  taskPayload: TaskPayload,
+) => {
   const queryClient = useQueryClient()
 
-  const mutation = useMutation(() => tasksService.create(tasklistId, title), {
-    onSuccess: () => {
-      queryClient.invalidateQueries(QueryKey.Tasks)
+  const mutation = useMutation(
+    () => tasksService.create(tasklistId, taskPayload),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(QueryKey.Tasks)
+      },
     },
-  })
+  )
   return mutation
 }
 

@@ -8,9 +8,10 @@ import PopupView from 'components/PopupView'
 import PopupItem from 'components/PopupItem'
 import { useDeleteTasklistMutation } from 'hooks/tasklists'
 import { useFetchTasksQuery } from 'hooks/tasks'
-import EllipsishButton from 'components/EllipsishButton'
+import { faEllipsisH } from '@fortawesome/free-solid-svg-icons'
 import HeaderTitle from 'components/HeaderTitle'
 import AddTaskView from 'components/AddTaskView'
+import IconButton from 'components/IconButton'
 
 const TasklistScreen = () => {
   const {
@@ -23,7 +24,10 @@ const TasklistScreen = () => {
     navigation.setOptions({
       headerTitle: () => <HeaderTitle title={title} tasklistId={id} />,
       headerRight: () => (
-        <EllipsishButton fn={() => setModalVisible(!modalVisible)} />
+        <IconButton
+          icon={faEllipsisH}
+          fn={() => setModalVisible(!modalVisible)}
+        />
       ),
     }),
   )

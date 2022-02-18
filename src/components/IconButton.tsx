@@ -1,18 +1,20 @@
 import React from 'react'
 import { TouchableOpacity } from 'react-native'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { faEllipsisH } from '@fortawesome/free-solid-svg-icons'
+import { IconDefinition } from '@fortawesome/free-solid-svg-icons'
 import { theme } from 'shared'
 
 type Props = {
   fn: () => void
+  size?: number
+  icon: IconDefinition
 }
-const EllipsishButton = ({ fn }: Props) => {
+const IconButton = ({ fn, size = 20, icon }: Props) => {
   return (
     <TouchableOpacity onPress={fn}>
-      <FontAwesomeIcon icon={faEllipsisH} color={theme.font.primary} />
+      <FontAwesomeIcon icon={icon} color={theme.font.primary} size={size} />
     </TouchableOpacity>
   )
 }
 
-export default EllipsishButton
+export default IconButton
