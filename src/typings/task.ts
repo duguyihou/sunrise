@@ -29,3 +29,8 @@ export interface TaskQuery {
   items: Task[]
   kind: string
 }
+
+export interface TaskPayload {
+  title: string
+  notes?: string
+}
