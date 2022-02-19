@@ -3,11 +3,10 @@ import React, { useLayoutEffect, useState } from 'react'
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import IconButton from 'components/IconButton'
 import { faAngleDown, faCheck } from '@fortawesome/free-solid-svg-icons'
-import Checkbox from 'components/Checkbox'
 import { windowWidth } from 'utils/dimensions'
 import { useAddTaskMutation } from 'hooks/tasks'
 import { RootStackParamList } from 'typings'
-import { RouteName } from 'shared'
+import { RouteName, theme } from 'shared'
 
 const NewTaskScreen = () => {
   const navigation = useNavigation()
@@ -33,7 +32,6 @@ const NewTaskScreen = () => {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.top}>
-        <Checkbox onPress={() => console.log('🐵 checkbox click')} />
         <TextInput
           style={styles.title}
           value={title}
@@ -46,7 +44,7 @@ const NewTaskScreen = () => {
         style={styles.notes}
         value={notes}
         onChangeText={setNotes}
-        placeholder="Add Notes"
+        placeholder="Add Note"
         blurOnSubmit={false}
         multiline
       />
@@ -74,7 +72,8 @@ const styles = StyleSheet.create({
   },
   notes: {
     paddingHorizontal: 10,
-    // paddingVertical: 20,
     fontSize: 18,
+    borderTopWidth: 1,
+    borderColor: theme.border,
   },
 })
