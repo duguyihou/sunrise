@@ -7,6 +7,7 @@ import { windowWidth } from 'utils/dimensions'
 import { useAddTaskMutation } from 'hooks/tasks'
 import { RootStackParamList } from 'typings'
 import { RouteName, theme } from 'shared'
+import DatePicker from 'react-native-date-picker'
 
 const NewTaskScreen = () => {
   const navigation = useNavigation()
@@ -16,12 +17,16 @@ const NewTaskScreen = () => {
 
   const [title, setTitle] = useState('')
   const [notes, setNotes] = useState('')
-  const addTaskMutation = useAddTaskMutation(tasklistId, { title, notes })
+  const [due, setDue] = useState(new Date())
+  const [openDatePicker, setOpenDatePicker] = useState(false)
+  const addTaskMutation = useAddTaskMutation(tasklistId, { title, notes, due })
   const handleSaveTask = () => {
     addTaskMutation.mutate()
     navigation.goBack()
   }
   const handleDismiss = () => navigation.goBack()
+  const handleShowDateTimeModal = () => setOpenDatePicker(true)
+
   useLayoutEffect(() =>
     navigation.setOptions({
       headerLeft: () => <IconButton icon={faAngleDown} fn={handleDismiss} />,
@@ -40,6 +45,26 @@ const NewTaskScreen = () => {
           blurOnSubmit={false}
         />
       </View>
+      <TextInput
+        style={styles.dateTime}
+        value={due.toString()}
+        placeholder="Date/Time"
+        blurOnSubmit={false}
+        onFocus={handleShowDateTimeModal}
+      />
+      <DatePicker
+        modal
+        open={openDatePicker}
+        date={due}
+        onConfirm={date => {
+          setOpenDatePicker(false)
+          setDue(date)
+        }}
+        onCancel={() => {
+          setOpenDatePicker(false)
+        }}
+      />
+
       <TextInput
         style={styles.notes}
         value={notes}
@@ -70,10 +95,17 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     fontSize: 20,
   },
+  dateTime: {
+    fontSize: 18,
+    color: theme.font.primary,
+    paddingHorizontal: 10,
+    width: '100%',
+  },
   notes: {
     paddingHorizontal: 10,
     fontSize: 18,
     borderTopWidth: 1,
+    paddingVertical: 10,
     borderColor: theme.border,
   },
 })

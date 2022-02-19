@@ -28,6 +28,7 @@
     "react-native-app-auth": "^6.4.1",
     "react-native-bouncy-checkbox": "^2.1.10",
     "react-native-config": "^1.4.5",
+    "react-native-date-picker": "^4.1.5",
     "react-native-gesture-handler": "^2.2.0",
     "react-native-reanimated": "^2.3.1",
     "react-native-safe-area-context": "^3.3.2",
