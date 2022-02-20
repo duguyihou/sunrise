@@ -2,7 +2,6 @@ import {
   NativeStackScreenProps,
   NativeStackNavigationProp,
 } from '@react-navigation/native-stack'
-import { TaskPayload } from './task'
 
 export type RootStackParamList = {
   Root: undefined
@@ -13,7 +12,7 @@ export type RootStackParamList = {
   MyTasks: undefined
   NewTasklist: { title: string; tasklistId: string }
   NewTask: { tasklistId: string; text?: string }
-  TaskDetail: { taskPayload: TaskPayload }
+  TaskDetail: { tasklistId: string; taskId: string }
 }
 
 export type StackProps = NativeStackScreenProps<RootStackParamList>

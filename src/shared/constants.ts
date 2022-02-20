@@ -23,6 +23,7 @@ export enum TaskName {
 export enum QueryKey {
   Tasklists = 'tasklists',
   Tasks = 'tasks',
+  TaskDetail = 'taskDetail',
 }
 
 export enum AccessoryID {

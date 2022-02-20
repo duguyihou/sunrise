@@ -27,7 +27,7 @@ const TaskItem = ({ task, tasklistId }: Props) => {
     <TouchableOpacity
       style={styles.container}
       onPress={() =>
-        navigation.push(RouteName.TaskDetail, { taskPayload: task })
+        navigation.push(RouteName.TaskDetail, { tasklistId, taskId: task.id })
       }>
       <Checkbox isChecked={isChecked} onPress={handleCheck} />
       <Text style={isChecked ? styles.completedTitle : styles.needsActionTitle}>

@@ -26,8 +26,14 @@ const updateStatusById = async (
   return response.data
 }
 
+const findById = async (tasklistId: string, taskId: string) => {
+  const response = await apiClient.get(`v1/lists/${tasklistId}/tasks/${taskId}`)
+  return response.data
+}
+
 const tasksService = {
   findAll,
+  findById,
   create,
   updateStatusById,
 }
