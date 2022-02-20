@@ -25,7 +25,7 @@ const TaskItem = ({ task, tasklistId }: Props) => {
     <TouchableOpacity
       style={styles.container}
       onPress={() => console.log('🐵 touch')}>
-      <Checkbox onPress={handleCheck} />
+      <Checkbox isChecked={isChecked} onPress={handleCheck} />
       <Text style={isChecked ? styles.completedTitle : styles.needsActionTitle}>
         {title}
       </Text>

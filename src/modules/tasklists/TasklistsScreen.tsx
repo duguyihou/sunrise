@@ -20,7 +20,6 @@ const TasklistsScreen = ({ navigation, route }: StackProps) => {
       })
     }
   }
-  useLayoutEffect(() => navigation.push(RouteName.MyTasks), [navigation])
   const addTasklistMutation = useAddTasklistMutation(TasklistName.UntitledList)
   useLayoutEffect(() =>
     navigation.setOptions({
