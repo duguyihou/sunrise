@@ -1,9 +1,8 @@
-import { ScrollView, StyleSheet } from 'react-native'
+import { ScrollView } from 'react-native'
 import React, { useLayoutEffect, useState } from 'react'
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import IconButton from 'components/IconButton'
 import { faAngleDown, faCheck } from '@fortawesome/free-solid-svg-icons'
-import { windowWidth } from 'utils/dimensions'
 import { useAddTaskMutation } from 'hooks/tasks'
 import { RootStackParamList } from 'typings'
 import { RouteName } from 'shared'
@@ -36,7 +35,7 @@ const NewTaskScreen = () => {
   )
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView>
       <TaskTitle task={task} setTask={setTask} />
       <DateTimeView task={task} setTask={setTask} />
       <TaskNotes task={task} setTask={setTask} />
@@ -45,9 +44,3 @@ const NewTaskScreen = () => {
 }
 
 export default NewTaskScreen
-
-const styles = StyleSheet.create({
-  container: {
-    width: windowWidth,
-  },
-})
