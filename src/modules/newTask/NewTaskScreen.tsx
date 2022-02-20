@@ -17,7 +17,6 @@ const NewTaskScreen = () => {
 
   const [title, setTitle] = useState('')
   const [notes, setNotes] = useState('')
-  const [due, setDue] = useState(false)
   const [date, setDate] = useState(new Date())
   const addTaskMutation = useAddTaskMutation(tasklistId, {
     title,
@@ -46,7 +45,7 @@ const NewTaskScreen = () => {
         placeholder="Add a Task"
         blurOnSubmit={false}
       />
-      <DateTimeView due={due} setDue={setDue} date={date} setDate={setDate} />
+      <DateTimeView date={date} setDate={setDate} />
       <TextInput
         style={styles.notes}
         value={notes}
@@ -77,5 +76,8 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     paddingVertical: 10,
     borderColor: theme.border,
+  },
+  dateTime: {
+    flexDirection: 'row',
   },
 })

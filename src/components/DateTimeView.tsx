@@ -1,4 +1,4 @@
-import { StyleSheet, TextInput } from 'react-native'
+import { Button, StyleSheet, TextInput } from 'react-native'
 import DatePicker from 'react-native-date-picker'
 import React, { Dispatch, SetStateAction, useState } from 'react'
 import { theme } from 'shared'
@@ -6,45 +6,36 @@ import { theme } from 'shared'
 type Props = {
   date: Date
   setDate: Dispatch<SetStateAction<Date>>
-  due: boolean
-  setDue: Dispatch<SetStateAction<boolean>>
 }
-const DateTimeView = ({ date, setDate, due, setDue }: Props) => {
+const DateTimeView = ({ date, setDate }: Props) => {
+  const [due, setDue] = useState(false)
   const [openDatePicker, setOpenDatePicker] = useState(false)
-  const handleShowDateTimeModal = () => setOpenDatePicker(true)
-  console.log('🐵 due', due)
+  const handleConfirm = (d: Date) => {
+    setOpenDatePicker(false)
+    setDate(d)
+    setDue(true)
+  }
+  const handleCancel = () => setOpenDatePicker(false)
+  const handleClear = () => {
+    setDue(false)
+  }
   return (
     <>
-      {!due && (
-        <TextInput
-          style={styles.dateTime}
-          value={''}
-          placeholder="Date/Time"
-          blurOnSubmit={false}
-          onFocus={() => setDue(true)}
-        />
-      )}
-      {due && (
-        <>
-          <TextInput
-            style={styles.dateTime}
-            value={date.toString()}
-            placeholder="Date/Time"
-            blurOnSubmit={false}
-            onFocus={handleShowDateTimeModal}
-          />
-          <DatePicker
-            modal
-            open={openDatePicker}
-            date={date}
-            onConfirm={d => {
-              setOpenDatePicker(false)
-              setDate(d)
-            }}
-            onCancel={() => setOpenDatePicker(false)}
-          />
-        </>
-      )}
+      <TextInput
+        editable={false}
+        style={styles.dateTime}
+        placeholder="Date/Time"
+        value={due ? date.toString() : ''}
+        onPressOut={() => setOpenDatePicker(true)}
+      />
+      <DatePicker
+        modal
+        open={openDatePicker}
+        date={date}
+        onConfirm={handleConfirm}
+        onCancel={handleCancel}
+      />
+      {due && <Button title="X" onPress={handleClear} />}
     </>
   )
 }
