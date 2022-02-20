@@ -1,7 +1,5 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, TextInput } from 'react-native'
 import React, { useState } from 'react'
-import { TextInput } from 'react-native-gesture-handler'
-import { theme } from 'shared'
 import { useUpdateTasklistMutation } from 'hooks/tasklists'
 
 type Props = {
@@ -16,19 +14,14 @@ const HeaderTitle = ({ tasklistId, title }: Props) => {
     updateTasklistMutation.mutate()
     setEditable(false)
   }
-  if (!editable) {
-    return (
-      <View>
-        <TouchableOpacity onPress={() => setEditable(true)}>
-          <Text>{value}</Text>
-        </TouchableOpacity>
-      </View>
-    )
-  }
+  const handlePress = () => setEditable(true)
+
   return (
     <TextInput
+      editable={editable}
       style={styles.textInput}
       value={value}
+      onPressIn={handlePress}
       onChangeText={setValue}
       onBlur={handleOnBlur}
     />
@@ -39,7 +32,8 @@ export default HeaderTitle
 
 const styles = StyleSheet.create({
   textInput: {
-    // flex: 1,
-    backgroundColor: theme.bg.secondary,
+    width: '60%',
+    fontSize: 20,
+    textAlign: 'center',
   },
 })

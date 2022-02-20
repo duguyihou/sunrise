@@ -1,10 +1,10 @@
 import React from 'react'
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { faListUl } from '@fortawesome/free-solid-svg-icons'
 
 import { RouteName, theme } from 'shared'
 import { StackProps, Tasklist } from 'typings'
+import IconButton from './IconButton'
 
 type ItemProps = StackProps & {
   tasklist: Tasklist
@@ -12,15 +12,14 @@ type ItemProps = StackProps & {
 const TasklistItem = ({ navigation, tasklist }: ItemProps) => {
   return (
     <TouchableOpacity
+      style={styles.container}
       onPress={() =>
         navigation.push(RouteName.Tasklist, {
           key: tasklist,
         })
       }>
-      <View style={styles.container}>
-        <FontAwesomeIcon icon={faListUl} size={20} color={theme.font.primary} />
-        <Text style={styles.text}>{tasklist.title}</Text>
-      </View>
+      <IconButton icon={faListUl} />
+      <Text style={styles.text}>{tasklist.title}</Text>
     </TouchableOpacity>
   )
 }
