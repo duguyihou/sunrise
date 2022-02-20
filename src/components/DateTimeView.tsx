@@ -1,7 +1,9 @@
-import { Button, StyleSheet, TextInput } from 'react-native'
+import { Button, StyleSheet, TextInput, View } from 'react-native'
 import DatePicker from 'react-native-date-picker'
 import React, { Dispatch, SetStateAction, useState } from 'react'
 import { theme } from 'shared'
+import { windowWidth } from 'utils/dimensions'
+import { getDue } from 'utils/dateTime'
 
 type Props = {
   date: Date
@@ -16,18 +18,18 @@ const DateTimeView = ({ date, setDate }: Props) => {
     setDue(true)
   }
   const handleCancel = () => setOpenDatePicker(false)
-  const handleClear = () => {
-    setDue(false)
-  }
+  const handleClear = () => setDue(false)
+
   return (
-    <>
+    <View style={styles.container}>
       <TextInput
         editable={false}
         style={styles.dateTime}
         placeholder="Date/Time"
-        value={due ? date.toString() : ''}
+        value={due ? getDue(date) : ''}
         onPressOut={() => setOpenDatePicker(true)}
       />
+      {due && <Button title="X" onPress={handleClear} />}
       <DatePicker
         modal
         open={openDatePicker}
@@ -35,18 +37,23 @@ const DateTimeView = ({ date, setDate }: Props) => {
         onConfirm={handleConfirm}
         onCancel={handleCancel}
       />
-      {due && <Button title="X" onPress={handleClear} />}
-    </>
+    </View>
   )
 }
 
 export default DateTimeView
 
 const styles = StyleSheet.create({
+  container: {
+    width: windowWidth,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
   dateTime: {
     fontSize: 18,
     color: theme.font.primary,
     paddingHorizontal: 10,
-    width: '100%',
+    width: '50%',
   },
 })
