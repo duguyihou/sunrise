@@ -1,29 +1,24 @@
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { faListUl, faCalendar } from '@fortawesome/free-solid-svg-icons'
+import { faListUl } from '@fortawesome/free-solid-svg-icons'
 
-import { RouteName, TasklistName, theme } from 'shared'
+import { RouteName, theme } from 'shared'
 import { StackProps, Tasklist } from 'typings'
 
 type ItemProps = StackProps & {
   tasklist: Tasklist
 }
 const TasklistItem = ({ navigation, tasklist }: ItemProps) => {
-  const isMyTasks = tasklist.title === TasklistName.MyTasks
   return (
     <TouchableOpacity
       onPress={() =>
-        navigation.push(isMyTasks ? RouteName.MyTasks : RouteName.Tasklist, {
+        navigation.push(RouteName.Tasklist, {
           key: tasklist,
         })
       }>
       <View style={styles.container}>
-        <FontAwesomeIcon
-          icon={isMyTasks ? faCalendar : faListUl}
-          size={20}
-          color={theme.font.primary}
-        />
+        <FontAwesomeIcon icon={faListUl} size={20} color={theme.font.primary} />
         <Text style={styles.text}>{tasklist.title}</Text>
       </View>
     </TouchableOpacity>
