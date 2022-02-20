@@ -6,7 +6,7 @@ export enum RouteName {
   MyTasks = 'MyTasks',
   NewTasklist = 'NewTasklist',
   NewTask = 'NewTask',
-  ItemDetail = 'ItemDetail',
+  TaskDetail = 'TaskDetail',
   Home = 'Home',
 }
 

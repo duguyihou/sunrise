@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, TextInput } from 'react-native'
+import { ScrollView, StyleSheet } from 'react-native'
 import React, { useLayoutEffect, useState } from 'react'
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import IconButton from 'components/IconButton'
@@ -6,22 +6,21 @@ import { faAngleDown, faCheck } from '@fortawesome/free-solid-svg-icons'
 import { windowWidth } from 'utils/dimensions'
 import { useAddTaskMutation } from 'hooks/tasks'
 import { RootStackParamList } from 'typings'
-import { RouteName, theme } from 'shared'
+import { RouteName } from 'shared'
 import DateTimeView from 'components/DateTimeView'
+import { TaskPayload } from 'typings/task'
+import TaskTitle from 'components/TaskTitle'
+import TaskNotes from 'components/TaskNotes'
 
 const NewTaskScreen = () => {
   const navigation = useNavigation()
   const {
     params: { tasklistId },
   } = useRoute<RouteProp<RootStackParamList, RouteName.NewTask>>()
-
-  const [title, setTitle] = useState('')
-  const [notes, setNotes] = useState('')
-  const [date, setDate] = useState(new Date())
+  const initialState = { title: '', notes: '', due: new Date() } as TaskPayload
+  const [task, setTask] = useState(initialState)
   const addTaskMutation = useAddTaskMutation(tasklistId, {
-    title,
-    notes,
-    due: date,
+    ...task,
   })
   const handleSaveTask = () => {
     addTaskMutation.mutate()
@@ -38,22 +37,9 @@ const NewTaskScreen = () => {
 
   return (
     <ScrollView style={styles.container}>
-      <TextInput
-        style={styles.title}
-        value={title}
-        onChangeText={setTitle}
-        placeholder="Add a Task"
-        blurOnSubmit={false}
-      />
-      <DateTimeView date={date} setDate={setDate} />
-      <TextInput
-        style={styles.notes}
-        value={notes}
-        onChangeText={setNotes}
-        placeholder="Add Note"
-        blurOnSubmit={false}
-        multiline
-      />
+      <TaskTitle task={task} setTask={setTask} />
+      <DateTimeView task={task} setTask={setTask} />
+      <TaskNotes task={task} setTask={setTask} />
     </ScrollView>
   )
 }
@@ -63,21 +49,5 @@ export default NewTaskScreen
 const styles = StyleSheet.create({
   container: {
     width: windowWidth,
-  },
-  title: {
-    flex: 1,
-    paddingHorizontal: 10,
-    paddingVertical: 20,
-    fontSize: 20,
-  },
-  notes: {
-    paddingHorizontal: 10,
-    fontSize: 18,
-    borderTopWidth: 1,
-    paddingVertical: 10,
-    borderColor: theme.border,
-  },
-  dateTime: {
-    flexDirection: 'row',
   },
 })

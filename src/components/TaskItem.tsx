@@ -1,10 +1,11 @@
 import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
-import { Task } from 'typings'
+import { StackNavigationProps, Task } from 'typings'
 import { windowWidth } from 'utils/dimensions'
 import Checkbox from './Checkbox'
 import { useUpdateTaskStatusMutation } from 'hooks/tasks'
-import { TaskStatus, theme } from 'shared'
+import { RouteName, TaskStatus, theme } from 'shared'
+import { useNavigation } from '@react-navigation/native'
 
 type Props = {
   task: Task
@@ -12,6 +13,7 @@ type Props = {
 }
 const TaskItem = ({ task, tasklistId }: Props) => {
   const { title, id, status } = task
+  const navigation = useNavigation<StackNavigationProps>()
   const [isChecked, setIsChecked] = useState(status === TaskStatus.Completed)
   const updateTaskStatusMutation = useUpdateTaskStatusMutation(tasklistId, id, {
     ...task,
@@ -24,7 +26,7 @@ const TaskItem = ({ task, tasklistId }: Props) => {
   return (
     <TouchableOpacity
       style={styles.container}
-      onPress={() => console.log('🐵 touch')}>
+      onPress={() => navigation.push(RouteName.TaskDetail, { id })}>
       <Checkbox isChecked={isChecked} onPress={handleCheck} />
       <Text style={isChecked ? styles.completedTitle : styles.needsActionTitle}>
         {title}

@@ -4,17 +4,18 @@ import React, { Dispatch, SetStateAction, useState } from 'react'
 import { theme } from 'shared'
 import { windowWidth } from 'utils/dimensions'
 import { getDue } from 'utils/dateTime'
+import { TaskPayload } from 'typings/task'
 
 type Props = {
-  date: Date
-  setDate: Dispatch<SetStateAction<Date>>
+  task: TaskPayload
+  setTask: Dispatch<SetStateAction<TaskPayload>>
 }
-const DateTimeView = ({ date, setDate }: Props) => {
+const DateTimeView = ({ task, setTask }: Props) => {
   const [due, setDue] = useState(false)
   const [openDatePicker, setOpenDatePicker] = useState(false)
   const handleConfirm = (d: Date) => {
     setOpenDatePicker(false)
-    setDate(d)
+    setTask({ ...task, due: d })
     setDue(true)
   }
   const handleCancel = () => setOpenDatePicker(false)
@@ -26,14 +27,14 @@ const DateTimeView = ({ date, setDate }: Props) => {
         editable={false}
         style={styles.dateTime}
         placeholder="Date/Time"
-        value={due ? getDue(date) : ''}
+        value={due ? getDue(task.due as Date) : ''}
         onPressOut={() => setOpenDatePicker(true)}
       />
       {due && <Button title="X" onPress={handleClear} />}
       <DatePicker
         modal
         open={openDatePicker}
-        date={date}
+        date={task.due as Date}
         onConfirm={handleConfirm}
         onCancel={handleCancel}
       />
