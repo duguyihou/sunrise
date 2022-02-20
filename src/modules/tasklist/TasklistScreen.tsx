@@ -1,7 +1,7 @@
 import { ScrollView, Text, StyleSheet, View } from 'react-native'
 import React, { useLayoutEffect, useState } from 'react'
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
-import { RootStackParamList, StackNavigationProps, Tasklist } from 'typings'
+import { RootStackParamList, StackNavigationProps } from 'typings'
 import { RouteName, theme } from 'shared'
 import TaskItem from 'components/TaskItem'
 import PopupView from 'components/PopupView'
@@ -15,14 +15,13 @@ import IconButton from 'components/IconButton'
 
 const TasklistScreen = () => {
   const {
-    params: { key },
+    params: { title, tasklistId },
   } = useRoute<RouteProp<RootStackParamList, RouteName.Tasklist>>()
   const navigation = useNavigation<StackNavigationProps>()
-  const { id, title } = key as Tasklist
   const [modalVisible, setModalVisible] = useState(false)
   useLayoutEffect(() =>
     navigation.setOptions({
-      headerTitle: () => <HeaderTitle title={title} tasklistId={id} />,
+      headerTitle: () => <HeaderTitle title={title} tasklistId={tasklistId} />,
       headerRight: () => (
         <IconButton
           icon={faEllipsisH}
@@ -32,8 +31,8 @@ const TasklistScreen = () => {
     }),
   )
 
-  const deleteTasklistMutation = useDeleteTasklistMutation(id)
-  const { isLoading, error, data } = useFetchTasksQuery(id)
+  const deleteTasklistMutation = useDeleteTasklistMutation(tasklistId)
+  const { isLoading, error, data } = useFetchTasksQuery(tasklistId)
   const tasks = data?.items
 
   if (isLoading) return <Text>loading...</Text>
@@ -43,13 +42,13 @@ const TasklistScreen = () => {
       <ScrollView keyboardDismissMode="on-drag">
         {tasks &&
           tasks.map(task => (
-            <TaskItem key={task.id} task={task} tasklistId={id} />
+            <TaskItem key={task.id} task={task} tasklistId={tasklistId} />
           ))}
       </ScrollView>
       <PopupView visible={modalVisible} setVisible={setModalVisible}>
         <PopupItem title="delete" fn={() => deleteTasklistMutation.mutate()} />
       </PopupView>
-      <AddTaskView tasklistId={id} />
+      <AddTaskView tasklistId={tasklistId} />
     </View>
   )
 }
