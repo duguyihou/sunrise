@@ -1,13 +1,13 @@
-import { ScrollView, StyleSheet, TextInput, View } from 'react-native'
+import { ScrollView, StyleSheet, TextInput } from 'react-native'
 import React, { useLayoutEffect, useState } from 'react'
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import IconButton from 'components/IconButton'
 import { faAngleDown, faCheck } from '@fortawesome/free-solid-svg-icons'
-import Checkbox from 'components/Checkbox'
 import { windowWidth } from 'utils/dimensions'
 import { useAddTaskMutation } from 'hooks/tasks'
 import { RootStackParamList } from 'typings'
-import { RouteName } from 'shared'
+import { RouteName, theme } from 'shared'
+import DateTimeView from 'components/DateTimeView'
 
 const NewTaskScreen = () => {
   const navigation = useNavigation()
@@ -17,12 +17,19 @@ const NewTaskScreen = () => {
 
   const [title, setTitle] = useState('')
   const [notes, setNotes] = useState('')
-  const addTaskMutation = useAddTaskMutation(tasklistId, { title, notes })
+  const [due, setDue] = useState(false)
+  const [date, setDate] = useState(new Date())
+  const addTaskMutation = useAddTaskMutation(tasklistId, {
+    title,
+    notes,
+    due: date,
+  })
   const handleSaveTask = () => {
     addTaskMutation.mutate()
     navigation.goBack()
   }
   const handleDismiss = () => navigation.goBack()
+
   useLayoutEffect(() =>
     navigation.setOptions({
       headerLeft: () => <IconButton icon={faAngleDown} fn={handleDismiss} />,
@@ -32,21 +39,19 @@ const NewTaskScreen = () => {
 
   return (
     <ScrollView style={styles.container}>
-      <View style={styles.top}>
-        <Checkbox onPress={() => console.log('🐵 checkbox click')} />
-        <TextInput
-          style={styles.title}
-          value={title}
-          onChangeText={setTitle}
-          placeholder="Add a Task"
-          blurOnSubmit={false}
-        />
-      </View>
+      <TextInput
+        style={styles.title}
+        value={title}
+        onChangeText={setTitle}
+        placeholder="Add a Task"
+        blurOnSubmit={false}
+      />
+      <DateTimeView due={due} setDue={setDue} date={date} setDate={setDate} />
       <TextInput
         style={styles.notes}
         value={notes}
         onChangeText={setNotes}
-        placeholder="Add Notes"
+        placeholder="Add Note"
         blurOnSubmit={false}
         multiline
       />
@@ -60,21 +65,17 @@ const styles = StyleSheet.create({
   container: {
     width: windowWidth,
   },
-  top: {
-    width: windowWidth,
-    paddingHorizontal: 10,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   title: {
     flex: 1,
+    paddingHorizontal: 10,
     paddingVertical: 20,
     fontSize: 20,
   },
   notes: {
     paddingHorizontal: 10,
-    // paddingVertical: 20,
     fontSize: 18,
+    borderTopWidth: 1,
+    paddingVertical: 10,
+    borderColor: theme.border,
   },
 })

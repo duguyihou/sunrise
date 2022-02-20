@@ -1,4 +1,3 @@
-export type { CalendarEvent } from './calendarEvent'
 export type {
   RootStackParamList,
   StackProps,

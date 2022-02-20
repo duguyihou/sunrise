@@ -7,6 +7,7 @@ export interface Task {
   status: string
   title: string
   updated: string
+  due: Date
 }
 
 export interface Tasklist {
@@ -33,4 +34,5 @@ export interface TaskQuery {
 export interface TaskPayload {
   title: string
   notes?: string
+  due?: Date
 }

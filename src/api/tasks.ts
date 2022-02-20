@@ -11,7 +11,6 @@ const create = async (tasklist: string, taskPayload: TaskPayload) => {
   const response = await apiClient.post(`/v1/lists/${tasklist}/tasks`, {
     ...taskPayload,
   })
-  console.log('🐵 ', response.data)
   return response.data
 }
 
