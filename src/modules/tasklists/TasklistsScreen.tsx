@@ -14,7 +14,7 @@ const TasklistsScreen = ({ navigation, route }: StackProps) => {
     addTasklistMutation.mutate()
     if (addTasklistMutation.isSuccess) {
       const { id } = addTasklistMutation.data
-      navigation.push(RouteName.NewTasklist, {
+      navigation.navigate(RouteName.NewTasklist, {
         title: TasklistName.UntitledList,
         tasklistId: id,
       })

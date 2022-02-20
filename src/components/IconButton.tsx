@@ -5,7 +5,7 @@ import { IconDefinition } from '@fortawesome/free-solid-svg-icons'
 import { theme } from 'shared'
 
 type Props = {
-  fn: () => void
+  fn?: () => void
   size?: number
   icon: IconDefinition
 }
