@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, TextInput, View } from 'react-native'
+import { ScrollView, StyleSheet, TextInput } from 'react-native'
 import React, { useLayoutEffect, useState } from 'react'
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import IconButton from 'components/IconButton'
@@ -7,7 +7,7 @@ import { windowWidth } from 'utils/dimensions'
 import { useAddTaskMutation } from 'hooks/tasks'
 import { RootStackParamList } from 'typings'
 import { RouteName, theme } from 'shared'
-import DatePicker from 'react-native-date-picker'
+import DateTimeView from 'components/DateTimeView'
 
 const NewTaskScreen = () => {
   const navigation = useNavigation()
@@ -17,15 +17,18 @@ const NewTaskScreen = () => {
 
   const [title, setTitle] = useState('')
   const [notes, setNotes] = useState('')
-  const [due, setDue] = useState(new Date())
-  const [openDatePicker, setOpenDatePicker] = useState(false)
-  const addTaskMutation = useAddTaskMutation(tasklistId, { title, notes, due })
+  const [due, setDue] = useState(false)
+  const [date, setDate] = useState(new Date())
+  const addTaskMutation = useAddTaskMutation(tasklistId, {
+    title,
+    notes,
+    due: date,
+  })
   const handleSaveTask = () => {
     addTaskMutation.mutate()
     navigation.goBack()
   }
   const handleDismiss = () => navigation.goBack()
-  const handleShowDateTimeModal = () => setOpenDatePicker(true)
 
   useLayoutEffect(() =>
     navigation.setOptions({
@@ -36,35 +39,14 @@ const NewTaskScreen = () => {
 
   return (
     <ScrollView style={styles.container}>
-      <View style={styles.top}>
-        <TextInput
-          style={styles.title}
-          value={title}
-          onChangeText={setTitle}
-          placeholder="Add a Task"
-          blurOnSubmit={false}
-        />
-      </View>
       <TextInput
-        style={styles.dateTime}
-        value={due.toString()}
-        placeholder="Date/Time"
+        style={styles.title}
+        value={title}
+        onChangeText={setTitle}
+        placeholder="Add a Task"
         blurOnSubmit={false}
-        onFocus={handleShowDateTimeModal}
       />
-      <DatePicker
-        modal
-        open={openDatePicker}
-        date={due}
-        onConfirm={date => {
-          setOpenDatePicker(false)
-          setDue(date)
-        }}
-        onCancel={() => {
-          setOpenDatePicker(false)
-        }}
-      />
-
+      <DateTimeView due={due} setDue={setDue} date={date} setDate={setDate} />
       <TextInput
         style={styles.notes}
         value={notes}
@@ -83,23 +65,11 @@ const styles = StyleSheet.create({
   container: {
     width: windowWidth,
   },
-  top: {
-    width: windowWidth,
-    paddingHorizontal: 10,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   title: {
     flex: 1,
+    paddingHorizontal: 10,
     paddingVertical: 20,
     fontSize: 20,
-  },
-  dateTime: {
-    fontSize: 18,
-    color: theme.font.primary,
-    paddingHorizontal: 10,
-    width: '100%',
   },
   notes: {
     paddingHorizontal: 10,
