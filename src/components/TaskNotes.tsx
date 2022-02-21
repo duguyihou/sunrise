@@ -1,11 +1,12 @@
 import React from 'react'
 import { StyleSheet, TextInput } from 'react-native'
-import { ControllerRenderProps } from 'react-hook-form'
 import { theme } from 'shared'
 
-const TaskNotes = (controllerRenderProps: ControllerRenderProps) => {
-  const { value, onChange } = controllerRenderProps
-
+type Props = {
+  value: string | undefined
+  onChange: (...event: unknown[]) => void
+}
+const TaskNotes = ({ value, onChange }: Props) => {
   return (
     <TextInput
       multiline

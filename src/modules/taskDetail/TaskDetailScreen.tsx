@@ -1,5 +1,5 @@
 import { ScrollView, Text } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { RouteProp, useRoute } from '@react-navigation/native'
 import { useForm, Controller } from 'react-hook-form'
 import { RootStackParamList } from 'typings'
@@ -14,35 +14,33 @@ const TaskDetailScreen = () => {
     params: { tasklistId, taskId },
   } = useRoute<RouteProp<RootStackParamList, RouteName.TaskDetail>>()
   const { isLoading, error, data } = useFetchTaskDetailQuery(tasklistId, taskId)
-  const [task, setTask] = useState(data)
-  useEffect(() => {
-    if (!isLoading && data) setTask(data)
-  }, [data, isLoading])
-  const {
-    control,
-    formState: { errors },
-  } = useForm({
-    defaultValues: { ...task },
+  const { control, setValue } = useForm({
+    defaultValues: { ...data },
   })
-  if (isLoading && !task) return <Text>loading...</Text>
+  if (isLoading || !data) return <Text>loading...</Text>
   if (error) return <Text>`An error has occurred: ${error.message}`</Text>
   return (
     <ScrollView>
       <Controller
         name="title"
         control={control}
-        render={({ field }) => <TaskTitle {...field} />}
+        render={({ field: { value, onChange } }) => (
+          <TaskTitle value={value} onChange={onChange} />
+        )}
       />
-      {errors.title && <Text>This is required.</Text>}
       <Controller
         name="due"
         control={control}
-        render={({ field }) => <DateTimeView {...field} />}
+        render={({ field: { value } }) => (
+          <DateTimeView value={value} setValue={setValue} />
+        )}
       />
       <Controller
         name="notes"
         control={control}
-        render={({ field }) => <TaskNotes {...field} />}
+        render={({ field: { value, onChange } }) => (
+          <TaskNotes value={value} onChange={onChange} />
+        )}
       />
     </ScrollView>
   )

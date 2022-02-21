@@ -1,9 +1,10 @@
 import React from 'react'
 import { StyleSheet, TextInput } from 'react-native'
-import { ControllerRenderProps } from 'react-hook-form'
-
-const TaskTitle = (controllerRenderProps: ControllerRenderProps) => {
-  const { value, onChange } = controllerRenderProps
+type Props = {
+  value: string | undefined
+  onChange: (...event: unknown[]) => void
+}
+const TaskTitle = ({ value, onChange }: Props) => {
   return (
     <TextInput
       style={styles.title}
