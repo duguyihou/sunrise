@@ -1,19 +1,18 @@
+import React from 'react'
 import { StyleSheet, TextInput } from 'react-native'
-import React, { Dispatch, SetStateAction } from 'react'
-import { TaskPayload } from 'typings/task'
+import { ControllerRenderProps } from 'react-hook-form'
 import { theme } from 'shared'
 
-type Props = {
-  task: TaskPayload
-  setTask: Dispatch<SetStateAction<TaskPayload>>
-}
-const TaskNotes = ({ task, setTask }: Props) => {
+const TaskNotes = (controllerRenderProps: ControllerRenderProps) => {
+  const { value, onChange } = controllerRenderProps
+
   return (
     <TextInput
+      multiline
       style={styles.notes}
-      value={task.notes}
-      onChangeText={t => setTask({ ...task, notes: t })}
-      placeholder="Add a Task"
+      value={value}
+      onChangeText={onChange}
+      placeholder="Add Notes"
       blurOnSubmit={false}
     />
   )

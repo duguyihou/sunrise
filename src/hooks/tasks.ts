@@ -1,7 +1,7 @@
 import tasksService from 'api/tasks'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { QueryKey } from 'shared'
-import { TaskQuery, Task, TaskPayload, TaskDetailQuery } from 'typings/task'
+import { TaskQuery, Task, TaskPayload } from 'typings/task'
 
 export const useFetchTasksQuery = (tasklistId: string) => {
   const { isLoading, error, data } = useQuery<TaskQuery, Error>(

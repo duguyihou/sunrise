@@ -1,17 +1,14 @@
+import React from 'react'
 import { StyleSheet, TextInput } from 'react-native'
-import React, { Dispatch, SetStateAction } from 'react'
-import { TaskPayload } from 'typings/task'
+import { ControllerRenderProps } from 'react-hook-form'
 
-type Props = {
-  task: TaskPayload
-  setTask: Dispatch<SetStateAction<TaskPayload>>
-}
-const TaskTitle = ({ task, setTask }: Props) => {
+const TaskTitle = (controllerRenderProps: ControllerRenderProps) => {
+  const { value, onChange } = controllerRenderProps
   return (
     <TextInput
       style={styles.title}
-      value={task.title}
-      onChangeText={t => setTask({ ...task, title: t })}
+      value={value}
+      onChangeText={onChange}
       placeholder="Add a Task"
       blurOnSubmit={false}
     />
