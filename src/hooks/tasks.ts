@@ -45,3 +45,11 @@ export const useUpdateTaskStatusMutation = (
   )
   return mutation
 }
+
+export const useFetchTaskDetailQuery = (tasklistId: string, taskId: string) => {
+  const { isLoading, error, data } = useQuery<TaskPayload, Error>(
+    [QueryKey.TaskDetail, tasklistId, taskId],
+    async () => tasksService.findById(tasklistId, taskId),
+  )
+  return { isLoading, error, data }
+}

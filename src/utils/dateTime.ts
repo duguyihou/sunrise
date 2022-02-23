@@ -26,4 +26,4 @@ export const getNextDays = (number = 0) => {
   return days
 }
 
-export const getDue = (date: Date) => dayjs(date).format('ddd, DD-MM-YYYY')
+export const getDue = (date: Date) => dayjs(date).format('ddd, DD/MM/YYYY')

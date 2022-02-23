@@ -12,6 +12,7 @@ export type RootStackParamList = {
   MyTasks: undefined
   NewTasklist: { title: string; tasklistId: string }
   NewTask: { tasklistId: string; text?: string }
+  TaskDetail: { tasklistId: string; taskId: string }
 }
 
 export type StackProps = NativeStackScreenProps<RootStackParamList>

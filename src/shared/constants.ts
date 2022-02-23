@@ -6,7 +6,7 @@ export enum RouteName {
   MyTasks = 'MyTasks',
   NewTasklist = 'NewTasklist',
   NewTask = 'NewTask',
-  ItemDetail = 'ItemDetail',
+  TaskDetail = 'TaskDetail',
   Home = 'Home',
 }
 
@@ -17,11 +17,13 @@ export enum TasklistName {
 
 export enum TaskName {
   NewTask = 'New Task',
+  TaskDetail = 'Task Detail',
 }
 
 export enum QueryKey {
   Tasklists = 'tasklists',
   Tasks = 'tasks',
+  TaskDetail = 'taskDetail',
 }
 
 export enum AccessoryID {

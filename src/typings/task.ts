@@ -31,8 +31,10 @@ export interface TaskQuery {
   kind: string
 }
 
+export type TaskDetailQuery = Task
+
 export interface TaskPayload {
   title: string
-  notes?: string
-  due?: Date
+  notes: string
+  due: Date
 }
