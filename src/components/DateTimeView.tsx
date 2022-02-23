@@ -1,57 +1,28 @@
-import React, { useState } from 'react'
-import { StyleSheet, TextInput, View } from 'react-native'
-import DatePicker from 'react-native-date-picker'
-
-import { theme } from 'shared'
-import { windowWidth } from 'utils/dimensions'
-import { UseFormSetValue } from 'react-hook-form'
+import React from 'react'
+import { StyleSheet, TextInput } from 'react-native'
 
 type Props = {
   value: Date | undefined
-  setValue: UseFormSetValue<{
-    title?: string | undefined
-    notes?: string | undefined
-    due?: Date | undefined
-  }>
+  onChange: (...event: unknown[]) => void
 }
-const DateTimeView = ({ value, setValue }: Props) => {
-  const [showDatePicker, setShowDatePicker] = useState(false)
+const DateTimeView = ({ value, onChange }: Props) => {
   return (
-    <View style={styles.container}>
-      {value && (
-        <TextInput
-          style={styles.dateTime}
-          placeholder="Date/Time"
-          value={value.toString()}
-          onFocus={() => setShowDatePicker(true)}
-        />
-      )}
-      {value && (
-        <DatePicker
-          modal
-          mode="date"
-          open={showDatePicker}
-          date={new Date(value)}
-          onDateChange={date => setValue('due', date)}
-        />
-      )}
-    </View>
+    <TextInput
+      style={styles.dateTime}
+      placeholder="Date/Time"
+      value={value?.toString()}
+      onChange={onChange}
+    />
   )
 }
 
 export default DateTimeView
 
 const styles = StyleSheet.create({
-  container: {
-    width: windowWidth,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
   dateTime: {
-    fontSize: 18,
-    color: theme.font.primary,
+    flex: 1,
     paddingHorizontal: 10,
-    width: '50%',
+    paddingVertical: 20,
+    fontSize: 20,
   },
 })
