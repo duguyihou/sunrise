@@ -1,6 +1,8 @@
 import dayjs from 'dayjs'
+import calendar from 'dayjs/plugin/calendar'
 import { Day } from 'typings/day'
 
+dayjs.extend(calendar)
 export const dateFormat = (dateTime: string, format = 'h:mm:a') =>
   dayjs(dateTime).format(format)
 
@@ -26,4 +28,5 @@ export const getNextDays = (number = 0) => {
   return days
 }
 
-export const getDue = (date: Date) => dayjs(date).format('ddd, DD/MM/YYYY')
+export const getCalendar = (date: Date) =>
+  dayjs(date).calendar(null, { sameElse: 'ddd, MMM DD' })

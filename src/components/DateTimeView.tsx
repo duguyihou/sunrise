@@ -1,8 +1,9 @@
 import React from 'react'
 import { StyleSheet, TextInput } from 'react-native'
+import { getCalendar } from 'utils/dateTime'
 
 type Props = {
-  value: Date | undefined
+  value: Date
   onChange: (...event: unknown[]) => void
 }
 const DateTimeView = ({ value, onChange }: Props) => {
@@ -10,7 +11,7 @@ const DateTimeView = ({ value, onChange }: Props) => {
     <TextInput
       style={styles.dateTime}
       placeholder="Date/Time"
-      value={value?.toString()}
+      value={getCalendar(value)}
       onChange={onChange}
     />
   )
@@ -22,7 +23,6 @@ const styles = StyleSheet.create({
   dateTime: {
     flex: 1,
     paddingHorizontal: 10,
-    paddingVertical: 20,
-    fontSize: 20,
+    fontSize: 16,
   },
 })
