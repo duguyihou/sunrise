@@ -46,7 +46,7 @@ function RootRoute() {
         <RootStack.Screen
           name={RouteName.TaskDetail}
           component={TaskDetailScreen}
-          options={{ title: TaskName.TaskDetail }}
+          options={{ title: TaskName.TaskDetail, headerBackTitle: '' }}
         />
       </RootStack.Group>
       <RootStack.Group screenOptions={{ presentation: 'modal' }}>

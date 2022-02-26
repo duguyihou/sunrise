@@ -3,10 +3,16 @@ import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { QueryKey } from 'shared'
 import { TaskQuery, Task, TaskPayload } from 'typings/task'
 
-export const useFetchTasksQuery = (tasklistId: string) => {
+export const useFetchTasksQuery = (
+  tasklistId: string,
+  showCompleted?: boolean,
+  showDeleted?: boolean,
+  showHidden?: boolean,
+) => {
   const { isLoading, error, data } = useQuery<TaskQuery, Error>(
     QueryKey.Tasks,
-    async () => tasksService.findAll(tasklistId),
+    async () =>
+      tasksService.findAll(tasklistId, showCompleted, showDeleted, showHidden),
   )
   return { isLoading, error, data }
 }
@@ -28,7 +34,7 @@ export const useAddTaskMutation = (
   return mutation
 }
 
-export const useUpdateTaskStatusMutation = (
+export const useUpdateTaskMutation = (
   tasklistId: string,
   taskId: string,
   task: Task,
@@ -36,7 +42,7 @@ export const useUpdateTaskStatusMutation = (
   const queryClient = useQueryClient()
 
   const mutation = useMutation(
-    () => tasksService.updateStatusById(tasklistId, taskId, task),
+    () => tasksService.updateById(tasklistId, taskId, task),
     {
       onSuccess: () => {
         queryClient.invalidateQueries([QueryKey.Tasks, tasklistId])
@@ -52,4 +58,17 @@ export const useFetchTaskDetailQuery = (tasklistId: string, taskId: string) => {
     async () => tasksService.findById(tasklistId, taskId),
   )
   return { isLoading, error, data }
+}
+
+export const useDeleteTaskMutation = (tasklistId: string, taskId: string) => {
+  const queryClient = useQueryClient()
+  const mutation = useMutation(
+    () => tasksService.deleteById(tasklistId, taskId),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries([QueryKey.Tasks, tasklistId, taskId])
+      },
+    },
+  )
+  return mutation
 }

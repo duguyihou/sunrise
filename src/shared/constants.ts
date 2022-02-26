@@ -17,7 +17,7 @@ export enum TasklistName {
 
 export enum TaskName {
   NewTask = 'New Task',
-  TaskDetail = 'Task Detail',
+  TaskDetail = '',
 }
 
 export enum QueryKey {
