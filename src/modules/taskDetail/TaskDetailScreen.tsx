@@ -1,18 +1,31 @@
 import { ScrollView, Text } from 'react-native'
-import React, { useEffect, useState } from 'react'
-import { RouteProp, useRoute } from '@react-navigation/native'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { useForm, Controller } from 'react-hook-form'
 import { RootStackParamList } from 'typings'
 import { RouteName } from 'shared'
-import { useFetchTaskDetailQuery } from 'hooks/tasks'
+import { useDeleteTaskMutation, useFetchTaskDetailQuery } from 'hooks/tasks'
 import DateTimeView from 'components/DateTimeView'
 import TaskTitle from 'components/TaskTitle'
 import TaskNotes from 'components/TaskNotes'
+import IconButton from 'components/IconButton'
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
 const TaskDetailScreen = () => {
   const {
     params: { tasklistId, taskId },
   } = useRoute<RouteProp<RootStackParamList, RouteName.TaskDetail>>()
+  const navigation = useNavigation()
+  useLayoutEffect(() =>
+    navigation.setOptions({
+      headerRight: () => <IconButton icon={faTrash} fn={handleDelete} />,
+    }),
+  )
+  const handleDelete = () => {
+    deleteTaskMutation.mutate()
+    navigation.goBack()
+  }
+  const deleteTaskMutation = useDeleteTaskMutation(tasklistId, taskId)
   const { isLoading, error, data } = useFetchTaskDetailQuery(tasklistId, taskId)
   const [defaultValues, setDefaultValues] = useState({
     title: '',

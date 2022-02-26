@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { StackNavigationProps, Task } from 'typings'
 import { windowWidth } from 'utils/dimensions'
 import Checkbox from './Checkbox'
-import { useUpdateTaskStatusMutation } from 'hooks/tasks'
+import { useUpdateTaskMutation } from 'hooks/tasks'
 import { RouteName, TaskStatus, theme } from 'shared'
 import { useNavigation } from '@react-navigation/native'
 
@@ -15,7 +15,7 @@ const TaskItem = ({ task, tasklistId }: Props) => {
   const { title, id, status } = task
   const navigation = useNavigation<StackNavigationProps>()
   const [isChecked, setIsChecked] = useState(status === TaskStatus.Completed)
-  const updateTaskStatusMutation = useUpdateTaskStatusMutation(tasklistId, id, {
+  const updateTaskStatusMutation = useUpdateTaskMutation(tasklistId, id, {
     ...task,
     status: !isChecked ? TaskStatus.Completed : TaskStatus.NeedsAction,
   })
