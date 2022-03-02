@@ -13,7 +13,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
 const TaskDetailScreen = () => {
   const {
-    params: { tasklistId, taskId },
+    params: { selfLink },
   } = useRoute<RouteProp<RootStackParamList, RouteName.TaskDetail>>()
   const navigation = useNavigation()
   useLayoutEffect(() =>
@@ -25,8 +25,8 @@ const TaskDetailScreen = () => {
     deleteTaskMutation.mutate()
     navigation.goBack()
   }
-  const deleteTaskMutation = useDeleteTaskMutation(tasklistId, taskId)
-  const { isLoading, error, data } = useFetchTaskDetailQuery(tasklistId, taskId)
+  const deleteTaskMutation = useDeleteTaskMutation(selfLink)
+  const { isLoading, error, data } = useFetchTaskDetailQuery(selfLink)
   const [defaultValues, setDefaultValues] = useState({
     title: '',
     due: new Date(),

@@ -34,41 +34,31 @@ export const useAddTaskMutation = (
   return mutation
 }
 
-export const useUpdateTaskMutation = (
-  tasklistId: string,
-  taskId: string,
-  task: Task,
-) => {
+export const useUpdateTaskMutation = (selfLink: string, task: Task) => {
   const queryClient = useQueryClient()
-
-  const mutation = useMutation(
-    () => tasksService.updateById(tasklistId, taskId, task),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries([QueryKey.Tasks, tasklistId])
-      },
+  const mutation = useMutation(() => tasksService.updateById(selfLink, task), {
+    onSuccess: () => {
+      queryClient.invalidateQueries(QueryKey.Tasks)
     },
-  )
+  })
   return mutation
 }
 
-export const useFetchTaskDetailQuery = (tasklistId: string, taskId: string) => {
-  const { isLoading, error, data } = useQuery<TaskPayload, Error>(
-    [QueryKey.TaskDetail, tasklistId, taskId],
-    async () => tasksService.findById(tasklistId, taskId),
+export const useFetchTaskDetailQuery = (selfLink: string) => {
+  const { isLoading, error, data } = useQuery<Task, Error>(
+    QueryKey.TaskDetail,
+    async () => tasksService.findById(selfLink),
+    { enabled: !!selfLink },
   )
   return { isLoading, error, data }
 }
 
-export const useDeleteTaskMutation = (tasklistId: string, taskId: string) => {
+export const useDeleteTaskMutation = (selfLink: string) => {
   const queryClient = useQueryClient()
-  const mutation = useMutation(
-    () => tasksService.deleteById(tasklistId, taskId),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries([QueryKey.Tasks, tasklistId, taskId])
-      },
+  const mutation = useMutation(() => tasksService.deleteById(selfLink), {
+    onSuccess: () => {
+      queryClient.invalidateQueries(QueryKey.Tasks)
     },
-  )
+  })
   return mutation
 }

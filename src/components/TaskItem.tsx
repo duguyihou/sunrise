@@ -1,5 +1,5 @@
 import { StyleSheet, Text, TouchableOpacity } from 'react-native'
-import React, { useState } from 'react'
+import React from 'react'
 import { StackNavigationProps, Task } from 'typings'
 import { windowWidth } from 'utils/dimensions'
 import Checkbox from './Checkbox'
@@ -9,26 +9,24 @@ import { useNavigation } from '@react-navigation/native'
 
 type Props = {
   task: Task
-  tasklistId: string
 }
-const TaskItem = ({ task, tasklistId }: Props) => {
-  const { title, id, status } = task
+const TaskItem = ({ task }: Props) => {
+  const { title, selfLink, status } = task
   const navigation = useNavigation<StackNavigationProps>()
-  const [isChecked, setIsChecked] = useState(status === TaskStatus.Completed)
-  const updateTaskStatusMutation = useUpdateTaskMutation(tasklistId, id, {
+  const isChecked = status === TaskStatus.Completed
+
+  const updateTaskStatusMutation = useUpdateTaskMutation(selfLink, {
     ...task,
     status: !isChecked ? TaskStatus.Completed : TaskStatus.NeedsAction,
   })
   const handleCheck = () => {
-    setIsChecked(!isChecked)
-    updateTaskStatusMutation.mutate()
+    // updateTaskStatusMutation.mutate()
+    console.log('🐵 check')
   }
   return (
     <TouchableOpacity
       style={styles.container}
-      onPress={() =>
-        navigation.push(RouteName.TaskDetail, { tasklistId, taskId: task.id })
-      }>
+      onPress={() => navigation.push(RouteName.TaskDetail, { selfLink })}>
       <Checkbox isChecked={isChecked} onPress={handleCheck} />
       <Text style={isChecked ? styles.completedTitle : styles.needsActionTitle}>
         {title}
