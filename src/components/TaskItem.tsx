@@ -19,10 +19,8 @@ const TaskItem = ({ task }: Props) => {
     ...task,
     status: !isChecked ? TaskStatus.Completed : TaskStatus.NeedsAction,
   })
-  const handleCheck = () => {
-    // updateTaskStatusMutation.mutate()
-    console.log('🐵 check')
-  }
+  const handleCheck = () => updateTaskStatusMutation.mutate()
+
   return (
     <TouchableOpacity
       style={styles.container}

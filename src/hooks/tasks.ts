@@ -45,7 +45,7 @@ export const useUpdateTaskMutation = (selfLink: string, task: Task) => {
 }
 
 export const useFetchTaskDetailQuery = (selfLink: string) => {
-  const { isLoading, error, data } = useQuery<Task, Error>(
+  const { isLoading, error, data } = useQuery<TaskPayload, Error>(
     QueryKey.TaskDetail,
     async () => tasksService.findById(selfLink),
     { enabled: !!selfLink },
