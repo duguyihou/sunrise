@@ -23,10 +23,10 @@ export const useAddTasklistMutation = (title: string) => {
   return mutation
 }
 
-export const useDeleteTasklistMutation = (tasklistId: string) => {
+export const useDeleteTasklistMutation = (selfLink: string) => {
   const queryClient = useQueryClient()
   const navigation = useNavigation()
-  const mutation = useMutation(() => tasklistService.deleteById(tasklistId), {
+  const mutation = useMutation(() => tasklistService.deleteBy(selfLink), {
     onSuccess: () => {
       queryClient.invalidateQueries(QueryKey.Tasklists)
       navigation.goBack()

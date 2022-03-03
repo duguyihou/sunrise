@@ -36,7 +36,7 @@ export const useAddTaskMutation = (
 
 export const useUpdateTaskMutation = (selfLink: string, task: Task) => {
   const queryClient = useQueryClient()
-  const mutation = useMutation(() => tasksService.updateById(selfLink, task), {
+  const mutation = useMutation(() => tasksService.updateBy(selfLink, task), {
     onSuccess: () => {
       queryClient.invalidateQueries(QueryKey.Tasks)
     },
@@ -47,7 +47,7 @@ export const useUpdateTaskMutation = (selfLink: string, task: Task) => {
 export const useFetchTaskDetailQuery = (selfLink: string) => {
   const { isLoading, error, data } = useQuery<TaskPayload, Error>(
     QueryKey.TaskDetail,
-    async () => tasksService.findById(selfLink),
+    async () => tasksService.findBy(selfLink),
     { enabled: !!selfLink },
   )
   return { isLoading, error, data }
@@ -55,7 +55,7 @@ export const useFetchTaskDetailQuery = (selfLink: string) => {
 
 export const useDeleteTaskMutation = (selfLink: string) => {
   const queryClient = useQueryClient()
-  const mutation = useMutation(() => tasksService.deleteById(selfLink), {
+  const mutation = useMutation(() => tasksService.deleteBy(selfLink), {
     onSuccess: () => {
       queryClient.invalidateQueries(QueryKey.Tasks)
     },

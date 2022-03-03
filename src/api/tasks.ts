@@ -21,28 +21,28 @@ const create = async (tasklist: string, taskPayload: TaskPayload) => {
   return response.data
 }
 
-const updateById = async (selfLink: string, task: Task) => {
+const updateBy = async (selfLink: string, task: Task) => {
   const response = await apiClient.put(selfLink, { ...task })
   return response.data
 }
 
-const findById = async (selfLink?: string) => {
+const findBy = async (selfLink?: string) => {
   if (!selfLink) return
   const response = await apiClient.get(selfLink)
   return response.data
 }
 
-const deleteById = async (selfLink: string) => {
+const deleteBy = async (selfLink: string) => {
   const response = await apiClient.delete(selfLink)
   return response.data
 }
 
 const tasksService = {
   findAll,
-  findById,
+  findBy,
   create,
-  updateById,
-  deleteById,
+  updateBy,
+  deleteBy,
 }
 
 export default tasksService
