@@ -40,10 +40,7 @@ const TasklistScreen = () => {
   return (
     <View style={styles.container}>
       <ScrollView keyboardDismissMode="on-drag">
-        {tasks &&
-          tasks.map(task => (
-            <TaskItem key={task.id} task={task} tasklistId={tasklistId} />
-          ))}
+        {tasks && tasks.map(task => <TaskItem key={task.id} task={task} />)}
       </ScrollView>
       <PopupView visible={modalVisible} setVisible={setModalVisible}>
         <PopupItem title="delete" fn={() => deleteTasklistMutation.mutate()} />

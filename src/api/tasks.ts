@@ -21,23 +21,19 @@ const create = async (tasklist: string, taskPayload: TaskPayload) => {
   return response.data
 }
 
-const updateById = async (tasklistId: string, taskId: string, task: Task) => {
-  const response = await apiClient.put(
-    `v1/lists/${tasklistId}/tasks/${taskId}`,
-    { ...task },
-  )
+const updateById = async (selfLink: string, task: Task) => {
+  const response = await apiClient.put(selfLink, { ...task })
   return response.data
 }
 
-const findById = async (tasklistId: string, taskId: string) => {
-  const response = await apiClient.get(`v1/lists/${tasklistId}/tasks/${taskId}`)
+const findById = async (selfLink?: string) => {
+  if (!selfLink) return
+  const response = await apiClient.get(selfLink)
   return response.data
 }
 
-const deleteById = async (tasklistId: string, taskId: string) => {
-  const response = await apiClient.delete(
-    `v1/lists/${tasklistId}/tasks/${taskId}`,
-  )
+const deleteById = async (selfLink: string) => {
+  const response = await apiClient.delete(selfLink)
   return response.data
 }
 

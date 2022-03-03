@@ -7,7 +7,8 @@ export interface Task {
   status: string
   title: string
   updated: string
-  due: Date
+  due?: Date
+  notes?: string
 }
 
 export interface Tasklist {

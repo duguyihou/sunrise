@@ -1,5 +1,5 @@
 import { ScrollView, Text } from 'react-native'
-import React, { useEffect, useLayoutEffect, useState } from 'react'
+import React, { useEffect, useLayoutEffect } from 'react'
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { useForm, Controller } from 'react-hook-form'
 import { RootStackParamList } from 'typings'
@@ -13,7 +13,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
 const TaskDetailScreen = () => {
   const {
-    params: { tasklistId, taskId },
+    params: { selfLink },
   } = useRoute<RouteProp<RootStackParamList, RouteName.TaskDetail>>()
   const navigation = useNavigation()
   useLayoutEffect(() =>
@@ -25,16 +25,18 @@ const TaskDetailScreen = () => {
     deleteTaskMutation.mutate()
     navigation.goBack()
   }
-  const deleteTaskMutation = useDeleteTaskMutation(tasklistId, taskId)
-  const { isLoading, error, data } = useFetchTaskDetailQuery(tasklistId, taskId)
-  const [defaultValues, setDefaultValues] = useState({
-    title: '',
-    due: new Date(),
-    notes: '',
-  })
-  const { reset, control } = useForm({ defaultValues })
-  useEffect(() => setDefaultValues(data!), [data])
-  useEffect(() => reset(defaultValues), [defaultValues, reset])
+  const deleteTaskMutation = useDeleteTaskMutation(selfLink)
+  const { isLoading, error, data } = useFetchTaskDetailQuery(selfLink)
+
+  const { control, setValue } = useForm({ mode: 'onChange' })
+  useEffect(() => {
+    if (data) {
+      setValue('title', data.title)
+      setValue('due', data.due)
+      setValue('notes', data.notes)
+    }
+  }, [data, setValue])
+
   if (isLoading || !data) return <Text>loading...</Text>
   if (error) return <Text>`An error has occurred: ${error.message}`</Text>
   return (
