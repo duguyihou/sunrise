@@ -15,13 +15,14 @@ import IconButton from 'components/IconButton'
 
 const TasklistScreen = () => {
   const {
-    params: { title, tasklistId, selfLink },
+    params: { tasklist },
   } = useRoute<RouteProp<RootStackParamList, RouteName.Tasklist>>()
+  const { title, id, selfLink } = tasklist
   const navigation = useNavigation<StackNavigationProps>()
   const [modalVisible, setModalVisible] = useState(false)
   useLayoutEffect(() =>
     navigation.setOptions({
-      headerTitle: () => <HeaderTitle title={title} tasklistId={tasklistId} />,
+      headerTitle: () => <HeaderTitle title={title} tasklistId={id} />,
       headerRight: () => (
         <IconButton
           icon={faEllipsisH}
@@ -32,7 +33,7 @@ const TasklistScreen = () => {
   )
 
   const deleteTasklistMutation = useDeleteTasklistMutation(selfLink)
-  const { isLoading, error, data } = useFetchTasksQuery(tasklistId)
+  const { isLoading, error, data } = useFetchTasksQuery(id)
   const tasks = data?.items
 
   if (isLoading) return <Text>loading...</Text>
@@ -45,7 +46,7 @@ const TasklistScreen = () => {
       <PopupView visible={modalVisible} setVisible={setModalVisible}>
         <PopupItem title="delete" fn={() => deleteTasklistMutation.mutate()} />
       </PopupView>
-      <AddTaskView tasklistId={tasklistId} />
+      <AddTaskView tasklistId={id} />
     </View>
   )
 }
