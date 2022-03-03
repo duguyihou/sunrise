@@ -15,8 +15,7 @@ const TasklistItem = ({ navigation, tasklist }: ItemProps) => {
       style={styles.container}
       onPress={() =>
         navigation.push(RouteName.Tasklist, {
-          title: tasklist.title,
-          tasklistId: tasklist.id,
+          tasklist,
         })
       }>
       <IconButton icon={faListUl} />
