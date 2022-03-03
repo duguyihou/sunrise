@@ -15,7 +15,7 @@ import IconButton from 'components/IconButton'
 
 const TasklistScreen = () => {
   const {
-    params: { title, tasklistId },
+    params: { title, tasklistId, selfLink },
   } = useRoute<RouteProp<RootStackParamList, RouteName.Tasklist>>()
   const navigation = useNavigation<StackNavigationProps>()
   const [modalVisible, setModalVisible] = useState(false)
@@ -31,7 +31,7 @@ const TasklistScreen = () => {
     }),
   )
 
-  const deleteTasklistMutation = useDeleteTasklistMutation(tasklistId)
+  const deleteTasklistMutation = useDeleteTasklistMutation(selfLink)
   const { isLoading, error, data } = useFetchTasksQuery(tasklistId)
   const tasks = data?.items
 

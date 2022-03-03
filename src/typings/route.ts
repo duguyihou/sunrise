@@ -7,7 +7,7 @@ export type RootStackParamList = {
   Root: undefined
   SignIn: undefined
   Tasklists: undefined
-  Tasklist: { title: string; tasklistId: string }
+  Tasklist: { title: string; tasklistId: string; selfLink: string }
   Home: undefined
   MyTasks: undefined
   NewTasklist: { title: string; tasklistId: string }

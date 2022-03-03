@@ -11,8 +11,8 @@ const create = async (title: string) => {
   return response.data
 }
 
-const deleteById = async (tasklist: string) => {
-  const response = await apiClient.delete(`v1/users/@me/lists/${tasklist}`)
+const deleteBy = async (selfLink: string) => {
+  const response = await apiClient.delete(selfLink)
   return response.data
 }
 
@@ -26,7 +26,7 @@ const updateById = async (tasklistId: string, title: string) => {
 const tasklistService = {
   findAll,
   create,
-  deleteById,
+  deleteBy,
   updateById,
 }
 
