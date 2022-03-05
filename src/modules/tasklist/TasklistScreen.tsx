@@ -36,14 +36,15 @@ const TasklistScreen = () => {
 
   const deleteTasklistMutation = useDeleteTasklistMutation(selfLink)
   const { isLoading, error, data } = useFetchTasksQuery(id)
-  const tasks = data?.items
 
   if (isLoading) return <Text>loading...</Text>
   if (error) return <Text>`An error has occurred: ${error.message}`</Text>
   const needsActionTasks =
-    tasks && tasks.filter(({ status }) => status === TaskStatus.NeedsAction)
+    data?.items &&
+    data?.items.filter(({ status }) => status === TaskStatus.NeedsAction)
   const compeletedTasks =
-    tasks && tasks.filter(({ status }) => status === TaskStatus.Completed)
+    data?.items &&
+    data?.items.filter(({ status }) => status === TaskStatus.Completed)
   return (
     <View style={styles.container}>
       <ScrollView keyboardDismissMode="on-drag">
