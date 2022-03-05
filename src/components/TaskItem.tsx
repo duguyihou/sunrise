@@ -42,8 +42,8 @@ export default TaskItem
 const styles = StyleSheet.create({
   container: {
     width: windowWidth,
-    paddingVertical: 4,
-    paddingHorizontal: 10,
+    padding: 10,
+    marginBottom: 10,
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
