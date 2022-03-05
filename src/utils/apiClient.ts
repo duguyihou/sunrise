@@ -29,6 +29,7 @@ apiClient.interceptors.request.use(
     const { access_token } = store.getState().auth
     config.headers = {
       Authorization: `Bearer ${access_token}`,
+      'If-Match': '*',
     }
     return config
   },
