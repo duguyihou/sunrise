@@ -2,7 +2,7 @@ import { ScrollView, Text, StyleSheet, View } from 'react-native'
 import React, { useLayoutEffect, useState } from 'react'
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { RootStackParamList, StackNavigationProps } from 'typings'
-import { RouteName, theme } from 'shared'
+import { RouteName, TaskStatus, theme } from 'shared'
 import TaskItem from 'components/TaskItem'
 import PopupView from 'components/PopupView'
 import PopupItem from 'components/PopupItem'
@@ -12,6 +12,7 @@ import { faEllipsisH } from '@fortawesome/free-solid-svg-icons'
 import HeaderTitle from 'components/HeaderTitle'
 import AddTaskView from 'components/AddTaskView'
 import IconButton from 'components/IconButton'
+import CompletedTaskHeader from 'components/CompletedTaskHeader'
 
 const TasklistScreen = () => {
   const {
@@ -20,6 +21,7 @@ const TasklistScreen = () => {
   const { title, id, selfLink } = tasklist
   const navigation = useNavigation<StackNavigationProps>()
   const [modalVisible, setModalVisible] = useState(false)
+  const [showCompletedTasks, setShowCompletedTasks] = useState(false)
   useLayoutEffect(() =>
     navigation.setOptions({
       headerTitle: () => <HeaderTitle title={title} tasklistId={id} />,
@@ -38,10 +40,24 @@ const TasklistScreen = () => {
 
   if (isLoading) return <Text>loading...</Text>
   if (error) return <Text>`An error has occurred: ${error.message}`</Text>
+  const needsActionTasks =
+    tasks && tasks.filter(({ status }) => status === TaskStatus.NeedsAction)
+  const compeletedTasks =
+    tasks && tasks.filter(({ status }) => status === TaskStatus.Completed)
   return (
     <View style={styles.container}>
       <ScrollView keyboardDismissMode="on-drag">
-        {tasks && tasks.map(task => <TaskItem key={task.id} task={task} />)}
+        {needsActionTasks &&
+          needsActionTasks.map(task => <TaskItem key={task.id} task={task} />)}
+        {compeletedTasks && compeletedTasks.length > 0 && (
+          <CompletedTaskHeader
+            showCompletedTasks={showCompletedTasks}
+            setShowCompletedTasks={setShowCompletedTasks}
+          />
+        )}
+        {compeletedTasks &&
+          showCompletedTasks &&
+          compeletedTasks.map(task => <TaskItem key={task.id} task={task} />)}
       </ScrollView>
       <PopupView visible={modalVisible} setVisible={setModalVisible}>
         <PopupItem title="delete" fn={() => deleteTasklistMutation.mutate()} />
