@@ -7,6 +7,7 @@ type Props = {
 const TaskTitle = ({ value, onChange }: Props) => {
   return (
     <TextInput
+      multiline
       style={styles.title}
       value={value}
       onChangeText={onChange}

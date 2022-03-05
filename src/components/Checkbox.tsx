@@ -10,6 +10,7 @@ type Props = {
   textStyle?: Record<string, unknown>
   onPress: () => void
   isChecked: boolean
+  disableText?: boolean
 }
 const Checkbox = ({
   size,
@@ -20,6 +21,7 @@ const Checkbox = ({
   textStyle,
   onPress,
   isChecked,
+  disableText = false,
 }: Props) => {
   return (
     <BouncyCheckbox
@@ -31,6 +33,7 @@ const Checkbox = ({
       iconStyle={iconStyle}
       textStyle={textStyle}
       onPress={() => onPress()}
+      disableText={disableText}
     />
   )
 }
