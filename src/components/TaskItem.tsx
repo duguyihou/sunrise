@@ -27,9 +27,13 @@ const TaskItem = ({ task }: Props) => {
       activeOpacity={1}
       style={styles.container}
       onPress={() => navigation.push(RouteName.TaskDetail, { selfLink })}>
-      <Checkbox isChecked={isChecked} onPress={handleCheck} />
+      <Checkbox
+        isChecked={isChecked}
+        onPress={handleCheck}
+        disableText={true}
+      />
       <View style={styles.task}>
-        {title && <TaskItemTitle isChecked={isChecked} title={title} />}
+        <TaskItemTitle isChecked={isChecked} title={title} />
         {notes && <TaskItemNotes notes={notes} />}
         {due && <TaskItemDue due={due} />}
       </View>
@@ -52,6 +56,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
-    paddingRight: 40, // TODO: not sure why need 40 padding
+    paddingHorizontal: 20,
   },
 })
