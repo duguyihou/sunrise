@@ -26,8 +26,7 @@ const updateBy = async (selfLink: string, task: Task) => {
   return response.data
 }
 
-const findBy = async (selfLink?: string) => {
-  if (!selfLink) return
+const findBy = async (selfLink: string) => {
   const response = await apiClient.get(selfLink)
   return response.data
 }

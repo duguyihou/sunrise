@@ -9,6 +9,7 @@ import TasklistsScreen from 'modules/tasklists/TasklistsScreen'
 import { RouteName, TaskName, theme } from 'shared'
 import NewTaskScreen from 'modules/newTask/NewTaskScreen'
 import TaskDetailScreen from 'modules/taskDetail/TaskDetailScreen'
+import PlannedTasksScreen from 'modules/planned/PlannedTasksScreen'
 
 const RootStack = createNativeStackNavigator<RootStackParamList>()
 
@@ -47,6 +48,10 @@ function RootRoute() {
           name={RouteName.TaskDetail}
           component={TaskDetailScreen}
           options={{ title: TaskName.TaskDetail, headerBackTitle: '' }}
+        />
+        <RootStack.Screen
+          name={RouteName.Planned}
+          component={PlannedTasksScreen}
         />
       </RootStack.Group>
       <RootStack.Group screenOptions={{ presentation: 'modal' }}>
