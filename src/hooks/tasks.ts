@@ -1,7 +1,7 @@
 import tasksService from 'api/tasks'
-import { useMutation, useQuery, useQueryClient } from 'react-query'
+import { useMutation, useQueries, useQuery, useQueryClient } from 'react-query'
 import { QueryKey } from 'shared'
-import { TaskQuery, Task, TaskPayload } from 'typings/task'
+import { TaskQuery, Task, TaskPayload, Tasklist } from 'typings/task'
 
 export const useFetchTasksQuery = (
   tasklistId: string,
@@ -61,4 +61,17 @@ export const useDeleteTaskMutation = (selfLink: string) => {
     },
   })
   return mutation
+}
+
+export const useFetchTasksQueries = (tasklists: Tasklist[]) => {
+  const tasklistIds = tasklists.map(({ id }) => id)
+  const queryResults = useQueries(
+    tasklistIds.map(tasklistId => {
+      return {
+        queryKey: [QueryKey.Tasks, tasklistId],
+        queryFn: () => tasksService.findAll(tasklistId),
+      }
+    }),
+  )
+  return queryResults
 }

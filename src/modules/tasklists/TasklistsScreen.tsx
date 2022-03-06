@@ -8,6 +8,7 @@ import { theme, RouteName, TasklistName } from 'shared'
 import { useAddTasklistMutation, useFetchTasklistQuery } from 'hooks/tasklists'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import IconButton from 'components/IconButton'
+import PlannedTasklistItem from 'components/PlannedTasklistItem'
 
 const TasklistsScreen = ({ navigation, route }: StackProps) => {
   const handlePlus = () => {
@@ -33,6 +34,13 @@ const TasklistsScreen = ({ navigation, route }: StackProps) => {
   if (error) return <Text>`An error has occurred: ${error.message}`</Text>
   return (
     <ScrollView style={styles.container}>
+      {allTasklists && (
+        <PlannedTasklistItem
+          tasklists={allTasklists}
+          navigation={navigation}
+          route={route}
+        />
+      )}
       {allTasklists &&
         allTasklists.map(tasklist => (
           <TasklistItem

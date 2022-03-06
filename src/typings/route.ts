@@ -14,6 +14,7 @@ export type RootStackParamList = {
   NewTasklist: { title: string; tasklistId: string }
   NewTask: { tasklistId: string; text?: string }
   TaskDetail: { selfLink: string }
+  Planned: { tasklists: Tasklist[] }
 }
 
 export type StackProps = NativeStackScreenProps<RootStackParamList>

@@ -7,12 +7,14 @@ export enum RouteName {
   NewTasklist = 'NewTasklist',
   NewTask = 'NewTask',
   TaskDetail = 'TaskDetail',
+  Planned = 'Planned',
   Home = 'Home',
 }
 
 export enum TasklistName {
   MyTasks = 'My Tasks',
   UntitledList = 'Untitled list',
+  Planned = 'Planned Tasks',
 }
 
 export enum TaskName {
