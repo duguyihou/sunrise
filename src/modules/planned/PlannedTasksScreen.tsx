@@ -4,6 +4,7 @@ import { RouteProp, useRoute } from '@react-navigation/native'
 import { RootStackParamList } from 'typings'
 import { RouteName } from 'shared'
 import { useFetchTasksQueries } from 'hooks/tasks'
+import CalendatBanner from 'components/CalendarBanner'
 
 const PlannedTasksScreen = () => {
   const {
@@ -18,12 +19,21 @@ const PlannedTasksScreen = () => {
     console.log('🐵 ', fetchTasksQueryResults.map(q => q.data.items).flat())
   }
   return (
-    <View>
-      <Text>PlannedTasksScreen</Text>
+    <View style={styles.container}>
+      <CalendatBanner />
     </View>
   )
 }
 
 export default PlannedTasksScreen
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container: {
+    width: '100%',
+    height: '100%',
+    padding: 10,
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+})
