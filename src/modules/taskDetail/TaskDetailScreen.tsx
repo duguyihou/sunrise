@@ -16,18 +16,13 @@ const TaskDetailScreen = () => {
     params: { selfLink },
   } = useRoute<RouteProp<RootStackParamList, RouteName.TaskDetail>>()
   const navigation = useNavigation()
+  const { isLoading, error, data } = useFetchTaskDetailQuery(selfLink)
+  const deleteTaskMutation = useDeleteTaskMutation(selfLink)
   useLayoutEffect(() =>
     navigation.setOptions({
       headerRight: () => <IconButton icon={faTrash} fn={handleDelete} />,
     }),
   )
-  const handleDelete = () => {
-    deleteTaskMutation.mutate()
-    navigation.goBack()
-  }
-  const deleteTaskMutation = useDeleteTaskMutation(selfLink)
-  const { isLoading, error, data } = useFetchTaskDetailQuery(selfLink)
-
   const { control, setValue } = useForm({ mode: 'onChange' })
   useEffect(() => {
     if (data) {
@@ -36,6 +31,7 @@ const TaskDetailScreen = () => {
       setValue('notes', data.notes)
     }
   }, [data, setValue])
+  const handleDelete = () => deleteTaskMutation.mutate()
 
   if (isLoading || !data) return <Text>loading...</Text>
   if (error) return <Text>`An error has occurred: ${error.message}`</Text>

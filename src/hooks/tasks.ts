@@ -1,7 +1,9 @@
+import { useNavigation } from '@react-navigation/native'
 import tasksService from 'api/tasks'
 import { useMemo } from 'react'
 import { useMutation, useQueries, useQuery, useQueryClient } from 'react-query'
 import { QueryKey, TaskStatus } from 'shared'
+import { StackNavigationProps } from 'typings'
 import { TaskQuery, Task, TaskPayload, Tasklist } from 'typings/task'
 
 export const useFetchTasksQuery = (
@@ -72,9 +74,11 @@ export const useFetchTaskDetailQuery = (selfLink: string) => {
 
 export const useDeleteTaskMutation = (selfLink: string) => {
   const queryClient = useQueryClient()
+  const navigation = useNavigation<StackNavigationProps>()
   const mutation = useMutation(() => tasksService.deleteBy(selfLink), {
     onSuccess: () => {
       queryClient.invalidateQueries(QueryKey.Tasks)
+      navigation.goBack()
     },
   })
   return mutation
