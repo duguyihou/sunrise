@@ -2,8 +2,8 @@ import tasklistService from 'api/tasklists'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { useNavigation } from '@react-navigation/native'
 
-import { QueryKey } from 'shared'
-import { TasklistQuery } from 'typings'
+import { QueryKey, RouteName } from 'shared'
+import { StackNavigationProps, TasklistQuery } from 'typings'
 
 export const useFetchTasklistQuery = () => {
   const { isLoading, error, data } = useQuery<TasklistQuery, Error>(
@@ -15,9 +15,13 @@ export const useFetchTasklistQuery = () => {
 
 export const useAddTasklistMutation = (title: string) => {
   const queryClient = useQueryClient()
+  const navigation = useNavigation<StackNavigationProps>()
   const mutation = useMutation(() => tasklistService.create(title), {
-    onSuccess: () => {
+    onSuccess: data => {
       queryClient.invalidateQueries(QueryKey.Tasklists)
+      navigation.navigate(RouteName.NewTasklist, {
+        tasklist: data,
+      })
     },
   })
   return mutation
@@ -25,7 +29,7 @@ export const useAddTasklistMutation = (title: string) => {
 
 export const useDeleteTasklistMutation = (selfLink: string) => {
   const queryClient = useQueryClient()
-  const navigation = useNavigation()
+  const navigation = useNavigation<StackNavigationProps>()
   const mutation = useMutation(() => tasklistService.deleteBy(selfLink), {
     onSuccess: () => {
       queryClient.invalidateQueries(QueryKey.Tasklists)
@@ -41,7 +45,7 @@ export const useUpdateTasklistMutation = (
 ) => {
   const queryClient = useQueryClient()
   const mutation = useMutation(
-    () => tasklistService.updateById(tasklistId, title),
+    () => tasklistService.updateBy(tasklistId, title),
     {
       onSuccess: () => {
         queryClient.invalidateQueries(QueryKey.Tasklists)
