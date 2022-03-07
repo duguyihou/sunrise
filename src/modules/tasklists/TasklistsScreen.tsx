@@ -11,16 +11,14 @@ import IconButton from 'components/IconButton'
 import PlannedTasklistItem from 'components/PlannedTasklistItem'
 
 const TasklistsScreen = ({ navigation, route }: StackProps) => {
-  const handlePlus = () => addTasklistMutation.mutate()
-
+  const { isLoading, error, allTasklists } = useFetchTasklistQuery()
   const addTasklistMutation = useAddTasklistMutation(TasklistName.UntitledList)
   useLayoutEffect(() =>
     navigation.setOptions({
       headerRight: () => <IconButton icon={faPlus} fn={handlePlus} />,
     }),
   )
-  const { isLoading, error, data } = useFetchTasklistQuery()
-  const allTasklists = data?.items
+  const handlePlus = () => addTasklistMutation.mutate()
 
   if (isLoading) return <Text>loading...</Text>
   if (error) return <Text>`An error has occurred: ${error.message}`</Text>

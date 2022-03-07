@@ -1,6 +1,7 @@
 import tasksService from 'api/tasks'
+import { useMemo } from 'react'
 import { useMutation, useQueries, useQuery, useQueryClient } from 'react-query'
-import { QueryKey } from 'shared'
+import { QueryKey, TaskStatus } from 'shared'
 import { TaskQuery, Task, TaskPayload, Tasklist } from 'typings/task'
 
 export const useFetchTasksQuery = (
@@ -9,12 +10,28 @@ export const useFetchTasksQuery = (
   showDeleted?: boolean,
   showHidden?: boolean,
 ) => {
-  const { isLoading, error, data } = useQuery<TaskQuery, Error>(
-    QueryKey.Tasks,
+  const queryResult = useQuery<TaskQuery, Error>(
+    [QueryKey.Tasks, tasklistId],
     async () =>
       tasksService.findAll(tasklistId, showCompleted, showDeleted, showHidden),
   )
-  return { isLoading, error, data }
+  return {
+    ...queryResult,
+    needsActionTasks: useMemo(
+      () =>
+        queryResult.data?.items.filter(
+          ({ status }) => status === TaskStatus.NeedsAction,
+        ),
+      [queryResult.data],
+    ),
+    compeletedTasks: useMemo(
+      () =>
+        queryResult.data?.items.filter(
+          ({ status }) => status === TaskStatus.Completed,
+        ),
+      [queryResult.data],
+    ),
+  }
 }
 
 export const useAddTaskMutation = (
@@ -27,7 +44,7 @@ export const useAddTaskMutation = (
     () => tasksService.create(tasklistId, taskPayload),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries(QueryKey.Tasks)
+        queryClient.invalidateQueries([QueryKey.Tasks, tasklistId])
       },
     },
   )

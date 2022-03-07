@@ -4,13 +4,17 @@ import { useNavigation } from '@react-navigation/native'
 
 import { QueryKey, RouteName } from 'shared'
 import { StackNavigationProps, TasklistQuery } from 'typings'
+import { useMemo } from 'react'
 
 export const useFetchTasklistQuery = () => {
-  const { isLoading, error, data } = useQuery<TasklistQuery, Error>(
+  const queryResult = useQuery<TasklistQuery, Error>(
     QueryKey.Tasklists,
     async () => await tasklistService.findAll(),
   )
-  return { isLoading, error, data }
+  return {
+    ...queryResult,
+    allTasklists: useMemo(() => queryResult.data?.items, [queryResult.data]),
+  }
 }
 
 export const useAddTasklistMutation = (title: string) => {
