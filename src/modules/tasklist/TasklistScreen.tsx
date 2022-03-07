@@ -2,7 +2,7 @@ import { ScrollView, Text, StyleSheet, View } from 'react-native'
 import React, { useLayoutEffect, useState } from 'react'
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { RootStackParamList, StackNavigationProps } from 'typings'
-import { RouteName, TaskStatus, theme } from 'shared'
+import { RouteName, theme } from 'shared'
 import TaskItem from 'components/TaskItem'
 import PopupView from 'components/PopupView'
 import PopupItem from 'components/PopupItem'
@@ -22,6 +22,10 @@ const TasklistScreen = () => {
   const navigation = useNavigation<StackNavigationProps>()
   const [modalVisible, setModalVisible] = useState(false)
   const [showCompletedTasks, setShowCompletedTasks] = useState(false)
+  const deleteTasklistMutation = useDeleteTasklistMutation(selfLink)
+  const { isLoading, error, needsActionTasks, compeletedTasks } =
+    useFetchTasksQuery(id)
+
   useLayoutEffect(() =>
     navigation.setOptions({
       headerTitle: () => <HeaderTitle title={title} tasklistId={id} />,
@@ -34,17 +38,9 @@ const TasklistScreen = () => {
     }),
   )
 
-  const deleteTasklistMutation = useDeleteTasklistMutation(selfLink)
-  const { isLoading, error, data } = useFetchTasksQuery(id)
-
   if (isLoading) return <Text>loading...</Text>
   if (error) return <Text>`An error has occurred: ${error.message}`</Text>
-  const needsActionTasks =
-    data?.items &&
-    data?.items.filter(({ status }) => status === TaskStatus.NeedsAction)
-  const compeletedTasks =
-    data?.items &&
-    data?.items.filter(({ status }) => status === TaskStatus.Completed)
+
   return (
     <View style={styles.container}>
       <ScrollView keyboardDismissMode="on-drag">
