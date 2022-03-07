@@ -17,22 +17,27 @@ export const useFetchTasksQuery = (
     async () =>
       tasksService.findAll(tasklistId, showCompleted, showDeleted, showHidden),
   )
+  const needsActionTasks = useMemo(
+    () =>
+      queryResult.data?.items.filter(
+        ({ status }) => status === TaskStatus.NeedsAction,
+      ),
+    [queryResult.data],
+  )
+
+  const compeletedTasks = useMemo(
+    () =>
+      queryResult.data?.items.filter(
+        ({ status }) => status === TaskStatus.Completed,
+      ),
+    [queryResult.data],
+  )
   return {
     ...queryResult,
-    needsActionTasks: useMemo(
-      () =>
-        queryResult.data?.items.filter(
-          ({ status }) => status === TaskStatus.NeedsAction,
-        ),
-      [queryResult.data],
-    ),
-    compeletedTasks: useMemo(
-      () =>
-        queryResult.data?.items.filter(
-          ({ status }) => status === TaskStatus.Completed,
-        ),
-      [queryResult.data],
-    ),
+    data: {
+      needsActionTasks,
+      compeletedTasks,
+    },
   }
 }
 
@@ -67,7 +72,6 @@ export const useFetchTaskDetailQuery = (selfLink: string) => {
   const { isLoading, error, data } = useQuery<TaskPayload, Error>(
     QueryKey.TaskDetail,
     async () => tasksService.findBy(selfLink),
-    { enabled: !!selfLink },
   )
   return { isLoading, error, data }
 }

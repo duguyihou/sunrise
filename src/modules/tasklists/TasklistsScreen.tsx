@@ -11,7 +11,7 @@ import IconButton from 'components/IconButton'
 import PlannedTasklistItem from 'components/PlannedTasklistItem'
 
 const TasklistsScreen = ({ navigation, route }: StackProps) => {
-  const { isLoading, error, allTasklists } = useFetchTasklistQuery()
+  const { isLoading, error, data: allTasklists } = useFetchTasklistQuery()
   const addTasklistMutation = useAddTasklistMutation(TasklistName.UntitledList)
   useLayoutEffect(() =>
     navigation.setOptions({

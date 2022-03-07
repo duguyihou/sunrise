@@ -23,8 +23,11 @@ const TasklistScreen = () => {
   const [modalVisible, setModalVisible] = useState(false)
   const [showCompletedTasks, setShowCompletedTasks] = useState(false)
   const deleteTasklistMutation = useDeleteTasklistMutation(selfLink)
-  const { isLoading, error, needsActionTasks, compeletedTasks } =
-    useFetchTasksQuery(id)
+  const {
+    isLoading,
+    error,
+    data: { needsActionTasks, compeletedTasks },
+  } = useFetchTasksQuery(id)
 
   useLayoutEffect(() =>
     navigation.setOptions({
