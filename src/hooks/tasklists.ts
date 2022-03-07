@@ -13,7 +13,7 @@ export const useFetchTasklistQuery = () => {
   )
   return {
     ...queryResult,
-    allTasklists: useMemo(() => queryResult.data?.items, [queryResult.data]),
+    data: useMemo(() => queryResult.data?.items, [queryResult.data]),
   }
 }
 
