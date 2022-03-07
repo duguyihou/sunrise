@@ -11,7 +11,7 @@ export type RootStackParamList = {
   Tasklist: { tasklist: Tasklist }
   Home: undefined
   MyTasks: undefined
-  NewTasklist: { title: string; tasklistId: string }
+  NewTasklist: { tasklist: Tasklist }
   NewTask: { tasklistId: string; text?: string }
   TaskDetail: { selfLink: string }
   Planned: { tasklists: Tasklist[] }

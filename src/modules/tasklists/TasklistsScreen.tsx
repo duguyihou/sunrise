@@ -4,23 +4,15 @@ import { ScrollView, StyleSheet, Text } from 'react-native'
 import { StackProps } from 'typings'
 import { windowHeight, windowWidth } from 'utils/dimensions'
 import TasklistItem from 'components/TasklistItem'
-import { theme, RouteName, TasklistName } from 'shared'
+import { theme, TasklistName } from 'shared'
 import { useAddTasklistMutation, useFetchTasklistQuery } from 'hooks/tasklists'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import IconButton from 'components/IconButton'
 import PlannedTasklistItem from 'components/PlannedTasklistItem'
 
 const TasklistsScreen = ({ navigation, route }: StackProps) => {
-  const handlePlus = () => {
-    addTasklistMutation.mutate()
-    if (addTasklistMutation.isSuccess) {
-      const { id } = addTasklistMutation.data
-      navigation.navigate(RouteName.NewTasklist, {
-        title: TasklistName.UntitledList,
-        tasklistId: id,
-      })
-    }
-  }
+  const handlePlus = () => addTasklistMutation.mutate()
+
   const addTasklistMutation = useAddTasklistMutation(TasklistName.UntitledList)
   useLayoutEffect(() =>
     navigation.setOptions({

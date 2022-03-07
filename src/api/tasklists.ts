@@ -16,7 +16,7 @@ const deleteBy = async (selfLink: string) => {
   return response.data
 }
 
-const updateById = async (tasklistId: string, title: string) => {
+const updateBy = async (tasklistId: string, title: string) => {
   const response = await apiClient.put(`v1/users/@me/lists/${tasklistId}`, {
     title,
     id: tasklistId,
@@ -27,7 +27,7 @@ const tasklistService = {
   findAll,
   create,
   deleteBy,
-  updateById,
+  updateBy,
 }
 
 export default tasklistService
