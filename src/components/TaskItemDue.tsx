@@ -11,9 +11,11 @@ export default TaskItemDue
 
 const styles = StyleSheet.create({
   due: {
+    marginTop: 4,
     paddingHorizontal: 10,
     paddingVertical: 5,
     borderWidth: 1,
-    borderRadius: 15,
+    borderRadius: 10,
+    fontSize: 12,
   },
 })

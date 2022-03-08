@@ -16,6 +16,7 @@ export default TaskItemNotes
 const styles = StyleSheet.create({
   notes: {
     color: theme.font.placeholder,
-    paddingVertical: 4,
+    paddingVertical: 5,
+    marginTop: 4,
   },
 })
