@@ -7,7 +7,7 @@ import { useForm, Controller } from 'react-hook-form'
 import { useAddTaskMutation } from 'hooks/tasks'
 import { RootStackParamList } from 'typings'
 import { RouteName } from 'shared'
-import DateTimeView from 'components/DateTimeView'
+import TaskDateTime from 'components/TaskDateTime'
 import TaskTitle from 'components/TaskTitle'
 import TaskNotes from 'components/TaskNotes'
 import { TaskPayload } from 'typings/task'
@@ -53,7 +53,7 @@ const NewTaskScreen = () => {
         name="due"
         control={control}
         render={({ field: { value, onChange } }) => (
-          <DateTimeView value={value} onChange={onChange} />
+          <TaskDateTime value={value} onChange={onChange} />
         )}
       />
       <Controller

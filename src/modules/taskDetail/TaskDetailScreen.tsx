@@ -5,7 +5,7 @@ import { useForm, Controller } from 'react-hook-form'
 import { RootStackParamList } from 'typings'
 import { RouteName } from 'shared'
 import { useDeleteTaskMutation, useFetchTaskDetailQuery } from 'hooks/tasks'
-import DateTimeView from 'components/DateTimeView'
+import TaskDateTime from 'components/TaskDateTime'
 import TaskTitle from 'components/TaskTitle'
 import TaskNotes from 'components/TaskNotes'
 import IconButton from 'components/IconButton'
@@ -48,7 +48,7 @@ const TaskDetailScreen = () => {
         name="due"
         control={control}
         render={({ field: { value, onChange } }) => (
-          <DateTimeView value={value} onChange={onChange} />
+          <TaskDateTime value={value} onChange={onChange} />
         )}
       />
       <Controller
