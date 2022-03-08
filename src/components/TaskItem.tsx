@@ -1,5 +1,5 @@
-import { StyleSheet, TouchableOpacity, View } from 'react-native'
 import React from 'react'
+import { StyleSheet, TouchableOpacity, View } from 'react-native'
 import { StackNavigationProps, Task } from 'typings'
 import Checkbox from './Checkbox'
 import { useUpdateTaskMutation } from 'hooks/tasks'
@@ -47,7 +47,6 @@ const styles = StyleSheet.create({
   container: {
     width: windowWidth,
     padding: 10,
-    marginBottom: 10,
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
