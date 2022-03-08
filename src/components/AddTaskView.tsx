@@ -24,7 +24,7 @@ const AddTaskView = ({ tasklistId }: Props) => {
     setText('')
   }
   const handleExpand = () =>
-    navigation.navigate(RouteName.NewTask, { tasklistId })
+    navigation.navigate(RouteName.NewTask, { tasklistId, text })
 
   return (
     <KeyboardAvoidingView

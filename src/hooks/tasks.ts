@@ -46,12 +46,14 @@ export const useAddTaskMutation = (
   taskPayload: TaskPayload,
 ) => {
   const queryClient = useQueryClient()
+  const navigation = useNavigation<StackNavigationProps>()
 
   const mutation = useMutation(
     () => tasksService.create(tasklistId, taskPayload),
     {
       onSuccess: () => {
         queryClient.invalidateQueries([QueryKey.Tasks, tasklistId])
+        navigation.goBack()
       },
     },
   )
