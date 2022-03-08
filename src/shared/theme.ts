@@ -7,8 +7,11 @@ export const theme = {
     primary: '#282c34',
     secondary: '#fff',
     placeholder: '#807F80',
-    beforeDate: 'red',
+    beforeDate: '#ef928f',
   },
-  border: '#e0e0e0',
+  border: {
+    primary: '#f8f8f8',
+    secondary: '#e0e0e0',
+  },
   hidden: 'transpancy',
 }
