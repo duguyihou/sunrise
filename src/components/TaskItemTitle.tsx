@@ -9,8 +9,8 @@ type Props = {
 const TaskItemTitle = ({ title, isChecked }: Props) => {
   return (
     <Text
-      numberOfLines={1}
-      style={isChecked ? styles.completedTitle : styles.needsActionTitle}>
+      numberOfLines={2}
+      style={[styles.needsActionTitle, isChecked && styles.completedTitle]}>
       {title}
     </Text>
   )
