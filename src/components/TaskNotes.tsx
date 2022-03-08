@@ -24,9 +24,10 @@ export default TaskNotes
 const styles = StyleSheet.create({
   notes: {
     paddingHorizontal: 10,
-    fontSize: 18,
+    fontSize: 16,
+    color: theme.font.placeholder,
     borderTopWidth: 1,
     paddingVertical: 10,
-    borderColor: theme.border,
+    borderColor: theme.border.primary,
   },
 })
