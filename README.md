@@ -2,5 +2,8 @@
 
 ## 3rd party libs
 
-- redux toolkit
+- axios
+- dayjs
+- react-query
 - react-navigation
+- redux-toolkit
