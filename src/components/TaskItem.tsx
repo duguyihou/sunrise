@@ -1,5 +1,5 @@
-import { StyleSheet, TouchableOpacity, View } from 'react-native'
 import React from 'react'
+import { StyleSheet, TouchableOpacity, View } from 'react-native'
 import { StackNavigationProps, Task } from 'typings'
 import Checkbox from './Checkbox'
 import { useUpdateTaskMutation } from 'hooks/tasks'

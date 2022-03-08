@@ -30,3 +30,5 @@ export const getNextDays = (number = 0) => {
 
 export const getCalendar = (date: Date) =>
   dayjs(date).calendar(null, { sameElse: 'ddd, MMM DD' })
+
+export const isBeforeToday = (date: Date) => dayjs(date).isBefore(dayjs())
