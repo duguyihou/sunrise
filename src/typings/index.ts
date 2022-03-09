@@ -5,4 +5,10 @@ export type {
 } from './route'
 export type { Day } from './day'
 export type { Auth } from './auth'
-export type { Task, Tasklist, TasklistQuery } from './task'
+export type {
+  Task,
+  Tasklist,
+  TasklistQuery,
+  TaskQuery,
+  TaskPayload,
+} from './task'

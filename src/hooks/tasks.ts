@@ -3,8 +3,13 @@ import tasksService from 'api/tasks'
 import { useMemo } from 'react'
 import { useMutation, useQueries, useQuery, useQueryClient } from 'react-query'
 import { QueryKey, TaskStatus } from 'shared'
-import { StackNavigationProps } from 'typings'
-import { TaskQuery, Task, TaskPayload, Tasklist } from 'typings/task'
+import {
+  StackNavigationProps,
+  TaskQuery,
+  Task,
+  TaskPayload,
+  Tasklist,
+} from 'typings'
 
 export const useFetchTasksQuery = (
   tasklistId: string,
@@ -17,6 +22,9 @@ export const useFetchTasksQuery = (
     async () =>
       tasksService.findAll(tasklistId, showCompleted, showDeleted, showHidden),
   )
+  if (!queryResult.data || !queryResult.data.items) {
+    queryResult.data = { ...queryResult.data, items: [] }
+  }
   const needsActionTasks = useMemo(
     () =>
       queryResult.data?.items.filter(
