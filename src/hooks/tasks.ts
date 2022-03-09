@@ -22,24 +22,20 @@ export const useFetchTasksQuery = (
     async () =>
       tasksService.findAll(tasklistId, showCompleted, showDeleted, showHidden),
   )
-  if (!queryResult.data || !queryResult.data.items) {
-    queryResult.data = { ...queryResult.data, items: [] }
-  }
-  const needsActionTasks = useMemo(
-    () =>
-      queryResult.data?.items.filter(
-        ({ status }) => status === TaskStatus.NeedsAction,
-      ),
-    [queryResult.data],
-  )
 
-  const compeletedTasks = useMemo(
-    () =>
-      queryResult.data?.items.filter(
-        ({ status }) => status === TaskStatus.Completed,
-      ),
-    [queryResult.data],
-  )
+  const needsActionTasks = useMemo(() => {
+    if (!queryResult.data?.items) return []
+    queryResult.data?.items.filter(
+      ({ status }) => status === TaskStatus.NeedsAction,
+    )
+  }, [queryResult.data])
+
+  const compeletedTasks = useMemo(() => {
+    if (!queryResult.data?.items) return []
+    queryResult.data?.items.filter(
+      ({ status }) => status === TaskStatus.Completed,
+    )
+  }, [queryResult.data])
   return {
     ...queryResult,
     data: {
