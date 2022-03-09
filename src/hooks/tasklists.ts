@@ -2,7 +2,7 @@ import tasklistService from 'api/tasklists'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { useNavigation } from '@react-navigation/native'
 
-import { QueryKey, RouteName } from 'shared'
+import { QueryKey, RouteName, TasklistName } from 'shared'
 import { StackNavigationProps, TasklistQuery } from 'typings'
 import { useMemo } from 'react'
 
@@ -17,17 +17,20 @@ export const useFetchTasklistQuery = () => {
   }
 }
 
-export const useAddTasklistMutation = (title: string) => {
+export const useAddTasklistMutation = () => {
   const queryClient = useQueryClient()
   const navigation = useNavigation<StackNavigationProps>()
-  const mutation = useMutation(() => tasklistService.create(title), {
-    onSuccess: data => {
-      queryClient.invalidateQueries(QueryKey.Tasklists)
-      navigation.navigate(RouteName.NewTasklist, {
-        tasklist: data,
-      })
+  const mutation = useMutation(
+    () => tasklistService.create(TasklistName.UntitledList),
+    {
+      onSuccess: data => {
+        queryClient.invalidateQueries(QueryKey.Tasklists)
+        navigation.navigate(RouteName.NewTasklist, {
+          tasklist: data,
+        })
+      },
     },
-  })
+  )
   return mutation
 }
 

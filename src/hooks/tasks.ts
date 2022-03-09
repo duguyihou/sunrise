@@ -3,8 +3,13 @@ import tasksService from 'api/tasks'
 import { useMemo } from 'react'
 import { useMutation, useQueries, useQuery, useQueryClient } from 'react-query'
 import { QueryKey, TaskStatus } from 'shared'
-import { StackNavigationProps } from 'typings'
-import { TaskQuery, Task, TaskPayload, Tasklist } from 'typings/task'
+import {
+  StackNavigationProps,
+  TaskQuery,
+  Task,
+  TaskPayload,
+  Tasklist,
+} from 'typings'
 
 export const useFetchTasksQuery = (
   tasklistId: string,
@@ -17,21 +22,20 @@ export const useFetchTasksQuery = (
     async () =>
       tasksService.findAll(tasklistId, showCompleted, showDeleted, showHidden),
   )
-  const needsActionTasks = useMemo(
-    () =>
-      queryResult.data?.items.filter(
-        ({ status }) => status === TaskStatus.NeedsAction,
-      ),
-    [queryResult.data],
-  )
 
-  const compeletedTasks = useMemo(
-    () =>
-      queryResult.data?.items.filter(
-        ({ status }) => status === TaskStatus.Completed,
-      ),
-    [queryResult.data],
-  )
+  const needsActionTasks = useMemo(() => {
+    if (!queryResult.data?.items) return []
+    queryResult.data?.items.filter(
+      ({ status }) => status === TaskStatus.NeedsAction,
+    )
+  }, [queryResult.data])
+
+  const compeletedTasks = useMemo(() => {
+    if (!queryResult.data?.items) return []
+    queryResult.data?.items.filter(
+      ({ status }) => status === TaskStatus.Completed,
+    )
+  }, [queryResult.data])
   return {
     ...queryResult,
     data: {
