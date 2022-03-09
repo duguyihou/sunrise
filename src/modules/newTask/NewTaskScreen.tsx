@@ -36,7 +36,6 @@ const NewTaskScreen = () => {
   const onSubmit = (payload: TaskPayload) => {
     setNewtask(payload)
     addTaskMutation.mutate()
-    navigation.goBack()
   }
   const handleDismiss = () => navigation.goBack()
 
