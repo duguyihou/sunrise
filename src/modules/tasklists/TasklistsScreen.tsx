@@ -4,7 +4,7 @@ import { ScrollView, StyleSheet, Text } from 'react-native'
 import { StackProps } from 'typings'
 import { windowHeight, windowWidth } from 'utils/dimensions'
 import TasklistItem from 'components/TasklistItem'
-import { theme, TasklistName } from 'shared'
+import { theme } from 'shared'
 import { useAddTasklistMutation, useFetchTasklistQuery } from 'hooks/tasklists'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import IconButton from 'components/IconButton'
@@ -12,7 +12,7 @@ import PlannedTasklistItem from 'components/PlannedTasklistItem'
 
 const TasklistsScreen = ({ navigation, route }: StackProps) => {
   const { isLoading, error, data: allTasklists } = useFetchTasklistQuery()
-  const addTasklistMutation = useAddTasklistMutation(TasklistName.UntitledList)
+  const addTasklistMutation = useAddTasklistMutation()
   useLayoutEffect(() =>
     navigation.setOptions({
       headerRight: () => <IconButton icon={faPlus} fn={handlePlus} />,
