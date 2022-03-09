@@ -44,6 +44,7 @@ export const useFetchTasksQuery = (
 export const useAddTaskMutation = (
   tasklistId: string,
   taskPayload: TaskPayload,
+  goBack = true,
 ) => {
   const queryClient = useQueryClient()
   const navigation = useNavigation<StackNavigationProps>()
@@ -53,7 +54,7 @@ export const useAddTaskMutation = (
     {
       onSuccess: () => {
         queryClient.invalidateQueries([QueryKey.Tasks, tasklistId])
-        navigation.goBack()
+        goBack && navigation.goBack()
       },
     },
   )

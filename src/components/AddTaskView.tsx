@@ -16,7 +16,7 @@ const AddTaskView = ({ tasklistId }: Props) => {
   const navigation = useNavigation<StackNavigationProps>()
   const [text, setText] = useState('')
   const [isFocused, setIsFocused] = useState(false)
-  const addTaskMutation = useAddTaskMutation(tasklistId, { title: text })
+  const addTaskMutation = useAddTaskMutation(tasklistId, { title: text }, false)
 
   const handleOnSubmitEditing = () => {
     if (text.trim() === '') return
