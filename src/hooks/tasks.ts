@@ -1,8 +1,7 @@
 import { useNavigation } from '@react-navigation/native'
 import tasksService from 'api/tasks'
-import { useMemo } from 'react'
 import { useMutation, useQueries, useQuery, useQueryClient } from 'react-query'
-import { QueryKey, TaskStatus } from 'shared'
+import { QueryKey } from 'shared'
 import {
   StackNavigationProps,
   TaskQuery,
@@ -22,26 +21,9 @@ export const useFetchTasksQuery = (
     async () =>
       tasksService.findAll(tasklistId, showCompleted, showDeleted, showHidden),
   )
-
-  const needsActionTasks = useMemo(() => {
-    if (!queryResult.data?.items) return []
-    queryResult.data?.items.filter(
-      ({ status }) => status === TaskStatus.NeedsAction,
-    )
-  }, [queryResult.data])
-
-  const compeletedTasks = useMemo(() => {
-    if (!queryResult.data?.items) return []
-    queryResult.data?.items.filter(
-      ({ status }) => status === TaskStatus.Completed,
-    )
-  }, [queryResult.data])
   return {
     ...queryResult,
-    data: {
-      needsActionTasks,
-      compeletedTasks,
-    },
+    data: queryResult.data?.items,
   }
 }
 
@@ -76,11 +58,11 @@ export const useUpdateTaskMutation = (selfLink: string, task: Task) => {
 }
 
 export const useFetchTaskDetailQuery = (selfLink: string) => {
-  const { isLoading, error, data } = useQuery<TaskPayload, Error>(
+  const queryResult = useQuery<TaskPayload, Error>(
     QueryKey.TaskDetail,
     async () => tasksService.findBy(selfLink),
   )
-  return { isLoading, error, data }
+  return queryResult
 }
 
 export const useDeleteTaskMutation = (selfLink: string) => {
