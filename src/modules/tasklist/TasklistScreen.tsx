@@ -1,8 +1,8 @@
 import { ScrollView, Text, StyleSheet, View } from 'react-native'
-import React, { useLayoutEffect, useState } from 'react'
+import React, { useLayoutEffect, useMemo, useState } from 'react'
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { RootStackParamList, StackNavigationProps } from 'typings'
-import { RouteName, theme } from 'shared'
+import { RouteName, TaskStatus, theme } from 'shared'
 import TaskItem from 'components/TaskItem'
 import PopupView from 'components/PopupView'
 import PopupItem from 'components/PopupItem'
@@ -23,11 +23,7 @@ const TasklistScreen = () => {
   const [modalVisible, setModalVisible] = useState(false)
   const [showCompletedTasks, setShowCompletedTasks] = useState(false)
   const deleteTasklistMutation = useDeleteTasklistMutation(selfLink)
-  const {
-    isLoading,
-    error,
-    data: { needsActionTasks, compeletedTasks },
-  } = useFetchTasksQuery(id)
+  const { isLoading, error, data: tasks } = useFetchTasksQuery(id)
 
   useLayoutEffect(() =>
     navigation.setOptions({
@@ -40,7 +36,14 @@ const TasklistScreen = () => {
       ),
     }),
   )
-
+  const needsActionTasks = useMemo(
+    () => tasks?.filter(({ status }) => status === TaskStatus.NeedsAction),
+    [tasks],
+  )
+  const compeletedTasks = useMemo(
+    () => tasks?.filter(({ status }) => status === TaskStatus.Completed),
+    [tasks],
+  )
   if (isLoading) return <Text>loading...</Text>
   if (error) return <Text>`An error has occurred: ${error.message}`</Text>
 
