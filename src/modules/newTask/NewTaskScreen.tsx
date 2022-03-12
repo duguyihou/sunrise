@@ -28,9 +28,11 @@ const NewTaskScreen = () => {
   const [newtask, setNewtask] = useState({
     title: '',
     notes: undefined,
-    due: new Date(),
+    due: undefined,
   })
-  const { control, handleSubmit } = useForm({ defaultValues: newtask })
+  const { control, handleSubmit, setValue } = useForm({
+    defaultValues: newtask,
+  })
   const addTaskMutation = useAddTaskMutation(tasklistId, newtask)
 
   const onSubmit = (payload: TaskPayload) => {
@@ -51,7 +53,9 @@ const NewTaskScreen = () => {
       <Controller
         name="due"
         control={control}
-        render={({ field: { value } }) => <TaskDateTime value={value} />}
+        render={({ field: { value } }) => (
+          <TaskDateTime date={value} setValue={setValue} />
+        )}
       />
       <Controller
         name="notes"
