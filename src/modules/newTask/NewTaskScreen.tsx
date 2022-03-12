@@ -27,7 +27,7 @@ const NewTaskScreen = () => {
   )
   const [newtask, setNewtask] = useState({
     title: '',
-    notes: '',
+    notes: undefined,
     due: new Date(),
   })
   const { control, handleSubmit } = useForm({ defaultValues: newtask })
@@ -51,9 +51,7 @@ const NewTaskScreen = () => {
       <Controller
         name="due"
         control={control}
-        render={({ field: { value, onChange } }) => (
-          <TaskDateTime value={value} onChange={onChange} />
-        )}
+        render={({ field: { value } }) => <TaskDateTime value={value} />}
       />
       <Controller
         name="notes"

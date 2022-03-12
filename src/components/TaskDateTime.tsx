@@ -1,23 +1,34 @@
 import { faCalendarCheck } from '@fortawesome/free-solid-svg-icons'
-import React from 'react'
-import { StyleSheet, TextInput, View } from 'react-native'
+import React, { useState } from 'react'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { theme } from 'shared'
 import { getCalendar } from 'utils/dateTime'
 import IconButton from './IconButton'
 
 type Props = {
-  value: Date
-  onChange: (...event: unknown[]) => void
+  value: Date | undefined
 }
-const TaskDateTime = ({ value, onChange }: Props) => {
+const TaskDateTime = ({ value }: Props) => {
+  const [date, setDate] = useState(value)
+  const handleRemove = () => {
+    console.log('🐵 remove')
+  }
+  const handleShowModal = () => console.log('🐵 show')
+
   return (
     <View style={styles.container}>
       <IconButton icon={faCalendarCheck} />
-      <TextInput
-        style={styles.dateTime}
-        placeholder="Date/Time"
-        value={getCalendar(value)}
-        onChange={onChange}
-      />
+      <TouchableOpacity
+        activeOpacity={1}
+        style={[styles.dateTime, date && styles.dateExist]}
+        onPress={handleShowModal}>
+        <Text> {date ? getCalendar(date) : 'Add date'}</Text>
+        {date && (
+          <TouchableOpacity style={styles.remove} onPress={handleRemove}>
+            <Text>x</Text>
+          </TouchableOpacity>
+        )}
+      </TouchableOpacity>
     </View>
   )
 }
@@ -31,8 +42,17 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   dateTime: {
-    flex: 1,
     paddingHorizontal: 10,
-    fontSize: 16,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  dateExist: {
+    borderColor: theme.border.secondary,
+    borderRadius: 10,
+    borderWidth: 1,
+  },
+  remove: {
+    marginLeft: 10,
   },
 })
