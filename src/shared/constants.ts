@@ -29,7 +29,7 @@ export enum QueryKey {
 }
 
 export enum AccessoryID {
-  Input = 'input',
+  Task = 'task',
 }
 
 export enum TaskStatus {

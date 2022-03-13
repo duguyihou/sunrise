@@ -11,7 +11,7 @@ type Props = {
 }
 const IconButton = ({ fn, size = 20, icon }: Props) => {
   return (
-    <TouchableOpacity onPress={fn}>
+    <TouchableOpacity onPress={fn} activeOpacity={1}>
       <FontAwesomeIcon icon={icon} color={theme.font.primary} size={size} />
     </TouchableOpacity>
   )
