@@ -15,7 +15,7 @@ import { TaskPayload } from 'typings/task'
 const NewTaskScreen = () => {
   const navigation = useNavigation()
   const {
-    params: { tasklistId },
+    params: { tasklistId, taskPayload },
   } = useRoute<RouteProp<RootStackParamList, RouteName.NewTask>>()
   useLayoutEffect(() =>
     navigation.setOptions({
@@ -25,12 +25,10 @@ const NewTaskScreen = () => {
       ),
     }),
   )
-  const [newtask, setNewtask] = useState({
-    title: '',
-    notes: '',
-    due: new Date(),
+  const [newtask, setNewtask] = useState(taskPayload)
+  const { control, handleSubmit, setValue } = useForm({
+    defaultValues: newtask,
   })
-  const { control, handleSubmit } = useForm({ defaultValues: newtask })
   const addTaskMutation = useAddTaskMutation(tasklistId, newtask)
 
   const onSubmit = (payload: TaskPayload) => {
@@ -51,8 +49,8 @@ const NewTaskScreen = () => {
       <Controller
         name="due"
         control={control}
-        render={({ field: { value, onChange } }) => (
-          <TaskDateTime value={value} onChange={onChange} />
+        render={({ field: { value } }) => (
+          <TaskDateTime date={value} setValue={setValue} />
         )}
       />
       <Controller

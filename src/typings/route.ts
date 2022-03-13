@@ -2,7 +2,7 @@ import {
   NativeStackScreenProps,
   NativeStackNavigationProp,
 } from '@react-navigation/native-stack'
-import { Tasklist } from './task'
+import { Tasklist, TaskPayload } from './task'
 
 export type RootStackParamList = {
   Root: undefined
@@ -12,7 +12,7 @@ export type RootStackParamList = {
   Home: undefined
   MyTasks: undefined
   NewTasklist: { tasklist: Tasklist }
-  NewTask: { tasklistId: string; text?: string }
+  NewTask: { tasklistId: string; taskPayload: TaskPayload }
   TaskDetail: { selfLink: string }
   Planned: { tasklists: Tasklist[] }
 }
