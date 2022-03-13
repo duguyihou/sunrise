@@ -9,12 +9,14 @@ import IconButton from './IconButton'
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProps, TaskPayload } from 'typings'
 import TaskAccessory from './TaskAccessory'
+import { useAppSelector } from 'app/hooks'
 
 type Props = {
   tasklistId: string
 }
 const AddTaskView = ({ tasklistId }: Props) => {
   const navigation = useNavigation<StackNavigationProps>()
+  const { newTask } = useAppSelector(state => state.tasks)
   const [taskPayload, setTaskPayload] = useState({
     title: '',
     due: undefined,
@@ -31,7 +33,7 @@ const AddTaskView = ({ tasklistId }: Props) => {
   }
   const handleExpand = () =>
     navigation.navigate(RouteName.NewTask, { tasklistId, taskPayload })
-
+  console.log('🐵 ', newTask)
   return (
     <KeyboardAvoidingView
       behavior="padding"
@@ -40,7 +42,7 @@ const AddTaskView = ({ tasklistId }: Props) => {
         {isFocused && <IconButton icon={faAngleUp} fn={handleExpand} />}
         <TextInput
           style={styles.textInput}
-          value={taskPayload.title}
+          value={newTask.title}
           onChangeText={text => setTaskPayload({ ...taskPayload, title: text })}
           placeholder="Add a Task"
           inputAccessoryViewID={AccessoryID.Task}
