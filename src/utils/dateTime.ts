@@ -33,4 +33,4 @@ export const getCalendar = (date: string) =>
 
 export const isBeforeToday = (date: string) => dayjs(date).isBefore(dayjs())
 
-export const getTodayDate = () => dayjs().toString()
+export const getTodayDate = () => dayjs().toISOString()

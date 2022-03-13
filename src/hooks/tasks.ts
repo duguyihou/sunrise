@@ -2,7 +2,6 @@ import { useNavigation } from '@react-navigation/native'
 import tasksService from 'api/tasks'
 import { useAppDispatch } from 'app/hooks'
 import { clearTask } from 'app/tasks'
-import dayjs from 'dayjs'
 import { useMutation, useQueries, useQuery, useQueryClient } from 'react-query'
 import { QueryKey } from 'shared'
 import {
@@ -35,17 +34,19 @@ export const useAddTaskMutation = (
   taskPayload: TaskPayload,
   goBack = true,
 ) => {
-  const task = { ...taskPayload, due: dayjs(taskPayload.due) }
   const queryClient = useQueryClient()
   const navigation = useNavigation<StackNavigationProps>()
   const dispatch = useAppDispatch()
-  const mutation = useMutation(() => tasksService.create(tasklistId, task), {
-    onSuccess: () => {
-      queryClient.invalidateQueries([QueryKey.Tasks, tasklistId])
-      dispatch(clearTask())
-      goBack && navigation.goBack()
+  const mutation = useMutation(
+    () => tasksService.create(tasklistId, taskPayload),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries([QueryKey.Tasks, tasklistId])
+        dispatch(clearTask())
+        goBack && navigation.goBack()
+      },
     },
-  })
+  )
   return mutation
 }
 
