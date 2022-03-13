@@ -3,14 +3,20 @@ import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProps } from 'typings'
 import { theme } from 'shared'
+import { useAppDispatch } from 'app/hooks'
+import { updateDateTime } from 'app/tasks'
+import { getTodayDate } from 'utils/dateTime'
 
 const DateTimeScreen = () => {
   const navigation = useNavigation<StackNavigationProps>()
+  const dispatch = useAppDispatch()
 
   const handleGoback = () => navigation.goBack()
   const handleSetDate = () => {
-    console.log('🐵 today')
+    dispatch(updateDateTime(getTodayDate()))
+    navigation.goBack()
   }
+
   return (
     <>
       <TouchableOpacity style={styles.outside} onPress={handleGoback} />

@@ -7,7 +7,7 @@ import { AccessoryID, RouteName, theme } from 'shared'
 import { faAngleUp } from '@fortawesome/free-solid-svg-icons'
 import IconButton from './IconButton'
 import { useNavigation } from '@react-navigation/native'
-import { StackNavigationProps, TaskPayload } from 'typings'
+import { StackNavigationProps } from 'typings'
 import TaskAccessory from './TaskAccessory'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
 import { updateTitle } from 'app/tasks'
@@ -45,10 +45,7 @@ const AddTaskView = ({ tasklistId }: Props) => {
           blurOnSubmit={false}
           onSubmitEditing={handleOnSubmitEditing}
         />
-        {/* <TaskAccessory
-          taskPayload={taskPayload}
-          setTaskPayload={setTaskPayload}
-        /> */}
+        <TaskAccessory />
       </View>
     </KeyboardAvoidingView>
   )
