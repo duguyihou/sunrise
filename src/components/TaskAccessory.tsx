@@ -8,19 +8,21 @@ import {
 import React from 'react'
 import IconButton from './IconButton'
 import { faCalendarCheck } from '@fortawesome/free-solid-svg-icons'
-import { AccessoryID, theme } from 'shared'
-import { TaskPayload } from 'typings'
+import { AccessoryID, RouteName, theme } from 'shared'
+import { StackNavigationProps, TaskPayload } from 'typings'
 import { getCalendar } from 'utils/dateTime'
+import { useNavigation } from '@react-navigation/native'
 
 type Props = {
   taskPayload: TaskPayload
   setTaskPayload: React.Dispatch<React.SetStateAction<TaskPayload>>
 }
 const TaskAccessory = ({ taskPayload, setTaskPayload }: Props) => {
-  const handleSetDate = () => {
-    setTaskPayload({ ...taskPayload, due: new Date() })
-  }
-
+  const navigation = useNavigation<StackNavigationProps>()
+  // const handleSetDate = () =>
+  //   setTaskPayload({ ...taskPayload, due: new Date() })
+  const handleSetDate = () =>
+    navigation.navigate(RouteName.DateTime, { taskPayload })
   const handleRemove = () => setTaskPayload({ ...taskPayload, due: undefined })
   return (
     <InputAccessoryView nativeID={AccessoryID.Task}>

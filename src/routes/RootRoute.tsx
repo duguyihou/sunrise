@@ -10,6 +10,7 @@ import { RouteName, TaskName, theme } from 'shared'
 import NewTaskScreen from 'modules/newTask/NewTaskScreen'
 import TaskDetailScreen from 'modules/taskDetail/TaskDetailScreen'
 import PlannedTasksScreen from 'modules/planned/PlannedTasksScreen'
+import DateTimeScreen from 'modules/dateTime/DateTimeScreen'
 
 const RootStack = createNativeStackNavigator<RootStackParamList>()
 
@@ -54,12 +55,21 @@ function RootRoute() {
           component={PlannedTasksScreen}
         />
       </RootStack.Group>
-      <RootStack.Group screenOptions={{ presentation: 'modal' }}>
+      <RootStack.Group>
         <RootStack.Screen
           name={RouteName.NewTask}
           component={NewTaskScreen}
           options={{
             headerTitle: TaskName.NewTask,
+            presentation: 'modal',
+          }}
+        />
+        <RootStack.Screen
+          name={RouteName.DateTime}
+          component={DateTimeScreen}
+          options={{
+            headerShown: false,
+            presentation: 'containedTransparentModal',
           }}
         />
       </RootStack.Group>
