@@ -15,8 +15,8 @@ const DateTimeScreen = () => {
     <>
       <TouchableOpacity style={styles.outside} onPress={handleGoback} />
       <View style={styles.container}>
-        <TouchableOpacity onPress={handleSetDate}>
-          <Text>Today</Text>
+        <TouchableOpacity onPress={handleSetDate} style={styles.today}>
+          <Text style={styles.text}>Today</Text>
         </TouchableOpacity>
       </View>
     </>
@@ -34,5 +34,14 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '40%',
     backgroundColor: theme.bg.primary,
+  },
+  today: {
+    width: '100%',
+  },
+  text: {
+    fontSize: 16,
+    color: theme.font.secondary,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
   },
 })
