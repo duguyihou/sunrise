@@ -1,5 +1,5 @@
+import React from 'react'
 import { faCalendarCheck } from '@fortawesome/free-solid-svg-icons'
-import React, { useState } from 'react'
 import { UseFormSetValue } from 'react-hook-form'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { theme } from 'shared'
@@ -9,9 +9,7 @@ import IconButton from './IconButton'
 type Props = {
   date: Date | undefined
   setValue: UseFormSetValue<{
-    title: string
-    notes: undefined
-    due: undefined
+    due: undefined | Date
   }>
 }
 const TaskDateTime = ({ date, setValue }: Props) => {
