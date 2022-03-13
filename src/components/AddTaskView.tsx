@@ -14,17 +14,17 @@ type Props = {
 }
 const AddTaskView = ({ tasklistId }: Props) => {
   const navigation = useNavigation<StackNavigationProps>()
-  const [text, setText] = useState('')
+  const [taskPayload, setTaskPayload] = useState({ title: '' })
   const [isFocused, setIsFocused] = useState(false)
-  const addTaskMutation = useAddTaskMutation(tasklistId, { title: text }, false)
+  const addTaskMutation = useAddTaskMutation(tasklistId, taskPayload, false)
 
   const handleOnSubmitEditing = () => {
-    if (text.trim() === '') return
+    if (taskPayload.title.trim() === '') return
     addTaskMutation.mutate()
-    setText('')
+    setTaskPayload({ title: '' })
   }
   const handleExpand = () =>
-    navigation.navigate(RouteName.NewTask, { tasklistId, text })
+    navigation.navigate(RouteName.NewTask, { tasklistId, taskPayload })
 
   return (
     <KeyboardAvoidingView
@@ -34,8 +34,8 @@ const AddTaskView = ({ tasklistId }: Props) => {
         {isFocused && <IconButton icon={faAngleUp} fn={handleExpand} />}
         <TextInput
           style={styles.textInput}
-          value={text}
-          onChangeText={setText}
+          value={taskPayload.title}
+          onChangeText={text => setTaskPayload({ title: text })}
           placeholder="Add a Task"
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}

@@ -15,7 +15,7 @@ import { TaskPayload } from 'typings/task'
 const NewTaskScreen = () => {
   const navigation = useNavigation()
   const {
-    params: { tasklistId },
+    params: { tasklistId, taskPayload },
   } = useRoute<RouteProp<RootStackParamList, RouteName.NewTask>>()
   useLayoutEffect(() =>
     navigation.setOptions({
@@ -25,11 +25,7 @@ const NewTaskScreen = () => {
       ),
     }),
   )
-  const [newtask, setNewtask] = useState({
-    title: '',
-    notes: undefined,
-    due: undefined,
-  })
+  const [newtask, setNewtask] = useState(taskPayload)
   const { control, handleSubmit, setValue } = useForm({
     defaultValues: newtask,
   })

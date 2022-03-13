@@ -5,12 +5,11 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { theme } from 'shared'
 import { getCalendar } from 'utils/dateTime'
 import IconButton from './IconButton'
+import { TaskPayload } from 'typings'
 
 type Props = {
   date: Date | undefined
-  setValue: UseFormSetValue<{
-    due: undefined | Date
-  }>
+  setValue: UseFormSetValue<TaskPayload>
 }
 const TaskDateTime = ({ date, setValue }: Props) => {
   const handleRemove = () => setValue('due', undefined)
