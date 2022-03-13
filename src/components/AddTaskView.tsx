@@ -9,7 +9,8 @@ import IconButton from './IconButton'
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProps, TaskPayload } from 'typings'
 import TaskAccessory from './TaskAccessory'
-import { useAppSelector } from 'app/hooks'
+import { useAppDispatch, useAppSelector } from 'app/hooks'
+import { updateTitle } from 'app/tasks'
 
 type Props = {
   tasklistId: string
@@ -17,23 +18,16 @@ type Props = {
 const AddTaskView = ({ tasklistId }: Props) => {
   const navigation = useNavigation<StackNavigationProps>()
   const { newTask } = useAppSelector(state => state.tasks)
-  const [taskPayload, setTaskPayload] = useState({
-    title: '',
-    due: undefined,
-    notes: undefined,
-  } as TaskPayload)
+  const dispatch = useAppDispatch()
   const [isFocused, setIsFocused] = useState(false)
-  const addTaskMutation = useAddTaskMutation(tasklistId, taskPayload, false)
+  const addTaskMutation = useAddTaskMutation(tasklistId, newTask, false)
 
-  const handleOnSubmitEditing = () => {
-    if (taskPayload.title.trim() === '') return
-    setTaskPayload(taskPayload)
-    addTaskMutation.mutate()
-    setTaskPayload({ title: '', due: undefined, notes: undefined })
-  }
+  const handleOnSubmitEditing = () => addTaskMutation.mutate()
+
   const handleExpand = () =>
-    navigation.navigate(RouteName.NewTask, { tasklistId, taskPayload })
-  console.log('🐵 ', newTask)
+    navigation.navigate(RouteName.NewTask, { tasklistId, taskPayload: newTask })
+  const handleOnChangeTitle = (title: string) => dispatch(updateTitle(title))
+
   return (
     <KeyboardAvoidingView
       behavior="padding"
@@ -43,7 +37,7 @@ const AddTaskView = ({ tasklistId }: Props) => {
         <TextInput
           style={styles.textInput}
           value={newTask.title}
-          onChangeText={text => setTaskPayload({ ...taskPayload, title: text })}
+          onChangeText={handleOnChangeTitle}
           placeholder="Add a Task"
           inputAccessoryViewID={AccessoryID.Task}
           onFocus={() => setIsFocused(true)}
@@ -51,10 +45,10 @@ const AddTaskView = ({ tasklistId }: Props) => {
           blurOnSubmit={false}
           onSubmitEditing={handleOnSubmitEditing}
         />
-        <TaskAccessory
+        {/* <TaskAccessory
           taskPayload={taskPayload}
           setTaskPayload={setTaskPayload}
-        />
+        /> */}
       </View>
     </KeyboardAvoidingView>
   )

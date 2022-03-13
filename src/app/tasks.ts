@@ -1,18 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
-  newTask: { title: 'X', due: undefined, notes: undefined },
+  newTask: { title: '', due: undefined, notes: undefined },
 }
 const tasksSlice = createSlice({
   name: 'tasks',
   initialState,
   reducers: {
-    updateNewTask: (state, { payload }) => {
-      console.log('🐵 payload', payload)
-      return (state = { ...state, payload })
+    updateTitle: (state, { payload }) => {
+      return (state = {
+        ...state,
+        newTask: { ...state.newTask, title: payload },
+      })
     },
+    clearTask: () => initialState,
   },
 })
 
 const tasksReducer = tasksSlice.reducer
-export const { updateNewTask } = tasksSlice.actions
+export const { updateTitle, clearTask } = tasksSlice.actions
 export default tasksReducer
