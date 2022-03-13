@@ -8,29 +8,28 @@ import {
 import React from 'react'
 import IconButton from './IconButton'
 import { faCalendarCheck } from '@fortawesome/free-solid-svg-icons'
-import { AccessoryID, theme } from 'shared'
-import { TaskPayload } from 'typings'
+import { AccessoryID, RouteName, theme } from 'shared'
+import { StackNavigationProps } from 'typings'
 import { getCalendar } from 'utils/dateTime'
+import { useNavigation } from '@react-navigation/native'
+import { useAppDispatch, useAppSelector } from 'app/hooks'
+import { clearTask } from 'app/tasks'
 
-type Props = {
-  taskPayload: TaskPayload
-  setTaskPayload: React.Dispatch<React.SetStateAction<TaskPayload>>
-}
-const TaskAccessory = ({ taskPayload, setTaskPayload }: Props) => {
-  const handleSetDate = () => {
-    setTaskPayload({ ...taskPayload, due: new Date() })
-  }
+const TaskAccessory = () => {
+  const navigation = useNavigation<StackNavigationProps>()
+  const { newTask } = useAppSelector(state => state.tasks)
+  const dispatch = useAppDispatch()
 
-  const handleRemove = () => setTaskPayload({ ...taskPayload, due: undefined })
+  const handleSetDate = () => navigation.navigate(RouteName.DateTime)
+  const handleRemove = () => dispatch(clearTask())
+  const dueExist = newTask.due !== ''
   return (
     <InputAccessoryView nativeID={AccessoryID.Task}>
       <View style={styles.container}>
-        {!taskPayload.due && (
-          <IconButton icon={faCalendarCheck} fn={handleSetDate} />
-        )}
-        {taskPayload.due && (
+        {!dueExist && <IconButton icon={faCalendarCheck} fn={handleSetDate} />}
+        {dueExist && (
           <TouchableOpacity style={styles.dateTime} onPress={handleRemove}>
-            <Text>{getCalendar(taskPayload.due)}</Text>
+            <Text>{getCalendar(newTask.due)}</Text>
           </TouchableOpacity>
         )}
       </View>

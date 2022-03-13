@@ -28,7 +28,9 @@ export const getNextDays = (number = 0) => {
   return days
 }
 
-export const getCalendar = (date: Date) =>
+export const getCalendar = (date: string) =>
   dayjs(date).calendar(null, { sameElse: 'ddd, MMM DD' })
 
-export const isBeforeToday = (date: Date) => dayjs(date).isBefore(dayjs())
+export const isBeforeToday = (date: string) => dayjs(date).isBefore(dayjs())
+
+export const getTodayDate = () => dayjs().toISOString()

@@ -7,7 +7,7 @@ export interface Task {
   status: string
   title: string
   updated: string
-  due?: Date
+  due?: string
   notes?: string
 }
 
@@ -36,6 +36,6 @@ export type TaskDetailQuery = Task
 
 export interface TaskPayload {
   title: string
-  notes?: string
-  due?: Date
+  notes: string
+  due: string
 }

@@ -7,30 +7,26 @@ import { AccessoryID, RouteName, theme } from 'shared'
 import { faAngleUp } from '@fortawesome/free-solid-svg-icons'
 import IconButton from './IconButton'
 import { useNavigation } from '@react-navigation/native'
-import { StackNavigationProps, TaskPayload } from 'typings'
+import { StackNavigationProps } from 'typings'
 import TaskAccessory from './TaskAccessory'
+import { useAppDispatch, useAppSelector } from 'app/hooks'
+import { updateTitle } from 'app/tasks'
 
 type Props = {
   tasklistId: string
 }
 const AddTaskView = ({ tasklistId }: Props) => {
   const navigation = useNavigation<StackNavigationProps>()
-  const [taskPayload, setTaskPayload] = useState({
-    title: '',
-    due: undefined,
-    notes: undefined,
-  } as TaskPayload)
+  const { newTask } = useAppSelector(state => state.tasks)
+  const dispatch = useAppDispatch()
   const [isFocused, setIsFocused] = useState(false)
-  const addTaskMutation = useAddTaskMutation(tasklistId, taskPayload, false)
+  const addTaskMutation = useAddTaskMutation(tasklistId, newTask, false)
 
-  const handleOnSubmitEditing = () => {
-    if (taskPayload.title.trim() === '') return
-    setTaskPayload(taskPayload)
-    addTaskMutation.mutate()
-    setTaskPayload({ title: '', due: undefined, notes: undefined })
-  }
+  const handleOnSubmitEditing = () => addTaskMutation.mutate()
+
   const handleExpand = () =>
-    navigation.navigate(RouteName.NewTask, { tasklistId, taskPayload })
+    navigation.navigate(RouteName.NewTask, { tasklistId, taskPayload: newTask })
+  const handleOnChangeTitle = (title: string) => dispatch(updateTitle(title))
 
   return (
     <KeyboardAvoidingView
@@ -40,8 +36,8 @@ const AddTaskView = ({ tasklistId }: Props) => {
         {isFocused && <IconButton icon={faAngleUp} fn={handleExpand} />}
         <TextInput
           style={styles.textInput}
-          value={taskPayload.title}
-          onChangeText={text => setTaskPayload({ ...taskPayload, title: text })}
+          value={newTask.title}
+          onChangeText={handleOnChangeTitle}
           placeholder="Add a Task"
           inputAccessoryViewID={AccessoryID.Task}
           onFocus={() => setIsFocused(true)}
@@ -49,10 +45,7 @@ const AddTaskView = ({ tasklistId }: Props) => {
           blurOnSubmit={false}
           onSubmitEditing={handleOnSubmitEditing}
         />
-        <TaskAccessory
-          taskPayload={taskPayload}
-          setTaskPayload={setTaskPayload}
-        />
+        <TaskAccessory />
       </View>
     </KeyboardAvoidingView>
   )

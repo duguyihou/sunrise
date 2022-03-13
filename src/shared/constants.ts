@@ -9,6 +9,7 @@ export enum RouteName {
   TaskDetail = 'TaskDetail',
   Planned = 'Planned',
   Home = 'Home',
+  DateTime = 'DateTime',
 }
 
 export enum TasklistName {
