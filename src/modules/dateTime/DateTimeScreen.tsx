@@ -1,19 +1,21 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
+import { Calendar } from 'react-native-calendars'
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProps } from 'typings'
 import { theme } from 'shared'
 import { useAppDispatch } from 'app/hooks'
 import { updateDateTime } from 'app/tasks'
-import { getTodayDate } from 'utils/dateTime'
+import { getCalendarDayDate } from 'utils/dateTime'
+import { CalendarDay } from 'typings/day'
 
 const DateTimeScreen = () => {
   const navigation = useNavigation<StackNavigationProps>()
   const dispatch = useAppDispatch()
 
   const handleGoback = () => navigation.goBack()
-  const handleSetDate = () => {
-    dispatch(updateDateTime(getTodayDate()))
+  const handleSetDate = (calendarDay: CalendarDay) => {
+    dispatch(updateDateTime(getCalendarDayDate(calendarDay)))
     navigation.goBack()
   }
 
@@ -21,9 +23,10 @@ const DateTimeScreen = () => {
     <>
       <TouchableOpacity style={styles.outside} onPress={handleGoback} />
       <View style={styles.container}>
-        <TouchableOpacity onPress={handleSetDate} style={styles.today}>
+        <Calendar onDayPress={handleSetDate} />
+        {/* <TouchableOpacity onPress={handleSetDate} style={styles.today}>
           <Text style={styles.text}>Today</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     </>
   )
@@ -34,11 +37,11 @@ export default DateTimeScreen
 const styles = StyleSheet.create({
   outside: {
     width: '100%',
-    height: '60%',
+    height: '50%',
   },
   container: {
     width: '100%',
-    height: '40%',
+    height: '50%',
     backgroundColor: theme.bg.primary,
   },
   today: {
