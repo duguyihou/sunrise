@@ -1,6 +1,6 @@
 import dayjs from 'dayjs'
 import calendar from 'dayjs/plugin/calendar'
-import { Day } from 'typings/day'
+import { CalendarDay, Day } from 'typings/day'
 
 dayjs.extend(calendar)
 export const dateFormat = (dateTime: string, format = 'h:mm:a') =>
@@ -33,4 +33,7 @@ export const getCalendar = (date: string) =>
 
 export const isBeforeToday = (date: string) => dayjs(date).isBefore(dayjs())
 
-export const getTodayDate = () => dayjs().toISOString()
+export const getCalendarDayDate = (calendarDay: CalendarDay) => {
+  const { dateString } = calendarDay
+  return dayjs(dateString).toISOString()
+}
