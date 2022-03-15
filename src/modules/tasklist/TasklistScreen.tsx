@@ -12,7 +12,8 @@ import { faEllipsisH } from '@fortawesome/free-solid-svg-icons'
 import HeaderTitle from 'components/HeaderTitle'
 import AddTaskView from 'components/AddTaskView'
 import IconButton from 'components/IconButton'
-import CompletedTaskHeader from 'components/CompletedTaskHeader'
+import TaskHeader from 'components/TaskHeader'
+import { useAppSelector } from 'app/hooks'
 
 const TasklistScreen = () => {
   const {
@@ -21,7 +22,7 @@ const TasklistScreen = () => {
   const { title, id, selfLink } = tasklist
   const navigation = useNavigation<StackNavigationProps>()
   const [modalVisible, setModalVisible] = useState(false)
-  const [showCompletedTasks, setShowCompletedTasks] = useState(false)
+  const { showCompletedTasks } = useAppSelector(state => state.tasks)
   const deleteTasklistMutation = useDeleteTasklistMutation(selfLink)
   const { isLoading, error, data: tasks } = useFetchTasksQuery(id)
 
@@ -53,10 +54,7 @@ const TasklistScreen = () => {
         {needsActionTasks &&
           needsActionTasks.map(task => <TaskItem key={task.id} task={task} />)}
         {compeletedTasks && compeletedTasks.length > 0 && (
-          <CompletedTaskHeader
-            showCompletedTasks={showCompletedTasks}
-            setShowCompletedTasks={setShowCompletedTasks}
-          />
+          <TaskHeader title="Completed" />
         )}
         {compeletedTasks &&
           showCompletedTasks &&
