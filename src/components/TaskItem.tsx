@@ -6,7 +6,7 @@ import { useUpdateTaskMutation } from 'hooks/tasks'
 import { RouteName, TaskStatus } from 'shared'
 import { useNavigation } from '@react-navigation/native'
 import { windowWidth } from 'utils/dimensions'
-import TaskItemDue from './TaskItemDue'
+import DateTimeText from './DateTimeText'
 import TaskItemNotes from './TaskItemNotes'
 import TaskItemTitle from './TaskItemTitle'
 
@@ -35,7 +35,7 @@ const TaskItem = ({ task }: Props) => {
       <View style={styles.task}>
         <TaskItemTitle isChecked={isChecked} title={title} />
         {notes && <TaskItemNotes notes={notes} />}
-        {due && <TaskItemDue due={due} />}
+        {due && <DateTimeText dateTime={due} />}
       </View>
     </TouchableOpacity>
   )

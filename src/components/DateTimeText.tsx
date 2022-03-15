@@ -3,19 +3,19 @@ import { StyleSheet, Text } from 'react-native'
 import { getCalendar, isBeforeToday } from 'utils/dateTime'
 import { theme } from 'shared'
 
-type Props = { due: Date }
-const TaskItemDue = ({ due }: Props) => {
+type Props = { dateTime: string }
+const DateTimeText = ({ dateTime }: Props) => {
   return (
-    <Text style={[styles.time, isBeforeToday(due) && styles.before]}>
-      {getCalendar(due)}
+    <Text style={[styles.common, isBeforeToday(dateTime) && styles.before]}>
+      {getCalendar(dateTime)}
     </Text>
   )
 }
 
-export default TaskItemDue
+export default DateTimeText
 
 const styles = StyleSheet.create({
-  time: {
+  common: {
     marginTop: 4,
     paddingHorizontal: 10,
     paddingVertical: 5,
