@@ -8,27 +8,29 @@ import TaskAccessory from './TaskAccessory'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
 import { updateTitle } from 'app/tasks'
 import DateTime from './DateTime'
+import { useKeyboard } from 'shared/useKeyboard'
 
 type Props = {
   tasklistId: string
 }
 const AddTaskView = ({ tasklistId }: Props) => {
+  const dispatch = useAppDispatch()
   const { newTask } = useAppSelector(state => state.tasks)
   const { title, due } = newTask
-  const dispatch = useAppDispatch()
   const addTaskMutation = useAddTaskMutation(tasklistId, newTask, false)
-
+  const isKeyboardOpen = useKeyboard()
   const handleOnSubmitEditing = () => addTaskMutation.mutate()
 
   const handleOnChangeTitle = (text: string) => dispatch(updateTitle(text))
 
   return (
     <KeyboardAvoidingView
+      style={styles.wrapper}
       behavior="padding"
       keyboardVerticalOffset={useHeaderHeight()}>
       <View style={styles.container}>
         <TextInput
-          style={styles.textInput}
+          style={styles.title}
           value={title}
           onChangeText={handleOnChangeTitle}
           placeholder="Add a Task"
@@ -36,7 +38,7 @@ const AddTaskView = ({ tasklistId }: Props) => {
           blurOnSubmit={false}
           onSubmitEditing={handleOnSubmitEditing}
         />
-        {!!due && <DateTime dateTime={due} />}
+        {!!due && isKeyboardOpen && <DateTime dateTime={due} />}
       </View>
       <TaskAccessory />
     </KeyboardAvoidingView>
@@ -46,13 +48,17 @@ const AddTaskView = ({ tasklistId }: Props) => {
 export default AddTaskView
 
 const styles = StyleSheet.create({
+  wrapper: {
+    marginBottom: 50,
+  },
   container: {
     width: windowWidth,
     backgroundColor: theme.bg.secondary,
     paddingHorizontal: 20,
     alignItems: 'flex-start',
   },
-  textInput: {
+  title: {
+    paddingVertical: 8,
     fontSize: 20,
     width: '100%',
   },
