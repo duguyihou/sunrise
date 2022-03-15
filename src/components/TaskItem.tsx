@@ -3,10 +3,10 @@ import { StyleSheet, TouchableOpacity, View } from 'react-native'
 import { StackNavigationProps, Task } from 'typings'
 import Checkbox from './Checkbox'
 import { useUpdateTaskMutation } from 'hooks/tasks'
-import { RouteName, TaskStatus } from 'shared'
+import { RouteName, TaskStatus, theme } from 'shared'
 import { useNavigation } from '@react-navigation/native'
 import { windowWidth } from 'utils/dimensions'
-import TaskItemDue from './TaskItemDue'
+import DateTimeText from './DateTimeText'
 import TaskItemNotes from './TaskItemNotes'
 import TaskItemTitle from './TaskItemTitle'
 
@@ -35,7 +35,7 @@ const TaskItem = ({ task }: Props) => {
       <View style={styles.task}>
         <TaskItemTitle isChecked={isChecked} title={title} />
         {notes && <TaskItemNotes notes={notes} />}
-        {due && <TaskItemDue due={due} />}
+        {due && <DateTimeText dateTime={due} style={styles.dateTimeText} />}
       </View>
     </TouchableOpacity>
   )
@@ -57,5 +57,11 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
     paddingLeft: 20,
+  },
+  dateTimeText: {
+    borderWidth: 1,
+    borderRadius: 10,
+    borderColor: theme.border.secondary,
+    marginTop: 4,
   },
 })
