@@ -8,22 +8,21 @@ import IconButton from './IconButton'
 import { TaskPayload } from 'typings'
 
 type Props = {
-  date: Date | undefined
+  date: string
   setValue: UseFormSetValue<TaskPayload>
 }
 const TaskDateTime = ({ date, setValue }: Props) => {
-  const handleRemove = () => setValue('due', undefined)
-  const handleShowModal = () => setValue('due', new Date())
-
+  const handleRemove = () => setValue('due', '')
+  const handleShowModal = () => setValue('due', new Date().toISOString())
   return (
     <View style={styles.container}>
       <IconButton icon={faCalendarCheck} />
       <TouchableOpacity
         activeOpacity={1}
-        style={[styles.dateTime, date && styles.dateExist]}
+        style={[styles.dateTime, !!date && styles.dateExist]}
         onPress={handleShowModal}>
         <Text> {date ? getCalendar(date) : 'Add date'}</Text>
-        {date && (
+        {!!date && (
           <TouchableOpacity style={styles.remove} onPress={handleRemove}>
             <Text>x</Text>
           </TouchableOpacity>
