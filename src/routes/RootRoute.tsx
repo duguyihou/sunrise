@@ -7,7 +7,6 @@ import TasklistScreen from 'modules/tasklist/TasklistScreen'
 import SigninScreen from 'modules/signin/SigninScreen'
 import TasklistsScreen from 'modules/tasklists/TasklistsScreen'
 import { RouteName, TaskName, theme } from 'shared'
-import NewTaskScreen from 'modules/newTask/NewTaskScreen'
 import TaskDetailScreen from 'modules/taskDetail/TaskDetailScreen'
 import PlannedTasksScreen from 'modules/planned/PlannedTasksScreen'
 import DateTimeScreen from 'modules/dateTime/DateTimeScreen'
@@ -56,14 +55,6 @@ function RootRoute() {
         />
       </RootStack.Group>
       <RootStack.Group>
-        <RootStack.Screen
-          name={RouteName.NewTask}
-          component={NewTaskScreen}
-          options={{
-            headerTitle: TaskName.NewTask,
-            presentation: 'modal',
-          }}
-        />
         <RootStack.Screen
           name={RouteName.DateTime}
           component={DateTimeScreen}

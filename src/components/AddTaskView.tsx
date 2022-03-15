@@ -49,10 +49,10 @@ const styles = StyleSheet.create({
   container: {
     width: windowWidth,
     backgroundColor: theme.bg.secondary,
-    alignItems: 'center',
+    paddingHorizontal: 20,
+    alignItems: 'flex-start',
   },
   textInput: {
-    padding: 20,
     fontSize: 20,
     width: '100%',
   },

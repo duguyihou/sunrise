@@ -25,7 +25,7 @@ export default TaskAccessory
 
 const styles = StyleSheet.create({
   icon: {
-    paddingHorizontal: 20,
+    paddingLeft: 20,
     paddingVertical: 10,
   },
 })
