@@ -7,7 +7,7 @@ import { AccessoryID, theme } from 'shared'
 import TaskAccessory from './TaskAccessory'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
 import { updateTitle } from 'app/tasks'
-import DateTime from './DateTime'
+import DateTimeButton from './DateTimeButton'
 import { useKeyboard } from 'shared/useKeyboard'
 
 type Props = {
@@ -38,7 +38,7 @@ const AddTaskView = ({ tasklistId }: Props) => {
           blurOnSubmit={false}
           onSubmitEditing={handleOnSubmitEditing}
         />
-        {!!due && isKeyboardOpen && <DateTime dateTime={due} />}
+        {!!due && isKeyboardOpen && <DateTimeButton dateTime={due} />}
       </View>
       <TaskAccessory />
     </KeyboardAvoidingView>

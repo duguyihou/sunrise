@@ -2,7 +2,7 @@ import { StyleSheet, View } from 'react-native'
 import React from 'react'
 import IconButton from './IconButton'
 import { faCalendarCheck } from '@fortawesome/free-solid-svg-icons'
-import DateTime from './DateTime'
+import DateTimeButton from './DateTimeButton'
 
 type Props = {
   dateTime: string
@@ -11,7 +11,7 @@ const TaskDateTime = ({ dateTime }: Props) => {
   return (
     <View style={styles.container}>
       <IconButton style={styles.icon} icon={faCalendarCheck} />
-      <DateTime dateTime={dateTime} />
+      <DateTimeButton dateTime={dateTime} showPlaceholder={true} />
     </View>
   )
 }

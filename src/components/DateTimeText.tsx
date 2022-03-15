@@ -3,11 +3,21 @@ import { StyleSheet, Text } from 'react-native'
 import { getCalendar, isBeforeToday } from 'utils/dateTime'
 import { theme } from 'shared'
 
-type Props = { dateTime: string }
-const DateTimeText = ({ dateTime }: Props) => {
+type Props = {
+  dateTime: string
+  showPlaceholder?: boolean
+  style?: Record<string, string | number>
+}
+const DateTimeText = (props: Props) => {
+  const { dateTime, showPlaceholder, style } = props
   return (
-    <Text style={[styles.common, isBeforeToday(dateTime) && styles.before]}>
-      {getCalendar(dateTime)}
+    <Text
+      style={[
+        styles.common,
+        style,
+        !!dateTime && isBeforeToday(dateTime) && styles.before,
+      ]}>
+      {dateTime ? getCalendar(dateTime) : showPlaceholder && 'Add date/time'}
     </Text>
   )
 }
@@ -16,12 +26,8 @@ export default DateTimeText
 
 const styles = StyleSheet.create({
   common: {
-    marginTop: 4,
     paddingHorizontal: 10,
     paddingVertical: 5,
-    borderWidth: 1,
-    borderRadius: 10,
-    borderColor: theme.border.secondary,
     fontSize: 12,
   },
 
