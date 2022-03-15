@@ -47,9 +47,7 @@ const TaskDetailScreen = () => {
       <Controller
         name="due"
         control={control}
-        render={({ field: { value, onChange } }) => (
-          <TaskDateTime value={value} onChange={onChange} />
-        )}
+        render={({ field: { value } }) => <TaskDateTime dateTime={value} />}
       />
       <Controller
         name="notes"

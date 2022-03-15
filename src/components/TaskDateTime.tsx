@@ -1,38 +1,17 @@
-import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import React from 'react'
 import IconButton from './IconButton'
 import { faCalendarCheck } from '@fortawesome/free-solid-svg-icons'
-import { RouteName, theme } from 'shared'
-import { StackNavigationProps } from 'typings'
-import { getCalendar } from 'utils/dateTime'
-import { useNavigation } from '@react-navigation/native'
-import { useAppDispatch, useAppSelector } from 'app/hooks'
-import { clearTask } from 'app/tasks'
+import DateTime from './DateTime'
 
 type Props = {
-  iconClickable: boolean
+  dateTime: string
 }
-const TaskDateTime = ({ iconClickable }: Props) => {
-  const navigation = useNavigation<StackNavigationProps>()
-  const {
-    newTask: { due },
-  } = useAppSelector(state => state.tasks)
-  const dispatch = useAppDispatch()
-
-  const handleSetDate = () =>
-    iconClickable && navigation.navigate(RouteName.DateTime)
-  const handleRemove = () => dispatch(clearTask())
+const TaskDateTime = ({ dateTime }: Props) => {
   return (
     <View style={styles.container}>
-      {!due && <IconButton icon={faCalendarCheck} fn={handleSetDate} />}
-      {!!due && (
-        <TouchableOpacity style={styles.dateTime} onPress={handleSetDate}>
-          <Text>{due ? getCalendar(due) : 'Add date/time'}</Text>
-          <TouchableOpacity onPress={handleRemove}>
-            <Text style={styles.remove}>X</Text>
-          </TouchableOpacity>
-        </TouchableOpacity>
-      )}
+      <IconButton style={styles.icon} icon={faCalendarCheck} />
+      <DateTime dateTime={dateTime} />
     </View>
   )
 }
@@ -41,21 +20,12 @@ export default TaskDateTime
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
-    paddingHorizontal: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  icon: {
+    paddingLeft: 20,
+    paddingRight: 10,
     paddingVertical: 10,
-    flexDirection: 'row',
-  },
-  dateTime: {
-    borderWidth: 1,
-    borderRadius: 10,
-    borderColor: theme.border.secondary,
-    padding: 5,
-    flexDirection: 'row',
-  },
-
-  remove: {
-    marginLeft: 10,
-    fontSize: 16,
   },
 })
