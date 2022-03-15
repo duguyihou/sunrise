@@ -26,7 +26,7 @@ const NewTaskScreen = () => {
     }),
   )
   const [newtask, setNewtask] = useState(taskPayload)
-  const { control, handleSubmit, setValue } = useForm({
+  const { control, handleSubmit } = useForm({
     defaultValues: newtask,
   })
   const addTaskMutation = useAddTaskMutation(tasklistId, newtask)
@@ -49,9 +49,7 @@ const NewTaskScreen = () => {
       <Controller
         name="due"
         control={control}
-        render={({ field: { value } }) => (
-          <TaskDateTime date={value} setValue={setValue} />
-        )}
+        render={() => <TaskDateTime iconClickable={false} />}
       />
       <Controller
         name="notes"
