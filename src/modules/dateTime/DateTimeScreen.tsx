@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { Calendar } from 'react-native-calendars'
 import { useNavigation } from '@react-navigation/native'
@@ -24,9 +24,6 @@ const DateTimeScreen = () => {
       <TouchableOpacity style={styles.outside} onPress={handleGoback} />
       <View style={styles.container}>
         <Calendar onDayPress={handleSetDate} />
-        {/* <TouchableOpacity onPress={handleSetDate} style={styles.today}>
-          <Text style={styles.text}>Today</Text>
-        </TouchableOpacity> */}
       </View>
     </>
   )

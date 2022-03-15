@@ -1,33 +1,38 @@
+import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
-import { faCalendarCheck } from '@fortawesome/free-solid-svg-icons'
-import { UseFormSetValue } from 'react-hook-form'
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { theme } from 'shared'
-import { getCalendar } from 'utils/dateTime'
 import IconButton from './IconButton'
-import { TaskPayload } from 'typings'
+import { faCalendarCheck } from '@fortawesome/free-solid-svg-icons'
+import { RouteName, theme } from 'shared'
+import { StackNavigationProps } from 'typings'
+import { getCalendar } from 'utils/dateTime'
+import { useNavigation } from '@react-navigation/native'
+import { useAppDispatch, useAppSelector } from 'app/hooks'
+import { clearTask } from 'app/tasks'
 
 type Props = {
-  date: string
-  setValue: UseFormSetValue<TaskPayload>
+  iconClickable: boolean
 }
-const TaskDateTime = ({ date, setValue }: Props) => {
-  const handleRemove = () => setValue('due', '')
-  const handleShowModal = () => setValue('due', new Date().toISOString())
+const TaskDateTime = ({ iconClickable }: Props) => {
+  const navigation = useNavigation<StackNavigationProps>()
+  const {
+    newTask: { due },
+  } = useAppSelector(state => state.tasks)
+  const dispatch = useAppDispatch()
+
+  const handleSetDate = () =>
+    iconClickable && navigation.navigate(RouteName.DateTime)
+  const handleRemove = () => dispatch(clearTask())
   return (
     <View style={styles.container}>
-      <IconButton icon={faCalendarCheck} />
-      <TouchableOpacity
-        activeOpacity={1}
-        style={[styles.dateTime, !!date && styles.dateExist]}
-        onPress={handleShowModal}>
-        <Text> {date ? getCalendar(date) : 'Add date'}</Text>
-        {!!date && (
-          <TouchableOpacity style={styles.remove} onPress={handleRemove}>
-            <Text>x</Text>
+      {!due && <IconButton icon={faCalendarCheck} fn={handleSetDate} />}
+      {!!due && (
+        <TouchableOpacity style={styles.dateTime} onPress={handleSetDate}>
+          <Text>{due ? getCalendar(due) : 'Add date/time'}</Text>
+          <TouchableOpacity onPress={handleRemove}>
+            <Text style={styles.remove}>X</Text>
           </TouchableOpacity>
-        )}
-      </TouchableOpacity>
+        </TouchableOpacity>
+      )}
     </View>
   )
 }
@@ -37,21 +42,20 @@ export default TaskDateTime
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    paddingHorizontal: 10,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
     flexDirection: 'row',
   },
   dateTime: {
-    paddingHorizontal: 10,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  dateExist: {
-    borderColor: theme.border.secondary,
-    borderRadius: 10,
     borderWidth: 1,
+    borderRadius: 10,
+    borderColor: theme.border.secondary,
+    padding: 5,
+    flexDirection: 'row',
   },
+
   remove: {
     marginLeft: 10,
+    fontSize: 16,
   },
 })
