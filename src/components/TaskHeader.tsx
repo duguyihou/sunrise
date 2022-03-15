@@ -1,23 +1,25 @@
+import React from 'react'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
-import React, { Dispatch, SetStateAction } from 'react'
 import { theme } from 'shared'
+import { useAppDispatch } from 'app/hooks'
+import { toggleShowCompletedTasks } from 'app/tasks'
+
 type Props = {
-  showCompletedTasks: boolean
-  setShowCompletedTasks: Dispatch<SetStateAction<boolean>>
+  title: string
 }
-const CompletedTaskHeader = (props: Props) => {
-  const { showCompletedTasks, setShowCompletedTasks } = props
-  const toggle = () => setShowCompletedTasks(!showCompletedTasks)
+const TaskHeader = ({ title }: Props) => {
+  const dispatch = useAppDispatch()
+  const toggle = () => dispatch(toggleShowCompletedTasks())
   return (
     <View style={styles.container}>
       <TouchableOpacity activeOpacity={1} onPress={toggle}>
-        <Text style={styles.text}>Completed</Text>
+        <Text style={styles.text}>{title}</Text>
       </TouchableOpacity>
     </View>
   )
 }
 
-export default CompletedTaskHeader
+export default TaskHeader
 
 const styles = StyleSheet.create({
   container: {
