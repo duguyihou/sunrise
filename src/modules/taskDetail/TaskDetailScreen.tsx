@@ -23,14 +23,10 @@ const TaskDetailScreen = () => {
       headerRight: () => <IconButton icon={faTrash} fn={handleDelete} />,
     }),
   )
-  const { control, setValue } = useForm({ mode: 'onChange' })
+  const { control, reset } = useForm()
   useEffect(() => {
-    if (data) {
-      setValue('title', data.title)
-      setValue('due', data.due)
-      setValue('notes', data.notes)
-    }
-  }, [data, setValue])
+    if (data) reset({ ...data })
+  }, [data, reset])
   const handleDelete = () => deleteTaskMutation.mutate()
 
   if (isLoading || !data) return <Text>loading...</Text>
