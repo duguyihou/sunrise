@@ -6,9 +6,9 @@ import IconButton from './IconButton'
 
 type Props = {
   value: string | undefined
-  onChange: (...event: unknown[]) => void
+  onChangeNotes: (text: string) => void
 }
-const TaskNotes = ({ value, onChange }: Props) => {
+const TaskNotes = ({ value, onChangeNotes }: Props) => {
   return (
     <View style={styles.container}>
       <IconButton icon={faAlignLeft} />
@@ -16,7 +16,7 @@ const TaskNotes = ({ value, onChange }: Props) => {
         multiline
         style={styles.notes}
         value={value}
-        onChangeText={onChange}
+        onChangeText={onChangeNotes}
         placeholder="Add Notes"
         blurOnSubmit={false}
       />

@@ -2,15 +2,15 @@ import React from 'react'
 import { StyleSheet, TextInput } from 'react-native'
 type Props = {
   value: string | undefined
-  onChange: (...event: unknown[]) => void
+  onChangeTitle: (text: string) => void
 }
-const TaskTitle = ({ value, onChange }: Props) => {
+const TaskTitle = ({ value, onChangeTitle }: Props) => {
   return (
     <TextInput
       multiline
       style={styles.title}
       value={value}
-      onChangeText={onChange}
+      onChangeText={onChangeTitle}
       placeholder="Add a Task"
       blurOnSubmit={false}
     />

@@ -1,61 +1,42 @@
 import { ScrollView, Text } from 'react-native'
-import React, { useEffect, useLayoutEffect } from 'react'
+import React, { useLayoutEffect } from 'react'
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
-import { useForm, Controller } from 'react-hook-form'
 import { RootStackParamList } from 'typings'
 import { RouteName } from 'shared'
 import { useDeleteTaskMutation, useFetchTaskDetailQuery } from 'hooks/tasks'
-import TaskDateTime from 'components/TaskDateTime'
 import TaskTitle from 'components/TaskTitle'
-import TaskNotes from 'components/TaskNotes'
 import IconButton from 'components/IconButton'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import { useAppDispatch, useAppSelector } from 'app/hooks'
+import { updateTask } from 'app/tasks'
+import TaskNotes from 'components/TaskNotes'
 
 const TaskDetailScreen = () => {
   const {
     params: { selfLink },
   } = useRoute<RouteProp<RootStackParamList, RouteName.TaskDetail>>()
   const navigation = useNavigation()
-  const { isLoading, error, data } = useFetchTaskDetailQuery(selfLink)
+  const dispatch = useAppDispatch()
+  const { isLoading, error } = useFetchTaskDetailQuery(selfLink)
   const deleteTaskMutation = useDeleteTaskMutation(selfLink)
   useLayoutEffect(() =>
     navigation.setOptions({
       headerRight: () => <IconButton icon={faTrash} fn={handleDelete} />,
     }),
   )
-  const { control, setValue } = useForm({ mode: 'onChange' })
-  useEffect(() => {
-    if (data) {
-      setValue('title', data.title)
-      setValue('due', data.due)
-      setValue('notes', data.notes)
-    }
-  }, [data, setValue])
+  const { task } = useAppSelector(state => state.tasks)
+  const { title, notes } = task
   const handleDelete = () => deleteTaskMutation.mutate()
-
-  if (isLoading || !data) return <Text>loading...</Text>
+  const onChangeTitle = (text: string) =>
+    dispatch(updateTask({ ...task, title: text }))
+  const onChangeNotes = (text: string) =>
+    dispatch(updateTask({ ...task, notes: text }))
+  if (isLoading) return <Text>loading...</Text>
   if (error) return <Text>`An error has occurred: ${error.message}`</Text>
   return (
     <ScrollView>
-      <Controller
-        name="title"
-        control={control}
-        render={({ field: { value, onChange } }) => (
-          <TaskTitle value={value} onChange={onChange} />
-        )}
-      />
-      <Controller
-        name="due"
-        control={control}
-        render={({ field: { value } }) => <TaskDateTime dateTime={value} />}
-      />
-      <Controller
-        name="notes"
-        control={control}
-        render={({ field: { value, onChange } }) => (
-          <TaskNotes value={value} onChange={onChange} />
-        )}
-      />
+      <TaskTitle value={title} onChangeTitle={onChangeTitle} />
+      <TaskNotes value={notes} onChangeNotes={onChangeNotes} />
     </ScrollView>
   )
 }

@@ -1,8 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { Task } from 'typings'
 
 const initialState = {
   newTask: { title: '', due: '', notes: '' },
   showCompletedTasks: false,
+  task: {} as Task,
 }
 const tasksSlice = createSlice({
   name: 'tasks',
@@ -27,6 +29,12 @@ const tasksSlice = createSlice({
         showCompletedTasks: !state.showCompletedTasks,
       })
     },
+    updateTask: (state, { payload }) => {
+      return (state = {
+        ...state,
+        task: payload,
+      })
+    },
   },
 })
 
@@ -36,5 +44,6 @@ export const {
   updateDateTime,
   clearTask,
   toggleShowCompletedTasks,
+  updateTask,
 } = tasksSlice.actions
 export default tasksReducer
