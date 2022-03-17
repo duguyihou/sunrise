@@ -1,7 +1,7 @@
 import { ScrollView, Text } from 'react-native'
-import React, { useEffect, useLayoutEffect } from 'react'
+import React, { useLayoutEffect } from 'react'
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
-import { useForm, Controller } from 'react-hook-form'
+import { Controller } from 'react-hook-form'
 import { RootStackParamList } from 'typings'
 import { RouteName } from 'shared'
 import { useDeleteTaskMutation, useFetchTaskDetailQuery } from 'hooks/tasks'
@@ -16,24 +16,17 @@ const TaskDetailScreen = () => {
     params: { selfLink },
   } = useRoute<RouteProp<RootStackParamList, RouteName.TaskDetail>>()
   const navigation = useNavigation()
-  const { isLoading, error, data } = useFetchTaskDetailQuery(selfLink)
+  const { isLoading, error, control } = useFetchTaskDetailQuery(selfLink)
   const deleteTaskMutation = useDeleteTaskMutation(selfLink)
   useLayoutEffect(() =>
     navigation.setOptions({
       headerRight: () => <IconButton icon={faTrash} fn={handleDelete} />,
     }),
   )
-  const { control, setValue } = useForm({ mode: 'onChange' })
-  useEffect(() => {
-    if (data) {
-      setValue('title', data.title)
-      setValue('due', data.due)
-      setValue('notes', data.notes)
-    }
-  }, [data, setValue])
+
   const handleDelete = () => deleteTaskMutation.mutate()
 
-  if (isLoading || !data) return <Text>loading...</Text>
+  if (isLoading) return <Text>loading...</Text>
   if (error) return <Text>`An error has occurred: ${error.message}`</Text>
   return (
     <ScrollView>
