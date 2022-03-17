@@ -5,23 +5,21 @@ import { windowWidth } from 'utils/dimensions'
 import { useAddTaskMutation } from 'hooks/tasks'
 import { AccessoryID, theme } from 'shared'
 import TaskAccessory from './TaskAccessory'
-import { useAppDispatch, useAppSelector } from 'app/hooks'
-import { updateTitle } from 'app/tasks'
 import DateTimeButton from './DateTimeButton'
 import { useKeyboard } from 'shared/useKeyboard'
+import { Controller } from 'react-hook-form'
 
 type Props = {
   tasklistId: string
 }
 const AddTaskView = ({ tasklistId }: Props) => {
-  const dispatch = useAppDispatch()
-  const { newTask } = useAppSelector(state => state.tasks)
-  const { title, due } = newTask
-  const addTaskMutation = useAddTaskMutation(tasklistId, newTask, false)
+  const {
+    addTaskMutation,
+    useFormState: { getValues, control, handleSubmit },
+  } = useAddTaskMutation(tasklistId)
   const isKeyboardOpen = useKeyboard()
-  const handleOnSubmitEditing = () => addTaskMutation.mutate()
-
-  const handleOnChangeTitle = (text: string) => dispatch(updateTitle(text))
+  const showDateTimeButton = () => !!getValues('due') && isKeyboardOpen
+  const onSubmit = () => addTaskMutation.mutate()
 
   return (
     <KeyboardAvoidingView
@@ -29,16 +27,30 @@ const AddTaskView = ({ tasklistId }: Props) => {
       behavior="padding"
       keyboardVerticalOffset={useHeaderHeight()}>
       <View style={styles.container}>
-        <TextInput
-          style={styles.title}
-          value={title}
-          onChangeText={handleOnChangeTitle}
-          placeholder="Add a Task"
-          inputAccessoryViewID={AccessoryID.Task}
-          blurOnSubmit={false}
-          onSubmitEditing={handleOnSubmitEditing}
+        <Controller
+          name="title"
+          control={control}
+          render={({ field: { value, onChange } }) => (
+            <TextInput
+              style={styles.title}
+              value={value}
+              onChangeText={onChange}
+              placeholder="Add a Task"
+              inputAccessoryViewID={AccessoryID.Task}
+              blurOnSubmit={false}
+              onSubmitEditing={handleSubmit(onSubmit)}
+            />
+          )}
         />
-        {!!due && isKeyboardOpen && <DateTimeButton dateTime={due} />}
+        {showDateTimeButton() && (
+          <Controller
+            name="due"
+            control={control}
+            render={({ field: { value } }) => (
+              <DateTimeButton dateTime={value} />
+            )}
+          />
+        )}
       </View>
       <TaskAccessory />
     </KeyboardAvoidingView>
