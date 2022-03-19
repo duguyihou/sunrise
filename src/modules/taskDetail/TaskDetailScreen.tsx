@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { ScrollView, StyleSheet, Text, View } from 'react-native'
 import React, { useLayoutEffect } from 'react'
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { RootStackParamList } from 'typings'
@@ -32,8 +32,10 @@ const TaskDetailScreen = () => {
   return (
     <View style={styles.container}>
       <TaskTitle title={title} />
-      <TaskDateTime dateTime={due} />
-      <TaskNotes notes={notes} />
+      <ScrollView style={styles.details}>
+        <TaskDateTime dateTime={due} />
+        <TaskNotes notes={notes} />
+      </ScrollView>
     </View>
   )
 }
@@ -42,6 +44,11 @@ export default TaskDetailScreen
 
 const styles = StyleSheet.create({
   container: {
+    width: '100%',
+    height: '100%',
     paddingHorizontal: 20,
+  },
+  details: {
+    flex: 1,
   },
 })
