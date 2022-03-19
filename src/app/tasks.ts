@@ -3,7 +3,18 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   newTask: { title: '', due: '', notes: '' },
   showCompletedTasks: false,
-  task: { title: '', due: '', notes: '', updated: '' },
+  task: {
+    title: '',
+    due: '',
+    notes: '',
+    updated: '',
+    status: 'needsAction',
+    etag: '',
+    id: '',
+    kind: 'tasks#task',
+    position: '',
+    selfLink: '',
+  },
 }
 const tasksSlice = createSlice({
   name: 'tasks',
