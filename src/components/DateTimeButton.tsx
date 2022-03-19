@@ -4,7 +4,7 @@ import { RouteName, theme } from 'shared'
 import { StackNavigationProps } from 'typings'
 import { useNavigation } from '@react-navigation/native'
 import { useAppDispatch } from 'app/hooks'
-import { clearTask } from 'app/tasks'
+import { clearNewTask } from 'app/tasks'
 import DateTimeText from './DateTimeText'
 
 type Props = {
@@ -17,7 +17,7 @@ const DateTimeButton = (props: Props) => {
   const navigation = useNavigation<StackNavigationProps>()
   const dispatch = useAppDispatch()
   const handleSetDate = () => navigation.navigate(RouteName.DateTime)
-  const handleRemove = () => dispatch(clearTask())
+  const handleRemove = () => dispatch(clearNewTask())
   return (
     <View style={styles.container}>
       <TouchableOpacity

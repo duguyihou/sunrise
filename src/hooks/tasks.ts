@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native'
 import tasksService from 'api/tasks'
-import { useAppDispatch } from 'app/hooks'
-import { clearTask } from 'app/tasks'
+import { useAppDispatch, useAppSelector } from 'app/hooks'
+import { clearNewTask } from 'app/tasks'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useMutation, useQueries, useQuery, useQueryClient } from 'react-query'
@@ -31,25 +31,20 @@ export const useFetchTasksQuery = (
   }
 }
 
-export const useAddTaskMutation = (
-  tasklistId: string,
-  taskPayload: TaskPayload,
-  goBack = true,
-) => {
+export const useAddTaskMutation = (tasklistId: string) => {
   const queryClient = useQueryClient()
-  const navigation = useNavigation<StackNavigationProps>()
+  const { newTask } = useAppSelector(state => state.tasks)
   const dispatch = useAppDispatch()
-  const mutation = useMutation(
-    () => tasksService.create(tasklistId, taskPayload),
+  const addTaskMutation = useMutation(
+    () => tasksService.create(tasklistId, newTask),
     {
       onSuccess: () => {
         queryClient.invalidateQueries([QueryKey.Tasks, tasklistId])
-        dispatch(clearTask())
-        goBack && navigation.goBack()
+        dispatch(clearNewTask())
       },
     },
   )
-  return mutation
+  return { addTaskMutation, newTask }
 }
 
 export const useUpdateTaskMutation = (selfLink: string, task: Task) => {

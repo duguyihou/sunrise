@@ -5,24 +5,24 @@ import { windowWidth } from 'utils/dimensions'
 import { useAddTaskMutation } from 'hooks/tasks'
 import { AccessoryID, theme } from 'shared'
 import TaskAccessory from './TaskAccessory'
-import { useAppDispatch, useAppSelector } from 'app/hooks'
-import { updateTitle } from 'app/tasks'
 import DateTimeButton from './DateTimeButton'
 import { useKeyboard } from 'shared/useKeyboard'
+import { updateNewTask } from 'app/tasks'
+import { useAppDispatch } from 'app/hooks'
 
 type Props = {
   tasklistId: string
 }
 const AddTaskView = ({ tasklistId }: Props) => {
+  const { addTaskMutation, newTask } = useAddTaskMutation(tasklistId)
   const dispatch = useAppDispatch()
-  const { newTask } = useAppSelector(state => state.tasks)
-  const { title, due } = newTask
-  const addTaskMutation = useAddTaskMutation(tasklistId, newTask, false)
   const isKeyboardOpen = useKeyboard()
-  const handleOnSubmitEditing = () => addTaskMutation.mutate()
+  const { title, due } = newTask
+  const showDateTimeButton = () => !!due && isKeyboardOpen
+  const onChangeTitle = (text: string) =>
+    dispatch(updateNewTask({ ...newTask, title: text }))
 
-  const handleOnChangeTitle = (text: string) => dispatch(updateTitle(text))
-
+  const handleSubmit = () => addTaskMutation.mutate()
   return (
     <KeyboardAvoidingView
       style={styles.wrapper}
@@ -32,13 +32,14 @@ const AddTaskView = ({ tasklistId }: Props) => {
         <TextInput
           style={styles.title}
           value={title}
-          onChangeText={handleOnChangeTitle}
+          onChangeText={onChangeTitle}
           placeholder="Add a Task"
           inputAccessoryViewID={AccessoryID.Task}
           blurOnSubmit={false}
-          onSubmitEditing={handleOnSubmitEditing}
+          onSubmitEditing={handleSubmit}
         />
-        {!!due && isKeyboardOpen && <DateTimeButton dateTime={due} />}
+
+        {showDateTimeButton() && <DateTimeButton dateTime={due} />}
       </View>
       <TaskAccessory />
     </KeyboardAvoidingView>
