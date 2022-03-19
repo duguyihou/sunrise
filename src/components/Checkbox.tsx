@@ -21,7 +21,7 @@ const Checkbox = ({
   textStyle,
   onPress,
   isChecked,
-  disableText = false,
+  disableText,
 }: Props) => {
   return (
     <BouncyCheckbox

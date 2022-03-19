@@ -11,7 +11,7 @@ const TaskDateTime = ({ dateTime }: Props) => {
   return (
     <View style={styles.container}>
       <IconButton style={styles.icon} icon={faCalendarCheck} />
-      <DateTimeButton dateTime={dateTime} showPlaceholder={true} />
+      <DateTimeButton dateTime={dateTime} showPlaceholder />
     </View>
   )
 }
@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   icon: {
-    paddingLeft: 20,
     paddingRight: 10,
     paddingVertical: 10,
   },
