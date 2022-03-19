@@ -5,13 +5,7 @@ import { clearNewTask, updateTask } from 'app/tasks'
 import { useEffect } from 'react'
 import { useMutation, useQueries, useQuery, useQueryClient } from 'react-query'
 import { QueryKey } from 'shared'
-import {
-  StackNavigationProps,
-  TaskQuery,
-  Task,
-  TaskPayload,
-  Tasklist,
-} from 'typings'
+import { StackNavigationProps, TaskQuery, Task, Tasklist } from 'typings'
 
 export const useFetchTasksQuery = (
   tasklistId: string,
@@ -59,7 +53,7 @@ export const useUpdateTaskMutation = (selfLink: string, task: Task) => {
 export const useFetchTaskDetailQuery = (selfLink: string) => {
   const { task } = useAppSelector(state => state.tasks)
   const dispatch = useAppDispatch()
-  const { isLoading, error, data } = useQuery<TaskPayload, Error>(
+  const { isLoading, error, data } = useQuery<Task, Error>(
     QueryKey.TaskDetail,
     async () => tasksService.findBy(selfLink),
   )
