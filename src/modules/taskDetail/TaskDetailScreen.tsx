@@ -9,6 +9,7 @@ import TaskTitle from 'components/TaskTitle'
 import TaskNotes from 'components/TaskNotes'
 import IconButton from 'components/IconButton'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import TaskInfo from 'components/TaskInfo'
 
 const TaskDetailScreen = () => {
   const {
@@ -16,7 +17,7 @@ const TaskDetailScreen = () => {
   } = useRoute<RouteProp<RootStackParamList, RouteName.TaskDetail>>()
   const navigation = useNavigation()
   const { isLoading, error, task } = useFetchTaskDetailQuery(selfLink)
-  const { title, due, notes } = task
+  const { title, due, notes, updated } = task
   const deleteTaskMutation = useDeleteTaskMutation(selfLink)
 
   useLayoutEffect(() =>
@@ -36,6 +37,7 @@ const TaskDetailScreen = () => {
         <TaskDateTime dateTime={due} />
         <TaskNotes notes={notes} />
       </ScrollView>
+      <TaskInfo updated={updated} />
     </View>
   )
 }
