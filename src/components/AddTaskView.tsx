@@ -1,47 +1,32 @@
-import { KeyboardAvoidingView, StyleSheet, TextInput, View } from 'react-native'
+import { KeyboardAvoidingView, StyleSheet, View } from 'react-native'
 import React from 'react'
 import { useHeaderHeight } from '@react-navigation/elements'
 import { windowWidth } from 'utils/dimensions'
-import { useAddTaskMutation } from 'hooks/tasks'
 import { AccessoryID, theme } from 'shared'
 import TaskAccessory from './TaskAccessory'
 import DateTimeButton from './DateTimeButton'
 import { useKeyboard } from 'shared/useKeyboard'
-import { updateNewTask } from 'app/tasks'
-import { useAppDispatch } from 'app/hooks'
+import TaskTitle from './TaskTitle'
+import { useAppSelector } from 'app/hooks'
 
 type Props = {
   tasklistId: string
 }
 const AddTaskView = ({ tasklistId }: Props) => {
-  const { addTaskMutation, newTask } = useAddTaskMutation(tasklistId)
-  const dispatch = useAppDispatch()
-  const isKeyboardOpen = useKeyboard()
+  const { newTask } = useAppSelector(state => state.tasks)
   const { title, due } = newTask
+  const isKeyboardOpen = useKeyboard()
   const showDateTimeButton = () => !!due && isKeyboardOpen
-  const onChangeTitle = (text: string) =>
-    dispatch(updateNewTask({ ...newTask, title: text }))
-
-  const handleSubmit = () => addTaskMutation.mutate()
   return (
     <KeyboardAvoidingView
       style={styles.wrapper}
       behavior="padding"
       keyboardVerticalOffset={useHeaderHeight()}>
       <View style={styles.container}>
-        <TextInput
-          style={styles.title}
-          value={title}
-          onChangeText={onChangeTitle}
-          placeholder="Add a Task"
-          inputAccessoryViewID={AccessoryID.Task}
-          blurOnSubmit={false}
-          onSubmitEditing={handleSubmit}
-        />
-
+        <TaskTitle title={title} accessoryID={AccessoryID.Task} />
         {showDateTimeButton() && <DateTimeButton dateTime={due} />}
       </View>
-      <TaskAccessory />
+      <TaskAccessory tasklistId={tasklistId} />
     </KeyboardAvoidingView>
   )
 }
@@ -57,10 +42,5 @@ const styles = StyleSheet.create({
     backgroundColor: theme.bg.secondary,
     paddingHorizontal: 20,
     alignItems: 'flex-start',
-  },
-  title: {
-    paddingVertical: 8,
-    fontSize: 20,
-    width: '100%',
   },
 })
