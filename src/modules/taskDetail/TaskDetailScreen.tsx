@@ -1,7 +1,6 @@
 import { ScrollView, Text } from 'react-native'
 import React, { useLayoutEffect } from 'react'
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
-import { Controller } from 'react-hook-form'
 import { RootStackParamList } from 'typings'
 import { RouteName } from 'shared'
 import { useDeleteTaskMutation, useFetchTaskDetailQuery } from 'hooks/tasks'
