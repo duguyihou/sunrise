@@ -3,9 +3,10 @@ import React from 'react'
 import { RouteName, theme } from 'shared'
 import { StackNavigationProps } from 'typings'
 import { useNavigation } from '@react-navigation/native'
-import { useAppDispatch } from 'app/hooks'
-import { clearNewTask } from 'app/tasks'
+import { useAppDispatch, useAppSelector } from 'app/hooks'
+import { updateTask, updateNewTask } from 'app/tasks'
 import DateTimeText from './DateTimeText'
+import { getPrevRoute } from 'utils/routes'
 
 type Props = {
   dateTime: string
@@ -16,8 +17,15 @@ const DateTimeButton = (props: Props) => {
   const { dateTime, showPlaceholder } = props
   const navigation = useNavigation<StackNavigationProps>()
   const dispatch = useAppDispatch()
+  const { newTask, task } = useAppSelector(state => state.tasks)
   const handleSetDate = () => navigation.navigate(RouteName.DateTime)
-  const handleRemove = () => dispatch(clearNewTask())
+  const handleRemove = () => {
+    if (getPrevRoute(navigation).name === RouteName.Tasklists) {
+      dispatch(updateNewTask({ ...newTask, due: '' }))
+    } else {
+      dispatch(updateTask({ ...task, due: '' }))
+    }
+  }
   return (
     <View style={styles.container}>
       <TouchableOpacity
