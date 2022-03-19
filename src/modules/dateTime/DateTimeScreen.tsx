@@ -4,18 +4,19 @@ import { Calendar } from 'react-native-calendars'
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProps } from 'typings'
 import { theme } from 'shared'
-import { useAppDispatch } from 'app/hooks'
-import { updateDateTime } from 'app/tasks'
+import { useAppDispatch, useAppSelector } from 'app/hooks'
+import { updateNewTask } from 'app/tasks'
 import { getCalendarDayDate } from 'utils/dateTime'
 import { CalendarDay } from 'typings/day'
 
 const DateTimeScreen = () => {
   const navigation = useNavigation<StackNavigationProps>()
   const dispatch = useAppDispatch()
-
+  const { newTask } = useAppSelector(state => state.tasks)
   const handleGoback = () => navigation.goBack()
   const handleSetDate = (calendarDay: CalendarDay) => {
-    dispatch(updateDateTime(getCalendarDayDate(calendarDay)))
+    const dateTime = getCalendarDayDate(calendarDay)
+    dispatch(updateNewTask({ ...newTask, due: dateTime }))
     navigation.goBack()
   }
 

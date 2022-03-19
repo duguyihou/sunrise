@@ -7,50 +7,39 @@ import { AccessoryID, theme } from 'shared'
 import TaskAccessory from './TaskAccessory'
 import DateTimeButton from './DateTimeButton'
 import { useKeyboard } from 'shared/useKeyboard'
-import { Controller } from 'react-hook-form'
+import { updateNewTask } from 'app/tasks'
+import { useAppDispatch } from 'app/hooks'
 
 type Props = {
   tasklistId: string
 }
 const AddTaskView = ({ tasklistId }: Props) => {
-  const {
-    addTaskMutation,
-    useFormState: { getValues, control, handleSubmit },
-  } = useAddTaskMutation(tasklistId)
+  const { addTaskMutation, newTask } = useAddTaskMutation(tasklistId)
+  const dispatch = useAppDispatch()
   const isKeyboardOpen = useKeyboard()
-  const showDateTimeButton = () => !!getValues('due') && isKeyboardOpen
-  const onSubmit = () => addTaskMutation.mutate()
+  const { title, due } = newTask
+  const showDateTimeButton = () => !!due && isKeyboardOpen
+  const onChangeTitle = (text: string) =>
+    dispatch(updateNewTask({ ...newTask, title: text }))
 
+  const handleSubmit = () => addTaskMutation.mutate()
   return (
     <KeyboardAvoidingView
       style={styles.wrapper}
       behavior="padding"
       keyboardVerticalOffset={useHeaderHeight()}>
       <View style={styles.container}>
-        <Controller
-          name="title"
-          control={control}
-          render={({ field: { value, onChange } }) => (
-            <TextInput
-              style={styles.title}
-              value={value}
-              onChangeText={onChange}
-              placeholder="Add a Task"
-              inputAccessoryViewID={AccessoryID.Task}
-              blurOnSubmit={false}
-              onSubmitEditing={handleSubmit(onSubmit)}
-            />
-          )}
+        <TextInput
+          style={styles.title}
+          value={title}
+          onChangeText={onChangeTitle}
+          placeholder="Add a Task"
+          inputAccessoryViewID={AccessoryID.Task}
+          blurOnSubmit={false}
+          onSubmitEditing={handleSubmit}
         />
-        {showDateTimeButton() && (
-          <Controller
-            name="due"
-            control={control}
-            render={({ field: { value } }) => (
-              <DateTimeButton dateTime={value} />
-            )}
-          />
-        )}
+
+        {showDateTimeButton() && <DateTimeButton dateTime={due} />}
       </View>
       <TaskAccessory />
     </KeyboardAvoidingView>

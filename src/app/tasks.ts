@@ -8,19 +8,13 @@ const tasksSlice = createSlice({
   name: 'tasks',
   initialState,
   reducers: {
-    updateTitle: (state, { payload }) => {
-      return (state = {
+    updateNewTask: (state, { payload }) => {
+      return {
         ...state,
-        newTask: { ...state.newTask, title: payload },
-      })
+        newTask: payload,
+      }
     },
-    updateDateTime: (state, { payload }) => {
-      return (state = {
-        ...state,
-        newTask: { ...state.newTask, due: payload },
-      })
-    },
-    clearTask: () => initialState,
+    clearNewTask: state => ({ ...state, newTask: initialState.newTask }),
     toggleShowCompletedTasks: state => {
       return (state = {
         ...state,
@@ -31,10 +25,6 @@ const tasksSlice = createSlice({
 })
 
 const tasksReducer = tasksSlice.reducer
-export const {
-  updateTitle,
-  updateDateTime,
-  clearTask,
-  toggleShowCompletedTasks,
-} = tasksSlice.actions
+export const { updateNewTask, clearNewTask, toggleShowCompletedTasks } =
+  tasksSlice.actions
 export default tasksReducer

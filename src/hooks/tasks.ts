@@ -1,5 +1,7 @@
 import { useNavigation } from '@react-navigation/native'
 import tasksService from 'api/tasks'
+import { useAppDispatch, useAppSelector } from 'app/hooks'
+import { clearNewTask } from 'app/tasks'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useMutation, useQueries, useQuery, useQueryClient } from 'react-query'
@@ -31,25 +33,18 @@ export const useFetchTasksQuery = (
 
 export const useAddTaskMutation = (tasklistId: string) => {
   const queryClient = useQueryClient()
-  const useFormState = useForm({
-    defaultValues: { title: '', due: '', notes: '' },
-  })
-  const { getValues, reset } = useFormState
-  const task = () => ({
-    title: getValues('title'),
-    due: getValues('due'),
-    notes: getValues('notes'),
-  })
+  const { newTask } = useAppSelector(state => state.tasks)
+  const dispatch = useAppDispatch()
   const addTaskMutation = useMutation(
-    () => tasksService.create(tasklistId, task()),
+    () => tasksService.create(tasklistId, newTask),
     {
       onSuccess: () => {
         queryClient.invalidateQueries([QueryKey.Tasks, tasklistId])
-        reset()
+        dispatch(clearNewTask())
       },
     },
   )
-  return { addTaskMutation, useFormState }
+  return { addTaskMutation, newTask }
 }
 
 export const useUpdateTaskMutation = (selfLink: string, task: Task) => {
