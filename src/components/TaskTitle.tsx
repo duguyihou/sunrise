@@ -40,7 +40,8 @@ export default TaskTitle
 const styles = StyleSheet.create({
   title: {
     width: '100%',
-    paddingHorizontal: 10,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
     fontSize: 20,
   },
 })

@@ -1,23 +1,22 @@
-import { KeyboardAvoidingView, StyleSheet, TextInput, View } from 'react-native'
+import { KeyboardAvoidingView, StyleSheet, View } from 'react-native'
 import React from 'react'
 import { useHeaderHeight } from '@react-navigation/elements'
 import { windowWidth } from 'utils/dimensions'
-import { useAddTaskMutation } from 'hooks/tasks'
 import { AccessoryID, theme } from 'shared'
 import TaskAccessory from './TaskAccessory'
 import DateTimeButton from './DateTimeButton'
 import { useKeyboard } from 'shared/useKeyboard'
 import TaskTitle from './TaskTitle'
+import { useAppSelector } from 'app/hooks'
 
 type Props = {
   tasklistId: string
 }
 const AddTaskView = ({ tasklistId }: Props) => {
-  const { addTaskMutation, newTask } = useAddTaskMutation(tasklistId)
-  const isKeyboardOpen = useKeyboard()
+  const { newTask } = useAppSelector(state => state.tasks)
   const { title, due } = newTask
+  const isKeyboardOpen = useKeyboard()
   const showDateTimeButton = () => !!due && isKeyboardOpen
-  // const handleSubmit = () => addTaskMutation.mutate()
   return (
     <KeyboardAvoidingView
       style={styles.wrapper}
@@ -27,7 +26,7 @@ const AddTaskView = ({ tasklistId }: Props) => {
         <TaskTitle title={title} accessoryID={AccessoryID.Task} />
         {showDateTimeButton() && <DateTimeButton dateTime={due} />}
       </View>
-      <TaskAccessory />
+      <TaskAccessory tasklistId={tasklistId} />
     </KeyboardAvoidingView>
   )
 }

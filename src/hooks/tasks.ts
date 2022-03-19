@@ -43,7 +43,7 @@ export const useAddTaskMutation = (tasklistId: string) => {
       },
     },
   )
-  return { addTaskMutation, newTask }
+  return addTaskMutation
 }
 
 export const useUpdateTaskMutation = (selfLink: string, task: Task) => {
