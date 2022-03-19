@@ -1,16 +1,22 @@
+import { useAppDispatch, useAppSelector } from 'app/hooks'
+import { updateTask } from 'app/tasks'
 import React from 'react'
 import { StyleSheet, TextInput } from 'react-native'
+
 type Props = {
-  value: string | undefined
-  onChange: (...event: unknown[]) => void
+  title: string
 }
-const TaskTitle = ({ value, onChange }: Props) => {
+const TaskTitle = ({ title }: Props) => {
+  const dispatch = useAppDispatch()
+  const { task } = useAppSelector(state => state.tasks)
+  const handleOnChange = (text: string) =>
+    dispatch(updateTask({ ...task, title: text }))
   return (
     <TextInput
       multiline
       style={styles.title}
-      value={value}
-      onChangeText={onChange}
+      value={title}
+      onChangeText={handleOnChange}
       placeholder="Add a Task"
       blurOnSubmit={false}
     />

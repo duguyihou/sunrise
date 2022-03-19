@@ -33,13 +33,11 @@ specifiers:
   jest: ^26.6.3
   metro-react-native-babel-preset: ^0.66.2
   react: 17.0.2
-  react-hook-form: ^7.25.0
   react-native: 0.66.4
   react-native-app-auth: ^6.4.1
   react-native-bouncy-checkbox: ^2.1.10
   react-native-calendars: ^1.1279.0
   react-native-config: ^1.4.5
-  react-native-date-picker: ^4.1.5
   react-native-gesture-handler: ^2.2.0
   react-native-reanimated: ^2.3.1
   react-native-safe-area-context: ^3.3.2
@@ -65,13 +63,11 @@ dependencies:
   axios: 0.25.0
   dayjs: 1.10.7
   react: 17.0.2
-  react-hook-form: 7.25.0_react@17.0.2
   react-native: 0.66.4_3ea5b0cc8d329643dbdf4991280571c8
   react-native-app-auth: 6.4.1_react-native@0.66.4
   react-native-bouncy-checkbox: 2.1.10_react-native@0.66.4+react@17.0.2
   react-native-calendars: 1.1279.0_react-native@0.66.4+react@17.0.2
   react-native-config: 1.4.5
-  react-native-date-picker: 4.1.5
   react-native-gesture-handler: 2.2.0
   react-native-reanimated: 2.3.1_fd1a002149e6dc67718dab76a4b98583
   react-native-safe-area-context: 3.3.2_react-native@0.66.4+react@17.0.2
@@ -7013,15 +7009,6 @@ packages:
       react: 17.0.2
     dev: false
 
-  /react-hook-form/7.25.0_react@17.0.2:
-    resolution: {integrity: sha512-MyF4YXegIT/vfyZloTm98mpJwLUPfULdX37yPzXeijT1hePCkV8DN1IAnEufxgtqCpc7aFGRinegQwisUGZCnA==}
-    engines: {node: '>=12.22.0'}
-    peerDependencies:
-      react: ^16.8.0 || ^17
-    dependencies:
-      react: 17.0.2
-    dev: false
-
   /react-is/16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
 
@@ -7089,10 +7076,6 @@ packages:
     peerDependenciesMeta:
       react-native-windows:
         optional: true
-    dev: false
-
-  /react-native-date-picker/4.1.5:
-    resolution: {integrity: sha512-JO342dCAcUpWi8kwaji9zOnidJdHagAHyhblUDUMyUfjZmEq2ZkqNnC00M7pN9Tu+D2YNs7yeAiOupMJxev9aQ==}
     dev: false
 
   /react-native-gesture-handler/2.2.0:

@@ -3,28 +3,30 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   newTask: { title: '', due: '', notes: '' },
   showCompletedTasks: false,
+  task: { title: '', due: '', notes: '' },
 }
 const tasksSlice = createSlice({
   name: 'tasks',
   initialState,
   reducers: {
-    updateNewTask: (state, { payload }) => {
-      return {
-        ...state,
-        newTask: payload,
-      }
-    },
+    updateNewTask: (state, { payload }) => ({
+      ...state,
+      newTask: payload,
+    }),
     clearNewTask: state => ({ ...state, newTask: initialState.newTask }),
-    toggleShowCompletedTasks: state => {
-      return (state = {
-        ...state,
-        showCompletedTasks: !state.showCompletedTasks,
-      })
-    },
+    toggleShowCompletedTasks: state => ({
+      ...state,
+      showCompletedTasks: !state.showCompletedTasks,
+    }),
+    updateTask: (state, { payload }) => ({ ...state, task: payload }),
   },
 })
 
 const tasksReducer = tasksSlice.reducer
-export const { updateNewTask, clearNewTask, toggleShowCompletedTasks } =
-  tasksSlice.actions
+export const {
+  updateNewTask,
+  clearNewTask,
+  toggleShowCompletedTasks,
+  updateTask,
+} = tasksSlice.actions
 export default tasksReducer
