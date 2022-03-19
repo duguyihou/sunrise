@@ -18,6 +18,7 @@ const TaskDetailScreen = () => {
   const { isLoading, error, task } = useFetchTaskDetailQuery(selfLink)
   const { title, due, notes } = task
   const deleteTaskMutation = useDeleteTaskMutation(selfLink)
+
   useLayoutEffect(() =>
     navigation.setOptions({
       headerRight: () => <IconButton icon={faTrash} fn={handleDelete} />,

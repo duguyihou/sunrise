@@ -3,20 +3,26 @@ import React from 'react'
 import { Calendar } from 'react-native-calendars'
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProps } from 'typings'
-import { theme } from 'shared'
+import { RouteName, theme } from 'shared'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
-import { updateNewTask } from 'app/tasks'
+import { updateNewTask, updateTask } from 'app/tasks'
 import { getCalendarDayDate } from 'utils/dateTime'
 import { CalendarDay } from 'typings/day'
+import { getPrevRoute } from 'utils/routes'
 
 const DateTimeScreen = () => {
   const navigation = useNavigation<StackNavigationProps>()
   const dispatch = useAppDispatch()
-  const { newTask } = useAppSelector(state => state.tasks)
+  const { newTask, task } = useAppSelector(state => state.tasks)
+
   const handleGoback = () => navigation.goBack()
   const handleSetDate = (calendarDay: CalendarDay) => {
     const dateTime = getCalendarDayDate(calendarDay)
-    dispatch(updateNewTask({ ...newTask, due: dateTime }))
+    if (getPrevRoute(navigation).name === RouteName.Tasklist) {
+      dispatch(updateNewTask({ ...newTask, due: dateTime }))
+    } else {
+      dispatch(updateTask({ ...task, due: dateTime }))
+    }
     navigation.goBack()
   }
 
