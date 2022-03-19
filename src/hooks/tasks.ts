@@ -1,9 +1,8 @@
 import { useNavigation } from '@react-navigation/native'
 import tasksService from 'api/tasks'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
-import { clearNewTask } from 'app/tasks'
+import { clearNewTask, updateTask } from 'app/tasks'
 import { useEffect } from 'react'
-import { useForm } from 'react-hook-form'
 import { useMutation, useQueries, useQuery, useQueryClient } from 'react-query'
 import { QueryKey } from 'shared'
 import {
@@ -58,16 +57,17 @@ export const useUpdateTaskMutation = (selfLink: string, task: Task) => {
 }
 
 export const useFetchTaskDetailQuery = (selfLink: string) => {
-  const { control, reset } = useForm({ mode: 'onChange' })
-
+  const { task } = useAppSelector(state => state.tasks)
+  const dispatch = useAppDispatch()
   const { isLoading, error, data } = useQuery<TaskPayload, Error>(
     QueryKey.TaskDetail,
     async () => tasksService.findBy(selfLink),
   )
   useEffect(() => {
-    if (data) reset({ ...data })
-  }, [data, reset])
-  return { isLoading, error, control }
+    if (data) dispatch(updateTask(data))
+  }, [data, dispatch])
+
+  return { isLoading, error, task }
 }
 
 export const useDeleteTaskMutation = (selfLink: string) => {

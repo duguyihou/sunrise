@@ -1,22 +1,27 @@
 import React from 'react'
 import { faAlignLeft } from '@fortawesome/free-solid-svg-icons'
 import { StyleSheet, TextInput, View } from 'react-native'
+import { useAppDispatch, useAppSelector } from 'app/hooks'
 import { theme } from 'shared'
 import IconButton from './IconButton'
+import { updateTask } from 'app/tasks'
 
 type Props = {
-  value: string | undefined
-  onChange: (...event: unknown[]) => void
+  notes: string
 }
-const TaskNotes = ({ value, onChange }: Props) => {
+const TaskNotes = ({ notes }: Props) => {
+  const dispatch = useAppDispatch()
+  const { task } = useAppSelector(state => state.tasks)
+  const handleOnChange = (text: string) =>
+    dispatch(updateTask({ ...task, notes: text }))
   return (
     <View style={styles.container}>
       <IconButton icon={faAlignLeft} />
       <TextInput
         multiline
         style={styles.notes}
-        value={value}
-        onChangeText={onChange}
+        value={notes}
+        onChangeText={handleOnChange}
         placeholder="Add Notes"
         blurOnSubmit={false}
       />

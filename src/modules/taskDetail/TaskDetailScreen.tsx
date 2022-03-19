@@ -16,7 +16,8 @@ const TaskDetailScreen = () => {
     params: { selfLink },
   } = useRoute<RouteProp<RootStackParamList, RouteName.TaskDetail>>()
   const navigation = useNavigation()
-  const { isLoading, error, control } = useFetchTaskDetailQuery(selfLink)
+  const { isLoading, error, task } = useFetchTaskDetailQuery(selfLink)
+  const { title, due, notes } = task
   const deleteTaskMutation = useDeleteTaskMutation(selfLink)
   useLayoutEffect(() =>
     navigation.setOptions({
@@ -30,25 +31,9 @@ const TaskDetailScreen = () => {
   if (error) return <Text>`An error has occurred: ${error.message}`</Text>
   return (
     <ScrollView>
-      <Controller
-        name="title"
-        control={control}
-        render={({ field: { value, onChange } }) => (
-          <TaskTitle value={value} onChange={onChange} />
-        )}
-      />
-      <Controller
-        name="due"
-        control={control}
-        render={({ field: { value } }) => <TaskDateTime dateTime={value} />}
-      />
-      <Controller
-        name="notes"
-        control={control}
-        render={({ field: { value, onChange } }) => (
-          <TaskNotes value={value} onChange={onChange} />
-        )}
-      />
+      <TaskTitle title={title} />
+      <TaskDateTime dateTime={due} />
+      <TaskNotes notes={notes} />
     </ScrollView>
   )
 }
