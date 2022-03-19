@@ -34,7 +34,6 @@ export default TaskNotes
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    paddingHorizontal: 10,
     paddingTop: 10,
     flexDirection: 'row',
   },

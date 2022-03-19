@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   text: {
-    fontSize: 16,
+    fontSize: 12,
     padding: 5,
     borderColor: theme.font.placeholder,
     borderWidth: 1,

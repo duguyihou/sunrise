@@ -50,7 +50,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   dateTime: {
-    padding: 5,
     flexDirection: 'row',
   },
 
@@ -61,7 +60,7 @@ const styles = StyleSheet.create({
   },
 
   remove: {
-    marginLeft: 10,
-    fontSize: 16,
+    padding: 5,
+    fontSize: 12,
   },
 })

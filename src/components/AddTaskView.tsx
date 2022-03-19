@@ -35,12 +35,11 @@ export default AddTaskView
 
 const styles = StyleSheet.create({
   wrapper: {
-    marginBottom: 50,
+    marginBottom: 30,
   },
   container: {
-    width: windowWidth,
+    width: windowWidth - 20,
     backgroundColor: theme.bg.secondary,
     paddingHorizontal: 20,
-    alignItems: 'flex-start',
   },
 })

@@ -24,7 +24,7 @@ const CalendatBanner = () => {
       </TouchableOpacity>
       <ScrollView
         style={styles.daysContainer}
-        horizontal={true}
+        horizontal
         showsHorizontalScrollIndicator={false}>
         {getNextDays(Next_DAYS).map(({ day, dayName }) => (
           <TouchableOpacity

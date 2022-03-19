@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { StackNavigationProps, Task } from 'typings'
 import Checkbox from './Checkbox'
 import { useUpdateTaskMutation } from 'hooks/tasks'
@@ -7,8 +7,6 @@ import { RouteName, TaskStatus, theme } from 'shared'
 import { useNavigation } from '@react-navigation/native'
 import { windowWidth } from 'utils/dimensions'
 import DateTimeText from './DateTimeText'
-import TaskItemNotes from './TaskItemNotes'
-import TaskItemTitle from './TaskItemTitle'
 
 type Props = {
   task: Task
@@ -22,19 +20,25 @@ const TaskItem = ({ task }: Props) => {
     status: !isChecked ? TaskStatus.Completed : TaskStatus.NeedsAction,
   })
   const handleCheck = () => updateTaskStatusMutation.mutate()
+  const navigateToTaskDetail = () =>
+    navigation.push(RouteName.TaskDetail, { selfLink })
   return (
     <TouchableOpacity
       activeOpacity={1}
       style={styles.container}
-      onPress={() => navigation.push(RouteName.TaskDetail, { selfLink })}>
-      <Checkbox
-        isChecked={isChecked}
-        onPress={handleCheck}
-        disableText={true}
-      />
+      onPress={navigateToTaskDetail}>
+      <Checkbox isChecked={isChecked} onPress={handleCheck} />
       <View style={styles.task}>
-        <TaskItemTitle isChecked={isChecked} title={title} />
-        {notes && <TaskItemNotes notes={notes} />}
+        <Text
+          numberOfLines={1}
+          style={[styles.needsActionTitle, isChecked && styles.completedTitle]}>
+          {title}
+        </Text>
+        {notes && (
+          <Text numberOfLines={2} style={styles.notes}>
+            {notes}
+          </Text>
+        )}
         {due && <DateTimeText dateTime={due} style={styles.dateTimeText} />}
       </View>
     </TouchableOpacity>
@@ -56,12 +60,24 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
-    paddingLeft: 20,
+  },
+  needsActionTitle: {
+    fontSize: 16,
+  },
+  completedTitle: {
+    color: theme.font.placeholder,
+    textDecorationLine: 'line-through',
   },
   dateTimeText: {
+    fontSize: 10,
     borderWidth: 1,
     borderRadius: 10,
     borderColor: theme.border.secondary,
+    marginTop: 4,
+  },
+  notes: {
+    color: theme.font.placeholder,
+    paddingVertical: 5,
     marginTop: 4,
   },
 })
