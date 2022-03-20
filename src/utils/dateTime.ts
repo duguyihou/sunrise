@@ -37,3 +37,6 @@ export const getCalendarDayDate = (calendarDay: CalendarDay) => {
   const { dateString } = calendarDay
   return dayjs(dateString).toISOString()
 }
+
+export const convertToCalendar = (date: string) =>
+  dayjs(date).format('ddd, MMM DD')
