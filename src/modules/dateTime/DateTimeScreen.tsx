@@ -1,37 +1,25 @@
 import { StyleSheet, TouchableOpacity, View } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import { Calendar } from 'react-native-calendars'
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProps } from 'typings'
-import { RouteName, theme } from 'shared'
-import { useAppDispatch, useAppSelector } from 'app/hooks'
-import { updateNewTask, updateTask } from 'app/tasks'
+import { theme } from 'shared'
 import { getCalendarDayDate } from 'utils/dateTime'
 import { CalendarDay } from 'typings/day'
-import { getPrevRoute } from 'utils/routes'
 import DateTimeHeader from 'components/DateTimeHeader'
 
 const DateTimeScreen = () => {
   const navigation = useNavigation<StackNavigationProps>()
-
-  const dispatch = useAppDispatch()
-  const { newTask, task } = useAppSelector(state => state.tasks)
+  const [due, setDue] = useState('')
   const handleGoback = () => navigation.goBack()
-  const handleSetDate = (calendarDay: CalendarDay) => {
-    const dateTime = getCalendarDayDate(calendarDay)
-    if (getPrevRoute(navigation).name === RouteName.Tasklist) {
-      dispatch(updateNewTask({ ...newTask, due: dateTime }))
-    } else {
-      dispatch(updateTask({ ...task, due: dateTime }))
-    }
-    navigation.goBack()
-  }
+  const handleSetDate = (calendarDay: CalendarDay) =>
+    setDue(getCalendarDayDate(calendarDay))
 
   return (
     <>
       <TouchableOpacity style={styles.outside} onPress={handleGoback} />
       <View style={styles.container}>
-        <DateTimeHeader />
+        <DateTimeHeader dateTime={due} />
         <Calendar onDayPress={handleSetDate} />
       </View>
     </>
@@ -51,14 +39,5 @@ const styles = StyleSheet.create({
     backgroundColor: theme.bg.primary,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
-  },
-  today: {
-    width: '100%',
-  },
-  text: {
-    fontSize: 16,
-    color: theme.font.secondary,
-    paddingHorizontal: 20,
-    paddingVertical: 10,
   },
 })
