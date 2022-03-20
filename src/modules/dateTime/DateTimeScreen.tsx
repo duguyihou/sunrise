@@ -1,26 +1,39 @@
-import { StyleSheet, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
-import { Calendar } from 'react-native-calendars'
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProps } from 'typings'
 import { theme } from 'shared'
-import { getCalendarDayDate } from 'utils/dateTime'
-import { CalendarDay } from 'typings/day'
 import DateTimeHeader from 'components/DateTimeHeader'
+import { Calendar } from 'react-native-calendars'
+import { CalendarDay } from 'typings/day'
+import { getCalendarDayDate } from 'utils/dateTime'
 
-const DateTimeScreen = () => {
+type Props = {
+  dateTime: string
+}
+const DateTimeScreen = ({ dateTime }: Props) => {
+  const [due, setDue] = useState(dateTime)
+  const [showCalendar, setShowCalendar] = useState(true)
   const navigation = useNavigation<StackNavigationProps>()
-  const [due, setDue] = useState('')
-  const handleGoback = () => navigation.goBack()
-  const handleSetDate = (calendarDay: CalendarDay) =>
-    setDue(getCalendarDayDate(calendarDay))
 
+  const handleGoback = () => navigation.goBack()
+  const handleSetDate = (calendarDay: CalendarDay) => {
+    setDue(getCalendarDayDate(calendarDay))
+  }
+  const hanldeShowCalendar = () => setShowCalendar(false)
   return (
     <>
       <TouchableOpacity style={styles.outside} onPress={handleGoback} />
       <View style={styles.container}>
         <DateTimeHeader dateTime={due} />
-        <Calendar onDayPress={handleSetDate} />
+        <>
+          {!showCalendar && (
+            <TouchableOpacity onPress={hanldeShowCalendar}>
+              <Text>{due}</Text>
+            </TouchableOpacity>
+          )}
+          {showCalendar && <Calendar onDayPress={handleSetDate} />}
+        </>
       </View>
     </>
   )
