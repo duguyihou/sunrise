@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text } from 'react-native'
-import { getCalendar, isBeforeToday } from 'utils/dateTime'
+import { convertToCalendar, getCalendar, isBeforeToday } from 'utils/dateTime'
 import { theme } from 'shared'
 
 type Props = {
@@ -17,7 +17,9 @@ const DateTimeText = (props: Props) => {
         style,
         !!dateTime && isBeforeToday(dateTime) && styles.before,
       ]}>
-      {dateTime ? getCalendar(dateTime) : showPlaceholder && 'Add date/time'}
+      {dateTime
+        ? convertToCalendar(dateTime)
+        : showPlaceholder && 'Add date/time'}
     </Text>
   )
 }
