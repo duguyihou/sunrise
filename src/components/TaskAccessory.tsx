@@ -9,12 +9,14 @@ import IconButton from './IconButton'
 
 type Props = {
   tasklistId: string
+  due: string
 }
-const TaskAccessory = ({ tasklistId }: Props) => {
+const TaskAccessory = ({ tasklistId, due }: Props) => {
   const navigation = useNavigation<StackNavigationProps>()
   const addTaskMutation = useAddTaskMutation(tasklistId)
 
-  const handleSetDateTime = () => navigation.navigate(RouteName.DateTime)
+  const handleSetDateTime = () =>
+    navigation.navigate(RouteName.DateTime, { dateTime: due })
   const handleSubmit = () => addTaskMutation.mutate()
   return (
     <InputAccessoryView nativeID={AccessoryID.Task}>

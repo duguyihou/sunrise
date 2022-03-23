@@ -26,7 +26,7 @@ const AddTaskView = ({ tasklistId }: Props) => {
         <TaskTitle title={title} accessoryID={AccessoryID.Task} />
         {showDateTimeButton() && <DateTimeButton dateTime={due} />}
       </View>
-      <TaskAccessory tasklistId={tasklistId} />
+      <TaskAccessory tasklistId={tasklistId} due={due} />
     </KeyboardAvoidingView>
   )
 }
