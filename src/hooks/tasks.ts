@@ -13,15 +13,15 @@ export const useFetchTasksQuery = (
   showDeleted?: boolean,
   showHidden?: boolean,
 ) => {
-  const queryResult = useQuery<TaskQuery, Error>(
+  const queryResult = useQuery<TaskQuery, Error, Task[]>(
     [QueryKey.Tasks, tasklistId],
     async () =>
       tasksService.findAll(tasklistId, showCompleted, showDeleted, showHidden),
+    {
+      select: ({ items }) => items,
+    },
   )
-  return {
-    ...queryResult,
-    data: queryResult.data?.items,
-  }
+  return queryResult
 }
 
 export const useAddTaskMutation = (tasklistId: string) => {
