@@ -50,4 +50,5 @@ export interface TaskPayload {
   title: string
   notes: string
   due: string
+  status: string
 }

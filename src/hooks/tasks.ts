@@ -37,9 +37,11 @@ export const useFetchTasksQuery = (
 export const useAddTaskMutation = (tasklistId: string) => {
   const queryClient = useQueryClient()
   const { newTask } = useAppSelector(state => state.tasks)
+  const status = newTask.status ? TaskStatus.Completed : TaskStatus.NeedsAction
+  const rawNewTask = { ...newTask, status }
   const dispatch = useAppDispatch()
   const addTaskMutation = useMutation(
-    () => tasksService.create(tasklistId, newTask),
+    () => tasksService.create(tasklistId, rawNewTask),
     {
       onSuccess: () => {
         queryClient.invalidateQueries([QueryKey.Tasks, tasklistId])
@@ -50,11 +52,11 @@ export const useAddTaskMutation = (tasklistId: string) => {
   return addTaskMutation
 }
 
-export const useUpdateTaskMutation = (selfLink: string, task: Task) => {
+export const useUpdateTaskMutation = (task: Task) => {
   const queryClient = useQueryClient()
-  const status = task.status ? TaskStatus.Completed : TaskStatus.NeedsAction
+  const status = task.status ? TaskStatus.NeedsAction : TaskStatus.Completed
   const rawTask = { ...task, status }
-  const mutation = useMutation(() => tasksService.updateBy(selfLink, rawTask), {
+  const mutation = useMutation(() => tasksService.update(rawTask), {
     onSuccess: () => {
       queryClient.invalidateQueries(QueryKey.Tasks)
     },
@@ -67,7 +69,7 @@ export const useFetchTaskDetailQuery = (selfLink: string) => {
   const dispatch = useAppDispatch()
   const { isLoading, error, data } = useQuery<Task, Error>(
     QueryKey.TaskDetail,
-    async () => tasksService.findBy(selfLink),
+    async () => tasksService.find(selfLink),
   )
   useEffect(() => {
     if (data) dispatch(updateTaskDetail(data))
