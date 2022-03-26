@@ -8,7 +8,7 @@ const initialState = {
     due: '',
     notes: '',
     updated: '',
-    status: 'needsAction',
+    status: false,
     etag: '',
     id: '',
     kind: 'tasks#task',
