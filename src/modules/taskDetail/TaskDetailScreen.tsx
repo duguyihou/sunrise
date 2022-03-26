@@ -1,7 +1,6 @@
 import { ScrollView, StyleSheet, Text, View } from 'react-native'
 import React, { useLayoutEffect } from 'react'
-import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
-import { RootStackParamList } from 'typings'
+import { useNavigation, useRoute } from '@react-navigation/native'
 import { RouteName } from 'shared'
 import { useDeleteTaskMutation, useFetchTaskDetailQuery } from 'hooks/tasks'
 import TaskDateTime from 'components/TaskDateTime'
@@ -10,11 +9,12 @@ import TaskNotes from 'components/TaskNotes'
 import IconButton from 'components/IconButton'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import { getCalendar } from 'utils/dateTime'
+import { RouteType } from 'typings/route'
 
 const TaskDetailScreen = () => {
   const {
     params: { selfLink },
-  } = useRoute<RouteProp<RootStackParamList, RouteName.TaskDetail>>()
+  } = useRoute<RouteType<RouteName.TaskDetail>>()
   const navigation = useNavigation()
   const { isLoading, error, task } = useFetchTaskDetailQuery(selfLink)
   const { title, due, notes, updated } = task

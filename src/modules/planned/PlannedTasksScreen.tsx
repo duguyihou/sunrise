@@ -1,15 +1,15 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import { RouteProp, useRoute } from '@react-navigation/native'
-import { RootStackParamList } from 'typings'
+import { useRoute } from '@react-navigation/native'
 import { RouteName } from 'shared'
 import { useFetchTasksQueries } from 'hooks/tasks'
 import CalendatBanner from 'components/CalendarBanner'
+import { RouteType } from 'typings/route'
 
 const PlannedTasksScreen = () => {
   const {
     params: { tasklists },
-  } = useRoute<RouteProp<RootStackParamList, RouteName.Planned>>()
+  } = useRoute<RouteType<RouteName.Planned>>()
   const fetchTasksQueryResults = useFetchTasksQueries(tasklists)
   if (fetchTasksQueryResults.every(q => q.isLoading))
     return <Text>loading...</Text>

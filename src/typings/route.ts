@@ -1,3 +1,4 @@
+import { RouteProp } from '@react-navigation/native'
 import {
   NativeStackScreenProps,
   NativeStackNavigationProp,
@@ -20,3 +21,8 @@ export type RootStackParamList = {
 
 export type StackProps = NativeStackScreenProps<RootStackParamList>
 export type StackNavigationProps = NativeStackNavigationProp<RootStackParamList>
+
+export type RouteType<K extends keyof RootStackParamList> = RouteProp<
+  RootStackParamList,
+  K
+>
