@@ -4,7 +4,6 @@ import { useNavigation, useRoute } from '@react-navigation/native'
 import { RouteName } from 'shared'
 import { useDeleteTaskMutation, useFetchTaskDetailQuery } from 'hooks/tasks'
 import TaskDateTime from 'components/TaskDateTime'
-import TaskTitle from 'components/TaskTitle'
 import TaskNotes from 'components/TaskNotes'
 import IconButton from 'components/IconButton'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
@@ -18,7 +17,7 @@ const TaskDetailScreen = () => {
   } = useRoute<RouteType<RouteName.TaskDetail>>()
   const navigation = useNavigation()
   const { isLoading, error, taskDetail } = useFetchTaskDetailQuery(selfLink)
-  const { title, due, notes, updated } = taskDetail
+  const { due, notes, updated } = taskDetail
   const deleteTaskMutation = useDeleteTaskMutation(selfLink)
 
   useLayoutEffect(() =>

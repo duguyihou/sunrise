@@ -1,26 +1,47 @@
 import React from 'react'
 import Checkbox from './Checkbox'
 import { useUpdateTaskMutation } from 'hooks/tasks'
-import Title from './Title'
-import { useAppSelector } from 'app/hooks'
+import { useAppDispatch, useAppSelector } from 'app/hooks'
+import { StyleSheet, TextInput } from 'react-native'
+import { updateTaskDetail } from 'app/tasks'
 
 const TaskTitleSection = () => {
+  const dispatch = useAppDispatch()
   const { taskDetail } = useAppSelector(state => state.tasks)
 
-  const { status, title, selfLink } = taskDetail
-  const updateTaskStatusMutation = useUpdateTaskMutation(selfLink, {
+  const { status, title } = taskDetail
+  const updateTaskStatusMutation = useUpdateTaskMutation({
     ...taskDetail,
     status: !status,
   })
   const handleCheck = () => updateTaskStatusMutation.mutate()
+  const handleOnChangeText = (text: string) =>
+    dispatch(updateTaskDetail({ ...taskDetail, title: text }))
+
   return (
     <Checkbox
       isChecked={status}
       onPress={handleCheck}
-      textComponent={<Title />}
+      textComponent={
+        <TextInput
+          style={styles.title}
+          value={taskDetail.title}
+          onChangeText={handleOnChangeText}
+          placeholder="Add a Task"
+          blurOnSubmit={false}
+        />
+      }
       text={title}
     />
   )
 }
 
 export default TaskTitleSection
+
+const styles = StyleSheet.create({
+  title: {
+    flex: 1,
+    padding: 10,
+    fontSize: 16,
+  },
+})

@@ -15,7 +15,7 @@ const TaskItem = ({ task }: Props) => {
   const { title, selfLink, status, due, notes } = task
   const navigation = useNavigation<StackNavigationProps>()
 
-  const updateTaskStatusMutation = useUpdateTaskMutation(selfLink, {
+  const updateTaskStatusMutation = useUpdateTaskMutation({
     ...task,
     status: !status,
   })

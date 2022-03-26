@@ -20,12 +20,13 @@ const create = async (tasklist: string, taskPayload: TaskPayload) => {
   return response.data
 }
 
-const updateBy = async (selfLink: string, task: RawTask) => {
+const update = async (task: RawTask) => {
+  const { selfLink } = task
   const response = await apiClient.put(selfLink, { ...task })
   return response.data
 }
 
-const findBy = async (selfLink: string) => {
+const find = async (selfLink: string) => {
   const response = await apiClient.get(selfLink)
   return response.data
 }
@@ -37,9 +38,9 @@ const deleteBy = async (selfLink: string) => {
 
 const tasksService = {
   findAll,
-  findBy,
+  find,
   create,
-  updateBy,
+  update,
   deleteBy,
 }
 
