@@ -11,18 +11,21 @@ type Props = {
   onPress: () => void
   isChecked: boolean
   disableText?: boolean
+  textComponent?: React.ReactNode
 }
-const Checkbox = ({
-  size,
-  fillColor,
-  unfillColor,
-  text,
-  iconStyle,
-  textStyle,
-  onPress,
-  isChecked,
-  disableText,
-}: Props) => {
+const Checkbox = (props: Props) => {
+  const {
+    size,
+    fillColor,
+    unfillColor,
+    text,
+    iconStyle,
+    textStyle,
+    onPress,
+    isChecked,
+    disableText,
+    textComponent,
+  } = props
   return (
     <BouncyCheckbox
       isChecked={isChecked}
@@ -34,6 +37,7 @@ const Checkbox = ({
       textStyle={textStyle}
       onPress={() => onPress()}
       disableText={disableText}
+      textComponent={textComponent}
     />
   )
 }
