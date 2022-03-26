@@ -3,7 +3,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { StackNavigationProps, Task } from 'typings'
 import Checkbox from './Checkbox'
 import { useUpdateTaskMutation } from 'hooks/tasks'
-import { RouteName, TaskStatus, theme } from 'shared'
+import { RouteName, theme } from 'shared'
 import { useNavigation } from '@react-navigation/native'
 import { windowWidth } from 'utils/dimensions'
 import DateTimeText from './DateTimeText'
@@ -14,10 +14,10 @@ type Props = {
 const TaskItem = ({ task }: Props) => {
   const { title, selfLink, status, due, notes } = task
   const navigation = useNavigation<StackNavigationProps>()
-  const isChecked = status === TaskStatus.Completed
+
   const updateTaskStatusMutation = useUpdateTaskMutation(selfLink, {
     ...task,
-    status: !isChecked ? TaskStatus.Completed : TaskStatus.NeedsAction,
+    status: !status,
   })
   const handleCheck = () => updateTaskStatusMutation.mutate()
   const navigateToTaskDetail = () =>
@@ -27,11 +27,11 @@ const TaskItem = ({ task }: Props) => {
       activeOpacity={1}
       style={styles.container}
       onPress={navigateToTaskDetail}>
-      <Checkbox isChecked={isChecked} onPress={handleCheck} />
+      <Checkbox isChecked={status} onPress={handleCheck} />
       <View style={styles.task}>
         <Text
           numberOfLines={1}
-          style={[styles.needsActionTitle, isChecked && styles.completedTitle]}>
+          style={[styles.needsActionTitle, status && styles.completedTitle]}>
           {title}
         </Text>
         {notes && (

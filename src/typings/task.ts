@@ -1,4 +1,4 @@
-export interface Task {
+export interface RawTask {
   etag: string
   id: string
   kind: string
@@ -11,6 +11,18 @@ export interface Task {
   notes?: string
 }
 
+export interface Task {
+  etag: string
+  id: string
+  kind: string
+  position: string
+  selfLink: string
+  status: boolean
+  title: string
+  updated: string
+  due?: string
+  notes?: string
+}
 export interface Tasklist {
   kind: string
   id: string
@@ -28,7 +40,7 @@ export interface TasklistQuery {
 
 export interface TaskQuery {
   etag: string
-  items: Task[]
+  items: RawTask[]
   kind: string
 }
 

@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from 'app/hooks'
 import { clearNewTask, updateTask } from 'app/tasks'
 import { useEffect } from 'react'
 import { useMutation, useQueries, useQuery, useQueryClient } from 'react-query'
-import { QueryKey } from 'shared'
+import { QueryKey, TaskStatus } from 'shared'
 import { StackNavigationProps, TaskQuery, Task, Tasklist } from 'typings'
 
 export const useFetchTasksQuery = (
@@ -13,15 +13,25 @@ export const useFetchTasksQuery = (
   showDeleted?: boolean,
   showHidden?: boolean,
 ) => {
-  const queryResult = useQuery<TaskQuery, Error, Task[]>(
+  let tasks: Task[] = [],
+    needsActionTasks: Task[] = [],
+    compeletedTasks: Task[] = []
+  const queryResult = useQuery<TaskQuery, Error, void>(
     [QueryKey.Tasks, tasklistId],
     async () =>
       tasksService.findAll(tasklistId, showCompleted, showDeleted, showHidden),
     {
-      select: ({ items }) => items,
+      select: ({ items }) => {
+        tasks = items.map(item => ({
+          ...item,
+          status: item.status === TaskStatus.Completed ? true : false,
+        }))
+        needsActionTasks = tasks.filter(({ status }) => !status)
+        compeletedTasks = tasks.filter(({ status }) => status)
+      },
     },
   )
-  return queryResult
+  return { ...queryResult, tasks, needsActionTasks, compeletedTasks }
 }
 
 export const useAddTaskMutation = (tasklistId: string) => {
@@ -42,7 +52,9 @@ export const useAddTaskMutation = (tasklistId: string) => {
 
 export const useUpdateTaskMutation = (selfLink: string, task: Task) => {
   const queryClient = useQueryClient()
-  const mutation = useMutation(() => tasksService.updateBy(selfLink, task), {
+  const status = task.status ? TaskStatus.Completed : TaskStatus.NeedsAction
+  const rawTask = { ...task, status }
+  const mutation = useMutation(() => tasksService.updateBy(selfLink, rawTask), {
     onSuccess: () => {
       queryClient.invalidateQueries(QueryKey.Tasks)
     },

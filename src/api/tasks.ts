@@ -1,5 +1,4 @@
-import { Task } from 'typings'
-import { TaskPayload } from 'typings/task'
+import { RawTask, TaskPayload } from 'typings/task'
 import apiClient from 'utils/apiClient'
 
 const findAll = async (
@@ -21,7 +20,7 @@ const create = async (tasklist: string, taskPayload: TaskPayload) => {
   return response.data
 }
 
-const updateBy = async (selfLink: string, task: Task) => {
+const updateBy = async (selfLink: string, task: RawTask) => {
   const response = await apiClient.put(selfLink, { ...task })
   return response.data
 }
