@@ -1,7 +1,7 @@
 import { ScrollView, Text, StyleSheet, View } from 'react-native'
 import React, { useLayoutEffect, useMemo, useState } from 'react'
-import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
-import { RootStackParamList, StackNavigationProps } from 'typings'
+import { useNavigation, useRoute } from '@react-navigation/native'
+import { StackNavigationProps } from 'typings'
 import { RouteName, TaskStatus, theme } from 'shared'
 import TaskItem from 'components/TaskItem'
 import PopupView from 'components/PopupView'
@@ -14,11 +14,12 @@ import AddTaskView from 'components/AddTaskView'
 import IconButton from 'components/IconButton'
 import TaskHeader from 'components/TaskHeader'
 import { useAppSelector } from 'app/hooks'
+import { RouteType } from 'typings/route'
 
 const TasklistScreen = () => {
   const {
     params: { tasklist },
-  } = useRoute<RouteProp<RootStackParamList, RouteName.Tasklist>>()
+  } = useRoute<RouteType<RouteName.Tasklist>>()
   const { title, id, selfLink } = tasklist
   const navigation = useNavigation<StackNavigationProps>()
   const [modalVisible, setModalVisible] = useState(false)
