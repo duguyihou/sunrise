@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native'
 import tasksService from 'api/tasks'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
-import { clearNewTask, updateTask } from 'app/tasks'
+import { clearNewTask, updateTaskDetail } from 'app/tasks'
 import { useEffect } from 'react'
 import { useMutation, useQueries, useQuery, useQueryClient } from 'react-query'
 import { QueryKey, TaskStatus } from 'shared'
@@ -63,17 +63,17 @@ export const useUpdateTaskMutation = (selfLink: string, task: Task) => {
 }
 
 export const useFetchTaskDetailQuery = (selfLink: string) => {
-  const { task } = useAppSelector(state => state.tasks)
+  const { taskDetail } = useAppSelector(state => state.tasks)
   const dispatch = useAppDispatch()
   const { isLoading, error, data } = useQuery<Task, Error>(
     QueryKey.TaskDetail,
     async () => tasksService.findBy(selfLink),
   )
   useEffect(() => {
-    if (data) dispatch(updateTask(data))
+    if (data) dispatch(updateTaskDetail(data))
   }, [data, dispatch])
 
-  return { isLoading, error, task }
+  return { isLoading, error, taskDetail }
 }
 
 export const useDeleteTaskMutation = (selfLink: string) => {

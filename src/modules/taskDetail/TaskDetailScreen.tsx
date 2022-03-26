@@ -10,14 +10,15 @@ import IconButton from 'components/IconButton'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import { getCalendar } from 'utils/dateTime'
 import { RouteType } from 'typings/route'
+import TaskTitleSection from 'components/TaskTitleSection'
 
 const TaskDetailScreen = () => {
   const {
     params: { selfLink },
   } = useRoute<RouteType<RouteName.TaskDetail>>()
   const navigation = useNavigation()
-  const { isLoading, error, task } = useFetchTaskDetailQuery(selfLink)
-  const { title, due, notes, updated } = task
+  const { isLoading, error, taskDetail } = useFetchTaskDetailQuery(selfLink)
+  const { title, due, notes, updated } = taskDetail
   const deleteTaskMutation = useDeleteTaskMutation(selfLink)
 
   useLayoutEffect(() =>
@@ -32,7 +33,7 @@ const TaskDetailScreen = () => {
   if (error) return <Text>`An error has occurred: ${error.message}`</Text>
   return (
     <View style={styles.container}>
-      <TaskTitle title={title} />
+      <TaskTitleSection />
       <ScrollView style={styles.details}>
         <TaskDateTime dateTime={due} />
         <TaskNotes notes={notes} />
