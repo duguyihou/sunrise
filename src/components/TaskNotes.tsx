@@ -2,16 +2,16 @@ import React from 'react'
 import { StyleSheet, TextInput } from 'react-native'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
 import { theme } from 'shared'
-import { updateTask } from 'app/tasks'
+import { updateTaskDetail } from 'app/tasks'
 
 type Props = {
   notes: string
 }
 const TaskNotes = ({ notes }: Props) => {
   const dispatch = useAppDispatch()
-  const { task } = useAppSelector(state => state.tasks)
+  const { taskDetail } = useAppSelector(state => state.tasks)
   const handleOnChange = (text: string) =>
-    dispatch(updateTask({ ...task, notes: text }))
+    dispatch(updateTaskDetail({ ...taskDetail, notes: text }))
   return (
     <TextInput
       multiline
