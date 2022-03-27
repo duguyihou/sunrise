@@ -132,3 +132,20 @@ export const useAddSubtaskMutation = (
   )
   return addTaskMutation
 }
+
+export const useFetchSubtasksQuery = (tasklistId: string, taskId: string) => {
+  const queryResult = useQuery<TaskQuery, Error, Task[]>(
+    [QueryKey.Tasks, tasklistId],
+    async () => tasksService.findAll(tasklistId),
+    {
+      select: ({ items }) =>
+        items
+          .filter(({ parent }) => parent === taskId)
+          .map(item => ({
+            ...item,
+            status: item.status === TaskStatus.Completed ? true : false,
+          })),
+    },
+  )
+  return queryResult
+}

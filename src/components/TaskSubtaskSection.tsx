@@ -2,10 +2,11 @@ import { StyleSheet, TextInput, View } from 'react-native'
 import React from 'react'
 import IconButton from './IconButton'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
-import { useAddSubtaskMutation } from 'hooks/tasks'
+import { useAddSubtaskMutation, useFetchSubtasksQuery } from 'hooks/tasks'
 import { TaskPayload } from 'typings'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
 import { updateSubtask } from 'app/tasks'
+import Checkbox from './Checkbox'
 
 const TaskSubtaskSection = () => {
   const {
@@ -14,6 +15,7 @@ const TaskSubtaskSection = () => {
   } = useAppSelector(state => state.tasks)
   const dispatch = useAppDispatch()
   const { tasklistId, title } = subtask
+  const { data: subtasks } = useFetchSubtasksQuery(tasklistId, id)
   const addSubtaskMutation = useAddSubtaskMutation(tasklistId, id, {
     title,
   } as TaskPayload)
@@ -21,6 +23,16 @@ const TaskSubtaskSection = () => {
   const handleSubmitEditing = () => addSubtaskMutation.mutate()
   return (
     <View style={styles.container}>
+      {subtasks &&
+        subtasks.map(task => (
+          <Checkbox
+            key={task.id}
+            isChecked={task.status}
+            onPress={() => console.log('🐵 ', task.title)}
+            text={task.title}
+            textStyle={styles.subtask}
+          />
+        ))}
       <View style={styles.addContainer}>
         <IconButton icon={faPlus} />
         <TextInput
@@ -49,5 +61,8 @@ const styles = StyleSheet.create({
   add: {
     flex: 1,
     paddingHorizontal: 10,
+  },
+  subtask: {
+    paddingVertical: 5,
   },
 })
