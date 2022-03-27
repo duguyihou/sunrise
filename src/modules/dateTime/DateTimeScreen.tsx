@@ -17,9 +17,9 @@ const DateTimeScreen = ({ dateTime }: Props) => {
   const navigation = useNavigation<StackNavigationProps>()
 
   const handleGoback = () => navigation.goBack()
-  const handleSetDate = (calendarDay: CalendarDay) => {
+  const handleSetDate = (calendarDay: CalendarDay) =>
     setDue(getCalendarDayDate(calendarDay))
-  }
+
   const hanldeShowCalendar = () => setShowCalendar(false)
   return (
     <>
