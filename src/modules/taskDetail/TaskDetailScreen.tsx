@@ -1,12 +1,10 @@
-import { ScrollView, StyleSheet, Text, View } from 'react-native'
+import { Button, ScrollView, StyleSheet, Text, View } from 'react-native'
 import React, { useLayoutEffect } from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { RouteName } from 'shared'
-import { useDeleteTaskMutation, useFetchTaskDetailQuery } from 'hooks/tasks'
+import { useFetchTaskDetailQuery, useUpdateTaskMutation } from 'hooks/tasks'
 import TaskDateTime from 'components/TaskDateTime'
 import TaskNotes from 'components/TaskNotes'
-import IconButton from 'components/IconButton'
-import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import { getCalendar } from 'utils/dateTime'
 import { RouteType } from 'typings/route'
 import TaskTitleSection from 'components/TaskTitleSection'
@@ -18,15 +16,15 @@ const TaskDetailScreen = () => {
   const navigation = useNavigation()
   const { isLoading, error, taskDetail } = useFetchTaskDetailQuery(selfLink)
   const { due, notes, updated } = taskDetail
-  const deleteTaskMutation = useDeleteTaskMutation(selfLink)
+  const updateTaskMutation = useUpdateTaskMutation(taskDetail)
 
   useLayoutEffect(() =>
     navigation.setOptions({
-      headerRight: () => <IconButton icon={faTrash} fn={handleDelete} />,
+      headerRight: () => <Button title="Done" onPress={handleUpdate} />,
     }),
   )
 
-  const handleDelete = () => deleteTaskMutation.mutate()
+  const handleUpdate = () => updateTaskMutation.mutate()
 
   if (isLoading) return <Text>loading...</Text>
   if (error) return <Text>`An error has occurred: ${error.message}`</Text>
