@@ -20,6 +20,21 @@ const create = async (tasklist: string, taskPayload: TaskPayload) => {
   return response.data
 }
 
+const createSubtask = async (
+  tasklist: string,
+  taskId: string,
+  taskPayload: TaskPayload,
+) => {
+  const response = await apiClient.post(
+    `/v1/lists/${tasklist}/tasks`,
+    {
+      ...taskPayload,
+    },
+    { params: { parent: taskId } },
+  )
+  return response.data
+}
+
 const update = async (task: RawTask) => {
   const { selfLink } = task
   const response = await apiClient.put(selfLink, { ...task })
@@ -42,6 +57,7 @@ const tasksService = {
   create,
   update,
   deleteBy,
+  createSubtask,
 }
 
 export default tasksService

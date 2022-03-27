@@ -7,6 +7,7 @@ export interface RawTask {
   status: string
   title: string
   updated: string
+  parent?: string
   due?: string
   notes?: string
 }
@@ -20,6 +21,7 @@ export interface Task {
   status: boolean
   title: string
   updated: string
+  parent?: string
   due?: string
   notes?: string
 }

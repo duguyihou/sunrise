@@ -5,19 +5,23 @@ import { faListUl } from '@fortawesome/free-solid-svg-icons'
 import { RouteName, theme } from 'shared'
 import { StackProps, Tasklist } from 'typings'
 import IconButton from './IconButton'
+import { useAppDispatch } from 'app/hooks'
+import { updateTasklistId } from 'app/tasks'
 
 type ItemProps = StackProps & {
   tasklist: Tasklist
 }
 const TasklistItem = ({ navigation, tasklist }: ItemProps) => {
+  const dispatch = useAppDispatch()
+  const handleSelect = () => {
+    const { id } = tasklist
+    dispatch(updateTasklistId(id))
+    navigation.push(RouteName.Tasklist, {
+      tasklist,
+    })
+  }
   return (
-    <TouchableOpacity
-      style={styles.container}
-      onPress={() =>
-        navigation.push(RouteName.Tasklist, {
-          tasklist,
-        })
-      }>
+    <TouchableOpacity style={styles.container} onPress={handleSelect}>
       <IconButton icon={faListUl} />
       <Text style={styles.text}>{tasklist.title}</Text>
     </TouchableOpacity>
