@@ -8,6 +8,7 @@ import TaskNotesSection from 'components/TaskNotesSection'
 import { RouteType } from 'typings/route'
 import TaskTitleSection from 'components/TaskTitleSection'
 import TaskInfoSection from 'components/TaskInfoSection'
+import TaskSubtaskSection from 'components/TaskSubtaskSection'
 
 const TaskDetailScreen = () => {
   const {
@@ -30,6 +31,7 @@ const TaskDetailScreen = () => {
       <TaskTitleSection />
       <ScrollView style={styles.details}>
         <TaskDateTimeSection />
+        <TaskSubtaskSection />
         <TaskNotesSection />
       </ScrollView>
       <TaskInfoSection />

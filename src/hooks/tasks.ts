@@ -1,12 +1,12 @@
 import { useNavigation } from '@react-navigation/native'
 import tasksService from 'api/tasks'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
-import { clearNewTask, updateTaskDetail } from 'app/tasks'
+import { clearNewTask, clearSubtask, updateTaskDetail } from 'app/tasks'
 import { useEffect } from 'react'
 import { useMutation, useQueries, useQuery, useQueryClient } from 'react-query'
 import { QueryKey, TaskStatus } from 'shared'
 import { StackNavigationProps, TaskQuery, Task, Tasklist } from 'typings'
-import { RawTask } from 'typings/task'
+import { RawTask, TaskPayload } from 'typings/task'
 
 export const useFetchTasksQuery = (
   tasklistId: string,
@@ -27,8 +27,12 @@ export const useFetchTasksQuery = (
           ...item,
           status: item.status === TaskStatus.Completed ? true : false,
         }))
-        needsActionTasks = tasks.filter(({ status }) => !status)
-        compeletedTasks = tasks.filter(({ status }) => status)
+        needsActionTasks = tasks.filter(
+          ({ status, parent }) => !status && !parent,
+        )
+        compeletedTasks = tasks.filter(
+          ({ status, parent }) => status && !parent,
+        )
       },
     },
   )
@@ -108,4 +112,40 @@ export const useFetchTasksQueries = (tasklists: Tasklist[]) => {
     }),
   )
   return queryResults
+}
+
+export const useAddSubtaskMutation = (
+  tasklistId: string,
+  taskId: string,
+  subtask: TaskPayload,
+) => {
+  const queryClient = useQueryClient()
+  const dispatch = useAppDispatch()
+  const addTaskMutation = useMutation(
+    () => tasksService.createSubtask(tasklistId, taskId, subtask),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries([QueryKey.Tasks, tasklistId])
+        dispatch(clearSubtask())
+      },
+    },
+  )
+  return addTaskMutation
+}
+
+export const useFetchSubtasksQuery = (tasklistId: string, taskId: string) => {
+  const queryResult = useQuery<TaskQuery, Error, Task[]>(
+    [QueryKey.Tasks, tasklistId],
+    async () => tasksService.findAll(tasklistId),
+    {
+      select: ({ items }) =>
+        items
+          .filter(({ parent }) => parent === taskId)
+          .map(item => ({
+            ...item,
+            status: item.status === TaskStatus.Completed ? true : false,
+          })),
+    },
+  )
+  return queryResult
 }
