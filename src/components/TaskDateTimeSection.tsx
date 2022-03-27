@@ -3,20 +3,20 @@ import React from 'react'
 import IconButton from './IconButton'
 import { faCalendarCheck } from '@fortawesome/free-solid-svg-icons'
 import DateTimeButton from './DateTimeButton'
+import { useAppSelector } from 'app/hooks'
 
-type Props = {
-  dateTime: string
-}
-const TaskDateTime = ({ dateTime }: Props) => {
+const TaskDateTimeSection = () => {
+  const { taskDetail } = useAppSelector(state => state.tasks)
+  const { due } = taskDetail
   return (
     <View style={styles.container}>
       <IconButton style={styles.icon} icon={faCalendarCheck} />
-      <DateTimeButton dateTime={dateTime} showPlaceholder />
+      <DateTimeButton dateTime={due} showPlaceholder />
     </View>
   )
 }
 
-export default TaskDateTime
+export default TaskDateTimeSection
 
 const styles = StyleSheet.create({
   container: {

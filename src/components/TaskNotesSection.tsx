@@ -4,12 +4,10 @@ import { useAppDispatch, useAppSelector } from 'app/hooks'
 import { theme } from 'shared'
 import { updateTaskDetail } from 'app/tasks'
 
-type Props = {
-  notes: string
-}
-const TaskNotes = ({ notes }: Props) => {
+const TaskNotesSection = () => {
   const dispatch = useAppDispatch()
   const { taskDetail } = useAppSelector(state => state.tasks)
+  const { notes } = taskDetail
   const handleOnChange = (text: string) =>
     dispatch(updateTaskDetail({ ...taskDetail, notes: text }))
   return (
@@ -24,7 +22,7 @@ const TaskNotes = ({ notes }: Props) => {
   )
 }
 
-export default TaskNotes
+export default TaskNotesSection
 
 const styles = StyleSheet.create({
   notes: {

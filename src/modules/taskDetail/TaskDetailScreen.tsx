@@ -3,8 +3,8 @@ import React, { useLayoutEffect } from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { RouteName } from 'shared'
 import { useFetchTaskDetailQuery, useUpdateTaskMutation } from 'hooks/tasks'
-import TaskDateTime from 'components/TaskDateTime'
-import TaskNotes from 'components/TaskNotes'
+import TaskDateTimeSection from 'components/TaskDateTimeSection'
+import TaskNotesSection from 'components/TaskNotesSection'
 import { RouteType } from 'typings/route'
 import TaskTitleSection from 'components/TaskTitleSection'
 import TaskInfoSection from 'components/TaskInfoSection'
@@ -15,7 +15,6 @@ const TaskDetailScreen = () => {
   } = useRoute<RouteType<RouteName.TaskDetail>>()
   const navigation = useNavigation()
   const { isLoading, error, taskDetail } = useFetchTaskDetailQuery(selfLink)
-  const { due, notes } = taskDetail
   const updateTaskMutation = useUpdateTaskMutation(taskDetail)
   useLayoutEffect(() =>
     navigation.setOptions({
@@ -30,8 +29,8 @@ const TaskDetailScreen = () => {
     <View style={styles.container}>
       <TaskTitleSection />
       <ScrollView style={styles.details}>
-        <TaskDateTime dateTime={due} />
-        <TaskNotes notes={notes} />
+        <TaskDateTimeSection />
+        <TaskNotesSection />
       </ScrollView>
       <TaskInfoSection />
     </View>
