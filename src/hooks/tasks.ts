@@ -54,7 +54,7 @@ export const useAddTaskMutation = (tasklistId: string) => {
 
 export const useUpdateTaskMutation = (task: Task) => {
   const queryClient = useQueryClient()
-  const status = task.status ? TaskStatus.NeedsAction : TaskStatus.Completed
+  const status = task.status ? TaskStatus.Completed : TaskStatus.NeedsAction
   const rawTask = { ...task, status }
   const mutation = useMutation(() => tasksService.update(rawTask), {
     onSuccess: () => {

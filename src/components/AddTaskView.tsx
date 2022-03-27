@@ -62,7 +62,6 @@ const styles = StyleSheet.create({
   container: {
     width: windowWidth - 20,
     backgroundColor: theme.bg.secondary,
-    paddingHorizontal: 20,
   },
   title: {
     flex: 1,
