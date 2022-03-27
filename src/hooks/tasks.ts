@@ -6,6 +6,7 @@ import { useEffect } from 'react'
 import { useMutation, useQueries, useQuery, useQueryClient } from 'react-query'
 import { QueryKey, TaskStatus } from 'shared'
 import { StackNavigationProps, TaskQuery, Task, Tasklist } from 'typings'
+import { RawTask } from 'typings/task'
 
 export const useFetchTasksQuery = (
   tasklistId: string,
@@ -65,11 +66,17 @@ export const useUpdateTaskMutation = (task: Task) => {
 }
 
 export const useFetchTaskDetailQuery = (selfLink: string) => {
-  const { taskDetail } = useAppSelector(state => state.tasks)
   const dispatch = useAppDispatch()
-  const { isLoading, error, data } = useQuery<Task, Error>(
+  const { taskDetail } = useAppSelector(state => state.tasks)
+  const { isLoading, error, data } = useQuery<RawTask, Error, Task>(
     QueryKey.TaskDetail,
     async () => tasksService.find(selfLink),
+    {
+      select: task => ({
+        ...task,
+        status: task.status === TaskStatus.Completed ? true : false,
+      }),
+    },
   )
   useEffect(() => {
     if (data) dispatch(updateTaskDetail(data))
