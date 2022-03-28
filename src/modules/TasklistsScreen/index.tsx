@@ -1,17 +1,14 @@
 import React, { useLayoutEffect } from 'react'
-import { ScrollView, StyleSheet, Text } from 'react-native'
-
-import { StackProps } from 'typings'
-import { windowHeight, windowWidth } from 'utils/dimensions'
-import TasklistItem from './TasklistItem'
-import { theme } from 'shared/theme'
-import { useAddTasklistMutation, useFetchTasklistQuery } from 'hooks/tasklists'
+import { useNavigation } from '@react-navigation/native'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
-import { IconButton } from 'modules/common/components'
-import PlannedTasklistItem from './PlannedTasklistItem'
 
-const TasklistsScreen = ({ navigation, route }: StackProps) => {
-  const { isLoading, error, data: allTasklists } = useFetchTasklistQuery()
+import { StackNavigationProps } from 'typings'
+import { useAddTasklistMutation } from 'hooks/tasklists'
+import { IconButton } from 'modules/common/components'
+import TasklistSection from './components/TasklistSection'
+
+const TasklistsScreen = () => {
+  const navigation = useNavigation<StackNavigationProps>()
   const addTasklistMutation = useAddTasklistMutation()
   useLayoutEffect(() =>
     navigation.setOptions({
@@ -20,36 +17,11 @@ const TasklistsScreen = ({ navigation, route }: StackProps) => {
   )
   const handlePlus = () => addTasklistMutation.mutate()
 
-  if (isLoading) return <Text>loading...</Text>
-  if (error) return <Text>`An error has occurred: ${error.message}`</Text>
   return (
-    <ScrollView style={styles.container}>
-      {allTasklists && (
-        <PlannedTasklistItem
-          tasklists={allTasklists}
-          navigation={navigation}
-          route={route}
-        />
-      )}
-      {allTasklists &&
-        allTasklists.map(tasklist => (
-          <TasklistItem
-            key={tasklist.id}
-            tasklist={tasklist}
-            navigation={navigation}
-            route={route}
-          />
-        ))}
-    </ScrollView>
+    <>
+      <TasklistSection />
+    </>
   )
 }
 
 export default TasklistsScreen
-
-const styles = StyleSheet.create({
-  container: {
-    width: windowWidth,
-    height: windowHeight,
-    backgroundColor: theme.bg.secondary,
-  },
-})
