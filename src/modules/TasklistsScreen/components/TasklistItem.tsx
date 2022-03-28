@@ -1,18 +1,20 @@
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 import { faListUl } from '@fortawesome/free-solid-svg-icons'
 
 import { RouteName } from 'shared/constants'
 import { theme } from 'shared/theme'
-import { StackProps, Tasklist } from 'typings'
+import { StackNavigationProps, Tasklist } from 'typings'
 import { IconButton } from 'modules/common/components'
 import { useAppDispatch } from 'app/hooks'
 import { updateTasklistId } from 'app/tasks'
 
-type ItemProps = StackProps & {
+type Props = {
   tasklist: Tasklist
 }
-const TasklistItem = ({ navigation, tasklist }: ItemProps) => {
+const TasklistItem = ({ tasklist }: Props) => {
+  const navigation = useNavigation<StackNavigationProps>()
   const dispatch = useAppDispatch()
   const handleSelect = () => {
     const { id } = tasklist
