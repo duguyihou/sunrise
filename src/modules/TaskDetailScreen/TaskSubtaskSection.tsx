@@ -4,7 +4,7 @@ import IconButton from 'modules/common/components/IconButton'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { useAddSubtaskMutation, useFetchSubtasksQuery } from 'hooks/tasks'
 import { TaskPayload } from 'typings'
-import { useAppDispatch, useAppSelector } from 'app/hooks'
+import { useAppDispatch, useTasks } from 'app/hooks'
 import { updateSubtask } from 'app/tasksSlice'
 import { Checkbox } from 'modules/common/components'
 
@@ -12,7 +12,7 @@ const TaskSubtaskSection = () => {
   const {
     subtask,
     taskDetail: { id },
-  } = useAppSelector(state => state.tasks)
+  } = useTasks()
   const dispatch = useAppDispatch()
   const { tasklistId, title } = subtask
   const { data: subtasks } = useFetchSubtasksQuery(tasklistId, id)

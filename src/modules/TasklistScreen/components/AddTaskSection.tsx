@@ -7,7 +7,7 @@ import { theme } from 'shared/theme'
 import TaskAccessory from './TaskAccessory'
 import { DateTimeButton, Checkbox } from 'modules/common/components'
 import { useKeyboard } from 'hooks/useKeyboard'
-import { useAppDispatch, useAppSelector } from 'app/hooks'
+import { useAppDispatch, useTasks } from 'app/hooks'
 import { updateNewTask } from 'app/tasksSlice'
 
 type Props = {
@@ -15,7 +15,7 @@ type Props = {
 }
 const AddTaskSection = ({ tasklistId }: Props) => {
   const dispatch = useAppDispatch()
-  const { newTask } = useAppSelector(state => state.tasks)
+  const { newTask } = useTasks()
   const { title, due, status } = newTask
   const handleCheck = () =>
     dispatch(updateNewTask({ ...newTask, status: !status }))

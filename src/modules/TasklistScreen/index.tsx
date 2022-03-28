@@ -13,18 +13,17 @@ import HeaderTitle from './components/HeaderTitle'
 import AddTaskSection from './components/AddTaskSection'
 import IconButton from 'modules/common/components/IconButton'
 import TaskHeader from './components/TaskHeader'
-import { useAppSelector } from 'app/hooks'
+import { useTasks } from 'app/hooks'
 import { RouteType } from 'typings/route'
 
 const TasklistScreen = () => {
   const {
     params: { tasklist },
   } = useRoute<RouteType<RouteName.Tasklist>>()
-  console.log('🐵 ', tasklist)
   const { title, id, selfLink } = tasklist
   const navigation = useNavigation<StackNavigationProps>()
   const [modalVisible, setModalVisible] = useState(false)
-  const { showCompletedTasks } = useAppSelector(state => state.tasks)
+  const { showCompletedTasks } = useTasks()
   const deleteTasklistMutation = useDeleteTasklistMutation(selfLink)
   const { isLoading, error, needsActionTasks, compeletedTasks } =
     useFetchTasksQuery(id)

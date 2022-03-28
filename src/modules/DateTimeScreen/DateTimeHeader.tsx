@@ -2,7 +2,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { updateNewTask, updateTaskDetail } from 'app/tasksSlice'
-import { useAppDispatch, useAppSelector } from 'app/hooks'
+import { useAppDispatch, useTasks } from 'app/hooks'
 import { getPrevRoute } from 'utils/routes'
 import { StackNavigationProps } from 'typings'
 import { RouteName } from 'shared/constants'
@@ -11,7 +11,7 @@ type Props = {
   dateTime: string
 }
 const DateTimeHeader = ({ dateTime }: Props) => {
-  const { newTask, taskDetail } = useAppSelector(state => state.tasks)
+  const { newTask, taskDetail } = useTasks()
   const dispatch = useAppDispatch()
   const navigation = useNavigation<StackNavigationProps>()
 

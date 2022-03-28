@@ -9,6 +9,7 @@ import { StackNavigationProps, Tasklist } from 'typings'
 import { IconButton } from 'modules/common/components'
 import { useAppDispatch } from 'app/hooks'
 import { updateTasklistId } from 'app/tasksSlice'
+import { updateTasklist } from 'app/tasklistSlice'
 
 type Props = {
   tasklist: Tasklist
@@ -18,7 +19,8 @@ const TasklistItem = ({ tasklist }: Props) => {
   const dispatch = useAppDispatch()
   const handleSelect = () => {
     const { id } = tasklist
-    dispatch(updateTasklistId(id))
+    dispatch(updateTasklistId(id)) // use updateTasklist
+    dispatch(updateTasklist(tasklist))
     navigation.push(RouteName.Tasklist, {
       tasklist,
     })
