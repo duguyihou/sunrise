@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import { useDeleteTaskMutation } from 'common/hooks/tasks'
+import { useDeleteTaskMutation } from 'hooks/tasks'
 import { getCalendar } from 'utils/dateTime'
-import IconButton from 'components/IconButton'
+import { IconButton } from 'modules/common/components'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import { useAppSelector } from 'common/app/hooks'
 

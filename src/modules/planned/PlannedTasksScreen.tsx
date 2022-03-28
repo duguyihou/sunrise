@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { useRoute } from '@react-navigation/native'
 import { RouteName } from 'shared/constants'
-import { useFetchTasksQueries } from 'common/hooks/tasks'
+import { useFetchTasksQueries } from 'hooks/tasks'
 import CalendatBanner from './CalendarBanner'
 import { RouteType } from 'typings/route'
 

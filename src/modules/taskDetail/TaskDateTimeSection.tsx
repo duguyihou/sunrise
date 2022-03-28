@@ -1,8 +1,8 @@
 import { StyleSheet, View } from 'react-native'
 import React from 'react'
-import IconButton from 'components/IconButton'
+import IconButton from 'modules/common/components/IconButton'
 import { faCalendarCheck } from '@fortawesome/free-solid-svg-icons'
-import DateTimeButton from 'components/DateTimeButton'
+import { DateTimeButton } from 'modules/common/components'
 import { useAppSelector } from 'common/app/hooks'
 
 const TaskDateTimeSection = () => {

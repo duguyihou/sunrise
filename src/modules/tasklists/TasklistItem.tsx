@@ -5,7 +5,7 @@ import { faListUl } from '@fortawesome/free-solid-svg-icons'
 import { RouteName } from 'shared/constants'
 import { theme } from 'shared/theme'
 import { StackProps, Tasklist } from 'typings'
-import IconButton from 'components/IconButton'
+import { IconButton } from 'modules/common/components'
 import { useAppDispatch } from 'common/app/hooks'
 import { updateTasklistId } from 'common/app/tasks'
 

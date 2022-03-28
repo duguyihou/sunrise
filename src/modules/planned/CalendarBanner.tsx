@@ -10,7 +10,7 @@ import { getCurrentMonth, getNextDays } from 'utils/dateTime'
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons'
 import { windowWidth } from 'utils/dimensions'
 import { theme } from 'shared/theme'
-import IconButton from 'components/IconButton'
+import { IconButton } from 'modules/common/components'
 
 const Next_DAYS = 8
 const CalendatBanner = () => {

@@ -4,11 +4,10 @@ import { useHeaderHeight } from '@react-navigation/elements'
 import { windowWidth } from 'utils/dimensions'
 import { AccessoryID } from 'shared/constants'
 import { theme } from 'shared/theme'
-import TaskAccessory from 'components/TaskAccessory'
-import DateTimeButton from 'components/DateTimeButton'
+import TaskAccessory from './TaskAccessory'
+import { DateTimeButton, Checkbox } from 'modules/common/components'
 import { useKeyboard } from 'shared/useKeyboard'
 import { useAppDispatch, useAppSelector } from 'common/app/hooks'
-import Checkbox from 'components/Checkbox'
 import { updateNewTask } from 'common/app/tasks'
 
 type Props = {
