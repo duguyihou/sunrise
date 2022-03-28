@@ -8,7 +8,7 @@ import { theme } from 'shared/theme'
 import { StackNavigationProps, Tasklist } from 'typings'
 import { IconButton } from 'modules/common/components'
 import { useAppDispatch } from 'app/hooks'
-import { updateTasklistId } from 'app/tasks'
+import { updateTasklistId } from 'app/tasksSlice'
 
 type Props = {
   tasklist: Tasklist

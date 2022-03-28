@@ -20,6 +20,7 @@ const TasklistScreen = () => {
   const {
     params: { tasklist },
   } = useRoute<RouteType<RouteName.Tasklist>>()
+  console.log('🐵 ', tasklist)
   const { title, id, selfLink } = tasklist
   const navigation = useNavigation<StackNavigationProps>()
   const [modalVisible, setModalVisible] = useState(false)

@@ -5,7 +5,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { useAddSubtaskMutation, useFetchSubtasksQuery } from 'hooks/tasks'
 import { TaskPayload } from 'typings'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
-import { updateSubtask } from 'app/tasks'
+import { updateSubtask } from 'app/tasksSlice'
 import { Checkbox } from 'modules/common/components'
 
 const TaskSubtaskSection = () => {

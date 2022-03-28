@@ -5,7 +5,7 @@ import { theme } from 'shared/theme'
 import { StackNavigationProps } from 'typings'
 import { useNavigation } from '@react-navigation/native'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
-import { updateTaskDetail, updateNewTask } from 'app/tasks'
+import { updateTaskDetail, updateNewTask } from 'app/tasksSlice'
 import DateTimeText from './DateTimeText'
 import { getPrevRoute } from 'utils/routes'
 

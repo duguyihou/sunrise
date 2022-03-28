@@ -8,7 +8,7 @@ import TaskAccessory from './TaskAccessory'
 import { DateTimeButton, Checkbox } from 'modules/common/components'
 import { useKeyboard } from 'hooks/useKeyboard'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
-import { updateNewTask } from 'app/tasks'
+import { updateNewTask } from 'app/tasksSlice'
 
 type Props = {
   tasklistId: string

@@ -3,7 +3,7 @@ import { Checkbox } from 'modules/common/components'
 import { useUpdateTaskMutation } from 'hooks/tasks'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
 import { StyleSheet, TextInput } from 'react-native'
-import { updateTaskDetail } from 'app/tasks'
+import { updateTaskDetail } from 'app/tasksSlice'
 
 const TaskTitleSection = () => {
   const dispatch = useAppDispatch()

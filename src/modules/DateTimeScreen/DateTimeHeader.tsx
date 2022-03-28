@@ -1,7 +1,7 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
-import { updateNewTask, updateTaskDetail } from 'app/tasks'
+import { updateNewTask, updateTaskDetail } from 'app/tasksSlice'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
 import { getPrevRoute } from 'utils/routes'
 import { StackNavigationProps } from 'typings'
