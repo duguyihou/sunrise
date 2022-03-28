@@ -15,7 +15,7 @@ const TaskInfoSection = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.updateInfo}>Updated {getCalendar(updated)}</Text>
-      <IconButton icon={faTrash} fn={handleDelete} />
+      <IconButton icon={faTrash} onPress={handleDelete} />
     </View>
   )
 }

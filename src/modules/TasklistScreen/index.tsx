@@ -4,15 +4,15 @@ import { useNavigation, useRoute } from '@react-navigation/native'
 import { StackNavigationProps } from 'typings'
 import { RouteName } from 'shared/constants'
 import { theme } from 'shared/theme'
-import TaskItem from './TaskItem'
+import TaskItem from './components/TaskItem'
 import { PopupView, PopupItem } from 'modules/common/components'
 import { useDeleteTasklistMutation } from 'hooks/tasklists'
 import { useFetchTasksQuery } from 'hooks/tasks'
 import { faEllipsisH } from '@fortawesome/free-solid-svg-icons'
-import HeaderTitle from './HeaderTitle'
-import AddTaskView from './AddTaskView'
+import HeaderTitle from './components/HeaderTitle'
+import AddTaskSection from './components/AddTaskSection'
 import IconButton from 'modules/common/components/IconButton'
-import TaskHeader from './TaskHeader'
+import TaskHeader from './components/TaskHeader'
 import { useAppSelector } from 'app/hooks'
 import { RouteType } from 'typings/route'
 
@@ -34,7 +34,7 @@ const TasklistScreen = () => {
       headerRight: () => (
         <IconButton
           icon={faEllipsisH}
-          fn={() => setModalVisible(!modalVisible)}
+          onPress={() => setModalVisible(!modalVisible)}
         />
       ),
     }),
@@ -57,7 +57,7 @@ const TasklistScreen = () => {
       <PopupView visible={modalVisible} setVisible={setModalVisible}>
         <PopupItem title="delete" fn={() => deleteTasklistMutation.mutate()} />
       </PopupView>
-      <AddTaskView tasklistId={id} />
+      <AddTaskSection tasklistId={id} />
     </View>
   )
 }

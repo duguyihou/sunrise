@@ -13,7 +13,7 @@ import { updateNewTask } from 'app/tasks'
 type Props = {
   tasklistId: string
 }
-const AddTaskView = ({ tasklistId }: Props) => {
+const AddTaskSection = ({ tasklistId }: Props) => {
   const dispatch = useAppDispatch()
   const { newTask } = useAppSelector(state => state.tasks)
   const { title, due, status } = newTask
@@ -53,7 +53,7 @@ const AddTaskView = ({ tasklistId }: Props) => {
   )
 }
 
-export default AddTaskView
+export default AddTaskSection
 
 const styles = StyleSheet.create({
   wrapper: {

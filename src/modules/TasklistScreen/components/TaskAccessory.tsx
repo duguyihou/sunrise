@@ -24,9 +24,9 @@ const TaskAccessory = ({ tasklistId, due }: Props) => {
         <IconButton
           style={styles.icon}
           icon={faCalendarCheck}
-          fn={handleSetDateTime}
+          onPress={handleSetDateTime}
         />
-        <IconButton style={styles.check} icon={faCheck} fn={handleSubmit} />
+        <IconButton style={styles.check} icon={faCheck} onPress={handleSubmit} />
       </View>
     </InputAccessoryView>
   )
