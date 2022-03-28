@@ -3,7 +3,7 @@ import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import { QueryClient, QueryClientProvider } from 'react-query'
 
-import { store, persistor } from 'app/store'
+import { store, persistor } from 'common/app/store'
 import Routes from 'routes'
 
 const queryClient = new QueryClient()

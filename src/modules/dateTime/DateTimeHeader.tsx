@@ -1,11 +1,11 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
-import { updateNewTask, updateTaskDetail } from 'app/tasks'
-import { useAppDispatch, useAppSelector } from 'app/hooks'
+import { updateNewTask, updateTaskDetail } from 'common/app/tasks'
+import { useAppDispatch, useAppSelector } from 'common/app/hooks'
 import { getPrevRoute } from 'utils/routes'
 import { StackNavigationProps } from 'typings'
-import { RouteName } from 'shared'
+import { RouteName } from 'shared/constants'
 
 type Props = {
   dateTime: string

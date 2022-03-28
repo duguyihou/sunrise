@@ -9,8 +9,8 @@ import React from 'react'
 import { getCurrentMonth, getNextDays } from 'utils/dateTime'
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons'
 import { windowWidth } from 'utils/dimensions'
-import { theme } from 'shared'
-import IconButton from './IconButton'
+import { theme } from 'shared/theme'
+import IconButton from 'components/IconButton'
 
 const Next_DAYS = 8
 const CalendatBanner = () => {

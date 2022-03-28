@@ -1,6 +1,6 @@
 import React from 'react'
 import { Modal, StyleSheet, TouchableOpacity } from 'react-native'
-import { theme } from 'shared'
+import { theme } from 'shared/theme'
 import { windowWidth } from 'utils/dimensions'
 
 type Props = {

@@ -3,12 +3,15 @@ import { ScrollView, StyleSheet, Text } from 'react-native'
 
 import { StackProps } from 'typings'
 import { windowHeight, windowWidth } from 'utils/dimensions'
-import TasklistItem from 'components/TasklistItem'
-import { theme } from 'shared'
-import { useAddTasklistMutation, useFetchTasklistQuery } from 'hooks/tasklists'
+import TasklistItem from './TasklistItem'
+import { theme } from 'shared/theme'
+import {
+  useAddTasklistMutation,
+  useFetchTasklistQuery,
+} from 'common/hooks/tasklists'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import IconButton from 'components/IconButton'
-import PlannedTasklistItem from 'components/PlannedTasklistItem'
+import PlannedTasklistItem from './PlannedTasklistItem'
 
 const TasklistsScreen = ({ navigation, route }: StackProps) => {
   const { isLoading, error, data: allTasklists } = useFetchTasklistQuery()

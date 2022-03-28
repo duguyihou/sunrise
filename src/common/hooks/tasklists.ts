@@ -2,7 +2,7 @@ import tasklistService from 'api/tasklists'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { useNavigation } from '@react-navigation/native'
 
-import { QueryKey, RouteName, TasklistName } from 'shared'
+import { QueryKey, RouteName, TasklistName } from 'shared/constants'
 import { StackNavigationProps, TasklistQuery } from 'typings'
 import { useMemo } from 'react'
 

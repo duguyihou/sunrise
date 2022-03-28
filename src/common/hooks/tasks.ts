@@ -1,10 +1,10 @@
 import { useNavigation } from '@react-navigation/native'
 import tasksService from 'api/tasks'
-import { useAppDispatch, useAppSelector } from 'app/hooks'
-import { clearNewTask, clearSubtask, updateTaskDetail } from 'app/tasks'
+import { useAppDispatch, useAppSelector } from 'common/app/hooks'
+import { clearNewTask, clearSubtask, updateTaskDetail } from 'common/app/tasks'
 import { useEffect } from 'react'
 import { useMutation, useQueries, useQuery, useQueryClient } from 'react-query'
-import { QueryKey, TaskStatus } from 'shared'
+import { QueryKey, TaskStatus } from 'shared/constants'
 import { StackNavigationProps, TaskQuery, Task, Tasklist } from 'typings'
 import { RawTask, TaskPayload } from 'typings/task'
 

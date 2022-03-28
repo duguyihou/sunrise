@@ -2,11 +2,12 @@ import React from 'react'
 import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { faListUl } from '@fortawesome/free-solid-svg-icons'
 
-import { RouteName, theme } from 'shared'
+import { RouteName } from 'shared/constants'
+import { theme } from 'shared/theme'
 import { StackProps, Tasklist } from 'typings'
-import IconButton from './IconButton'
-import { useAppDispatch } from 'app/hooks'
-import { updateTasklistId } from 'app/tasks'
+import IconButton from 'components/IconButton'
+import { useAppDispatch } from 'common/app/hooks'
+import { updateTasklistId } from 'common/app/tasks'
 
 type ItemProps = StackProps & {
   tasklist: Tasklist
