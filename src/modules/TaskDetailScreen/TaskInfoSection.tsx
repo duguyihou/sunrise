@@ -4,7 +4,7 @@ import { useDeleteTaskMutation } from 'hooks/tasks'
 import { getCalendar } from 'utils/dateTime'
 import { IconButton } from 'modules/common/components'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
-import { useAppSelector } from 'redux/hooks'
+import { useAppSelector } from 'app/hooks'
 
 const TaskInfoSection = () => {
   const { taskDetail } = useAppSelector(state => state.tasks)

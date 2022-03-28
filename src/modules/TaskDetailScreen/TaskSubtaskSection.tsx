@@ -4,8 +4,8 @@ import IconButton from 'modules/common/components/IconButton'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { useAddSubtaskMutation, useFetchSubtasksQuery } from 'hooks/tasks'
 import { TaskPayload } from 'typings'
-import { useAppDispatch, useAppSelector } from 'redux/hooks'
-import { updateSubtask } from 'redux/tasks'
+import { useAppDispatch, useAppSelector } from 'app/hooks'
+import { updateSubtask } from 'app/tasks'
 import { Checkbox } from 'modules/common/components'
 
 const TaskSubtaskSection = () => {

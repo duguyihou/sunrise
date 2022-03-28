@@ -6,8 +6,8 @@ import { RouteName } from 'shared/constants'
 import { theme } from 'shared/theme'
 import { StackProps, Tasklist } from 'typings'
 import { IconButton } from 'modules/common/components'
-import { useAppDispatch } from 'redux/hooks'
-import { updateTasklistId } from 'redux/tasks'
+import { useAppDispatch } from 'app/hooks'
+import { updateTasklistId } from 'app/tasks'
 
 type ItemProps = StackProps & {
   tasklist: Tasklist
