@@ -3,14 +3,14 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 import { RootStackParamList } from 'typings'
 import { useAppSelector } from 'redux/hooks'
-import TasklistScreen from 'modules/tasklist/TasklistScreen'
-import SigninScreen from 'modules/signin/SigninScreen'
-import TasklistsScreen from 'modules/tasklists/TasklistsScreen'
+import TasklistScreen from 'modules/TasklistScreen'
+import SigninScreen from 'modules/SigninScreen'
+import TasklistsScreen from 'modules/TasklistsScreen'
 import { RouteName, TaskName } from 'shared/constants'
 import { theme } from 'shared/theme'
-import TaskDetailScreen from 'modules/taskDetail/TaskDetailScreen'
-import PlannedTasksScreen from 'modules/planned/PlannedTasksScreen'
-import DateTimeScreen from 'modules/dateTime/DateTimeScreen'
+import TaskDetailScreen from 'modules/TaskDetailScreen'
+import PlannedTasksScreen from 'modules/PlannedTasksScreen'
+import DateTimeScreen from 'modules/DateTimeScreen'
 
 const RootStack = createNativeStackNavigator<RootStackParamList>()
 
