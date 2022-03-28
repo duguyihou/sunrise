@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import { useDeleteTaskMutation } from 'hooks/tasks'
+import { useDeleteTaskMutation } from 'common/hooks/tasks'
 import { getCalendar } from 'utils/dateTime'
-import IconButton from './IconButton'
+import IconButton from 'components/IconButton'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
-import { useAppSelector } from 'app/hooks'
+import { useAppSelector } from 'common/app/hooks'
 
 const TaskInfoSection = () => {
   const { taskDetail } = useAppSelector(state => state.tasks)

@@ -2,9 +2,10 @@ import React from 'react'
 import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { faCalendar } from '@fortawesome/free-solid-svg-icons'
 
-import { RouteName, TasklistName, theme } from 'shared'
+import { RouteName, TasklistName } from 'shared/constants'
+import { theme } from 'shared/theme'
 import { StackProps, Tasklist } from 'typings'
-import IconButton from './IconButton'
+import IconButton from 'components/IconButton'
 
 type Props = StackProps & {
   tasklists: Tasklist[]

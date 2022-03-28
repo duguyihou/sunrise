@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity } from 'react-native'
-import { theme } from 'shared'
+import { theme } from 'shared/theme'
 
 type Props = {
   title: string

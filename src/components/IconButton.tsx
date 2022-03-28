@@ -2,7 +2,7 @@ import React from 'react'
 import { TouchableOpacity } from 'react-native'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons'
-import { theme } from 'shared'
+import { theme } from 'shared/theme'
 
 type Props = {
   fn?: () => void

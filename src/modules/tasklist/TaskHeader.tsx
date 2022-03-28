@@ -1,8 +1,8 @@
 import React from 'react'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
-import { theme } from 'shared'
-import { useAppDispatch } from 'app/hooks'
-import { toggleShowCompletedTasks } from 'app/tasks'
+import { theme } from 'shared/theme'
+import { useAppDispatch } from 'common/app/hooks'
+import { toggleShowCompletedTasks } from 'common/app/tasks'
 
 type Props = {
   title: string

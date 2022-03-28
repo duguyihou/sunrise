@@ -1,12 +1,13 @@
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { StackNavigationProps, Task } from 'typings'
-import Checkbox from './Checkbox'
-import { useUpdateTaskMutation } from 'hooks/tasks'
-import { RouteName, theme } from 'shared'
+import Checkbox from 'components/Checkbox'
+import { useUpdateTaskMutation } from 'common/hooks/tasks'
+import { RouteName } from 'shared/constants'
+import { theme } from 'shared/theme'
 import { useNavigation } from '@react-navigation/native'
 import { windowWidth } from 'utils/dimensions'
-import DateTimeText from './DateTimeText'
+import DateTimeText from 'components/DateTimeText'
 
 type Props = {
   task: Task

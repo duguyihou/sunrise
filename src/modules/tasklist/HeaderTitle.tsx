@@ -1,6 +1,6 @@
 import { StyleSheet, TextInput } from 'react-native'
 import React, { useState } from 'react'
-import { useUpdateTasklistMutation } from 'hooks/tasklists'
+import { useUpdateTasklistMutation } from 'common/hooks/tasklists'
 
 type Props = {
   tasklistId: string

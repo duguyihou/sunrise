@@ -1,9 +1,9 @@
 import { faCalendarCheck, faCheck } from '@fortawesome/free-solid-svg-icons'
 import { useNavigation } from '@react-navigation/native'
-import { useAddTaskMutation } from 'hooks/tasks'
+import { useAddTaskMutation } from 'common/hooks/tasks'
 import React from 'react'
 import { InputAccessoryView, StyleSheet, View } from 'react-native'
-import { AccessoryID, RouteName } from 'shared'
+import { AccessoryID, RouteName } from 'shared/constants'
 import { StackNavigationProps } from 'typings'
 import IconButton from './IconButton'
 
