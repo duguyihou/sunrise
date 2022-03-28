@@ -1,8 +1,8 @@
 import React from 'react'
 import { StyleSheet, TextInput } from 'react-native'
-import { useAppDispatch, useAppSelector } from 'redux/hooks'
+import { useAppDispatch, useAppSelector } from 'app/hooks'
 import { theme } from 'shared/theme'
-import { updateTaskDetail } from 'redux/tasks'
+import { updateTaskDetail } from 'app/tasks'
 
 const TaskNotesSection = () => {
   const dispatch = useAppDispatch()

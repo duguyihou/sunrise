@@ -1,5 +1,5 @@
-import { saveToken } from 'redux/authSlice'
-import { store } from 'redux/store'
+import { saveToken } from 'app/authSlice'
+import { store } from 'app/store'
 import axios from 'axios'
 import Config from 'react-native-config'
 
