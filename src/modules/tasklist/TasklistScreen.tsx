@@ -13,7 +13,7 @@ import HeaderTitle from './HeaderTitle'
 import AddTaskView from './AddTaskView'
 import IconButton from 'modules/common/components/IconButton'
 import TaskHeader from './TaskHeader'
-import { useAppSelector } from 'common/app/hooks'
+import { useAppSelector } from 'redux/hooks'
 import { RouteType } from 'typings/route'
 
 const TasklistScreen = () => {

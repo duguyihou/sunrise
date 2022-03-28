@@ -4,8 +4,8 @@ import { authorize } from 'react-native-app-auth'
 import { windowHeight, windowWidth } from 'utils/dimensions'
 import { theme } from 'shared/theme'
 import { config } from 'shared/config'
-import { saveAuth } from 'common/app/authSlice'
-import { useAppDispatch } from 'common/app/hooks'
+import { saveAuth } from 'redux/authSlice'
+import { useAppDispatch } from 'redux/hooks'
 
 const SigninScreen = () => {
   const dispatch = useAppDispatch()

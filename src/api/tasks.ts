@@ -1,5 +1,5 @@
 import { RawTask, TaskPayload } from 'typings/task'
-import apiClient from 'utils/apiClient'
+import apiClient from './apiClient'
 
 const findAll = async (
   tasklist: string,

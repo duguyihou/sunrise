@@ -6,9 +6,9 @@ import { AccessoryID } from 'shared/constants'
 import { theme } from 'shared/theme'
 import TaskAccessory from './TaskAccessory'
 import { DateTimeButton, Checkbox } from 'modules/common/components'
-import { useKeyboard } from 'shared/useKeyboard'
-import { useAppDispatch, useAppSelector } from 'common/app/hooks'
-import { updateNewTask } from 'common/app/tasks'
+import { useKeyboard } from 'hooks/useKeyboard'
+import { useAppDispatch, useAppSelector } from 'redux/hooks'
+import { updateNewTask } from 'redux/tasks'
 
 type Props = {
   tasklistId: string

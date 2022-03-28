@@ -3,7 +3,7 @@ import React from 'react'
 import IconButton from 'modules/common/components/IconButton'
 import { faCalendarCheck } from '@fortawesome/free-solid-svg-icons'
 import { DateTimeButton } from 'modules/common/components'
-import { useAppSelector } from 'common/app/hooks'
+import { useAppSelector } from 'redux/hooks'
 
 const TaskDateTimeSection = () => {
   const { taskDetail } = useAppSelector(state => state.tasks)

@@ -2,7 +2,7 @@ import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 import { RootStackParamList } from 'typings'
-import { useAppSelector } from 'common/app/hooks'
+import { useAppSelector } from 'redux/hooks'
 import TasklistScreen from 'modules/tasklist/TasklistScreen'
 import SigninScreen from 'modules/signin/SigninScreen'
 import TasklistsScreen from 'modules/tasklists/TasklistsScreen'
