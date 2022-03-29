@@ -16,10 +16,7 @@ const initialState = {
     position: '',
     selfLink: '',
   },
-  subtask: {
-    tasklistId: '',
-    title: '',
-  },
+  subtaskTitle: '',
 }
 const tasksSlice = createSlice({
   name: 'tasks',
@@ -38,26 +35,14 @@ const tasksSlice = createSlice({
       ...state,
       taskDetail: payload,
     }),
-    updateTasklistId: (state, { payload }) => ({
-      ...state,
-      subtask: {
-        ...state.subtask,
-        tasklistId: payload,
-      },
-    }),
+
     updateSubtask: (state, { payload }) => ({
       ...state,
-      subtask: {
-        ...state.subtask,
-        title: payload,
-      },
+      subtaskTitle: payload,
     }),
     clearSubtask: state => ({
       ...state,
-      subtask: {
-        ...state.subtask,
-        title: '',
-      },
+      subtaskTitle: '',
     }),
   },
 })
@@ -68,7 +53,6 @@ export const {
   clearNewTask,
   toggleShowCompletedTasks,
   updateTaskDetail,
-  updateTasklistId,
   updateSubtask,
   clearSubtask,
 } = tasksSlice.actions

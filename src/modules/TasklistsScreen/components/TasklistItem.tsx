@@ -8,7 +8,6 @@ import { theme } from 'shared/theme'
 import { StackNavigationProps, Tasklist } from 'typings'
 import { IconButton } from 'modules/common/components'
 import { useAppDispatch } from 'app/hooks'
-import { updateTasklistId } from 'app/tasksSlice'
 import { updateTasklist } from 'app/tasklistSlice'
 
 type Props = {
@@ -18,12 +17,8 @@ const TasklistItem = ({ tasklist }: Props) => {
   const navigation = useNavigation<StackNavigationProps>()
   const dispatch = useAppDispatch()
   const handleSelect = () => {
-    const { id } = tasklist
-    dispatch(updateTasklistId(id)) // use updateTasklist
     dispatch(updateTasklist(tasklist))
-    navigation.push(RouteName.Tasklist, {
-      tasklist,
-    })
+    navigation.push(RouteName.Tasklist, { tasklist })
   }
   return (
     <TouchableOpacity style={styles.container} onPress={handleSelect}>
