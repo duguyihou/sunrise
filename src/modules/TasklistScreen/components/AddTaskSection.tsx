@@ -1,7 +1,6 @@
 import { KeyboardAvoidingView, StyleSheet, TextInput, View } from 'react-native'
 import React from 'react'
 import { useHeaderHeight } from '@react-navigation/elements'
-import { windowWidth } from 'utils/dimensions'
 import { AccessoryID } from 'shared/constants'
 import { theme } from 'shared/theme'
 import TaskAccessory from './TaskAccessory'

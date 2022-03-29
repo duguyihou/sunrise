@@ -1,12 +1,11 @@
 import { StyleSheet, TextInput, View } from 'react-native'
 import React from 'react'
-import IconButton from 'modules/common/components/IconButton'
+import { Checkbox, IconButton } from 'modules/common/components'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { useAddSubtaskMutation, useFetchSubtasksQuery } from 'hooks/tasks'
 import { TaskPayload } from 'typings'
 import { useAppDispatch, useTasklists, useTasks } from 'app/hooks'
 import { updateSubtask } from 'app/tasksSlice'
-import { Checkbox } from 'modules/common/components'
 
 const TaskSubtaskSection = () => {
   const { subtaskTitle, taskDetail } = useTasks()

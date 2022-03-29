@@ -1,12 +1,11 @@
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { StackNavigationProps, Task } from 'typings'
-import { Checkbox } from 'modules/common/components'
+import { Checkbox, DateTimeText } from 'modules/common/components'
 import { useUpdateTaskMutation } from 'hooks/tasks'
 import { RouteName } from 'shared/constants'
 import { theme } from 'shared/theme'
 import { useNavigation } from '@react-navigation/native'
-import DateTimeText from 'modules/common/components/DateTimeText'
 
 type Props = {
   task: Task
