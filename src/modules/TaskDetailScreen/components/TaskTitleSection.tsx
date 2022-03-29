@@ -1,7 +1,7 @@
 import React from 'react'
 import { Checkbox } from 'modules/common/components'
 import { useUpdateTaskMutation } from 'hooks/tasks'
-import { useAppDispatch, useTasks } from 'app/hooks'
+import { useAppDispatch, useTasks } from 'hooks/app'
 import { StyleSheet, TextInput } from 'react-native'
 import { updateTaskDetail } from 'app/tasksSlice'
 

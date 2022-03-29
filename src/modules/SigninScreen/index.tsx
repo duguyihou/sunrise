@@ -5,7 +5,7 @@ import { windowHeight, windowWidth } from 'utils/dimensions'
 import { theme } from 'shared/theme'
 import { config } from 'shared/config'
 import { saveAuth } from 'app/authSlice'
-import { useAppDispatch } from 'app/hooks'
+import { useAppDispatch } from 'hooks/app'
 
 const SigninScreen = () => {
   const dispatch = useAppDispatch()

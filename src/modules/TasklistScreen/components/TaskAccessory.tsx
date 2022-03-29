@@ -6,7 +6,7 @@ import { InputAccessoryView, StyleSheet, View } from 'react-native'
 import { AccessoryID, RouteName } from 'shared/constants'
 import { StackNavigationProps } from 'typings'
 import { IconButton } from 'modules/common/components'
-import { useTasklists, useTasks } from 'app/hooks'
+import { useTasklists, useTasks } from 'hooks/app'
 
 const TaskAccessory = () => {
   const {

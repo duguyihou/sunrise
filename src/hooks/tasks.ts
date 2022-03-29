@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native'
 import tasksService from 'api/tasks'
-import { useAppDispatch, useTasks } from 'app/hooks'
+import { useAppDispatch, useTasks } from 'hooks/app'
 import { clearNewTask, clearSubtask, updateTaskDetail } from 'app/tasksSlice'
 import { useEffect } from 'react'
 import { useMutation, useQueries, useQuery, useQueryClient } from 'react-query'
