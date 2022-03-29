@@ -55,14 +55,16 @@ export default AddTaskSection
 const styles = StyleSheet.create({
   wrapper: {
     marginBottom: 30,
+    width: '100%',
   },
   container: {
-    width: windowWidth - 20,
+    paddingHorizontal: 20,
     backgroundColor: theme.bg.secondary,
   },
   title: {
     flex: 1,
     padding: 10,
+    paddingLeft: 20,
     fontSize: 16,
   },
 })
