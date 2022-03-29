@@ -1,12 +1,12 @@
 import React from 'react'
 import { StyleSheet, TextInput } from 'react-native'
-import { useAppDispatch, useAppSelector } from 'app/hooks'
+import { useAppDispatch, useTasks } from 'app/hooks'
 import { theme } from 'shared/theme'
-import { updateTaskDetail } from 'app/tasks'
+import { updateTaskDetail } from 'app/tasksSlice'
 
 const TaskNotesSection = () => {
   const dispatch = useAppDispatch()
-  const { taskDetail } = useAppSelector(state => state.tasks)
+  const { taskDetail } = useTasks()
   const { notes } = taskDetail
   const handleOnChange = (text: string) =>
     dispatch(updateTaskDetail({ ...taskDetail, notes: text }))

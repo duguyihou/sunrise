@@ -4,10 +4,10 @@ import { useDeleteTaskMutation } from 'hooks/tasks'
 import { getCalendar } from 'utils/dateTime'
 import { IconButton } from 'modules/common/components'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
-import { useAppSelector } from 'app/hooks'
+import { useTasks } from 'app/hooks'
 
 const TaskInfoSection = () => {
-  const { taskDetail } = useAppSelector(state => state.tasks)
+  const { taskDetail } = useTasks()
   const { selfLink, updated } = taskDetail
   const deleteTaskMutation = useDeleteTaskMutation(selfLink)
   const handleDelete = () => deleteTaskMutation.mutate()
@@ -15,7 +15,7 @@ const TaskInfoSection = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.updateInfo}>Updated {getCalendar(updated)}</Text>
-      <IconButton icon={faTrash} fn={handleDelete} />
+      <IconButton icon={faTrash} onPress={handleDelete} />
     </View>
   )
 }

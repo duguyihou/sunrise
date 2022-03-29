@@ -4,20 +4,17 @@ import IconButton from 'modules/common/components/IconButton'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { useAddSubtaskMutation, useFetchSubtasksQuery } from 'hooks/tasks'
 import { TaskPayload } from 'typings'
-import { useAppDispatch, useAppSelector } from 'app/hooks'
-import { updateSubtask } from 'app/tasks'
+import { useAppDispatch, useTasklists, useTasks } from 'app/hooks'
+import { updateSubtask } from 'app/tasksSlice'
 import { Checkbox } from 'modules/common/components'
 
 const TaskSubtaskSection = () => {
-  const {
-    subtask,
-    taskDetail: { id },
-  } = useAppSelector(state => state.tasks)
+  const { subtaskTitle, taskDetail } = useTasks()
+  const { tasklist } = useTasklists()
   const dispatch = useAppDispatch()
-  const { tasklistId, title } = subtask
-  const { data: subtasks } = useFetchSubtasksQuery(tasklistId, id)
-  const addSubtaskMutation = useAddSubtaskMutation(tasklistId, id, {
-    title,
+  const { data: subtasks } = useFetchSubtasksQuery(tasklist.id, taskDetail.id)
+  const addSubtaskMutation = useAddSubtaskMutation(tasklist.id, taskDetail.id, {
+    title: subtaskTitle,
   } as TaskPayload)
   const handleOnChangeText = (text: string) => dispatch(updateSubtask(text))
   const handleSubmitEditing = () => addSubtaskMutation.mutate()
@@ -37,7 +34,7 @@ const TaskSubtaskSection = () => {
         <IconButton icon={faPlus} />
         <TextInput
           style={styles.add}
-          value={title}
+          value={subtaskTitle}
           onChangeText={handleOnChangeText}
           placeholder="Add subtasks"
           blurOnSubmit={false}

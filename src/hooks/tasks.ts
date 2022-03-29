@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native'
 import tasksService from 'api/tasks'
-import { useAppDispatch, useAppSelector } from 'app/hooks'
-import { clearNewTask, clearSubtask, updateTaskDetail } from 'app/tasks'
+import { useAppDispatch, useTasks } from 'app/hooks'
+import { clearNewTask, clearSubtask, updateTaskDetail } from 'app/tasksSlice'
 import { useEffect } from 'react'
 import { useMutation, useQueries, useQuery, useQueryClient } from 'react-query'
 import { QueryKey, TaskStatus } from 'shared/constants'
@@ -41,7 +41,7 @@ export const useFetchTasksQuery = (
 
 export const useAddTaskMutation = (tasklistId: string) => {
   const queryClient = useQueryClient()
-  const { newTask } = useAppSelector(state => state.tasks)
+  const { newTask } = useTasks()
   const status = newTask.status ? TaskStatus.Completed : TaskStatus.NeedsAction
   const rawNewTask = { ...newTask, status }
   const dispatch = useAppDispatch()
@@ -71,7 +71,7 @@ export const useUpdateTaskMutation = (task: Task) => {
 
 export const useFetchTaskDetailQuery = (selfLink: string) => {
   const dispatch = useAppDispatch()
-  const { taskDetail } = useAppSelector(state => state.tasks)
+  const { taskDetail } = useTasks()
   const { isLoading, error, data } = useQuery<RawTask, Error, Task>(
     QueryKey.TaskDetail,
     async () => tasksService.find(selfLink),

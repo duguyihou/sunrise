@@ -7,15 +7,12 @@ import { theme } from 'shared/theme'
 import TaskAccessory from './TaskAccessory'
 import { DateTimeButton, Checkbox } from 'modules/common/components'
 import { useKeyboard } from 'hooks/useKeyboard'
-import { useAppDispatch, useAppSelector } from 'app/hooks'
-import { updateNewTask } from 'app/tasks'
+import { useAppDispatch, useTasks } from 'app/hooks'
+import { updateNewTask } from 'app/tasksSlice'
 
-type Props = {
-  tasklistId: string
-}
-const AddTaskView = ({ tasklistId }: Props) => {
+const AddTaskSection = () => {
   const dispatch = useAppDispatch()
-  const { newTask } = useAppSelector(state => state.tasks)
+  const { newTask } = useTasks()
   const { title, due, status } = newTask
   const handleCheck = () =>
     dispatch(updateNewTask({ ...newTask, status: !status }))
@@ -48,24 +45,26 @@ const AddTaskView = ({ tasklistId }: Props) => {
         />
         {showDateTimeButton() && <DateTimeButton dateTime={due} />}
       </View>
-      <TaskAccessory tasklistId={tasklistId} due={due} />
+      <TaskAccessory />
     </KeyboardAvoidingView>
   )
 }
 
-export default AddTaskView
+export default AddTaskSection
 
 const styles = StyleSheet.create({
   wrapper: {
     marginBottom: 30,
+    width: '100%',
   },
   container: {
-    width: windowWidth - 20,
+    paddingHorizontal: 20,
     backgroundColor: theme.bg.secondary,
   },
   title: {
     flex: 1,
     padding: 10,
+    paddingLeft: 20,
     fontSize: 16,
   },
 })

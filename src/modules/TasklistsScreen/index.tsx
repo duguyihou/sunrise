@@ -12,7 +12,7 @@ const TasklistsScreen = () => {
   const addTasklistMutation = useAddTasklistMutation()
   useLayoutEffect(() =>
     navigation.setOptions({
-      headerRight: () => <IconButton icon={faPlus} fn={handlePlus} />,
+      headerRight: () => <IconButton icon={faPlus} onPress={handlePlus} />,
     }),
   )
   const handlePlus = () => addTasklistMutation.mutate()

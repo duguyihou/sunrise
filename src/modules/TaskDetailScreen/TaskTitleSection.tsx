@@ -1,13 +1,13 @@
 import React from 'react'
 import { Checkbox } from 'modules/common/components'
 import { useUpdateTaskMutation } from 'hooks/tasks'
-import { useAppDispatch, useAppSelector } from 'app/hooks'
+import { useAppDispatch, useTasks } from 'app/hooks'
 import { StyleSheet, TextInput } from 'react-native'
-import { updateTaskDetail } from 'app/tasks'
+import { updateTaskDetail } from 'app/tasksSlice'
 
 const TaskTitleSection = () => {
   const dispatch = useAppDispatch()
-  const { taskDetail } = useAppSelector(state => state.tasks)
+  const { taskDetail } = useTasks()
 
   const { status, title } = taskDetail
   const updateTaskStatusMutation = useUpdateTaskMutation({

@@ -4,8 +4,8 @@ import { RouteName } from 'shared/constants'
 import { theme } from 'shared/theme'
 import { StackNavigationProps } from 'typings'
 import { useNavigation } from '@react-navigation/native'
-import { useAppDispatch, useAppSelector } from 'app/hooks'
-import { updateTaskDetail, updateNewTask } from 'app/tasks'
+import { useAppDispatch, useTasks } from 'app/hooks'
+import { updateTaskDetail, updateNewTask } from 'app/tasksSlice'
 import DateTimeText from './DateTimeText'
 import { getPrevRoute } from 'utils/routes'
 
@@ -18,7 +18,7 @@ const DateTimeButton = (props: Props) => {
   const { dateTime, showPlaceholder } = props
   const navigation = useNavigation<StackNavigationProps>()
   const dispatch = useAppDispatch()
-  const { newTask, taskDetail } = useAppSelector(state => state.tasks)
+  const { newTask, taskDetail } = useTasks()
   const handleSetDate = () =>
     navigation.navigate(RouteName.DateTime, { dateTime })
   const handleRemove = () => {

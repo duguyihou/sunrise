@@ -3,10 +3,10 @@ import React from 'react'
 import IconButton from 'modules/common/components/IconButton'
 import { faCalendarCheck } from '@fortawesome/free-solid-svg-icons'
 import { DateTimeButton } from 'modules/common/components'
-import { useAppSelector } from 'app/hooks'
+import { useTasks } from 'app/hooks'
 
 const TaskDateTimeSection = () => {
-  const { taskDetail } = useAppSelector(state => state.tasks)
+  const { taskDetail } = useTasks()
   const { due } = taskDetail
   return (
     <View style={styles.container}>

@@ -1,15 +1,15 @@
 import { StyleSheet, TextInput } from 'react-native'
 import React, { useState } from 'react'
 import { useUpdateTasklistMutation } from 'hooks/tasklists'
+import { useTasklists } from 'app/hooks'
 
-type Props = {
-  tasklistId: string
-  title: string
-}
-const HeaderTitle = ({ tasklistId, title }: Props) => {
+const HeaderTitle = () => {
+  const {
+    tasklist: { id, title },
+  } = useTasklists()
   const [editable, setEditable] = useState(false)
   const [value, setValue] = useState(title)
-  const updateTasklistMutation = useUpdateTasklistMutation(tasklistId, value)
+  const updateTasklistMutation = useUpdateTasklistMutation(id, value)
   const handleOnBlur = () => {
     updateTasklistMutation.mutate()
     setEditable(false)

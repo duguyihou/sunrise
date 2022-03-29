@@ -2,7 +2,7 @@ import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 import { RootStackParamList } from 'typings'
-import { useAppSelector } from 'app/hooks'
+import { useAuth } from 'app/hooks'
 import TasklistScreen from 'modules/TasklistScreen'
 import SigninScreen from 'modules/SigninScreen'
 import TasklistsScreen from 'modules/TasklistsScreen'
@@ -15,7 +15,7 @@ import DateTimeScreen from 'modules/DateTimeScreen'
 const RootStack = createNativeStackNavigator<RootStackParamList>()
 
 function RootRoute() {
-  const { access_token } = useAppSelector(state => state.auth)
+  const { access_token } = useAuth()
 
   if (!access_token) {
     return (
