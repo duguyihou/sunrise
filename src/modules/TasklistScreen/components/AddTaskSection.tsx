@@ -6,7 +6,7 @@ import { theme } from 'shared/theme'
 import TaskAccessory from './TaskAccessory'
 import { DateTimeButton, Checkbox } from 'modules/common/components'
 import { useKeyboard } from 'hooks/useKeyboard'
-import { useAppDispatch, useTasks } from 'app/hooks'
+import { useAppDispatch, useTasks } from 'hooks/app'
 import { updateNewTask } from 'app/tasksSlice'
 
 const AddTaskSection = () => {

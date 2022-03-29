@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import { theme } from 'shared/theme'
-import { useAppDispatch } from 'app/hooks'
+import { useAppDispatch } from 'hooks/app'
 import { toggleShowCompletedTasks } from 'app/tasksSlice'
 
 type Props = {

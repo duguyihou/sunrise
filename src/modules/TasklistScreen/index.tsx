@@ -13,7 +13,7 @@ import HeaderTitle from './components/HeaderTitle'
 import AddTaskSection from './components/AddTaskSection'
 import IconButton from 'modules/common/components/IconButton'
 import TaskHeader from './components/TaskHeader'
-import { useTasks } from 'app/hooks'
+import { useTasks } from 'hooks/app'
 import { RouteType } from 'typings/route'
 
 const TasklistScreen = () => {

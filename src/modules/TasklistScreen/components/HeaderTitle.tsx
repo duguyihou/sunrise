@@ -1,7 +1,7 @@
 import { StyleSheet, TextInput } from 'react-native'
 import React, { useState } from 'react'
 import { useUpdateTasklistMutation } from 'hooks/tasklists'
-import { useTasklists } from 'app/hooks'
+import { useTasklists } from 'hooks/app'
 
 const HeaderTitle = () => {
   const {

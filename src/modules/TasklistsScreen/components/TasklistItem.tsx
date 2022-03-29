@@ -7,7 +7,7 @@ import { RouteName } from 'shared/constants'
 import { theme } from 'shared/theme'
 import { StackNavigationProps, Tasklist } from 'typings'
 import { IconButton } from 'modules/common/components'
-import { useAppDispatch } from 'app/hooks'
+import { useAppDispatch } from 'hooks/app'
 import { updateTasklist } from 'app/tasklistSlice'
 
 type Props = {

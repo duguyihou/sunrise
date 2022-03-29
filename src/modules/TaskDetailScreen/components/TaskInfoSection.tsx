@@ -4,7 +4,7 @@ import { useDeleteTaskMutation } from 'hooks/tasks'
 import { getCalendar } from 'utils/dateTime'
 import { IconButton } from 'modules/common/components'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
-import { useTasks } from 'app/hooks'
+import { useTasks } from 'hooks/app'
 
 const TaskInfoSection = () => {
   const { taskDetail } = useTasks()
