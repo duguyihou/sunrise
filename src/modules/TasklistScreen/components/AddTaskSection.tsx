@@ -10,10 +10,7 @@ import { useKeyboard } from 'hooks/useKeyboard'
 import { useAppDispatch, useTasks } from 'app/hooks'
 import { updateNewTask } from 'app/tasksSlice'
 
-type Props = {
-  tasklistId: string
-}
-const AddTaskSection = ({ tasklistId }: Props) => {
+const AddTaskSection = () => {
   const dispatch = useAppDispatch()
   const { newTask } = useTasks()
   const { title, due, status } = newTask
@@ -48,7 +45,7 @@ const AddTaskSection = ({ tasklistId }: Props) => {
         />
         {showDateTimeButton() && <DateTimeButton dateTime={due} />}
       </View>
-      <TaskAccessory tasklistId={tasklistId} due={due} />
+      <TaskAccessory />
     </KeyboardAvoidingView>
   )
 }

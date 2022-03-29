@@ -6,14 +6,17 @@ import { InputAccessoryView, StyleSheet, View } from 'react-native'
 import { AccessoryID, RouteName } from 'shared/constants'
 import { StackNavigationProps } from 'typings'
 import { IconButton } from 'modules/common/components'
+import { useTasklists, useTasks } from 'app/hooks'
 
-type Props = {
-  tasklistId: string
-  due: string
-}
-const TaskAccessory = ({ tasklistId, due }: Props) => {
+const TaskAccessory = () => {
+  const {
+    tasklist: { id },
+  } = useTasklists()
+  const {
+    newTask: { due },
+  } = useTasks()
   const navigation = useNavigation<StackNavigationProps>()
-  const addTaskMutation = useAddTaskMutation(tasklistId)
+  const addTaskMutation = useAddTaskMutation(id)
 
   const handleSetDateTime = () =>
     navigation.navigate(RouteName.DateTime, { dateTime: due })
@@ -26,7 +29,11 @@ const TaskAccessory = ({ tasklistId, due }: Props) => {
           icon={faCalendarCheck}
           onPress={handleSetDateTime}
         />
-        <IconButton style={styles.check} icon={faCheck} onPress={handleSubmit} />
+        <IconButton
+          style={styles.check}
+          icon={faCheck}
+          onPress={handleSubmit}
+        />
       </View>
     </InputAccessoryView>
   )

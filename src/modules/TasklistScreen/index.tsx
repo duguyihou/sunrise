@@ -20,7 +20,7 @@ const TasklistScreen = () => {
   const {
     params: { tasklist },
   } = useRoute<RouteType<RouteName.Tasklist>>()
-  const { title, id, selfLink } = tasklist
+  const { id, selfLink } = tasklist
   const navigation = useNavigation<StackNavigationProps>()
   const [modalVisible, setModalVisible] = useState(false)
   const { showCompletedTasks } = useTasks()
@@ -30,7 +30,7 @@ const TasklistScreen = () => {
 
   useLayoutEffect(() =>
     navigation.setOptions({
-      headerTitle: () => <HeaderTitle title={title} tasklistId={id} />,
+      headerTitle: () => <HeaderTitle />,
       headerRight: () => (
         <IconButton
           icon={faEllipsisH}
@@ -57,7 +57,7 @@ const TasklistScreen = () => {
       <PopupView visible={modalVisible} setVisible={setModalVisible}>
         <PopupItem title="delete" fn={() => deleteTasklistMutation.mutate()} />
       </PopupView>
-      <AddTaskSection tasklistId={id} />
+      <AddTaskSection />
     </View>
   )
 }
