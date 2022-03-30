@@ -22,7 +22,7 @@ const DateTimeButton = (props: Props) => {
   const handleSetDate = () =>
     navigation.navigate(RouteName.DateTime, { dateTime })
   const handleRemove = () => {
-    if (getPrevRoute(navigation).name === RouteName.Tasklists) {
+    if (getPrevRoute(navigation)?.name === RouteName.Tasklists) {
       dispatch(updateNewTask({ ...newTask, due: '' }))
     } else {
       dispatch(updateTaskDetail({ ...taskDetail, due: '' }))
