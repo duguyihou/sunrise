@@ -14,23 +14,23 @@ export const useFetchTasksQuery = (
   showDeleted?: boolean,
   showHidden?: boolean,
 ) => {
-  let tasks: Task[] = [],
-    needsActionTasks: Task[] = [],
-    compeletedTasks: Task[] = []
+  let tasks: Task[] | undefined,
+    needsActionTasks: Task[] | undefined,
+    compeletedTasks: Task[] | undefined
   const queryResult = useQuery<TaskQuery, Error, void>(
     [QueryKey.Tasks, tasklistId],
     async () =>
       tasksService.findAll(tasklistId, showCompleted, showDeleted, showHidden),
     {
       select: ({ items }) => {
-        tasks = items.map(item => ({
+        tasks = items?.map(item => ({
           ...item,
           status: item.status === TaskStatus.Completed ? true : false,
         }))
-        needsActionTasks = tasks.filter(
+        needsActionTasks = tasks?.filter(
           ({ status, parent }) => !status && !parent,
         )
-        compeletedTasks = tasks.filter(
+        compeletedTasks = tasks?.filter(
           ({ status, parent }) => status && !parent,
         )
       },

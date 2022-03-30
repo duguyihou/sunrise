@@ -42,7 +42,7 @@ export interface TasklistQuery {
 
 export interface TaskQuery {
   etag: string
-  items: RawTask[]
+  items?: RawTask[]
   kind: string
 }
 
