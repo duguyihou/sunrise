@@ -44,7 +44,7 @@ const TasklistScreen = () => {
 
   return (
     <View style={styles.container}>
-      <ScrollView keyboardDismissMode="on-drag">
+      <ScrollView style={styles.tasks} keyboardDismissMode="on-drag">
         {needsActionTasks &&
           needsActionTasks.map(task => <TaskItem key={task.id} task={task} />)}
         {compeletedTasks && compeletedTasks.length > 0 && (
@@ -67,9 +67,8 @@ export default TasklistScreen
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    display: 'flex',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    backgroundColor: theme.bg.secondary,
+  },
+  tasks: {
+    width: '100%',
   },
 })

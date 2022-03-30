@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { StackNavigationProps } from 'typings/route'
 import { Task } from 'typings/task'
 import { Checkbox, DateTimeText } from 'modules/common/components'
@@ -21,8 +21,8 @@ const TaskItem = ({ task }: Props) => {
     navigation.push(RouteName.TaskDetail, { selfLink })
   return (
     <TouchableOpacity
-      activeOpacity={1}
       style={styles.container}
+      activeOpacity={1}
       onPress={navigateToTaskDetail}>
       <Checkbox isChecked={status} onPress={handleCheck} text={title} />
       {notes && (
@@ -39,7 +39,6 @@ export default TaskItem
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
     padding: 10,
   },
 
