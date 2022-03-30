@@ -16,7 +16,7 @@ const DateTimeHeader = ({ dateTime }: Props) => {
   const navigation = useNavigation<StackNavigationProps>()
 
   const handleSetDateAndTime = () => {
-    if (getPrevRoute(navigation).name === RouteName.Tasklist) {
+    if (getPrevRoute(navigation)?.name === RouteName.Tasklist) {
       dispatch(updateNewTask({ ...newTask, due: dateTime }))
     } else {
       dispatch(updateTaskDetail({ ...taskDetail, due: dateTime }))
