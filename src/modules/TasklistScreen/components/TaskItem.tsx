@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { StackNavigationProps } from 'typings/route'
 import { Task } from 'typings/task'
 import { Checkbox, DateTimeText } from 'modules/common/components'
