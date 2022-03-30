@@ -1,7 +1,7 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
-import { StackNavigationProps } from 'typings'
+import { StackNavigationProps } from 'typings/route'
 import { theme } from 'shared/theme'
 import DateTimeHeader from './DateTimeHeader'
 import { Calendar } from 'react-native-calendars'

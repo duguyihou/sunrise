@@ -1,7 +1,7 @@
 import { ScrollView, Text, StyleSheet, View } from 'react-native'
 import React, { useLayoutEffect, useState } from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native'
-import { StackNavigationProps } from 'typings'
+import { StackNavigationProps } from 'typings/route'
 import { RouteName } from 'shared/constants'
 import { theme } from 'shared/theme'
 import TaskItem from './components/TaskItem'

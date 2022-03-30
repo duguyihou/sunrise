@@ -1,4 +1,4 @@
-import { StackNavigationProps } from 'typings'
+import { StackNavigationProps } from 'typings/route'
 
 export const getPrevRoute = (navigation: StackNavigationProps) => {
   const { routes } = navigation.getState()

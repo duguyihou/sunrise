@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity } from 'react-native'
-import { StackNavigationProps, Task } from 'typings'
+import { StackNavigationProps } from 'typings/route'
+import { Task } from 'typings/task'
 import { Checkbox, DateTimeText } from 'modules/common/components'
 import { useUpdateTaskMutation } from 'hooks/tasks'
 import { RouteName } from 'shared/constants'

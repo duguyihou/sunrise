@@ -3,7 +3,8 @@ import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { useNavigation } from '@react-navigation/native'
 
 import { QueryKey, RouteName, TasklistName } from 'shared/constants'
-import { StackNavigationProps, TasklistQuery } from 'typings'
+import { StackNavigationProps } from 'typings/route'
+import { TasklistQuery } from 'typings/task'
 import { useMemo } from 'react'
 
 export const useFetchTasklistQuery = () => {
