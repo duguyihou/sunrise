@@ -9,11 +9,19 @@ type Props = {
   size?: number
   icon: IconDefinition
   style?: Record<string, string | number>
+  color?: string
 }
-const IconButton = ({ onPress, size = 20, icon, style = {} }: Props) => {
+const IconButton = (props: Props) => {
+  const {
+    onPress,
+    size = 20,
+    icon,
+    style = {},
+    color = theme.font.primary,
+  } = props
   return (
     <TouchableOpacity style={style} onPress={onPress} activeOpacity={1}>
-      <FontAwesomeIcon icon={icon} color={theme.font.primary} size={size} />
+      <FontAwesomeIcon icon={icon} color={color} size={size} />
     </TouchableOpacity>
   )
 }

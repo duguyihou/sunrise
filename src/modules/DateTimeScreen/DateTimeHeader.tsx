@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native'
 import { updateNewTask, updateTaskDetail } from 'app/tasksSlice'
 import { useAppDispatch, useTasks } from 'hooks/app'
 import { getPrevRoute } from 'utils/routes'
-import { StackNavigationProps } from 'typings'
+import { StackNavigationProps } from 'typings/route'
 import { RouteName } from 'shared/constants'
 
 type Props = {

@@ -5,8 +5,8 @@ import { clearNewTask, clearSubtask, updateTaskDetail } from 'app/tasksSlice'
 import { useEffect } from 'react'
 import { useMutation, useQueries, useQuery, useQueryClient } from 'react-query'
 import { QueryKey, TaskStatus } from 'shared/constants'
-import { StackNavigationProps, TaskQuery, Task, Tasklist } from 'typings'
-import { RawTask, TaskPayload } from 'typings/task'
+import { StackNavigationProps } from 'typings/route'
+import { RawTask, TaskPayload, TaskQuery, Task, Tasklist } from 'typings/task'
 
 export const useFetchTasksQuery = (
   tasklistId: string,

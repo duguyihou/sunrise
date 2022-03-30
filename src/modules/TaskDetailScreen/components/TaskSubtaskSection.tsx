@@ -3,7 +3,7 @@ import React from 'react'
 import { Checkbox, IconButton } from 'modules/common/components'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { useAddSubtaskMutation, useFetchSubtasksQuery } from 'hooks/tasks'
-import { TaskPayload } from 'typings'
+import { TaskPayload } from 'typings/task'
 import { useAppDispatch, useTasklists, useTasks } from 'hooks/app'
 import { updateSubtask } from 'app/tasksSlice'
 

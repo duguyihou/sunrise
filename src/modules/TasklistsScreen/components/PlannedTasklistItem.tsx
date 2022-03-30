@@ -4,7 +4,8 @@ import { faCalendar } from '@fortawesome/free-solid-svg-icons'
 
 import { RouteName, TasklistName } from 'shared/constants'
 import { theme } from 'shared/theme'
-import { StackProps, Tasklist } from 'typings'
+import { StackProps } from 'typings/route'
+import { Tasklist } from 'typings/task'
 import { IconButton } from 'modules/common/components'
 
 type Props = StackProps & {

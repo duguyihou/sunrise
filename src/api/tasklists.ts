@@ -1,4 +1,4 @@
-import { TasklistQuery } from 'typings'
+import { TasklistQuery } from 'typings/task'
 import apiClient from './apiClient'
 
 const findAll = async () => {

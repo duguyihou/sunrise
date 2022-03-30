@@ -13,5 +13,8 @@ export const theme = {
     primary: '#f8f8f8',
     secondary: '#e0e0e0',
   },
+  button: {
+    enabled: 'red',
+  },
   hidden: 'transpancy',
 }

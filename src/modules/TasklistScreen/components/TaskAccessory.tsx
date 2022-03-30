@@ -4,23 +4,24 @@ import { useAddTaskMutation } from 'hooks/tasks'
 import React from 'react'
 import { InputAccessoryView, StyleSheet, View } from 'react-native'
 import { AccessoryID, RouteName } from 'shared/constants'
-import { StackNavigationProps } from 'typings'
+import { StackNavigationProps } from 'typings/route'
 import { IconButton } from 'modules/common/components'
 import { useTasklists, useTasks } from 'hooks/app'
+import { theme } from 'shared/theme'
 
 const TaskAccessory = () => {
   const {
     tasklist: { id },
   } = useTasklists()
   const {
-    newTask: { due },
+    newTask: { due, title },
   } = useTasks()
   const navigation = useNavigation<StackNavigationProps>()
   const addTaskMutation = useAddTaskMutation(id)
 
   const handleSetDateTime = () =>
     navigation.navigate(RouteName.DateTime, { dateTime: due })
-  const handleSubmit = () => addTaskMutation.mutate()
+  const handleSubmit = () => !!title && addTaskMutation.mutate()
   return (
     <InputAccessoryView nativeID={AccessoryID.Task}>
       <View style={styles.container}>
@@ -33,6 +34,7 @@ const TaskAccessory = () => {
           style={styles.check}
           icon={faCheck}
           onPress={handleSubmit}
+          color={title && theme.button.enabled}
         />
       </View>
     </InputAccessoryView>
