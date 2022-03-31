@@ -1,5 +1,9 @@
 # sunrise
 
+## development
+### Prerequisites
+- pnpm 
+- Node v16
 ## 3rd party libs
 
 - axios
