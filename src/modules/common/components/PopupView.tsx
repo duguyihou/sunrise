@@ -6,6 +6,7 @@ import { windowWidth } from 'utils/dimensions'
 type Props = {
   visible: boolean
   children: React.ReactNode
+  // eslint-disable-next-line no-unused-vars
   setVisible: (modalVisible: boolean) => void
 }
 function PopupView({ visible, children, setVisible }: Props) {

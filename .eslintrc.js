@@ -49,6 +49,8 @@ module.exports = {
           1,
           { extensions: ['js', '.ts', '.tsx'] },
         ],
+        'react/prop-types': 'off', // Since we do not use prop-types
+        'react/require-default-props': 'off', // Since we do not use prop-types
         'react-native/no-unused-styles': 2, // disallow unused styles
         'react-native/no-inline-styles': 2, // disallow styles declared within the component itself
         'react-native/no-color-literals': 2, // enforces variable names to be used for storing colors
