@@ -3,14 +3,14 @@ import React, { useLayoutEffect } from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { RouteName } from 'shared/constants'
 import { useFetchTaskDetailQuery, useUpdateTaskMutation } from 'hooks/tasks'
+import { RouteType } from 'typings/route'
 import TaskDateTimeSection from './components/TaskDateTimeSection'
 import TaskNotesSection from './components/TaskNotesSection'
-import { RouteType } from 'typings/route'
 import TaskTitleSection from './components/TaskTitleSection'
 import TaskInfoSection from './components/TaskInfoSection'
 import TaskSubtaskSection from './components/TaskSubtaskSection'
 
-const TaskDetailScreen = () => {
+function TaskDetailScreen() {
   const {
     params: { selfLink },
   } = useRoute<RouteType<RouteName.TaskDetail>>()

@@ -16,12 +16,11 @@ const authSlice = createSlice({
         refresh_token: refreshToken,
       })
     },
-    saveToken: (state, { payload }) => {
-      return (state = {
+    saveToken: (state, { payload }) =>
+      (state = {
         ...state,
         access_token: payload,
-      })
-    },
+      }),
   },
 })
 

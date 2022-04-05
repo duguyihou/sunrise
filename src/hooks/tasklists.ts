@@ -10,7 +10,7 @@ import { useMemo } from 'react'
 export const useFetchTasklistQuery = () => {
   const queryResult = useQuery<TasklistQuery, Error>(
     QueryKey.Tasklists,
-    async () => await tasklistService.findAll(),
+    async () => tasklistService.findAll(),
   )
   return {
     ...queryResult,

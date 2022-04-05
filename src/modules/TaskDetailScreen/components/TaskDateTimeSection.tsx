@@ -4,7 +4,7 @@ import { faCalendarCheck } from '@fortawesome/free-solid-svg-icons'
 import { DateTimeButton, IconButton } from 'modules/common/components'
 import { useTasks } from 'hooks/app'
 
-const TaskDateTimeSection = () => {
+function TaskDateTimeSection() {
   const { taskDetail } = useTasks()
   const { due } = taskDetail
   return (

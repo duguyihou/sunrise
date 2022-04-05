@@ -10,7 +10,7 @@ import { RouteName } from 'shared/constants'
 type Props = {
   dateTime: string
 }
-const DateTimeHeader = ({ dateTime }: Props) => {
+function DateTimeHeader({ dateTime }: Props) {
   const { newTask, taskDetail } = useTasks()
   const dispatch = useAppDispatch()
   const navigation = useNavigation<StackNavigationProps>()

@@ -14,9 +14,9 @@ export const useFetchTasksQuery = (
   showDeleted?: boolean,
   showHidden?: boolean,
 ) => {
-  let tasks: Task[] | undefined,
-    needsActionTasks: Task[] | undefined,
-    compeletedTasks: Task[] | undefined
+  let tasks: Task[] | undefined
+  let needsActionTasks: Task[] | undefined
+  let compeletedTasks: Task[] | undefined
   const queryResult = useQuery<TaskQuery, Error, void>(
     [QueryKey.Tasks, tasklistId],
     async () =>
@@ -25,7 +25,7 @@ export const useFetchTasksQuery = (
       select: ({ items }) => {
         tasks = items?.map(item => ({
           ...item,
-          status: item.status === TaskStatus.Completed ? true : false,
+          status: item.status === TaskStatus.Completed,
         }))
         needsActionTasks = tasks?.filter(
           ({ status, parent }) => !status && !parent,
@@ -78,7 +78,7 @@ export const useFetchTaskDetailQuery = (selfLink: string) => {
     {
       select: task => ({
         ...task,
-        status: task.status === TaskStatus.Completed ? true : false,
+        status: task.status === TaskStatus.Completed,
       }),
     },
   )
@@ -104,12 +104,10 @@ export const useDeleteTaskMutation = (selfLink: string) => {
 export const useFetchTasksQueries = (tasklists: Tasklist[]) => {
   const tasklistIds = tasklists.map(({ id }) => id)
   const queryResults = useQueries(
-    tasklistIds.map(tasklistId => {
-      return {
-        queryKey: [QueryKey.Tasks, tasklistId],
-        queryFn: () => tasksService.findAll(tasklistId),
-      }
-    }),
+    tasklistIds.map(tasklistId => ({
+      queryKey: [QueryKey.Tasks, tasklistId],
+      queryFn: () => tasksService.findAll(tasklistId),
+    })),
   )
   return queryResults
 }
@@ -142,7 +140,7 @@ export const useFetchSubtasksQuery = (tasklistId: string, taskId: string) => {
         const rawSubtasks = items?.filter(({ parent }) => parent === taskId)
         const subtasks = rawSubtasks?.map(item => ({
           ...item,
-          status: item.status === TaskStatus.Completed ? true : false,
+          status: item.status === TaskStatus.Completed,
         }))
         return subtasks
       },

@@ -13,7 +13,7 @@ import { theme } from 'shared/theme'
 import { IconButton } from 'modules/common/components'
 
 const Next_DAYS = 8
-const CalendatBanner = () => {
+function CalendatBanner() {
   return (
     <View style={styles.container}>
       <TouchableOpacity

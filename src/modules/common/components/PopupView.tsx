@@ -8,7 +8,7 @@ type Props = {
   children: React.ReactNode
   setVisible: (modalVisible: boolean) => void
 }
-const PopupView = ({ visible, children, setVisible }: Props) => {
+function PopupView({ visible, children, setVisible }: Props) {
   return (
     <Modal animationType="fade" transparent visible={visible}>
       <TouchableOpacity

@@ -3,13 +3,13 @@ import React from 'react'
 import { useHeaderHeight } from '@react-navigation/elements'
 import { AccessoryID } from 'shared/constants'
 import { theme } from 'shared/theme'
-import TaskAccessory from './TaskAccessory'
 import { DateTimeButton, Checkbox } from 'modules/common/components'
 import { useKeyboard } from 'hooks/useKeyboard'
 import { useAppDispatch, useTasks } from 'hooks/app'
 import { updateNewTask } from 'app/tasksSlice'
+import TaskAccessory from './TaskAccessory'
 
-const AddTaskSection = () => {
+function AddTaskSection() {
   const dispatch = useAppDispatch()
   const { newTask } = useTasks()
   const { title, due, status } = newTask

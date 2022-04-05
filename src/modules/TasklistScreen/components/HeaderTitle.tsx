@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { useUpdateTasklistMutation } from 'hooks/tasklists'
 import { useTasklists } from 'hooks/app'
 
-const HeaderTitle = () => {
+function HeaderTitle() {
   const {
     tasklist: { id, title },
   } = useTasklists()

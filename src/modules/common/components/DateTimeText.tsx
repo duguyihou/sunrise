@@ -8,7 +8,7 @@ type Props = {
   showPlaceholder?: boolean
   style?: Record<string, string | number>
 }
-const DateTimeText = (props: Props) => {
+function DateTimeText(props: Props) {
   const { dateTime, showPlaceholder, style } = props
   return (
     <Text

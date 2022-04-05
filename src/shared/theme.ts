@@ -18,3 +18,5 @@ export const theme = {
   },
   hidden: 'transpancy',
 }
+
+export const anotherTheme = {}

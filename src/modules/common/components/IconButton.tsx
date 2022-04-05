@@ -11,7 +11,7 @@ type Props = {
   style?: Record<string, string | number>
   color?: string
 }
-const IconButton = (props: Props) => {
+function IconButton(props: Props) {
   const {
     onPress,
     size = 20,

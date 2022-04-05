@@ -13,7 +13,7 @@ type Props = {
   disableText?: boolean
   textComponent?: React.ReactNode
 }
-const Checkbox = (props: Props) => {
+function Checkbox(props: Props) {
   const {
     size,
     fillColor,

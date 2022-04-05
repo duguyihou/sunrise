@@ -4,7 +4,7 @@ import { useAppDispatch, useTasks } from 'hooks/app'
 import { theme } from 'shared/theme'
 import { updateTaskDetail } from 'app/tasksSlice'
 
-const TaskNotesSection = () => {
+function TaskNotesSection() {
   const dispatch = useAppDispatch()
   const { taskDetail } = useTasks()
   const { notes } = taskDetail

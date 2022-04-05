@@ -3,10 +3,10 @@ import React from 'react'
 import { useRoute } from '@react-navigation/native'
 import { RouteName } from 'shared/constants'
 import { useFetchTasksQueries } from 'hooks/tasks'
-import CalendatBanner from './CalendarBanner'
 import { RouteType } from 'typings/route'
+import CalendatBanner from './CalendarBanner'
 
-const PlannedTasksScreen = () => {
+function PlannedTasksScreen() {
   const {
     params: { tasklists },
   } = useRoute<RouteType<RouteName.Planned>>()
