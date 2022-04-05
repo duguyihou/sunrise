@@ -1,7 +1,7 @@
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
-import { RootStackParamList } from 'typings'
+import { RootStackParamList } from 'typings/route'
 import { useAuth } from 'hooks/app'
 import TasklistScreen from 'modules/TasklistScreen'
 import SigninScreen from 'modules/SigninScreen'
