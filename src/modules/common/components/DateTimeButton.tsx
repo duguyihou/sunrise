@@ -6,15 +6,15 @@ import { StackNavigationProps } from 'typings/route'
 import { useNavigation } from '@react-navigation/native'
 import { useAppDispatch, useTasks } from 'hooks/app'
 import { updateTaskDetail, updateNewTask } from 'app/tasksSlice'
-import DateTimeText from './DateTimeText'
 import { getPrevRoute } from 'utils/routes'
+import DateTimeText from './DateTimeText'
 
 type Props = {
   dateTime: string
   showPlaceholder?: boolean
 }
 
-const DateTimeButton = (props: Props) => {
+function DateTimeButton(props: Props) {
   const { dateTime, showPlaceholder } = props
   const navigation = useNavigation<StackNavigationProps>()
   const dispatch = useAppDispatch()

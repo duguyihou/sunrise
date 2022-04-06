@@ -7,7 +7,7 @@ import { useAddTasklistMutation } from 'hooks/tasklists'
 import { IconButton } from 'modules/common/components'
 import TasklistSection from './components/TasklistSection'
 
-const TasklistsScreen = () => {
+function TasklistsScreen() {
   const navigation = useNavigation<StackNavigationProps>()
   const addTasklistMutation = useAddTasklistMutation()
   useLayoutEffect(() =>
@@ -17,11 +17,7 @@ const TasklistsScreen = () => {
   )
   const handlePlus = () => addTasklistMutation.mutate()
 
-  return (
-    <>
-      <TasklistSection />
-    </>
-  )
+  return <TasklistSection />
 }
 
 export default TasklistsScreen

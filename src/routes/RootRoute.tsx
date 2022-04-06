@@ -1,7 +1,7 @@
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
-import { RootStackParamList } from 'typings'
+import { RootStackParamList } from 'typings/route'
 import { useAuth } from 'hooks/app'
 import TasklistScreen from 'modules/TasklistScreen'
 import SigninScreen from 'modules/SigninScreen'
@@ -9,15 +9,14 @@ import TasklistsScreen from 'modules/TasklistsScreen'
 import { RouteName, TaskName } from 'shared/constants'
 import { theme } from 'shared/theme'
 import TaskDetailScreen from 'modules/TaskDetailScreen'
-import PlannedTasksScreen from 'modules/PlannedTasksScreen'
 import DateTimeScreen from 'modules/DateTimeScreen'
 
 const RootStack = createNativeStackNavigator<RootStackParamList>()
 
 function RootRoute() {
-  const { access_token } = useAuth()
+  const { accessToken } = useAuth()
 
-  if (!access_token) {
+  if (!accessToken) {
     return (
       <RootStack.Navigator screenOptions={{ headerShown: false }}>
         <RootStack.Screen name={RouteName.SignIn} component={SigninScreen} />
@@ -49,10 +48,6 @@ function RootRoute() {
           name={RouteName.TaskDetail}
           component={TaskDetailScreen}
           options={{ title: TaskName.TaskDetail, headerBackTitle: '' }}
-        />
-        <RootStack.Screen
-          name={RouteName.Planned}
-          component={PlannedTasksScreen}
         />
       </RootStack.Group>
       <RootStack.Group>

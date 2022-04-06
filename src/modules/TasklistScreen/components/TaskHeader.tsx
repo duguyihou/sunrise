@@ -7,7 +7,7 @@ import { toggleShowCompletedTasks } from 'app/tasksSlice'
 type Props = {
   title: string
 }
-const TaskHeader = ({ title }: Props) => {
+function TaskHeader({ title }: Props) {
   const dispatch = useAppDispatch()
   const toggle = () => dispatch(toggleShowCompletedTasks())
   return (

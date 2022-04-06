@@ -1,8 +1,10 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-return-assign */
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  access_token: '',
-  refresh_token: '',
+  accessToken: '',
+  refreshToken: '',
 }
 const authSlice = createSlice({
   name: 'auth',
@@ -10,18 +12,10 @@ const authSlice = createSlice({
   reducers: {
     saveAuth: (state, { payload }) => {
       const { accessToken, refreshToken } = payload
-      return (state = {
-        ...state,
-        access_token: accessToken,
-        refresh_token: refreshToken,
-      })
+      return (state = { ...state, accessToken, refreshToken })
     },
-    saveToken: (state, { payload }) => {
-      return (state = {
-        ...state,
-        access_token: payload,
-      })
-    },
+    saveToken: (state, { payload }) =>
+      (state = { ...state, accessToken: payload }),
   },
 })
 

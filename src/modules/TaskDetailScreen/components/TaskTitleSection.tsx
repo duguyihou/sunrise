@@ -5,7 +5,7 @@ import { useAppDispatch, useTasks } from 'hooks/app'
 import { StyleSheet, TextInput } from 'react-native'
 import { updateTaskDetail } from 'app/tasksSlice'
 
-const TaskTitleSection = () => {
+function TaskTitleSection() {
   const dispatch = useAppDispatch()
   const { taskDetail } = useTasks()
 

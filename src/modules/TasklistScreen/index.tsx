@@ -1,21 +1,20 @@
 import { ScrollView, Text, StyleSheet, View } from 'react-native'
 import React, { useLayoutEffect, useState } from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native'
-import { StackNavigationProps } from 'typings/route'
+import { StackNavigationProps, RouteType } from 'typings/route'
 import { RouteName } from 'shared/constants'
-import TaskItem from './components/TaskItem'
 import { PopupView, PopupItem } from 'modules/common/components'
 import { useDeleteTasklistMutation } from 'hooks/tasklists'
 import { useFetchTasksQuery } from 'hooks/tasks'
 import { faEllipsisH } from '@fortawesome/free-solid-svg-icons'
+import IconButton from 'modules/common/components/IconButton'
+import { useTasks } from 'hooks/app'
 import HeaderTitle from './components/HeaderTitle'
 import AddTaskSection from './components/AddTaskSection'
-import IconButton from 'modules/common/components/IconButton'
 import TaskHeader from './components/TaskHeader'
-import { useTasks } from 'hooks/app'
-import { RouteType } from 'typings/route'
+import TaskItem from './components/TaskItem'
 
-const TasklistScreen = () => {
+function TasklistScreen() {
   const {
     params: { tasklist },
   } = useRoute<RouteType<RouteName.Tasklist>>()

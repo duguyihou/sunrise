@@ -7,7 +7,7 @@ import { config } from 'shared/config'
 import { saveAuth } from 'app/authSlice'
 import { useAppDispatch } from 'hooks/app'
 
-const SigninScreen = () => {
+function SigninScreen() {
   const dispatch = useAppDispatch()
   const handleSignin = async () => {
     const response = await authorize(config)

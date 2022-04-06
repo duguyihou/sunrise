@@ -6,7 +6,7 @@ type Props = {
   title: string
   fn: () => void
 }
-const PopupItem = ({ title, fn }: Props) => {
+function PopupItem({ title, fn }: Props) {
   return (
     <TouchableOpacity onPress={fn}>
       <Text style={styles.title}>{title}</Text>

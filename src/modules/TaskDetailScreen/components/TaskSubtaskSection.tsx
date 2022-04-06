@@ -7,7 +7,7 @@ import { TaskPayload } from 'typings/task'
 import { useAppDispatch, useTasklists, useTasks } from 'hooks/app'
 import { updateSubtask } from 'app/tasksSlice'
 
-const TaskSubtaskSection = () => {
+function TaskSubtaskSection() {
   const { subtaskTitle, taskDetail } = useTasks()
   const { tasklist } = useTasklists()
   const dispatch = useAppDispatch()

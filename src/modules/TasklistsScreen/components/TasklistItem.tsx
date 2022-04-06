@@ -14,7 +14,7 @@ import { updateTasklist } from 'app/tasklistSlice'
 type Props = {
   tasklist: Tasklist
 }
-const TasklistItem = ({ tasklist }: Props) => {
+function TasklistItem({ tasklist }: Props) {
   const navigation = useNavigation<StackNavigationProps>()
   const dispatch = useAppDispatch()
   const handleSelect = () => {

@@ -3,15 +3,15 @@ import React, { useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProps } from 'typings/route'
 import { theme } from 'shared/theme'
-import DateTimeHeader from './DateTimeHeader'
 import { Calendar } from 'react-native-calendars'
 import { CalendarDay } from 'typings/day'
 import { getCalendarDayDate } from 'utils/dateTime'
+import DateTimeHeader from './DateTimeHeader'
 
 type Props = {
   dateTime: string
 }
-const DateTimeScreen = ({ dateTime }: Props) => {
+function DateTimeScreen({ dateTime }: Props) {
   const [due, setDue] = useState(dateTime)
   const [showCalendar, setShowCalendar] = useState(true)
   const navigation = useNavigation<StackNavigationProps>()

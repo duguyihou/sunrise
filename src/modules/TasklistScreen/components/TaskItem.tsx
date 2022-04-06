@@ -11,7 +11,7 @@ import { useNavigation } from '@react-navigation/native'
 type Props = {
   task: Task
 }
-const TaskItem = ({ task }: Props) => {
+function TaskItem({ task }: Props) {
   const { title, selfLink, status, due, notes } = task
   const navigation = useNavigation<StackNavigationProps>()
 

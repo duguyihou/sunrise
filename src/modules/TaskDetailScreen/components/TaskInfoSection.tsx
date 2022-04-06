@@ -6,7 +6,7 @@ import { IconButton } from 'modules/common/components'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import { useTasks } from 'hooks/app'
 
-const TaskInfoSection = () => {
+function TaskInfoSection() {
   const { taskDetail } = useTasks()
   const { selfLink, updated } = taskDetail
   const deleteTaskMutation = useDeleteTaskMutation(selfLink)
@@ -14,7 +14,10 @@ const TaskInfoSection = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.updateInfo}>Updated {getCalendar(updated)}</Text>
+      <Text style={styles.updateInfo}>
+        Updated
+        {getCalendar(updated)}
+      </Text>
       <IconButton icon={faTrash} onPress={handleDelete} />
     </View>
   )

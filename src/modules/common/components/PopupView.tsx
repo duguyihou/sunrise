@@ -6,9 +6,10 @@ import { windowWidth } from 'utils/dimensions'
 type Props = {
   visible: boolean
   children: React.ReactNode
+  // eslint-disable-next-line no-unused-vars
   setVisible: (modalVisible: boolean) => void
 }
-const PopupView = ({ visible, children, setVisible }: Props) => {
+function PopupView({ visible, children, setVisible }: Props) {
   return (
     <Modal animationType="fade" transparent visible={visible}>
       <TouchableOpacity

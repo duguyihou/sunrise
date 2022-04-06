@@ -11,7 +11,7 @@ import { IconButton } from 'modules/common/components'
 type Props = StackProps & {
   tasklists: Tasklist[]
 }
-const PlannedTasklistItem = ({ navigation, tasklists }: Props) => {
+function PlannedTasklistItem({ navigation, tasklists }: Props) {
   return (
     <TouchableOpacity
       style={styles.container}

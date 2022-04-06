@@ -9,7 +9,7 @@ import { IconButton } from 'modules/common/components'
 import { useTasklists, useTasks } from 'hooks/app'
 import { theme } from 'shared/theme'
 
-const TaskAccessory = () => {
+function TaskAccessory() {
   const {
     tasklist: { id },
   } = useTasklists()
