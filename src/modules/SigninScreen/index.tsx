@@ -3,7 +3,7 @@ import React from 'react'
 import { authorize } from 'react-native-app-auth'
 import { windowHeight, windowWidth } from 'utils/dimensions'
 import { theme } from 'shared/theme'
-import { config } from 'shared/config'
+import config from 'shared/config'
 import { saveAuth } from 'app/authSlice'
 import { useAppDispatch } from 'hooks/app'
 
