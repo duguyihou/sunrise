@@ -9,5 +9,8 @@
 - axios
 - dayjs
 - react-query
-- react-navigation
 - redux-toolkit
+- react-navigation
+- react-native-app-auth
+- react-native-calendars
+- @fortawesome/free-solid-svg-icons
