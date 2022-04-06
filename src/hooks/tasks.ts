@@ -1,12 +1,12 @@
 import { useNavigation } from '@react-navigation/native'
 import tasksService from 'api/tasks'
-import { useAppDispatch, useTasks } from 'hooks/app'
 import { clearNewTask, clearSubtask, updateTaskDetail } from 'app/tasksSlice'
+import { useAppDispatch, useTasks } from 'hooks/app'
 import { useEffect } from 'react'
 import { useMutation, useQueries, useQuery, useQueryClient } from 'react-query'
 import { QueryKey, TaskStatus } from 'shared/constants'
 import { StackNavigationProps } from 'typings/route'
-import { RawTask, TaskPayload, TaskQuery, Task, Tasklist } from 'typings/task'
+import { RawTask, Task, Tasklist, TaskPayload, TaskQuery } from 'typings/task'
 
 export const useFetchTasksQuery = (
   tasklistId: string,

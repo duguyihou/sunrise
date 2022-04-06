@@ -1,10 +1,10 @@
-import React, { useLayoutEffect } from 'react'
-import { useNavigation } from '@react-navigation/native'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
-
-import { StackNavigationProps } from 'typings/route'
+import { useNavigation } from '@react-navigation/native'
 import { useAddTasklistMutation } from 'hooks/tasklists'
 import { IconButton } from 'modules/common/components'
+import React, { useLayoutEffect } from 'react'
+import { StackNavigationProps } from 'typings/route'
+
 import TasklistSection from './components/TasklistSection'
 
 function TasklistsScreen() {

@@ -1,11 +1,11 @@
-import { StyleSheet, TouchableOpacity, View, Text } from 'react-native'
-import React from 'react'
-import { authorize } from 'react-native-app-auth'
-import { windowHeight, windowWidth } from 'utils/dimensions'
-import { theme } from 'shared/theme'
-import config from 'shared/config'
 import { saveAuth } from 'app/authSlice'
 import { useAppDispatch } from 'hooks/app'
+import React from 'react'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { authorize } from 'react-native-app-auth'
+import config from 'shared/config'
+import { theme } from 'shared/theme'
+import { windowHeight, windowWidth } from 'utils/dimensions'
 
 function SigninScreen() {
   const dispatch = useAppDispatch()

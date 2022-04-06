@@ -24,6 +24,7 @@ module.exports = {
     'react-native',
     '@typescript-eslint',
     'simple-import-sort',
+    'import',
     'prettier',
   ],
   overrides: [
@@ -55,6 +56,11 @@ module.exports = {
         'react-native/no-inline-styles': 2, // disallow styles declared within the component itself
         'react-native/no-color-literals': 2, // enforces variable names to be used for storing colors
         'react/no-unstable-nested-components': ['warn', { allowAsProps: true }],
+        'simple-import-sort/imports': 'error',
+        'simple-import-sort/exports': 'error',
+        'import/first': 'error',
+        'import/newline-after-import': 'error',
+        'import/no-duplicates': 'error',
       },
       parserOptions: {
         project: './tsconfig.json',

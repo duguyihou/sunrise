@@ -1,7 +1,8 @@
-import { ScrollView, StyleSheet, Text } from 'react-native'
-import React from 'react'
 import { useFetchTasklistQuery } from 'hooks/tasklists'
+import React from 'react'
+import { ScrollView, StyleSheet, Text } from 'react-native'
 import { theme } from 'shared/theme'
+
 import TasklistItem from './TasklistItem'
 
 function TasklistSection() {

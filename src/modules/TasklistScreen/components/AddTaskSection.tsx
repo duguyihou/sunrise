@@ -1,12 +1,13 @@
-import { KeyboardAvoidingView, StyleSheet, TextInput, View } from 'react-native'
-import React from 'react'
 import { useHeaderHeight } from '@react-navigation/elements'
+import { updateNewTask } from 'app/tasksSlice'
+import { useAppDispatch, useTasks } from 'hooks/app'
+import useKeyboard from 'hooks/useKeyboard'
+import { Checkbox, DateTimeButton } from 'modules/common/components'
+import React from 'react'
+import { KeyboardAvoidingView, StyleSheet, TextInput, View } from 'react-native'
 import { AccessoryID } from 'shared/constants'
 import { theme } from 'shared/theme'
-import { DateTimeButton, Checkbox } from 'modules/common/components'
-import useKeyboard from 'hooks/useKeyboard'
-import { useAppDispatch, useTasks } from 'hooks/app'
-import { updateNewTask } from 'app/tasksSlice'
+
 import TaskAccessory from './TaskAccessory'
 
 function AddTaskSection() {

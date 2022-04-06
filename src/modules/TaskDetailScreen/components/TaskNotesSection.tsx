@@ -1,8 +1,8 @@
+import { updateTaskDetail } from 'app/tasksSlice'
+import { useAppDispatch, useTasks } from 'hooks/app'
 import React from 'react'
 import { StyleSheet, TextInput } from 'react-native'
-import { useAppDispatch, useTasks } from 'hooks/app'
 import { theme } from 'shared/theme'
-import { updateTaskDetail } from 'app/tasksSlice'
 
 function TaskNotesSection() {
   const dispatch = useAppDispatch()

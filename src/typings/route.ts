@@ -1,8 +1,9 @@
 import { RouteProp } from '@react-navigation/native'
 import {
-  NativeStackScreenProps,
   NativeStackNavigationProp,
+  NativeStackScreenProps,
 } from '@react-navigation/native-stack'
+
 import { Tasklist, TaskPayload } from './task'
 
 export type RootStackParamList = {
