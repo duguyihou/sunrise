@@ -1,6 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { useAuth } from 'hooks/app'
 import DateTimeScreen from 'modules/DateTimeScreen'
+import OperationModal from 'modules/OperationModal'
 import SigninScreen from 'modules/SigninScreen'
 import TaskDetailScreen from 'modules/TaskDetailScreen'
 import TasklistScreen from 'modules/TasklistScreen'
@@ -57,6 +58,10 @@ function RootRoute() {
             headerShown: false,
             presentation: 'containedTransparentModal',
           }}
+        />
+        <RootStack.Screen
+          name={RouteName.Operation}
+          component={OperationModal}
         />
       </RootStack.Group>
     </RootStack.Navigator>
