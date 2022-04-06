@@ -1,11 +1,14 @@
+import TouchableOpacitySection from 'modules/common/components/TouchableOpacitySection'
 import React from 'react'
-import { Text, View } from 'react-native'
+
+import OperationSection from './components/OperationSection'
 
 function OperationModal() {
   return (
-    <View>
-      <Text>OperationModal</Text>
-    </View>
+    <>
+      <TouchableOpacitySection />
+      <OperationSection />
+    </>
   )
 }
 
