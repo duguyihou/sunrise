@@ -1,15 +1,14 @@
+import { faListUl } from '@fortawesome/free-solid-svg-icons'
+import { useNavigation } from '@react-navigation/native'
+import { updateTasklist } from 'app/tasklistSlice'
+import { useAppDispatch } from 'hooks/app'
+import { IconButton } from 'modules/common/components'
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
-import { faListUl } from '@fortawesome/free-solid-svg-icons'
-
 import { RouteName } from 'shared/constants'
 import { theme } from 'shared/theme'
 import { StackNavigationProps } from 'typings/route'
 import { Tasklist } from 'typings/task'
-import { IconButton } from 'modules/common/components'
-import { useAppDispatch } from 'hooks/app'
-import { updateTasklist } from 'app/tasklistSlice'
 
 type Props = {
   tasklist: Tasklist

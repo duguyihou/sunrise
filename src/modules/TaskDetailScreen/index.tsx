@@ -1,14 +1,15 @@
-import { Button, ScrollView, StyleSheet, Text, View } from 'react-native'
-import React, { useLayoutEffect } from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native'
-import { RouteName } from 'shared/constants'
 import { useFetchTaskDetailQuery, useUpdateTaskMutation } from 'hooks/tasks'
+import React, { useLayoutEffect } from 'react'
+import { Button, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { RouteName } from 'shared/constants'
 import { RouteType } from 'typings/route'
+
 import TaskDateTimeSection from './components/TaskDateTimeSection'
-import TaskNotesSection from './components/TaskNotesSection'
-import TaskTitleSection from './components/TaskTitleSection'
 import TaskInfoSection from './components/TaskInfoSection'
+import TaskNotesSection from './components/TaskNotesSection'
 import TaskSubtaskSection from './components/TaskSubtaskSection'
+import TaskTitleSection from './components/TaskTitleSection'
 
 function TaskDetailScreen() {
   const {

@@ -1,8 +1,8 @@
-import React from 'react'
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
-import { theme } from 'shared/theme'
-import { useAppDispatch } from 'hooks/app'
 import { toggleShowCompletedTasks } from 'app/tasksSlice'
+import { useAppDispatch } from 'hooks/app'
+import React from 'react'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { theme } from 'shared/theme'
 
 type Props = {
   title: string

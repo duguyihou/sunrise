@@ -6,10 +6,10 @@ import PopupItem from './PopupItem'
 import PopupView from './PopupView'
 
 export {
-  PopupView,
+  Checkbox,
+  DateTimeButton,
+  DateTimeText,
   IconButton,
   PopupItem,
-  DateTimeText,
-  DateTimeButton,
-  Checkbox,
+  PopupView,
 }

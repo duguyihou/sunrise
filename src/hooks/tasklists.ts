@@ -1,11 +1,10 @@
-import tasklistService from 'api/tasklists'
-import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { useNavigation } from '@react-navigation/native'
-
+import tasklistService from 'api/tasklists'
+import { useMemo } from 'react'
+import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { QueryKey, RouteName, TasklistName } from 'shared/constants'
 import { StackNavigationProps } from 'typings/route'
 import { TasklistQuery } from 'typings/task'
-import { useMemo } from 'react'
 
 export const useFetchTasklistQuery = () => {
   const queryResult = useQuery<TasklistQuery, Error>(

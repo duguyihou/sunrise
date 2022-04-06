@@ -1,13 +1,13 @@
 import { faCalendarCheck, faCheck } from '@fortawesome/free-solid-svg-icons'
 import { useNavigation } from '@react-navigation/native'
+import { useTasklists, useTasks } from 'hooks/app'
 import { useAddTaskMutation } from 'hooks/tasks'
+import { IconButton } from 'modules/common/components'
 import React from 'react'
 import { InputAccessoryView, StyleSheet, View } from 'react-native'
 import { AccessoryID, RouteName } from 'shared/constants'
-import { StackNavigationProps } from 'typings/route'
-import { IconButton } from 'modules/common/components'
-import { useTasklists, useTasks } from 'hooks/app'
 import { theme } from 'shared/theme'
+import { StackNavigationProps } from 'typings/route'
 
 function TaskAccessory() {
   const {

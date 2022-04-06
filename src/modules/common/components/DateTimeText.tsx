@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text } from 'react-native'
-import { convertToCalendar, isBeforeToday } from 'utils/dateTime'
 import { theme } from 'shared/theme'
+import { convertToCalendar, isBeforeToday } from 'utils/dateTime'
 
 type Props = {
   dateTime: string

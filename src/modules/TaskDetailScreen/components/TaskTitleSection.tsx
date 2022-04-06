@@ -1,9 +1,9 @@
-import React from 'react'
-import { Checkbox } from 'modules/common/components'
-import { useUpdateTaskMutation } from 'hooks/tasks'
-import { useAppDispatch, useTasks } from 'hooks/app'
-import { StyleSheet, TextInput } from 'react-native'
 import { updateTaskDetail } from 'app/tasksSlice'
+import { useAppDispatch, useTasks } from 'hooks/app'
+import { useUpdateTaskMutation } from 'hooks/tasks'
+import { Checkbox } from 'modules/common/components'
+import React from 'react'
+import { StyleSheet, TextInput } from 'react-native'
 
 function TaskTitleSection() {
   const dispatch = useAppDispatch()

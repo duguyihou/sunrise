@@ -1,10 +1,10 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import { useDeleteTaskMutation } from 'hooks/tasks'
-import { getCalendar } from 'utils/dateTime'
-import { IconButton } from 'modules/common/components'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import { useTasks } from 'hooks/app'
+import { useDeleteTaskMutation } from 'hooks/tasks'
+import { IconButton } from 'modules/common/components'
+import React from 'react'
+import { StyleSheet, Text, View } from 'react-native'
+import { getCalendar } from 'utils/dateTime'
 
 function TaskInfoSection() {
   const { taskDetail } = useTasks()
