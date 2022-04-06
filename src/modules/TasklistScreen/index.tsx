@@ -1,11 +1,9 @@
 import { faEllipsisH } from '@fortawesome/free-solid-svg-icons'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { useTasks } from 'hooks/app'
-import { useDeleteTasklistMutation } from 'hooks/tasklists'
 import { useFetchTasksQuery } from 'hooks/tasks'
-import { PopupItem, PopupView } from 'modules/common/components'
 import IconButton from 'modules/common/components/IconButton'
-import React, { useLayoutEffect, useState } from 'react'
+import React, { useLayoutEffect } from 'react'
 import { ScrollView, StyleSheet, Text, View } from 'react-native'
 import { RouteName } from 'shared/constants'
 import { RouteType, StackNavigationProps } from 'typings/route'
@@ -19,22 +17,17 @@ function TasklistScreen() {
   const {
     params: { tasklist },
   } = useRoute<RouteType<RouteName.Tasklist>>()
-  const { id, selfLink } = tasklist
+  const { id } = tasklist
   const navigation = useNavigation<StackNavigationProps>()
-  const [modalVisible, setModalVisible] = useState(false)
   const { showCompletedTasks } = useTasks()
-  const deleteTasklistMutation = useDeleteTasklistMutation(selfLink)
   const { isLoading, error, needsActionTasks, compeletedTasks } =
     useFetchTasksQuery(id)
-
+  const navigateToOperation = () => navigation.navigate(RouteName.Operation)
   useLayoutEffect(() =>
     navigation.setOptions({
       headerTitle: () => <HeaderTitle />,
       headerRight: () => (
-        <IconButton
-          icon={faEllipsisH}
-          onPress={() => setModalVisible(!modalVisible)}
-        />
+        <IconButton icon={faEllipsisH} onPress={navigateToOperation} />
       ),
     }),
   )
@@ -53,9 +46,6 @@ function TasklistScreen() {
           showCompletedTasks &&
           compeletedTasks.map(task => <TaskItem key={task.id} task={task} />)}
       </ScrollView>
-      <PopupView visible={modalVisible} setVisible={setModalVisible}>
-        <PopupItem title="delete" fn={() => deleteTasklistMutation.mutate()} />
-      </PopupView>
       <AddTaskSection />
     </View>
   )

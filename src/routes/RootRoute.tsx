@@ -62,6 +62,10 @@ function RootRoute() {
         <RootStack.Screen
           name={RouteName.Operation}
           component={OperationModal}
+          options={{
+            headerShown: false,
+            presentation: 'containedTransparentModal',
+          }}
         />
       </RootStack.Group>
     </RootStack.Navigator>
