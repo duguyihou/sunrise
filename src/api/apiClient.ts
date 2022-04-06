@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import { saveToken } from 'app/authSlice'
 import { store } from 'app/store'
 import axios from 'axios'
@@ -10,12 +11,12 @@ const apiClient = axios.create({
   },
 })
 
-const refreshAccessToken = async (refresh_token: string) => {
+const refreshAccessToken = async (refreshToken: string) => {
   const payload = {
     client_id: Config.CLIENT_ID,
     client_secret: Config.CLIENT_SECRET,
     grant_type: 'refresh_token',
-    refresh_token,
+    refresh_token: refreshToken,
   }
   const response = await apiClient.post(
     'https://oauth2.googleapis.com/token',
@@ -26,9 +27,10 @@ const refreshAccessToken = async (refresh_token: string) => {
 
 apiClient.interceptors.request.use(
   config => {
-    const { access_token } = store.getState().auth
+    const { accessToken } = store.getState().auth
+    // eslint-disable-next-line no-param-reassign
     config.headers = {
-      Authorization: `Bearer ${access_token}`,
+      Authorization: `Bearer ${accessToken}`,
       'If-Match': '*',
     }
     return config
@@ -42,9 +44,9 @@ apiClient.interceptors.response.use(
     const originalRequest = error.config
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true
-      const { refresh_token } = store.getState().auth
-      const { access_token } = await refreshAccessToken(refresh_token)
-      store.dispatch(saveToken(access_token))
+      const { refreshToken } = store.getState().auth
+      const { accessToken } = await refreshAccessToken(refreshToken)
+      store.dispatch(saveToken(accessToken))
       return apiClient(originalRequest)
     }
     return Promise.reject(error)

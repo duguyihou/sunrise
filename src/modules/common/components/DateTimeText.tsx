@@ -1,4 +1,3 @@
-/* eslint-disable react/require-default-props */
 import React from 'react'
 import { StyleSheet, Text } from 'react-native'
 import { convertToCalendar, isBeforeToday } from 'utils/dateTime'

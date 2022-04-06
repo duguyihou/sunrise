@@ -6,7 +6,7 @@ import { theme } from 'shared/theme'
 
 type Props = {
   onPress?: () => void
-  size?: number = 20
+  size?: number
   icon: IconDefinition
   style?: Record<string, string | number>
   color?: string
