@@ -6,6 +6,8 @@ import { QueryKey, RouteName, TasklistName } from 'shared/constants'
 import { StackNavigationProps } from 'typings/route'
 import { TasklistQuery } from 'typings/task'
 
+import { useTasklists } from './app'
+
 export const useFetchTasklistQuery = () => {
   const queryResult = useQuery<TasklistQuery, Error>(
     QueryKey.Tasklists,
@@ -34,13 +36,16 @@ export const useAddTasklistMutation = () => {
   return mutation
 }
 
-export const useDeleteTasklistMutation = (selfLink: string) => {
+export const useDeleteTasklistMutation = () => {
   const queryClient = useQueryClient()
   const navigation = useNavigation<StackNavigationProps>()
+  const {
+    tasklist: { selfLink },
+  } = useTasklists()
   const mutation = useMutation(() => tasklistService.deleteBy(selfLink), {
     onSuccess: () => {
       queryClient.invalidateQueries(QueryKey.Tasklists)
-      navigation.goBack()
+      navigation.navigate(RouteName.Tasklists)
     },
   })
   return mutation

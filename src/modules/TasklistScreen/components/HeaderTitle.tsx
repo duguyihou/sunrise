@@ -32,7 +32,7 @@ export default HeaderTitle
 
 const styles = StyleSheet.create({
   textInput: {
-    width: '60%',
+    // width: '60%',
     fontSize: 20,
     textAlign: 'center',
   },
