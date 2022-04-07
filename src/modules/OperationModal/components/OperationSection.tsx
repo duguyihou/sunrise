@@ -9,10 +9,6 @@ function OperationSection() {
   const deleteTasklistMutation = useDeleteTasklistMutation()
   const operations = [
     {
-      title: 'Rename',
-      onPress: () => console.log('🐵 rename'),
-    },
-    {
       title: 'Delete',
       onPress: () => deleteTasklistMutation.mutate(),
     },
@@ -31,7 +27,7 @@ export default OperationSection
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    height: '30%',
+    paddingVertical: 20,
     backgroundColor: theme.bg.primary,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
