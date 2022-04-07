@@ -1,3 +1,4 @@
+import { useDeleteTasklistMutation } from 'hooks/tasklists'
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
 import { theme } from 'shared/theme'
@@ -5,6 +6,7 @@ import { theme } from 'shared/theme'
 import OperationItem from './OperationItem'
 
 function OperationSection() {
+  const deleteTasklistMutation = useDeleteTasklistMutation()
   const operations = [
     {
       title: 'Rename',
@@ -12,7 +14,7 @@ function OperationSection() {
     },
     {
       title: 'Delete',
-      onPress: () => console.log('🐵 delete'),
+      onPress: () => deleteTasklistMutation.mutate(),
     },
   ]
   return (

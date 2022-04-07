@@ -35,10 +35,10 @@ export default OperationItem
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    padding: 5,
+    padding: 10,
   },
   text: {
-    fontSize: 12,
-    color: theme.font.primary,
+    fontSize: 16,
+    color: theme.font.secondary,
   },
 })
