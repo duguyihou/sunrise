@@ -8,11 +8,11 @@ import { StyleSheet, TextInput, View } from 'react-native'
 import { TaskPayload } from 'typings/task'
 
 function TaskSubtaskSection() {
-  const { subtaskTitle, taskDetail } = useTasks()
+  const { subtaskTitle, task } = useTasks()
   const { tasklist } = useTasklists()
   const dispatch = useAppDispatch()
-  const { data: subtasks } = useFetchSubtasksQuery(tasklist.id, taskDetail.id)
-  const addSubtaskMutation = useAddSubtaskMutation(tasklist.id, taskDetail.id, {
+  const { data: subtasks } = useFetchSubtasksQuery(tasklist.id, task.id)
+  const addSubtaskMutation = useAddSubtaskMutation(tasklist.id, task.id, {
     title: subtaskTitle,
   } as TaskPayload)
   const handleOnChangeText = (text: string) => dispatch(updateSubtask(text))
@@ -20,12 +20,12 @@ function TaskSubtaskSection() {
   return (
     <View style={styles.container}>
       {subtasks &&
-        subtasks.map(task => (
+        subtasks.map(subtask => (
           <Checkbox
-            key={task.id}
-            isChecked={task.status}
-            onPress={() => console.log('🐵 ', task.title)}
-            text={task.title}
+            key={subtask.id}
+            isChecked={subtask.status}
+            onPress={() => console.log('🐵 ', subtask.title)}
+            text={subtask.title}
             textStyle={styles.subtask}
           />
         ))}

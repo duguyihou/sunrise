@@ -16,8 +16,8 @@ function TaskDetailScreen() {
     params: { selfLink },
   } = useRoute<RouteType<RouteName.TaskDetail>>()
   const navigation = useNavigation()
-  const { isLoading, error, taskDetail } = useFetchTaskDetailQuery(selfLink)
-  const updateTaskMutation = useUpdateTaskMutation(taskDetail)
+  const { isLoading, error, task } = useFetchTaskDetailQuery(selfLink)
+  const updateTaskMutation = useUpdateTaskMutation(task)
   useLayoutEffect(() =>
     navigation.setOptions({
       headerRight: () => <Button title="Done" onPress={handleUpdate} />,

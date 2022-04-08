@@ -1,4 +1,4 @@
-import { updateTaskDetail } from 'app/tasksSlice'
+import { updateTask } from 'app/tasksSlice'
 import { useAppDispatch, useTasks } from 'hooks/app'
 import { useUpdateTaskMutation } from 'hooks/tasks'
 import { Checkbox } from 'modules/common/components'
@@ -7,16 +7,16 @@ import { StyleSheet, TextInput } from 'react-native'
 
 function TaskTitleSection() {
   const dispatch = useAppDispatch()
-  const { taskDetail } = useTasks()
+  const { task } = useTasks()
 
-  const { status, title } = taskDetail
+  const { status, title } = task
   const updateTaskStatusMutation = useUpdateTaskMutation({
-    ...taskDetail,
+    ...task,
     status: !status,
   })
   const handleCheck = () => updateTaskStatusMutation.mutate()
   const handleOnChangeText = (text: string) =>
-    dispatch(updateTaskDetail({ ...taskDetail, title: text }))
+    dispatch(updateTask({ ...task, title: text }))
 
   return (
     <Checkbox
@@ -25,7 +25,7 @@ function TaskTitleSection() {
       textComponent={
         <TextInput
           style={styles.title}
-          value={taskDetail.title}
+          value={task.title}
           onChangeText={handleOnChangeText}
           placeholder="Add a Task"
           blurOnSubmit={false}
