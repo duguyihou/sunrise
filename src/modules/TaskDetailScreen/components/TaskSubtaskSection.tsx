@@ -1,22 +1,23 @@
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
-import { updateSubtask } from 'app/tasksSlice'
-import { useAppDispatch, useTasklists, useTasks } from 'hooks/app'
+import { useTasklists, useTasks } from 'hooks/app'
 import { useAddSubtaskMutation, useFetchSubtasksQuery } from 'hooks/tasks'
 import { Checkbox, IconButton } from 'modules/common/components'
-import React from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, TextInput, View } from 'react-native'
 import { TaskPayload } from 'typings/task'
 
 function TaskSubtaskSection() {
-  const { subtaskTitle, task } = useTasks()
+  const { task } = useTasks()
   const { tasklist } = useTasklists()
-  const dispatch = useAppDispatch()
+  const [subtaskTitle, setSubtaskTitle] = useState('')
   const { data: subtasks } = useFetchSubtasksQuery(tasklist.id, task.id)
   const addSubtaskMutation = useAddSubtaskMutation(tasklist.id, task.id, {
     title: subtaskTitle,
   } as TaskPayload)
-  const handleOnChangeText = (text: string) => dispatch(updateSubtask(text))
-  const handleSubmitEditing = () => addSubtaskMutation.mutate()
+  const handleSubmitEditing = () => {
+    addSubtaskMutation.mutate()
+    setSubtaskTitle('')
+  }
   return (
     <View style={styles.container}>
       {subtasks &&
@@ -34,7 +35,7 @@ function TaskSubtaskSection() {
         <TextInput
           style={styles.add}
           value={subtaskTitle}
-          onChangeText={handleOnChangeText}
+          onChangeText={setSubtaskTitle}
           placeholder="Add subtasks"
           blurOnSubmit={false}
           onSubmitEditing={handleSubmitEditing}

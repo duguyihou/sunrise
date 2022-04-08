@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native'
 import tasksService from 'api/tasks'
-import { clearSubtask, clearTask, updateTask } from 'app/tasksSlice'
+import { clearTask, updateTask } from 'app/tasksSlice'
 import { useAppDispatch, useTasks } from 'hooks/app'
 import { useEffect } from 'react'
 import { useMutation, useQueries, useQuery, useQueryClient } from 'react-query'
@@ -118,13 +118,11 @@ export const useAddSubtaskMutation = (
   subtask: TaskPayload,
 ) => {
   const queryClient = useQueryClient()
-  const dispatch = useAppDispatch()
   const addTaskMutation = useMutation(
     () => tasksService.createSubtask(tasklistId, taskId, subtask),
     {
       onSuccess: () => {
         queryClient.invalidateQueries([QueryKey.Tasks, tasklistId])
-        dispatch(clearSubtask())
       },
     },
   )
