@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native'
 import { useUpdateTaskMutation } from 'hooks/tasks'
 import { Checkbox, DateTimeText } from 'modules/common/components'
 import React from 'react'
-import { StyleSheet, Text, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { RouteName } from 'shared/constants'
 import { theme } from 'shared/theme'
 import { StackNavigationProps } from 'typings/route'
@@ -24,7 +24,10 @@ function TaskItem({ task }: Props) {
       style={styles.container}
       activeOpacity={1}
       onPress={navigateToTaskDetail}>
-      <Checkbox isChecked={status} onPress={handleCheck} text={title} />
+      <View style={styles.title}>
+        <Checkbox isChecked={status} onPress={handleCheck} />
+        <Text>{title}</Text>
+      </View>
       {notes && (
         <Text numberOfLines={2} style={styles.notes}>
           {notes}
@@ -40,6 +43,11 @@ export default TaskItem
 const styles = StyleSheet.create({
   container: {
     padding: 10,
+  },
+
+  title: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 
   dateTimeText: {
