@@ -1,18 +1,15 @@
-import { toggleShowCompletedTasks } from 'app/tasksSlice'
-import { useAppDispatch } from 'hooks/app'
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { theme } from 'shared/theme'
 
 type Props = {
   title: string
+  onPress: () => void
 }
-function TaskHeader({ title }: Props) {
-  const dispatch = useAppDispatch()
-  const toggle = () => dispatch(toggleShowCompletedTasks())
+function TaskHeader({ title, onPress }: Props) {
   return (
     <View style={styles.container}>
-      <TouchableOpacity activeOpacity={1} onPress={toggle}>
+      <TouchableOpacity activeOpacity={1} onPress={onPress}>
         <Text style={styles.text}>{title}</Text>
       </TouchableOpacity>
     </View>

@@ -13,8 +13,6 @@ const initialState = {
     position: '',
     selfLink: '',
   },
-  showCompletedTasks: false,
-  subtaskTitle: '',
 }
 const tasksSlice = createSlice({
   name: 'tasks',
@@ -25,14 +23,9 @@ const tasksSlice = createSlice({
       task: payload,
     }),
     clearTask: state => ({ ...state, task: initialState.task }),
-    toggleShowCompletedTasks: state => ({
-      ...state,
-      showCompletedTasks: !state.showCompletedTasks,
-    }),
   },
 })
 
 const tasksReducer = tasksSlice.reducer
-export const { toggleShowCompletedTasks, updateTask, clearTask } =
-  tasksSlice.actions
+export const { updateTask, clearTask } = tasksSlice.actions
 export default tasksReducer

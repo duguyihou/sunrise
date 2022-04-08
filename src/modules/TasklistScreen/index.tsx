@@ -1,9 +1,8 @@
 import { faEllipsisH } from '@fortawesome/free-solid-svg-icons'
 import { useNavigation, useRoute } from '@react-navigation/native'
-import { useTasks } from 'hooks/app'
 import { useFetchTasksQuery } from 'hooks/tasks'
 import IconButton from 'modules/common/components/IconButton'
-import React, { useLayoutEffect } from 'react'
+import React, { useLayoutEffect, useState } from 'react'
 import { ScrollView, StyleSheet, Text, View } from 'react-native'
 import { RouteName } from 'shared/constants'
 import { RouteType, StackNavigationProps } from 'typings/route'
@@ -19,7 +18,7 @@ function TasklistScreen() {
   } = useRoute<RouteType<RouteName.Tasklist>>()
   const { id } = tasklist
   const navigation = useNavigation<StackNavigationProps>()
-  const { showCompletedTasks } = useTasks()
+  const [showCompletedTasks, setShowCompletedTasks] = useState(false)
   const { isLoading, error, needsActionTasks, compeletedTasks } =
     useFetchTasksQuery(id)
   const navigateToOperation = () => navigation.navigate(RouteName.Operation)
@@ -31,6 +30,7 @@ function TasklistScreen() {
       ),
     }),
   )
+  const handleToggle = () => setShowCompletedTasks(!showCompletedTasks)
   if (isLoading) return <Text>loading...</Text>
   if (error) return <Text>`An error has occurred: ${error.message}`</Text>
 
@@ -40,7 +40,7 @@ function TasklistScreen() {
         {needsActionTasks &&
           needsActionTasks.map(task => <TaskItem key={task.id} task={task} />)}
         {compeletedTasks && compeletedTasks.length > 0 && (
-          <TaskHeader title="Completed" />
+          <TaskHeader title="Completed" onPress={handleToggle} />
         )}
         {compeletedTasks &&
           showCompletedTasks &&
