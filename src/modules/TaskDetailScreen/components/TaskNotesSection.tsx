@@ -6,7 +6,7 @@ import { theme } from 'shared/theme'
 
 function TaskNotesSection() {
   const dispatch = useAppDispatch()
-  const { task } = useTasks()
+  const task = useTasks()
   const { notes } = task
   const handleOnChange = (text: string) =>
     dispatch(updateTask({ ...task, notes: text }))

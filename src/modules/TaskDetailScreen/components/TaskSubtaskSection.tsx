@@ -7,7 +7,7 @@ import { StyleSheet, TextInput, View } from 'react-native'
 import { TaskPayload } from 'typings/task'
 
 function TaskSubtaskSection() {
-  const { task } = useTasks()
+  const task = useTasks()
   const { tasklist } = useTasklists()
   const [subtaskTitle, setSubtaskTitle] = useState('')
   const { data: subtasks } = useFetchSubtasksQuery(tasklist.id, task.id)

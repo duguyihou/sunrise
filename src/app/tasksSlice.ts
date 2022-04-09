@@ -1,28 +1,23 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  task: {
-    title: '',
-    due: '',
-    notes: '',
-    updated: '',
-    status: false,
-    etag: '',
-    id: '',
-    kind: 'tasks#task',
-    position: '',
-    selfLink: '',
-  },
+  title: '',
+  due: '',
+  notes: '',
+  updated: '',
+  status: false,
+  etag: '',
+  id: '',
+  kind: 'tasks#task',
+  position: '',
+  selfLink: '',
 }
 const tasksSlice = createSlice({
   name: 'tasks',
   initialState,
   reducers: {
-    updateTask: (state, { payload }) => ({
-      ...state,
-      task: payload,
-    }),
-    clearTask: state => ({ ...state, task: initialState.task }),
+    updateTask: (state, { payload }) => ({ ...state, ...payload }),
+    clearTask: () => initialState,
   },
 })
 

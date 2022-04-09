@@ -7,7 +7,7 @@ import { StyleSheet, TextInput } from 'react-native'
 
 function TaskTitleSection() {
   const dispatch = useAppDispatch()
-  const { task } = useTasks()
+  const task = useTasks()
 
   const { status, title } = task
   const updateTaskStatusMutation = useUpdateTaskMutation({

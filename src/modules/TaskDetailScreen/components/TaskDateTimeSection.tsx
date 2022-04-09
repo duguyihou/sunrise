@@ -5,9 +5,7 @@ import React from 'react'
 import { StyleSheet, View } from 'react-native'
 
 function TaskDateTimeSection() {
-  const {
-    task: { due },
-  } = useTasks()
+  const { due } = useTasks()
   return (
     <View style={styles.container}>
       <IconButton style={styles.icon} icon={faCalendarCheck} />

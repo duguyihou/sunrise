@@ -12,7 +12,7 @@ import TaskAccessory from './TaskAccessory'
 
 function AddTaskSection() {
   const dispatch = useAppDispatch()
-  const { task } = useTasks()
+  const task = useTasks()
   const { title, due, status } = task
   const handleCheck = () => dispatch(updateTask({ ...task, status: !status }))
 
