@@ -2,7 +2,6 @@
 import { saveToken } from 'app/authSlice'
 import { store } from 'app/store'
 import axios from 'axios'
-import { useAuth } from 'hooks/app'
 import Config from 'react-native-config'
 
 const apiClient = axios.create({
@@ -45,8 +44,7 @@ apiClient.interceptors.response.use(
     const originalRequest = error.config
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true
-      const { refreshToken } = useAuth()
-      console.log('🐵refreshToken ', refreshToken)
+      const { refreshToken } = store.getState().auth
       const { accessToken } = await refreshAccessToken(refreshToken)
       store.dispatch(saveToken(accessToken))
       return apiClient(originalRequest)
