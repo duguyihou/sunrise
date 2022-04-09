@@ -1,5 +1,5 @@
 import { useHeaderHeight } from '@react-navigation/elements'
-import { updateNewTask } from 'app/tasksSlice'
+import { updateTask } from 'app/tasksSlice'
 import { useAppDispatch, useTasks } from 'hooks/app'
 import useKeyboard from 'hooks/useKeyboard'
 import { Checkbox, DateTimeButton } from 'modules/common/components'
@@ -12,15 +12,14 @@ import TaskAccessory from './TaskAccessory'
 
 function AddTaskSection() {
   const dispatch = useAppDispatch()
-  const { newTask } = useTasks()
-  const { title, due, status } = newTask
-  const handleCheck = () =>
-    dispatch(updateNewTask({ ...newTask, status: !status }))
+  const task = useTasks()
+  const { title, due, status } = task
+  const handleCheck = () => dispatch(updateTask({ ...task, status: !status }))
 
   const isKeyboardOpen = useKeyboard()
   const showDateTimeButton = () => !!due && isKeyboardOpen
   const handleOnChangeText = (text: string) =>
-    dispatch(updateNewTask({ ...newTask, title: text }))
+    dispatch(updateTask({ ...task, title: text }))
 
   return (
     <KeyboardAvoidingView

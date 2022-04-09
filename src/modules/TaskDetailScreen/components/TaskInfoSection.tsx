@@ -7,8 +7,8 @@ import { StyleSheet, Text, View } from 'react-native'
 import { getCalendar } from 'utils/dateTime'
 
 function TaskInfoSection() {
-  const { taskDetail } = useTasks()
-  const { selfLink, updated } = taskDetail
+  const task = useTasks()
+  const { selfLink, updated } = task
   const deleteTaskMutation = useDeleteTaskMutation(selfLink)
   const handleDelete = () => deleteTaskMutation.mutate()
 

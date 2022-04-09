@@ -13,9 +13,7 @@ function TaskAccessory() {
   const {
     tasklist: { id },
   } = useTasklists()
-  const {
-    newTask: { due, title },
-  } = useTasks()
+  const { due, title } = useTasks()
   const navigation = useNavigation<StackNavigationProps>()
   const addTaskMutation = useAddTaskMutation(id)
 

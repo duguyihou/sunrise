@@ -1,12 +1,11 @@
 import { useNavigation } from '@react-navigation/native'
-import { updateNewTask, updateTaskDetail } from 'app/tasksSlice'
+import { updateTask } from 'app/tasksSlice'
 import { useAppDispatch, useTasks } from 'hooks/app'
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { RouteName } from 'shared/constants'
 import { theme } from 'shared/theme'
 import { StackNavigationProps } from 'typings/route'
-import { getPrevRoute } from 'utils/routes'
 
 import DateTimeText from './DateTimeText'
 
@@ -19,16 +18,11 @@ function DateTimeButton(props: Props) {
   const { dateTime, showPlaceholder } = props
   const navigation = useNavigation<StackNavigationProps>()
   const dispatch = useAppDispatch()
-  const { newTask, taskDetail } = useTasks()
+  const task = useTasks()
   const handleSetDate = () =>
     navigation.navigate(RouteName.DateTime, { dateTime })
-  const handleRemove = () => {
-    if (getPrevRoute(navigation)?.name === RouteName.Tasklists) {
-      dispatch(updateNewTask({ ...newTask, due: '' }))
-    } else {
-      dispatch(updateTaskDetail({ ...taskDetail, due: '' }))
-    }
-  }
+  const handleRemove = () => dispatch(updateTask({ ...task, due: '' }))
+
   return (
     <View style={styles.container}>
       <TouchableOpacity

@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native'
 import tasksService from 'api/tasks'
-import { clearNewTask, clearSubtask, updateTaskDetail } from 'app/tasksSlice'
+import { clearTask, updateTask } from 'app/tasksSlice'
 import { useAppDispatch, useTasks } from 'hooks/app'
 import { useEffect } from 'react'
 import { useMutation, useQueries, useQuery, useQueryClient } from 'react-query'
@@ -41,16 +41,16 @@ export const useFetchTasksQuery = (
 
 export const useAddTaskMutation = (tasklistId: string) => {
   const queryClient = useQueryClient()
-  const { newTask } = useTasks()
-  const status = newTask.status ? TaskStatus.Completed : TaskStatus.NeedsAction
-  const rawNewTask = { ...newTask, status }
+  const task = useTasks()
+  const status = task.status ? TaskStatus.Completed : TaskStatus.NeedsAction
+  const rawNewTask = { ...task, status }
   const dispatch = useAppDispatch()
   const addTaskMutation = useMutation(
     () => tasksService.create(tasklistId, rawNewTask),
     {
       onSuccess: () => {
         queryClient.invalidateQueries([QueryKey.Tasks, tasklistId])
-        dispatch(clearNewTask())
+        dispatch(clearTask())
       },
     },
   )
@@ -71,22 +71,22 @@ export const useUpdateTaskMutation = (task: Task) => {
 
 export const useFetchTaskDetailQuery = (selfLink: string) => {
   const dispatch = useAppDispatch()
-  const { taskDetail } = useTasks()
+  const task = useTasks()
   const { isLoading, error, data } = useQuery<RawTask, Error, Task>(
     QueryKey.TaskDetail,
     async () => tasksService.find(selfLink),
     {
-      select: task => ({
-        ...task,
-        status: task.status === TaskStatus.Completed,
+      select: rawTask => ({
+        ...rawTask,
+        status: rawTask.status === TaskStatus.Completed,
       }),
     },
   )
   useEffect(() => {
-    if (data) dispatch(updateTaskDetail(data))
+    if (data) dispatch(updateTask(data))
   }, [data, dispatch])
 
-  return { isLoading, error, taskDetail }
+  return { isLoading, error, task }
 }
 
 export const useDeleteTaskMutation = (selfLink: string) => {
@@ -118,13 +118,11 @@ export const useAddSubtaskMutation = (
   subtask: TaskPayload,
 ) => {
   const queryClient = useQueryClient()
-  const dispatch = useAppDispatch()
   const addTaskMutation = useMutation(
     () => tasksService.createSubtask(tasklistId, taskId, subtask),
     {
       onSuccess: () => {
         queryClient.invalidateQueries([QueryKey.Tasks, tasklistId])
-        dispatch(clearSubtask())
       },
     },
   )

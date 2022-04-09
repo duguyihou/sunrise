@@ -1,4 +1,4 @@
-import { updateTaskDetail } from 'app/tasksSlice'
+import { updateTask } from 'app/tasksSlice'
 import { useAppDispatch, useTasks } from 'hooks/app'
 import React from 'react'
 import { StyleSheet, TextInput } from 'react-native'
@@ -6,10 +6,10 @@ import { theme } from 'shared/theme'
 
 function TaskNotesSection() {
   const dispatch = useAppDispatch()
-  const { taskDetail } = useTasks()
-  const { notes } = taskDetail
+  const task = useTasks()
+  const { notes } = task
   const handleOnChange = (text: string) =>
-    dispatch(updateTaskDetail({ ...taskDetail, notes: text }))
+    dispatch(updateTask({ ...task, notes: text }))
   return (
     <TextInput
       multiline

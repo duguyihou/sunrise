@@ -1,26 +1,20 @@
 import { useNavigation } from '@react-navigation/native'
-import { updateNewTask, updateTaskDetail } from 'app/tasksSlice'
+import { updateTask } from 'app/tasksSlice'
 import { useAppDispatch, useTasks } from 'hooks/app'
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { RouteName } from 'shared/constants'
 import { StackNavigationProps } from 'typings/route'
-import { getPrevRoute } from 'utils/routes'
 
 type Props = {
   dateTime: string
 }
 function DateTimeHeader({ dateTime }: Props) {
-  const { newTask, taskDetail } = useTasks()
+  const task = useTasks()
   const dispatch = useAppDispatch()
   const navigation = useNavigation<StackNavigationProps>()
 
   const handleSetDateAndTime = () => {
-    if (getPrevRoute(navigation)?.name === RouteName.Tasklist) {
-      dispatch(updateNewTask({ ...newTask, due: dateTime }))
-    } else {
-      dispatch(updateTaskDetail({ ...taskDetail, due: dateTime }))
-    }
+    dispatch(updateTask({ ...task, due: dateTime }))
     navigation.goBack()
   }
 
