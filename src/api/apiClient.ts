@@ -45,8 +45,9 @@ apiClient.interceptors.response.use(
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true
       const { refreshToken } = store.getState().auth
-      const { accessToken } = await refreshAccessToken(refreshToken)
-      store.dispatch(saveToken(accessToken))
+      // eslint-disable-next-line camelcase
+      const { access_token } = await refreshAccessToken(refreshToken)
+      store.dispatch(saveToken(access_token))
       return apiClient(originalRequest)
     }
     return Promise.reject(error)
