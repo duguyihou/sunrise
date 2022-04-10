@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native'
-import { useUpdateTaskMutation } from 'hooks/tasks'
+import { useUpdateTaskStatus } from 'hooks/tasks'
 import { Checkbox, DateTimeText } from 'modules/common/components'
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
@@ -10,15 +10,16 @@ import { Task } from 'typings/task'
 
 type Props = {
   task: Task
+  tasklistId: string
 }
-function TaskItem({ task }: Props) {
-  const { title, selfLink, status, due, notes } = task
+function TaskItem({ task, tasklistId }: Props) {
+  const { title, id, status, due, notes } = task
   const navigation = useNavigation<StackNavigationProps>()
 
-  const updateTaskMutation = useUpdateTaskMutation({ ...task, status: !status })
-  const handleCheck = () => updateTaskMutation.mutate()
+  const updateTaskStatus = useUpdateTaskStatus({ ...task, status: !status })
+  const handleCheck = () => updateTaskStatus.mutate()
   const navigateToTaskDetail = () =>
-    navigation.push(RouteName.TaskDetail, { selfLink })
+    navigation.push(RouteName.TaskDetail, { taskId: id, tasklistId })
   return (
     <TouchableOpacity
       style={styles.container}

@@ -42,8 +42,10 @@ const update = async (task: RawTask) => {
   return response.data
 }
 
-const find = async (selfLink: string) => {
-  const response = await apiClient.get(selfLink)
+const findBy = async (tasklistId: string, taskId: string) => {
+  const response = await apiClient.get(
+    `/v1/lists/${tasklistId}/tasks/${taskId}`,
+  )
   return response.data
 }
 
@@ -54,7 +56,7 @@ const deleteBy = async (selfLink: string) => {
 
 const tasksService = {
   findAll,
-  find,
+  findBy,
   create,
   update,
   deleteBy,

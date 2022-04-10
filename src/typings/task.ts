@@ -8,7 +8,7 @@ export interface RawTask {
   title: string
   updated: string
   parent?: string
-  due?: string
+  due: string
   notes?: string
 }
 
@@ -22,7 +22,7 @@ export interface Task {
   title: string
   updated: string
   parent?: string
-  due?: string
+  due: string
   notes?: string
 }
 export interface Tasklist {

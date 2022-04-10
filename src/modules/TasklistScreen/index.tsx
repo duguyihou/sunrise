@@ -23,10 +23,9 @@ function TasklistScreen() {
     useFetchTasksQuery(id)
   const navigateToOperation = () =>
     navigation.navigate(RouteName.Operation, { tasklistId: id })
-  const header = { id, title }
   useLayoutEffect(() =>
     navigation.setOptions({
-      headerTitle: () => <HeaderTitle header={header} />,
+      headerTitle: () => <HeaderTitle header={{ id, title }} />,
       headerRight: () => (
         <IconButton icon={faEllipsisH} onPress={navigateToOperation} />
       ),
@@ -40,13 +39,17 @@ function TasklistScreen() {
     <View style={styles.container}>
       <ScrollView style={styles.tasks} keyboardDismissMode="on-drag">
         {needsActionTasks &&
-          needsActionTasks.map(task => <TaskItem key={task.id} task={task} />)}
+          needsActionTasks.map(task => (
+            <TaskItem key={task.id} task={task} tasklistId={id} />
+          ))}
         {compeletedTasks && compeletedTasks.length > 0 && (
           <TaskHeader title="Completed" onPress={handleToggle} />
         )}
         {compeletedTasks &&
           showCompletedTasks &&
-          compeletedTasks.map(task => <TaskItem key={task.id} task={task} />)}
+          compeletedTasks.map(task => (
+            <TaskItem key={task.id} task={task} tasklistId={id} />
+          ))}
       </ScrollView>
       <AddTaskSection tasklist={tasklist} />
     </View>
