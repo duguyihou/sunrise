@@ -1,7 +1,5 @@
 import { faListUl } from '@fortawesome/free-solid-svg-icons'
 import { useNavigation } from '@react-navigation/native'
-import { updateTasklist } from 'app/tasklistSlice'
-import { useAppDispatch } from 'hooks/app'
 import { IconButton } from 'modules/common/components'
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity } from 'react-native'
@@ -15,11 +13,8 @@ type Props = {
 }
 function TasklistItem({ tasklist }: Props) {
   const navigation = useNavigation<StackNavigationProps>()
-  const dispatch = useAppDispatch()
-  const handleSelect = () => {
-    dispatch(updateTasklist(tasklist))
-    navigation.push(RouteName.Tasklist, { tasklist })
-  }
+  const handleSelect = () => navigation.push(RouteName.Tasklist, { tasklist })
+
   return (
     <TouchableOpacity style={styles.container} onPress={handleSelect}>
       <IconButton icon={faListUl} />
