@@ -1,12 +1,18 @@
+import { useRoute } from '@react-navigation/native'
 import { useDeleteTasklistMutation } from 'hooks/tasklists'
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
+import { RouteName } from 'shared/constants'
 import { theme } from 'shared/theme'
+import { RouteType } from 'typings/route'
 
 import OperationItem from './OperationItem'
 
 function OperationSection() {
-  const deleteTasklistMutation = useDeleteTasklistMutation()
+  const {
+    params: { tasklistId },
+  } = useRoute<RouteType<RouteName.Operation>>()
+  const deleteTasklistMutation = useDeleteTasklistMutation(tasklistId)
   const operations = [
     {
       title: 'Delete',
