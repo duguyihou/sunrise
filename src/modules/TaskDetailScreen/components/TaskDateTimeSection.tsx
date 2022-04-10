@@ -1,11 +1,14 @@
 import { faCalendarCheck } from '@fortawesome/free-solid-svg-icons'
-import { useTasks } from 'hooks/app'
 import { DateTimeButton, IconButton } from 'modules/common/components'
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
+import { Task } from 'typings/task'
 
-function TaskDateTimeSection() {
-  const { due } = useTasks()
+type Props = {
+  task: Task
+}
+function TaskDateTimeSection({ task }: Props) {
+  const { due } = task
   return (
     <View style={styles.container}>
       <IconButton style={styles.icon} icon={faCalendarCheck} />

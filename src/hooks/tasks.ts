@@ -1,8 +1,7 @@
 import { useNavigation } from '@react-navigation/native'
 import tasksService from 'api/tasks'
-import { clearTask, updateTask } from 'app/tasksSlice'
+import { clearTask } from 'app/tasksSlice'
 import { useAppDispatch, useTasks } from 'hooks/app'
-import { useEffect } from 'react'
 import { useMutation, useQueries, useQuery, useQueryClient } from 'react-query'
 import { QueryKey, TaskStatus } from 'shared/constants'
 import { StackNavigationProps } from 'typings/route'
@@ -57,7 +56,7 @@ export const useAddTaskMutation = (tasklistId: string) => {
   return addTaskMutation
 }
 
-export const useUpdateTaskMutation = (task: Task) => {
+export const useUpdateTaskStatus = (task: Task) => {
   const queryClient = useQueryClient()
   const status = task.status ? TaskStatus.Completed : TaskStatus.NeedsAction
   const rawTask = { ...task, status }
@@ -69,12 +68,34 @@ export const useUpdateTaskMutation = (task: Task) => {
   return mutation
 }
 
-export const useFetchTaskDetailQuery = (selfLink: string) => {
-  const dispatch = useAppDispatch()
-  const task = useTasks()
-  const { isLoading, error, data } = useQuery<RawTask, Error, Task>(
+export const useUpdateTaskTitle = (task: Task) => {
+  const queryClient = useQueryClient()
+  const status = task.status ? TaskStatus.Completed : TaskStatus.NeedsAction
+  const rawTask = { ...task, status }
+  const mutation = useMutation(() => tasksService.update(rawTask), {
+    onSuccess: () => {
+      queryClient.invalidateQueries(QueryKey.Tasks)
+    },
+  })
+  return mutation
+}
+
+export const useUpdateTaskNotes = (task: Task) => {
+  const queryClient = useQueryClient()
+  const status = task.status ? TaskStatus.Completed : TaskStatus.NeedsAction
+  const rawTask = { ...task, status }
+  const mutation = useMutation(() => tasksService.update(rawTask), {
+    onSuccess: () => {
+      queryClient.invalidateQueries(QueryKey.Tasks)
+    },
+  })
+  return mutation
+}
+
+export const useFetchTaskDetailQuery = (tasklistId: string, taskId: string) => {
+  const queryResult = useQuery<RawTask, Error, Task>(
     QueryKey.TaskDetail,
-    async () => tasksService.find(selfLink),
+    async () => tasksService.findBy(tasklistId, taskId),
     {
       select: rawTask => ({
         ...rawTask,
@@ -82,11 +103,8 @@ export const useFetchTaskDetailQuery = (selfLink: string) => {
       }),
     },
   )
-  useEffect(() => {
-    if (data) dispatch(updateTask(data))
-  }, [data, dispatch])
 
-  return { isLoading, error, task }
+  return queryResult
 }
 
 export const useDeleteTaskMutation = (selfLink: string) => {

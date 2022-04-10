@@ -1,17 +1,18 @@
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
-import { useTasklists, useTasks } from 'hooks/app'
 import { useAddSubtaskMutation, useFetchSubtasksQuery } from 'hooks/tasks'
 import { Checkbox, IconButton } from 'modules/common/components'
 import React, { useState } from 'react'
 import { StyleSheet, TextInput, View } from 'react-native'
 import { TaskPayload } from 'typings/task'
 
-function TaskSubtaskSection() {
-  const task = useTasks()
-  const { tasklist } = useTasklists()
+type Props = {
+  tasklistId: string
+  taskId: string
+}
+function TaskSubtaskSection({ tasklistId, taskId }: Props) {
   const [subtaskTitle, setSubtaskTitle] = useState('')
-  const { data: subtasks } = useFetchSubtasksQuery(tasklist.id, task.id)
-  const addSubtaskMutation = useAddSubtaskMutation(tasklist.id, task.id, {
+  const { data: subtasks } = useFetchSubtasksQuery(tasklistId, taskId)
+  const addSubtaskMutation = useAddSubtaskMutation(tasklistId, taskId, {
     title: subtaskTitle,
   } as TaskPayload)
   const handleSubmitEditing = () => {

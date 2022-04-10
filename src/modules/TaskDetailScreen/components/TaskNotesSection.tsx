@@ -1,23 +1,26 @@
-import { updateTask } from 'app/tasksSlice'
-import { useAppDispatch, useTasks } from 'hooks/app'
-import React from 'react'
+import { useUpdateTaskNotes } from 'hooks/tasks'
+import React, { useState } from 'react'
 import { StyleSheet, TextInput } from 'react-native'
 import { theme } from 'shared/theme'
+import { Task } from 'typings/task'
 
-function TaskNotesSection() {
-  const dispatch = useAppDispatch()
-  const task = useTasks()
+type Props = {
+  task: Task
+}
+function TaskNotesSection({ task }: Props) {
   const { notes } = task
-  const handleOnChange = (text: string) =>
-    dispatch(updateTask({ ...task, notes: text }))
+  const [text, setText] = useState(notes)
+  const updateTaskNotes = useUpdateTaskNotes({ ...task, notes: text })
+  const handleSubmit = () => updateTaskNotes.mutate()
   return (
     <TextInput
       multiline
       style={styles.notes}
-      value={notes}
-      onChangeText={handleOnChange}
+      value={text}
+      onChangeText={setText}
       placeholder="Add Notes"
       blurOnSubmit={false}
+      onSubmitEditing={handleSubmit}
     />
   )
 }

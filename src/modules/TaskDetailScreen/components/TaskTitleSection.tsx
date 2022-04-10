@@ -1,44 +1,47 @@
-import { updateTask } from 'app/tasksSlice'
-import { useAppDispatch, useTasks } from 'hooks/app'
-import { useUpdateTaskMutation } from 'hooks/tasks'
+import { useUpdateTaskStatus, useUpdateTaskTitle } from 'hooks/tasks'
 import { Checkbox } from 'modules/common/components'
-import React from 'react'
-import { StyleSheet, TextInput } from 'react-native'
+import React, { useState } from 'react'
+import { StyleSheet, TextInput, View } from 'react-native'
+import { Task } from 'typings/task'
 
-function TaskTitleSection() {
-  const dispatch = useAppDispatch()
-  const task = useTasks()
-
+type Props = {
+  task: Task
+}
+function TaskTitleSection({ task }: Props) {
   const { status, title } = task
-  const updateTaskStatusMutation = useUpdateTaskMutation({
+  const [text, setText] = useState(title)
+  const updateTaskTitle = useUpdateTaskTitle({ ...task, title: text })
+  const updateTaskStatus = useUpdateTaskStatus({
     ...task,
     status: !status,
   })
-  const handleCheck = () => updateTaskStatusMutation.mutate()
-  const handleOnChangeText = (text: string) =>
-    dispatch(updateTask({ ...task, title: text }))
+
+  const handleTitle = () => updateTaskTitle.mutate()
+  const handleCheck = () => updateTaskStatus.mutate()
 
   return (
-    <Checkbox
-      isChecked={status}
-      onPress={handleCheck}
-      textComponent={
+    task && (
+      <View style={styles.container}>
+        <Checkbox isChecked={task.status} onPress={handleCheck} />
         <TextInput
           style={styles.title}
-          value={task.title}
-          onChangeText={handleOnChangeText}
+          value={text}
+          onChangeText={setText}
           placeholder="Add a Task"
           blurOnSubmit={false}
+          onSubmitEditing={handleTitle}
         />
-      }
-      text={title}
-    />
+      </View>
+    )
   )
 }
 
 export default TaskTitleSection
 
 const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+  },
   title: {
     flex: 1,
     padding: 10,
