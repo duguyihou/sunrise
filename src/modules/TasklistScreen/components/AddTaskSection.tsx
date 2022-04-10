@@ -7,11 +7,16 @@ import React from 'react'
 import { KeyboardAvoidingView, StyleSheet, TextInput, View } from 'react-native'
 import { AccessoryID } from 'shared/constants'
 import { theme } from 'shared/theme'
+import { Tasklist } from 'typings/task'
 
 import TaskAccessory from './TaskAccessory'
 
-function AddTaskSection() {
+type Props = {
+  tasklist: Tasklist
+}
+function AddTaskSection({ tasklist }: Props) {
   const dispatch = useAppDispatch()
+  const { id } = tasklist
   const task = useTasks()
   const { title, due, status } = task
   const handleCheck = () => dispatch(updateTask({ ...task, status: !status }))
@@ -44,7 +49,7 @@ function AddTaskSection() {
         />
         {showDateTimeButton() && <DateTimeButton dateTime={due} />}
       </View>
-      <TaskAccessory />
+      <TaskAccessory tasklistId={id} />
     </KeyboardAvoidingView>
   )
 }

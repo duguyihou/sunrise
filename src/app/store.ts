@@ -12,21 +12,19 @@ import {
 } from 'redux-persist'
 
 import authReducer from './authSlice'
-import tasklistsReducer from './tasklistSlice'
 import tasksReducer from './tasksSlice'
 
 const persistConfig = {
   key: 'root',
   version: 1,
   storage: AsyncStorage,
-  blacklist: ['tasks', 'tasklists'],
+  blacklist: ['tasks'],
 }
 const reducer = persistReducer(
   persistConfig,
   combineReducers({
     auth: authReducer,
     tasks: tasksReducer,
-    tasklists: tasklistsReducer,
   }),
 )
 

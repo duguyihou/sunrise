@@ -1,6 +1,6 @@
 import { faCalendarCheck, faCheck } from '@fortawesome/free-solid-svg-icons'
 import { useNavigation } from '@react-navigation/native'
-import { useTasklists, useTasks } from 'hooks/app'
+import { useTasks } from 'hooks/app'
 import { useAddTaskMutation } from 'hooks/tasks'
 import { IconButton } from 'modules/common/components'
 import React from 'react'
@@ -9,13 +9,13 @@ import { AccessoryID, RouteName } from 'shared/constants'
 import { theme } from 'shared/theme'
 import { StackNavigationProps } from 'typings/route'
 
-function TaskAccessory() {
-  const {
-    tasklist: { id },
-  } = useTasklists()
+type Props = {
+  tasklistId: string
+}
+function TaskAccessory({ tasklistId }: Props) {
   const { due, title } = useTasks()
   const navigation = useNavigation<StackNavigationProps>()
-  const addTaskMutation = useAddTaskMutation(id)
+  const addTaskMutation = useAddTaskMutation(tasklistId)
 
   const handleSetDateTime = () =>
     navigation.navigate(RouteName.DateTime, { dateTime: due })

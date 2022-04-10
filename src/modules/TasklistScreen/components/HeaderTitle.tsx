@@ -1,13 +1,16 @@
-import { useTasklists } from 'hooks/app'
 import { useUpdateTasklistMutation } from 'hooks/tasklists'
 import React, { useState } from 'react'
 import { StyleSheet, TextInput } from 'react-native'
 import { theme } from 'shared/theme'
 
-function HeaderTitle() {
-  const {
-    tasklist: { id, title },
-  } = useTasklists()
+type Props = {
+  header: {
+    id: string
+    title: string
+  }
+}
+function HeaderTitle({ header }: Props) {
+  const { id, title } = header
   const [editable, setEditable] = useState(false)
   const [value, setValue] = useState(title)
   const updateTasklistMutation = useUpdateTasklistMutation(id, value)
