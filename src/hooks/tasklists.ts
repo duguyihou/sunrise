@@ -46,10 +46,9 @@ export const useDeleteTasklistMutation = (tasklistId: string) => {
   const navigation = useNavigation<StackNavigationProps>()
 
   const mutation = useMutation(() => tasklistService.deleteBy(tasklistId), {
-    onSuccess: a => {
+    onSuccess: () => {
       queryClient.invalidateQueries(taskKeys.lists())
       navigation.navigate(RouteName.Tasklists)
-      console.log('🐵 a', a)
     },
   })
   return mutation

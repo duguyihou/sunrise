@@ -21,7 +21,8 @@ function TasklistScreen() {
   const [showCompletedTasks, setShowCompletedTasks] = useState(false)
   const { isLoading, error, needsActionTasks, compeletedTasks } =
     useFetchTasksQuery(id)
-  const navigateToOperation = () => navigation.navigate(RouteName.Operation)
+  const navigateToOperation = () =>
+    navigation.navigate(RouteName.Operation, { tasklistId: id })
   const header = { id, title }
   useLayoutEffect(() =>
     navigation.setOptions({

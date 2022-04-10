@@ -18,7 +18,7 @@ export type RootStackParamList = {
   TaskDetail: { selfLink: string }
   Planned: { tasklists: Tasklist[] }
   DateTime: { dateTime: string }
-  Operation: undefined
+  Operation: { tasklistId: string }
 }
 
 export type StackProps = NativeStackScreenProps<RootStackParamList>
